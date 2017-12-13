@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/line_height">
+
+        <TextView
+            style="@style/Font15_black_dark"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="确认付款" />
+
+        <ImageView
+            android:id="@+id/dialog_member_close"
+            android:layout_width="@dimen/line_height"
+            android:layout_height="match_parent"
+            android:layout_gravity="end"
+            android:padding="@dimen/dimen_size_10"
+            android:src="@drawable/ic_close_black_48dp" />
+
+    </FrameLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/divider_height"
+        android:background="@color/divider" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/dimen_size_15"
+        android:gravity="center_horizontal">
+
+        <TextView
+            style="@style/Font14_black_dark"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="@dimen/dimen_size_5"
+            android:text="￥" />
+
+        <TextView
+            android:id="@+id/dialog_member_price"
+            style="@style/Font14_black_dark"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="0.0"
+            android:textSize="25sp" />
+
+    </LinearLayout>
+
+    <com.allen.library.SuperTextView
+        android:id="@+id/dialog_member_type"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimen_size_45.5"
+        app:sBottomLineMargin="0dp"
+        app:sLeftTextColor="@color/gray"
+        app:sLeftTextMarginLeft="@dimen/dimen_size_10"
+        app:sLeftTextString="升级会员至"
+        app:sLineShow="bottom"
+        app:sRightIconMarginRight="@dimen/dimen_size_10"
+        app:sRightIconSize="13dp"
+        app:sRightTextColor="@color/brown"
+        app:sRightTextMarginRight="@dimen/dimen_size_15"
+        app:sRightTextSize="14sp"
+        app:sRightTextString="会员类型" />
+
+    <com.allen.library.SuperTextView
+        android:id="@+id/dialog_member_bank"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimen_size_45.5"
+        app:sBottomLineMargin="0dp"
+        app:sLeftTextColor="@color/gray"
+        app:sLeftTextMarginLeft="@dimen/dimen_size_10"
+        app:sLeftTextString="支付方式"
+        app:sLineShow="bottom"
+        app:sRightIconMarginRight="@dimen/dimen_size_10"
+        app:sRightIconRes="@mipmap/arrow_right"
+        app:sRightIconSize="13dp"
+        app:sRightTextColor="@color/black_dark"
+        app:sRightTextMarginRight="@dimen/dimen_size_25"
+        app:sRightTextSize="14sp"
+        app:sRightTextString="银行卡  (尾号0000)" />
+
+    <Button
+        android:id="@+id/dialog_member_next"
+        style="@style/Font15_white"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/btn_height"
+        android:layout_margin="@dimen/dimen_size_20"
+        android:background="@drawable/rec_bg_blue"
+        android:onClick="doClick"
+        android:text="下一步" />
+
+</LinearLayout>

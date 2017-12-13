@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:id="@+id/item_bank"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:padding="@dimen/dimen_size_10">
+
+        <ImageView
+            android:id="@+id/item_bank_img"
+            android:layout_width="@dimen/dimen_size_35"
+            android:layout_height="@dimen/dimen_size_35"
+            android:adjustViewBounds="true"
+            android:src="@mipmap/default_logo"
+            tools:ignore="ContentDescription" />
+
+        <TextView
+            android:id="@+id/item_bank_name"
+            style="@style/Font14_black_dark"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dimen_size_15"
+            android:text="银行名称" />
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/divider_height"
+        android:layout_marginLeft="@dimen/dimen_size_10"
+        android:layout_marginRight="@dimen/dimen_size_10"
+        android:background="@color/divider" />
+
+</LinearLayout>

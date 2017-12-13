@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center_horizontal"
+    android:orientation="vertical">
+
+    <TextView
+        style="@style/Font12_black"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/dimen_size_30"
+        android:layout_marginLeft="@dimen/dimen_size_20"
+        android:layout_marginRight="@dimen/dimen_size_20"
+        android:layout_marginTop="@dimen/dimen_size_30"
+        android:gravity="center"
+        android:lineSpacingExtra="@dimen/dimen_size_3"
+        android:text="将下方软件下载二维码分享给朋友，并注册使用，即可获得相应奖励" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/dimen_size_30"
+        android:layout_marginRight="@dimen/dimen_size_30"
+        android:background="@drawable/rec_bg_white_stroke_lighter"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:padding="@dimen/dimen_size_10">
+
+            <com.makeramen.roundedimageview.RoundedImageView
+                android:id="@+id/share_img"
+                android:layout_width="45dp"
+                android:layout_height="45dp"
+                android:src="@mipmap/default_user"
+                app:riv_oval="true" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/dimen_size_10"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/share_hint"
+                    style="@style/Font13_black_dark"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="我是XX" />
+
+                <TextView
+                    style="@style/Font13_black_dark"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dimen_size_3"
+                    android:text="诸葛信用卡管家很好用，分享给你！" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <FrameLayout
+            android:layout_width="180dp"
+            android:layout_height="180dp"
+            android:layout_marginBottom="@dimen/dimen_size_50"
+            android:layout_marginTop="@dimen/dimen_size_40"
+            android:background="@drawable/rec_bg_white_stroke_lighter">
+
+            <ImageView
+                android:id="@+id/share_qrcode"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="@dimen/dimen_size_20"
+                android:src="@mipmap/default_logo" />
+
+        </FrameLayout>
+
+    </LinearLayout>
+
+</LinearLayout>

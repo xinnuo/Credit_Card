@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <include layout="@layout/layout_title_left" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/divider_height"
+        android:background="@color/divider" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/dimen_size_10"
+        android:layout_marginRight="@dimen/dimen_size_10"
+        android:layout_marginTop="@dimen/dimen_size_10"
+        android:background="@color/white"
+        android:orientation="vertical">
+
+        <com.allen.library.SuperTextView
+            android:id="@+id/plan_type"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimen_size_45.5"
+            app:sBottomLineMargin="10dp"
+            app:sLeftTextColor="@color/black_dark"
+            app:sLeftTextMarginLeft="@dimen/dimen_size_10"
+            app:sLeftTextString="还款类型"
+            app:sLineShow="bottom"
+            app:sRightIconMarginRight="@dimen/dimen_size_10"
+            app:sRightIconSize="13dp"
+            app:sRightTextColor="@color/black_dark"
+            app:sRightTextMarginRight="@dimen/dimen_size_10"
+            app:sRightTextString="快速还款" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/line_height">
+
+            <TextView
+                style="@style/Font14_black_dark"
+                android:layout_width="70dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/dimen_size_10"
+                android:text="还款总金额" />
+
+            <EditText
+                android:id="@+id/plan_total"
+                style="@style/Font14_black_dark"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@android:color/white"
+                android:gravity="center_vertical|end"
+                android:hint="请输入还款总金额"
+                android:inputType="numberDecimal"
+                android:maxLength="9"
+                android:paddingLeft="@dimen/dimen_size_10" />
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/divider_height"
+            android:layout_marginLeft="@dimen/dimen_size_10"
+            android:layout_marginRight="@dimen/dimen_size_10"
+            android:background="@color/divider" />
+
+        <LinearLayout
+            android:id="@+id/plan_date_11"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/line_height"
+            android:gravity="center_vertical"
+            android:onClick="doClick"
+            android:paddingLeft="@dimen/dimen_size_10"
+            android:paddingRight="@dimen/dimen_size_10">
+
+            <TextView
+                style="@style/Font14_black_dark"
+                android:layout_width="70dp"
+                android:layout_height="wrap_content"
+                android:text="还款日期" />
+
+            <TextView
+                android:id="@+id/plan_date"
+                style="@style/Font14_gray"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:paddingLeft="@dimen/dimen_size_10" />
+
+            <ImageView
+                android:layout_width="13dp"
+                android:layout_height="13dp"
+                android:src="@mipmap/arrow_right"
+                tools:ignore="ContentDescription" />
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/divider_height"
+            android:layout_marginLeft="@dimen/dimen_size_10"
+            android:layout_marginRight="@dimen/dimen_size_10"
+            android:background="@color/divider" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/line_height"
+            android:gravity="center_vertical"
+            android:onClick="doClick"
+            android:paddingLeft="@dimen/dimen_size_10">
+
+            <TextView
+                style="@style/Font14_black_dark"
+                android:layout_width="70dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="还款笔数" />
+
+            <ImageView
+                android:id="@+id/plan_plus"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:padding="@dimen/dimen_size_12"
+                android:src="@mipmap/ic_plus_p"
+                tools:ignore="ContentDescription" />
+
+            <TextView
+                android:id="@+id/plan_count"
+                style="@style/Font15_black_dark"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="1" />
+
+            <ImageView
+                android:id="@+id/plan_add"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:padding="@dimen/dimen_size_12"
+                android:src="@mipmap/ic_add_p"
+                tools:ignore="ContentDescription" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/plan_submit"
+        style="@style/Font15_white"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/btn_height"
+        android:layout_marginLeft="@dimen/dimen_size_20"
+        android:layout_marginRight="@dimen/dimen_size_20"
+        android:layout_marginTop="@dimen/dimen_size_20"
+        android:background="@drawable/rec_bg_blue"
+        android:onClick="doClick"
+        android:text="提交" />
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/plan_preview"
+            style="@style/Font14_black"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:layout_marginRight="@dimen/dimen_size_20"
+            android:padding="@dimen/dimen_size_10"
+            android:text="预览计划"
+            android:textColor="@color/colorAccent" />
+
+    </FrameLayout>
+
+</LinearLayout>

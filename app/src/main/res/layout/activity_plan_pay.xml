@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical">
+
+    <include layout="@layout/layout_title_left" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/divider_height"
+        android:background="@color/divider" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/dimen_size_10"
+        android:layout_marginRight="@dimen/dimen_size_10"
+        android:layout_marginTop="@dimen/dimen_size_10"
+        android:background="@color/white"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/line_height"
+            android:gravity="center_vertical"
+            android:onClick="doClick"
+            android:paddingLeft="@dimen/dimen_size_10"
+            android:paddingRight="@dimen/dimen_size_10">
+
+            <TextView
+                style="@style/Font14_black_dark"
+                android:layout_width="70dp"
+                android:layout_height="wrap_content"
+                android:text="信用卡" />
+
+            <TextView
+                android:id="@+id/plan_bank"
+                style="@style/Font14_gray"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="银行(尾号0000)"
+                android:paddingLeft="@dimen/dimen_size_10" />
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/divider_height"
+            android:layout_marginLeft="@dimen/dimen_size_10"
+            android:layout_marginRight="@dimen/dimen_size_10"
+            android:background="@color/divider" />
+
+        <LinearLayout
+            android:id="@+id/plan_date_11"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/line_height"
+            android:gravity="center_vertical"
+            android:onClick="doClick"
+            android:paddingLeft="@dimen/dimen_size_10"
+            android:paddingRight="@dimen/dimen_size_10">
+
+            <TextView
+                style="@style/Font14_black_dark"
+                android:layout_width="70dp"
+                android:layout_height="wrap_content"
+                android:text="还款日期" />
+
+            <TextView
+                android:id="@+id/plan_date"
+                style="@style/Font14_gray"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:paddingLeft="@dimen/dimen_size_10" />
+
+            <ImageView
+                android:layout_width="13dp"
+                android:layout_height="13dp"
+                android:src="@mipmap/arrow_right"
+                tools:ignore="ContentDescription" />
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/divider_height"
+            android:layout_marginLeft="@dimen/dimen_size_10"
+            android:layout_marginRight="@dimen/dimen_size_10"
+            android:background="@color/divider" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/line_height">
+
+            <TextView
+                style="@style/Font14_black_dark"
+                android:layout_width="70dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/dimen_size_10"
+                android:text="消费金额" />
+
+            <EditText
+                android:id="@+id/plan_count"
+                style="@style/Font14_black_dark"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@android:color/white"
+                android:hint="请输入消费金额"
+                android:inputType="numberDecimal"
+                android:maxLength="9"
+                android:paddingLeft="@dimen/dimen_size_10" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <TextView
+        style="@style/Font12_black"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/dimen_size_15"
+        android:layout_marginRight="@dimen/dimen_size_15"
+        android:layout_marginTop="@dimen/dimen_size_5"
+        android:lineSpacingExtra="@dimen/dimen_size_3"
+        android:text="提示：提交消费计划后立即开始执行"
+        android:textColor="@color/red" />
+
+    <Button
+        android:id="@+id/plan_submit"
+        style="@style/Font15_white"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/btn_height"
+        android:layout_margin="@dimen/dimen_size_20"
+        android:background="@drawable/rec_bg_blue"
+        android:onClick="doClick"
+        android:text="立即转账，2小时内到账" />
+
+</LinearLayout>

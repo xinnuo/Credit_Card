@@ -1,0 +1,238 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/dimen_size_10"
+        android:layout_marginRight="@dimen/dimen_size_10"
+        android:layout_marginTop="@dimen/dimen_size_10"
+        android:background="@color/white"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/line_height">
+
+            <TextView
+                style="@style/Font14_gray"
+                android:layout_width="70dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/dimen_size_10"
+                android:text="姓名" />
+
+            <EditText
+                android:id="@+id/et_name"
+                style="@style/Font14_black_dark"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@android:color/white"
+                android:hint="请输入您的姓名"
+                android:maxLength="12"
+                android:paddingLeft="@dimen/dimen_size_10" />
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/divider_height"
+            android:layout_marginLeft="@dimen/dimen_size_10"
+            android:layout_marginRight="@dimen/dimen_size_10"
+            android:background="@color/divider" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/line_height">
+
+            <TextView
+                style="@style/Font14_gray"
+                android:layout_width="70dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/dimen_size_10"
+                android:text="身份证" />
+
+            <EditText
+                android:id="@+id/et_num"
+                style="@style/Font14_black_dark"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@android:color/white"
+                android:hint="请输入您的身份证号码"
+                android:inputType="number"
+                android:maxLength="18"
+                android:paddingLeft="@dimen/dimen_size_10" />
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/divider_height"
+            android:layout_marginLeft="@dimen/dimen_size_10"
+            android:layout_marginRight="@dimen/dimen_size_10"
+            android:background="@color/divider" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/line_height">
+
+            <TextView
+                style="@style/Font14_gray"
+                android:layout_width="70dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/dimen_size_10"
+                android:text="储蓄卡号" />
+
+            <EditText
+                android:id="@+id/et_card"
+                style="@style/Font14_black_dark"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@android:color/white"
+                android:hint="请输入您的储蓄卡卡号"
+                android:inputType="number"
+                android:maxLength="18"
+                android:paddingLeft="@dimen/dimen_size_10" />
+
+            <ImageView
+                android:id="@+id/card_camera"
+                android:layout_width="@dimen/dimen_size_40"
+                android:layout_height="@dimen/dimen_size_40"
+                android:layout_marginRight="@dimen/dimen_size_5"
+                android:padding="@dimen/dimen_size_6"
+                android:src="@mipmap/icon_camera"
+                tools:ignore="ContentDescription" />
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/divider_height"
+            android:layout_marginLeft="@dimen/dimen_size_10"
+            android:layout_marginRight="@dimen/dimen_size_10"
+            android:background="@color/divider" />
+
+        <LinearLayout
+            android:id="@+id/card_bank_ll"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/line_height"
+            android:gravity="center_vertical"
+            android:onClick="doClick"
+            android:paddingLeft="@dimen/dimen_size_10"
+            android:paddingRight="@dimen/dimen_size_10">
+
+            <TextView
+                style="@style/Font14_gray"
+                android:layout_width="70dp"
+                android:layout_height="wrap_content"
+                android:text="发卡银行" />
+
+            <TextView
+                android:id="@+id/card_bank"
+                style="@style/Font14_black_dark"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:hint="请选择发卡银行"
+                android:paddingLeft="@dimen/dimen_size_10" />
+
+            <ImageView
+                android:layout_width="13dp"
+                android:layout_height="13dp"
+                android:src="@mipmap/arrow_right"
+                tools:ignore="ContentDescription" />
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/divider_height"
+            android:layout_marginLeft="@dimen/dimen_size_10"
+            android:layout_marginRight="@dimen/dimen_size_10"
+            android:background="@color/divider" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/line_height">
+
+            <TextView
+                style="@style/Font14_gray"
+                android:layout_width="70dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/dimen_size_10"
+                android:text="手机号" />
+
+            <EditText
+                android:id="@+id/et_phone"
+                style="@style/Font14_black_dark"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@android:color/white"
+                android:hint="请输入预留手机号"
+                android:inputType="phone"
+                android:maxLength="11"
+                android:paddingLeft="@dimen/dimen_size_10" />
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/divider_height"
+            android:layout_marginLeft="@dimen/dimen_size_10"
+            android:layout_marginRight="@dimen/dimen_size_10"
+            android:background="@color/divider" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                style="@style/Font14_gray"
+                android:layout_width="70dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/dimen_size_10"
+                android:text="验证码" />
+
+            <EditText
+                android:id="@+id/et_yzm"
+                style="@style/Font14_black_dark"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/line_height"
+                android:layout_weight="1"
+                android:background="@null"
+                android:hint="请输入短信验证码"
+                android:inputType="number"
+                android:maxLength="6"
+                android:paddingLeft="@dimen/dimen_size_10" />
+
+            <Button
+                android:id="@+id/bt_yzm"
+                style="@style/Font13_white"
+                android:layout_width="100dp"
+                android:layout_height="@dimen/dimen_size_30"
+                android:layout_marginRight="@dimen/dimen_size_10"
+                android:background="@drawable/rec_bg_ova_orange"
+                android:gravity="center"
+                android:onClick="doClick"
+                android:text="发送验证码" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/card_sure"
+        style="@style/Font15_white"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/btn_height"
+        android:layout_margin="@dimen/dimen_size_20"
+        android:background="@drawable/rec_bg_blue"
+        android:onClick="doClick"
+        android:text="确定添加" />
+
+</LinearLayout>

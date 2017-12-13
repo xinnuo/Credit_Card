@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.ruanmeng.credit_card">
+
+    <application
+        android:name="com.ruanmeng.Application"
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity
+            android:name=".GuideActivity"
+            android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".MainActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".LoginActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".AgencyActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".MessageActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".CashoutActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".WebActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".MemberActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".MemberDoneActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".RegisterActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ForgetActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".BankcardActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".SavingsCardActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".CreditCardActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".BankSelectActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".BankDoneActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".BillActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".RealActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ShareActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".SettingActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".SettingPasswordActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".PasswordLoginActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".SavingsDetailActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".PasswordPayActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".CreditDetailActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".PlanActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".PlanPayActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".PlanBackActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".InfoActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".NicknameActivity"
+            android:screenOrientation="portrait" />
+
+        <!-- 融云即时通讯 start -->
+        <!-- 会话界面 -->
+        <activity
+            android:name=".ConversationActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden|adjustResize">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+
+                <data
+                    android:host="${applicationId}"
+                    android:pathPrefix="/conversation/"
+                    android:scheme="rong" />
+            </intent-filter>
+        </activity>
+        <!-- 必须实现，否则会收不到推送消息，自定义的类继承自 PushMessageReceiver -->
+        <receiver
+            android:name="com.ruanmeng.receiver.RongPushReceiver"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="io.rong.push.intent.MESSAGE_ARRIVED" />
+                <action android:name="io.rong.push.intent.MI_MESSAGE_ARRIVED" />
+                <action android:name="io.rong.push.intent.MESSAGE_CLICKED" />
+                <action android:name="io.rong.push.intent.MI_MESSAGE_CLICKED" />
+            </intent-filter>
+        </receiver>
+        <!-- Android 7.0 应用间共享文件 -->
+        <provider
+            android:name="io.rong.imkit.RongCloudFileProvider"
+            android:authorities="${applicationId}.FileProvider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/rc_file_path" />
+        </provider>
+        <!-- 融云即时通讯 end -->
+
+    </application>
+
+</manifest>

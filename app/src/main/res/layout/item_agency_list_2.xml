@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:descendantFocusability="blocksDescendants"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:id="@+id/item_agency"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="@dimen/dimen_size_10"
+        android:paddingRight="@dimen/dimen_size_10">
+
+        <com.makeramen.roundedimageview.RoundedImageView
+            android:id="@+id/item_agency_img"
+            android:layout_width="@dimen/dimen_size_30"
+            android:layout_height="@dimen/dimen_size_30"
+            android:layout_marginLeft="@dimen/dimen_size_5"
+            android:layout_marginTop="@dimen/dimen_size_8"
+            android:scaleType="centerCrop"
+            android:src="@mipmap/default_user"
+            app:riv_oval="true" />
+
+        <ImageView
+            android:layout_width="5dp"
+            android:layout_height="75dp"
+            android:layout_marginLeft="@dimen/dimen_size_10"
+            android:adjustViewBounds="true"
+            android:src="@mipmap/icon_line" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dimen_size_15"
+            android:layout_marginTop="@dimen/dimen_size_15"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical">
+
+                <TextView
+                    android:id="@+id/item_agency_name"
+                    style="@style/Font14_black_dark"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="姓名" />
+
+                <TextView
+                    style="@style/Font13_light"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="总收益" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dimen_size_5">
+
+                <TextView
+                    android:id="@+id/item_agency_phone"
+                    style="@style/Font14_light"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="电话 17600000000" />
+
+                <TextView
+                    style="@style/Font12_light"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="￥"
+                    android:textColor="@color/orange" />
+
+                <TextView
+                    android:id="@+id/item_agency_price"
+                    style="@style/Font15_light"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="0.0"
+                    android:textColor="@color/orange" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <View
+        android:id="@+id/item_agency_divider1"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/divider_height"
+        android:layout_marginLeft="@dimen/dimen_size_10"
+        android:layout_marginRight="@dimen/dimen_size_10"
+        android:background="@color/divider" />
+
+    <View
+        android:id="@+id/item_agency_divider2"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/divider_height"
+        android:background="@color/divider"
+        android:visibility="gone" />
+
+</LinearLayout>

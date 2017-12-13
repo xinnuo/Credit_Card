@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <include layout="@layout/layout_title_left" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/divider_height"
+        android:background="@color/divider" />
+
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#414B80"
+                android:padding="@dimen/dimen_size_10">
+
+                <com.makeramen.roundedimageview.RoundedImageView
+                    android:id="@+id/credit_img"
+                    android:layout_width="@dimen/dimen_size_40"
+                    android:layout_height="@dimen/dimen_size_40"
+                    android:src="@mipmap/default_user"
+                    app:riv_oval="true" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/dimen_size_10"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/credit_bank"
+                        style="@style/Font14_white"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="银行信用卡" />
+
+                    <TextView
+                        android:id="@+id/credit_tail"
+                        style="@style/Font14_white"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dimen_size_5"
+                        android:text="尾号0000" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <com.allen.library.SuperTextView
+                android:id="@+id/credit_bill"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dimen_size_45.5"
+                app:sBottomLineMargin="10dp"
+                app:sLeftTextColor="@color/gray"
+                app:sLeftTextMarginLeft="@dimen/dimen_size_10"
+                app:sLeftTextString="账单日"
+                app:sLineShow="bottom"
+                app:sRightIconMarginRight="@dimen/dimen_size_10"
+                app:sRightIconSize="13dp"
+                app:sRightTextColor="@color/gray"
+                app:sRightTextMarginRight="@dimen/dimen_size_10"
+                app:sRightTextString="10日" />
+
+            <com.allen.library.SuperTextView
+                android:id="@+id/credit_pay"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dimen_size_45.5"
+                app:sBottomLineMargin="10dp"
+                app:sLeftTextColor="@color/gray"
+                app:sLeftTextMarginLeft="@dimen/dimen_size_10"
+                app:sLeftTextString="还款日"
+                app:sLineShow="bottom"
+                app:sRightIconMarginRight="@dimen/dimen_size_10"
+                app:sRightIconSize="13dp"
+                app:sRightTextColor="@color/gray"
+                app:sRightTextMarginRight="@dimen/dimen_size_10"
+                app:sRightTextString="5日" />
+
+            <com.allen.library.SuperTextView
+                android:id="@+id/credit_yi"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dimen_size_45.5"
+                app:sBottomLineMargin="10dp"
+                app:sLeftTextColor="@color/black_dark"
+                app:sLeftTextMarginLeft="@dimen/dimen_size_10"
+                app:sLeftTextString="已还金额"
+                app:sLineShow="bottom"
+                app:sRightIconMarginRight="@dimen/dimen_size_10"
+                app:sRightIconSize="13dp"
+                app:sRightTextColor="@color/black_dark"
+                app:sRightTextMarginRight="@dimen/dimen_size_10"
+                app:sRightTextString="0.00" />
+
+            <com.allen.library.SuperTextView
+                android:id="@+id/credit_wei"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dimen_size_45.5"
+                app:sBottomLineMargin="10dp"
+                app:sLeftTextColor="@color/black_dark"
+                app:sLeftTextMarginLeft="@dimen/dimen_size_10"
+                app:sLeftTextString="未还金额"
+                app:sLineShow="bottom"
+                app:sRightIconMarginRight="@dimen/dimen_size_10"
+                app:sRightIconSize="13dp"
+                app:sRightTextColor="@color/black_dark"
+                app:sRightTextMarginRight="@dimen/dimen_size_10"
+                app:sRightTextString="0.00" />
+
+            <com.allen.library.SuperTextView
+                android:id="@+id/credit_dang"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dimen_size_45.5"
+                app:sBottomLineMargin="0dp"
+                app:sLeftTextColor="@color/black_dark"
+                app:sLeftTextMarginLeft="@dimen/dimen_size_10"
+                app:sLeftTextString="当前保证金"
+                app:sLineShow="bottom"
+                app:sRightIconMarginRight="@dimen/dimen_size_10"
+                app:sRightIconSize="13dp"
+                app:sRightTextColor="@color/black_dark"
+                app:sRightTextMarginRight="@dimen/dimen_size_10"
+                app:sRightTextString="￥0.00" />
+
+            <LinearLayout
+                android:id="@+id/credit_add"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/btn_height"
+                android:layout_margin="@dimen/dimen_size_20"
+                android:background="@drawable/rec_bg_blue"
+                android:gravity="center">
+
+                <ImageView
+                    android:layout_width="@dimen/dimen_size_18"
+                    android:layout_height="@dimen/dimen_size_18"
+                    android:src="@mipmap/icon_add_w" />
+
+                <TextView
+                    style="@style/Font15_white"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/dimen_size_5"
+                    android:text="新增计划" />
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/credit_look"
+                style="@style/Font15_gray"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/btn_height"
+                android:layout_marginBottom="@dimen/dimen_size_20"
+                android:layout_marginLeft="@dimen/dimen_size_20"
+                android:layout_marginRight="@dimen/dimen_size_20"
+                android:background="@drawable/rec_bg_trans_stroke_light"
+                android:gravity="center"
+                android:text="查看全部计划" />
+
+        </LinearLayout>
+
+    </android.support.v4.widget.NestedScrollView>
+
+</LinearLayout>

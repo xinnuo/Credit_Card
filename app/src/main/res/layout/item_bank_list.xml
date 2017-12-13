@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:id="@+id/item_bank"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/line_height"
+        android:gravity="center_vertical"
+        android:paddingLeft="@dimen/dimen_size_15"
+        android:paddingRight="@dimen/dimen_size_5">
+
+        <com.makeramen.roundedimageview.RoundedImageView
+            android:id="@+id/item_bank_img"
+            android:layout_width="@dimen/dimen_size_20"
+            android:layout_height="@dimen/dimen_size_20"
+            android:adjustViewBounds="true"
+            android:src="@mipmap/default_logo"
+            app:riv_oval="true"
+            tools:ignore="ContentDescription" />
+
+        <TextView
+            android:id="@+id/item_bank_name"
+            style="@style/Font14_black_dark"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dimen_size_10"
+            android:text="银行卡" />
+
+        <TextView
+            android:id="@+id/item_bank_tail"
+            style="@style/Font14_black_dark"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dimen_size_10"
+            android:layout_weight="1"
+            android:text="(0000)" />
+
+        <ImageView
+            android:id="@+id/item_bank_img_check"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:adjustViewBounds="true"
+            android:padding="@dimen/dimen_size_5"
+            android:src="@mipmap/icon_choose"
+            tools:ignore="ContentDescription" />
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/divider_height"
+        android:background="@color/divider" />
+
+</LinearLayout>

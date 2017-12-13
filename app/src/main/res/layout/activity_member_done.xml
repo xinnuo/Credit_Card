@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:gravity="center_horizontal"
+    android:orientation="vertical">
+
+    <include layout="@layout/layout_title_left" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/divider_height"
+        android:background="@color/divider" />
+
+    <ImageView
+        android:layout_width="140dp"
+        android:layout_height="140dp"
+        android:layout_marginTop="60dp"
+        android:src="@mipmap/member_success" />
+
+    <TextView
+        style="@style/Font15_black_dark"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/dimen_size_5"
+        android:gravity="center"
+        android:text="恭喜您会员升级成功！"
+        android:textColor="@color/brown" />
+
+    <TextView
+        android:id="@+id/member_hint"
+        style="@style/Font13_light"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dimen_size_10"
+        android:gravity="center"
+        android:text="您已成功升级至XX会员" />
+
+    <Button
+        android:id="@+id/member_done"
+        style="@style/Font15_white"
+        android:layout_width="150dp"
+        android:layout_height="@dimen/btn_height"
+        android:layout_margin="@dimen/dimen_size_20"
+        android:background="@drawable/rec_bg_trans_stroke_blue"
+        android:onClick="doClick"
+        android:text="确定"
+        android:textColor="@color/colorAccent" />
+
+</LinearLayout>

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merger version="3"><dataSet config="main$Generated" generated="true"><source path="D:\workspace_studio\Credit_Card\GridPasswordView\src\main\res"/><source path="D:\workspace_studio\Credit_Card\GridPasswordView\build\generated\res\rs\release"/><source path="D:\workspace_studio\Credit_Card\GridPasswordView\build\generated\res\resValues\release"/></dataSet><dataSet config="main" generated-set="main$Generated"><source path="D:\workspace_studio\Credit_Card\GridPasswordView\src\main\res"><file name="divider" path="D:\workspace_studio\Credit_Card\GridPasswordView\src\main\res\layout\divider.xml" qualifiers="" type="layout"/><file name="gridpasswordview" path="D:\workspace_studio\Credit_Card\GridPasswordView\src\main\res\layout\gridpasswordview.xml" qualifiers="" type="layout"/><file name="textview" path="D:\workspace_studio\Credit_Card\GridPasswordView\src\main\res\layout\textview.xml" qualifiers="" type="layout"/><file path="D:\workspace_studio\Credit_Card\GridPasswordView\src\main\res\values\attr.xml" qualifiers=""><declare-styleable name="gridPasswordView">
+
+        <attr format="color|reference" name="gpvTextColor"/>
+        <attr format="dimension" name="gpvTextSize"/>
+
+        <attr format="color" name="gpvLineColor"/>
+        <attr format="color" name="gpvGridColor"/>
+        <attr format="dimension" name="gpvLineWidth"/>
+        <attr format="dimension" name="gpvCornerRadius"/>
+
+        <attr format="integer" name="gpvPasswordLength"/>
+        <attr format="string" name="gpvPasswordTransformation"/>
+
+        <attr format="enum" name="gpvPasswordType">
+            <enum name="numberPassword" value="0"/>
+            <enum name="textPassword" value="1"/>
+            <enum name="textVisiblePassword" value="2"/>
+            <enum name="textWebPassword" value="3"/>
+        </attr>
+
+    </declare-styleable></file><file path="D:\workspace_studio\Credit_Card\GridPasswordView\src\main\res\values\styles.xml" qualifiers=""><style name="GridPasswordView"/><style name="GridPasswordView.TextView">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:background">@null</item>
+        <item name="android:gravity">center</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:singleLine">true</item>
+    </style><style name="GridPasswordView.EditText" parent="GridPasswordView.TextView">
+        <item name="android:cursorVisible">false</item>
+    </style><style name="GridPasswordView.Divider">
+        <item name="android:layout_width">1dp</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:layout_marginTop">1dp</item>
+        <item name="android:layout_marginBottom">1dp</item>
+    </style></file></source><source path="D:\workspace_studio\Credit_Card\GridPasswordView\build\generated\res\rs\release"/><source path="D:\workspace_studio\Credit_Card\GridPasswordView\build\generated\res\resValues\release"/></dataSet><dataSet config="release$Generated" generated="true"><source path="D:\workspace_studio\Credit_Card\GridPasswordView\src\release\res"/></dataSet><dataSet config="release" generated-set="release$Generated"><source path="D:\workspace_studio\Credit_Card\GridPasswordView\src\release\res"/></dataSet><mergedItems><configuration qualifiers=""><declare-styleable name="gridPasswordView"><attr format="color|reference" name="gpvTextColor"/><attr format="dimension" name="gpvTextSize"/><attr format="color" name="gpvLineColor"/><attr format="color" name="gpvGridColor"/><attr format="dimension" name="gpvLineWidth"/><attr format="dimension" name="gpvCornerRadius"/><attr format="integer" name="gpvPasswordLength"/><attr format="string" name="gpvPasswordTransformation"/><attr format="enum" name="gpvPasswordType">
+            <enum name="numberPassword" value="0"/>
+            <enum name="textPassword" value="1"/>
+            <enum name="textVisiblePassword" value="2"/>
+            <enum name="textWebPassword" value="3"/>
+        </attr></declare-styleable></configuration></mergedItems></merger>

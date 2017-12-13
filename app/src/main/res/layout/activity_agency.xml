@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <android.support.design.widget.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:elevation="0dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorAccent"
+            android:orientation="vertical"
+            app:layout_scrollFlags="scroll|enterAlways">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:paddingBottom="@dimen/dimen_size_10"
+                android:paddingLeft="@dimen/dimen_size_15"
+                android:paddingRight="@dimen/dimen_size_15"
+                android:paddingTop="@dimen/dimen_size_10">
+
+                <com.makeramen.roundedimageview.RoundedImageView
+                    android:id="@+id/agency_img"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:layout_marginRight="@dimen/dimen_size_5"
+                    android:scaleType="centerCrop"
+                    android:src="@mipmap/default_user"
+                    app:riv_oval="true" />
+
+                <TextView
+                    android:id="@+id/agency_name"
+                    style="@style/Font15_white"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/dimen_size_10"
+                    android:layout_weight="1"
+                    android:text="姓名" />
+
+                <TextView
+                    android:id="@+id/agency_cash"
+                    style="@style/Font15_white"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/rec_bg_trans_stroke_white_radius_30"
+                    android:paddingBottom="@dimen/dimen_size_6"
+                    android:paddingLeft="@dimen/dimen_size_20"
+                    android:paddingRight="@dimen/dimen_size_20"
+                    android:paddingTop="@dimen/dimen_size_6"
+                    android:text="去提现" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center_horizontal"
+                    android:orientation="vertical"
+                    android:padding="@dimen/dimen_size_10">
+
+                    <TextView
+                        android:id="@+id/agency_total"
+                        style="@style/Font14_white"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="0"
+                        android:textSize="18sp" />
+
+                    <TextView
+                        style="@style/Font13_white"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dimen_size_5"
+                        android:text="累计收益(元)" />
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="@dimen/divider_height"
+                    android:layout_height="@dimen/dimen_size_30"
+                    android:background="#33EDEDED" />
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center_horizontal"
+                    android:orientation="vertical"
+                    android:padding="@dimen/dimen_size_10">
+
+                    <TextView
+                        android:id="@+id/agency_current"
+                        style="@style/Font14_white"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="0"
+                        android:textSize="18sp" />
+
+                    <TextView
+                        style="@style/Font13_white"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dimen_size_5"
+                        android:text="当前收益(元)" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <android.support.design.widget.TabLayout
+            android:id="@+id/agency_tab"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/line_height"
+            android:background="@color/white"
+            app:tabIndicatorColor="@color/colorAccent"
+            app:tabSelectedTextColor="@color/colorAccent"
+            app:tabTextColor="@color/gray" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/divider_height"
+            android:background="@color/divider" />
+
+    </android.support.design.widget.AppBarLayout>
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/agency_pager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+
+</android.support.design.widget.CoordinatorLayout>

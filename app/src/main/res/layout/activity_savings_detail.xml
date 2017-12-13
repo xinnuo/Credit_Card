@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <include layout="@layout/layout_title_left" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/divider_height"
+        android:background="@color/divider" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/dimen_size_10"
+        android:layout_marginRight="@dimen/dimen_size_10"
+        android:layout_marginTop="@dimen/dimen_size_10"
+        android:background="@drawable/rec_bg_ca566b"
+        android:orientation="vertical"
+        android:paddingTop="@dimen/dimen_size_5">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/line_height"
+            android:gravity="center_vertical"
+            android:paddingLeft="@dimen/dimen_size_10"
+            android:paddingRight="@dimen/dimen_size_10">
+
+            <com.makeramen.roundedimageview.RoundedImageView
+                android:id="@+id/bankcard_img"
+                android:layout_width="@dimen/dimen_size_25"
+                android:layout_height="@dimen/dimen_size_25"
+                android:adjustViewBounds="true"
+                android:src="@mipmap/default_logo"
+                app:riv_oval="true"
+                tools:ignore="ContentDescription" />
+
+            <TextView
+                android:id="@+id/bankcard_name"
+                style="@style/Font14_white"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/dimen_size_10"
+                android:text="银行卡" />
+
+            <TextView
+                style="@style/Font13_white"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/dimen_size_10"
+                android:layout_weight="1"
+                android:gravity="end"
+                android:text="手机尾号" />
+
+            <TextView
+                android:id="@+id/bankcard_tail"
+                style="@style/Font13_white"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/dimen_size_10"
+                android:text="0000" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/dimen_size_10"
+            android:layout_marginTop="@dimen/dimen_size_10"
+            android:gravity="center_vertical"
+            android:paddingLeft="@dimen/dimen_size_10"
+            android:paddingRight="@dimen/dimen_size_10">
+
+            <TextView
+                style="@style/Font14_white"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/dimen_size_10"
+                android:text="••••"
+                android:textColor="#88FFFFFF"
+                android:textSize="25sp" />
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="@dimen/dimen_size_3"
+                android:layout_weight="1" />
+
+            <TextView
+                style="@style/Font14_white"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/dimen_size_10"
+                android:text="••••"
+                android:textColor="#88FFFFFF"
+                android:textSize="25sp" />
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="@dimen/dimen_size_3"
+                android:layout_weight="1" />
+
+            <TextView
+                style="@style/Font14_white"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/dimen_size_10"
+                android:text="••••"
+                android:textColor="#88FFFFFF"
+                android:textSize="25sp" />
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="@dimen/dimen_size_3"
+                android:layout_weight="1" />
+
+            <TextView
+                style="@style/Font14_white"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/dimen_size_10"
+                android:text="••••"
+                android:textColor="#88FFFFFF"
+                android:textSize="25sp" />
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="@dimen/dimen_size_3"
+                android:layout_weight="1" />
+
+            <TextView
+                android:id="@+id/bankcard_num"
+                style="@style/Font14_white"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/dimen_size_10"
+                android:text="0000"
+                android:textSize="20sp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/dimen_size_5"
+            android:layout_marginRight="@dimen/dimen_size_5"
+            android:gravity="end"
+            android:padding="@dimen/dimen_size_10">
+
+            <TextView
+                android:id="@+id/bankcard_cash"
+                style="@style/Font15_white"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/rec_bg_trans_stroke_white_radius_30"
+                android:paddingBottom="@dimen/dimen_size_6"
+                android:paddingLeft="@dimen/dimen_size_20"
+                android:paddingRight="@dimen/dimen_size_20"
+                android:paddingTop="@dimen/dimen_size_6"
+                android:text="提现到此卡" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>

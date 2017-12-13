@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <View
+        android:id="@+id/item_member_divider1"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/divider_height" />
+
+    <View
+        android:id="@+id/item_member_divider2"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimen_size_5"
+        android:visibility="gone" />
+
+    <LinearLayout
+        android:id="@+id/item_member"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/line_height"
+        android:background="@color/white"
+        android:gravity="center_vertical"
+        android:paddingLeft="@dimen/dimen_size_10"
+        android:paddingRight="@dimen/dimen_size_10">
+
+        <ImageView
+            android:id="@+id/item_member_logo"
+            android:layout_width="@dimen/dimen_size_30"
+            android:layout_height="@dimen/dimen_size_30"
+            android:adjustViewBounds="true"
+            android:padding="@dimen/dimen_size_5"
+            android:src="@mipmap/icon_vip"
+            tools:ignore="ContentDescription" />
+
+        <TextView
+            android:id="@+id/item_member_name"
+            style="@style/Font14_black_dark"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="会员类型"
+            android:textColor="@color/brown" />
+
+        <TextView
+            android:id="@+id/item_member_price"
+            style="@style/Font14_black_dark"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dimen_size_10"
+            android:layout_weight="1"
+            android:text="￥0.0"
+            android:textColor="@color/brown" />
+
+        <CheckBox
+            android:id="@+id/item_member_check"
+            android:layout_width="@dimen/dimen_size_25"
+            android:layout_height="@dimen/dimen_size_25"
+            android:button="@null"
+            android:background="@drawable/cb_member_selector"
+            android:clickable="false" />
+
+    </LinearLayout>
+
+</LinearLayout>
