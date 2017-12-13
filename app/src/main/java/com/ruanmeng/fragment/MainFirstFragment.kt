@@ -41,12 +41,12 @@ class MainFirstFragment : BaseFragment() {
         super.onViewCreated(view, savedInstanceState)
         init_title()
 
-        list.add(CommonData().apply { title = "1" })
-        list.add(CommonData().apply { title = "2" })
-        list.add(CommonData().apply { title = "3" })
-        list.add(CommonData().apply { title = "4" })
-        list.add(CommonData().apply { title = "5" })
-        list.add(CommonData().apply { title = "6" })
+        list.add(CommonData().apply { title = "100.0" })
+        list.add(CommonData().apply { title = "200.0" })
+        list.add(CommonData().apply { title = "300.0" })
+        list.add(CommonData().apply { title = "400.0" })
+        list.add(CommonData().apply { title = "500.0" })
+        list.add(CommonData().apply { title = "600.0" })
         mAdapterEx.updateData(list).notifyDataSetChanged()
     }
 
