@@ -22,4 +22,8 @@ public class BaseHttp {
     public static String pwd_forget_sub = baseIp + "/pwd_forget_sub.rm";             //忘记密码找回提交√
     public static String logout_sub = baseIp + "/logout_sub.rm";                     //退出登录√
 
+    public static String user_msg_data = baseIp + "/user_msg_data.rm"; //用户个人资料√
+    public static String userinfo_uploadhead_sub = baseIp + "/userinfo_uploadhead_sub.rm"; //修改头像√
+    public static String nickName_change_sub = baseIp + "/nickName_change_sub.rm"; //修改昵称√
+    public static String sex_change_sub = baseIp + "/sex_change_sub.rm"; //修改性别√
 }
