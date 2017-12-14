@@ -66,6 +66,7 @@ class MainActivity : BaseActivity() {
                 intent.putExtra("title", "信用卡攻略")
                 startActivity(intent)
             }
+            R.id.first_pay -> { }
             R.id.second_update -> startActivity(MemberActivity::class.java)
         }
     }
