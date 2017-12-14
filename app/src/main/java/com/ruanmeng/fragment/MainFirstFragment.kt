@@ -74,7 +74,7 @@ class MainFirstFragment : BaseFragment() {
                 }
                 .register<CommonData>(R.layout.item_first_list) { data, injector ->
                     injector.text(R.id.item_first_name, "还款消费")
-                            .text(R.id.item_first_price, "￥${list.indexOf(data)}")
+                            .text(R.id.item_first_price, "￥${data.title}")
 
                             .visibility(R.id.item_first_divider1, if (list.indexOf(data) == list.size - 1) View.GONE else View.VISIBLE)
                             .visibility(R.id.item_first_divider2, if (list.indexOf(data) != list.size - 1) View.GONE else View.VISIBLE)
