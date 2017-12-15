@@ -31,8 +31,6 @@
     <dimen name="dimen_size_5">5dp</dimen>
     <dimen name="dimen_size_3">3dp</dimen>
     <dimen name="dimen_size_2">2dp</dimen>
+    <dimen name="dimen_size_1">1dp</dimen>
     <dimen name="dimen_size_0.5">0.5dp</dimen>
-    <dimen name="app_bar_height">180dp</dimen>
-    <dimen name="fab_margin">16dp</dimen>
-    <dimen name="text_margin">16dp</dimen>
 </resources>

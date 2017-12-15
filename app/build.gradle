@@ -90,6 +90,10 @@ dependencies {
     implementation 'com.github.bumptech.glide:glide:' + versions.glideVersion
     kapt 'com.github.bumptech.glide:compiler:' + versions.glideVersion
 
+    implementation 'com.google.zxing:core:3.3.1'
+    implementation 'cn.bingoogolapple:bga-qrcodecore:1.1.9@aar'
+    implementation 'cn.bingoogolapple:bga-zxing:1.1.9@aar'
+
     implementation 'net.idik:slimadapter:2.1.2'
     implementation 'com.yanzhenjie:permission:1.1.2'
     implementation 'org.greenrobot:eventbus:3.0.0'

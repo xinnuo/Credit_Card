@@ -9,6 +9,7 @@ import com.lzy.extend.StringDialogCallback
 import com.lzy.okgo.OkGo
 import com.lzy.okgo.model.Response
 import com.ruanmeng.base.BaseActivity
+import com.ruanmeng.base.startActivity
 import com.ruanmeng.base.toast
 import com.ruanmeng.share.BaseHttp
 import com.ruanmeng.utils.ActivityStack
@@ -49,6 +50,7 @@ class RegisterActivity : BaseActivity() {
                 intent.putExtra("title", "服务协议")
                 startActivity(intent)
             }
+            R.id.register_qrcode -> startActivity(ScanActivity::class.java)
             R.id.bt_yzm -> {
                 if (et_name.text.isBlank()) {
                     et_name.requestFocus()

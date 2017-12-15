@@ -106,6 +106,9 @@
         <activity
             android:name=".NicknameActivity"
             android:screenOrientation="portrait" />
+        <activity
+            android:name=".ScanActivity"
+            android:screenOrientation="portrait" />
 
         <!-- 融云即时通讯 start -->
         <!-- 会话界面 -->
