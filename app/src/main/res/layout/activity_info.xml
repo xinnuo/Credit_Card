@@ -67,7 +67,7 @@
             app:sRightIconMarginRight="@dimen/dimen_size_10"
             app:sRightIconRes="@mipmap/arrow_right"
             app:sRightIconSize="13dp"
-            app:sRightTextColor="@color/light"
+            app:sRightTextColor="@color/gray"
             app:sRightTextMarginRight="30dp"
             app:sTopLineMargin="10dp" />
 
@@ -83,7 +83,7 @@
             app:sRightIconMarginRight="@dimen/dimen_size_10"
             app:sRightIconRes="@mipmap/arrow_right"
             app:sRightIconSize="13dp"
-            app:sRightTextColor="@color/light"
+            app:sRightTextColor="@color/gray"
             app:sRightTextMarginRight="30dp" />
 
     </LinearLayout>

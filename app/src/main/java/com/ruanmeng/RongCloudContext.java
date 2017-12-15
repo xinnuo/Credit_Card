@@ -32,6 +32,7 @@ import io.rong.imlib.model.Group;
 import io.rong.imlib.model.Message;
 import io.rong.imlib.model.MessageContent;
 import io.rong.imlib.model.UserInfo;
+import io.rong.message.DiscussionNotificationMessage;
 import io.rong.message.FileMessage;
 import io.rong.message.ImageMessage;
 import io.rong.message.InformationNotificationMessage;
@@ -337,11 +338,18 @@ public class RongCloudContext implements RongIM.ConversationListBehaviorListener
             content = "[小灰条]";
 
             Log.i(TAG, "onReceived-informationNotificationMessage:" + informationNotificationMessage.getMessage());
+        } else if (messageContent instanceof DiscussionNotificationMessage){ //讨论组通知消息
+            DiscussionNotificationMessage discussionNotificationMessage = (DiscussionNotificationMessage) messageContent;
+            content = "[通知]";
+
+            Log.i(TAG, "onReceived-discussionNotificationMessage：" + discussionNotificationMessage.toString());
         } else {
             Log.i(TAG, "onReceived-其他消息，自己来判断处理");
         }
 
         String contentTitle = messageContent.getUserInfo() == null ? "对方消息" : messageContent.getUserInfo().getName();
+        if (message.getConversationType() == Conversation.ConversationType.DISCUSSION)
+            contentTitle = "讨论组消息";
 
         //在Android进行通知处理，首先需要重系统哪里获得通知管理器NotificationManager，它是一个系统Service
         if (manager == null)
@@ -368,7 +376,7 @@ public class RongCloudContext implements RongIM.ConversationListBehaviorListener
                     .buildUpon()
                     .appendPath("conversation")
                     .appendPath(message.getConversationType().getName().toLowerCase())
-                    .appendQueryParameter("targetId", messageContent.getUserInfo() == null ? tagetId : messageContent.getUserInfo().getUserId())
+                    .appendQueryParameter("targetId", tagetId)
                     .appendQueryParameter("title", contentTitle)
                     .build();
             intent.setData(uri);
@@ -473,7 +481,7 @@ public class RongCloudContext implements RongIM.ConversationListBehaviorListener
     public UserInfo getUserInfo(String userId) {
         return new UserInfo(
                 PreferencesUtils.getString(mContext, "token"),
-                PreferencesUtils.getString(mContext, "userName"),
+                PreferencesUtils.getString(mContext, "nickName"),
                 Uri.parse(BaseHttp.baseImg + PreferencesUtils.getString(mContext, "userhead")));
     }
 

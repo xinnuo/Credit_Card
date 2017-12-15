@@ -150,6 +150,7 @@
         </provider>
         <!-- 融云即时通讯 end -->
 
+        <activity android:name=".RealNameActivity"></activity>
     </application>
 
 </manifest>

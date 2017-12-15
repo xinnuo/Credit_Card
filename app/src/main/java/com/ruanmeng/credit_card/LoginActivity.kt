@@ -5,13 +5,15 @@ import android.text.method.HideReturnsTransformationMethod
 import android.text.method.PasswordTransformationMethod
 import android.view.View
 import android.widget.CompoundButton
-import com.ruanmeng.base.BaseActivity
-import com.ruanmeng.base.getString
-import com.ruanmeng.base.startActivity
-import com.ruanmeng.base.toast
+import com.lzy.extend.StringDialogCallback
+import com.lzy.okgo.OkGo
+import com.lzy.okgo.model.Response
+import com.ruanmeng.base.*
+import com.ruanmeng.share.BaseHttp
 import com.ruanmeng.utils.ActivityStack
 import com.ruanmeng.utils.CommonUtil
 import kotlinx.android.synthetic.main.activity_login.*
+import org.json.JSONObject
 
 class LoginActivity : BaseActivity() {
 
@@ -35,6 +37,15 @@ class LoginActivity : BaseActivity() {
             et_name.setText(getString("mobile"))
             et_name.setSelection(et_name.text.length)
         }
+
+        if (intent.getBooleanExtra("offLine", false)) {
+            if (intent.getBooleanExtra("isToast", false))
+                toast("当前账户在其他设备登录")
+
+            clearData()
+
+            ActivityStack.getScreenManager().popAllActivityExcept(this@LoginActivity::class.java)
+        }
     }
 
     override fun doClick(v: View) {
@@ -53,12 +64,67 @@ class LoginActivity : BaseActivity() {
                     return
                 }
 
-                startActivity(MainActivity::class.java)
-                ActivityStack.getScreenManager().popActivities(this@LoginActivity::class.java)
+                OkGo.post<String>(BaseHttp.login_sub)
+                        .tag(this@LoginActivity)
+                        .params("accountName", et_name.text.trim().toString())
+                        .params("password", et_pwd.text.trim().toString())
+                        .params("loginType", "mobile")
+                        .execute(object : StringDialogCallback(this@LoginActivity) {
+                            /*{
+                                "msg": "登录成功",
+                                "msgcode": 100,
+                                "object": {
+                                    "cusTel": "",
+                                    "isPass": 0,
+                                    "mobile": "17603870563",
+                                    "msgsNum": 28,
+                                    "rongtoken": "Q4DZc5aadc9rp8f7PWRFNc6IEHMWJRjuP/Un2Bh7R8OALyAioDNc8UX8RXn+TR8MVsC9MnbwkUndHZG64866M6nQ9l89IT/nN2JWgpjVAAH9/snaemskGR3HEfdi28dVDHGbu4/6NK8=",
+                                    "token": "31743A18B53842298BC9DDF861651658"
+                                }
+                            }*/
+                            override fun onSuccessResponse(response: Response<String>, msg: String, msgCode: String) {
+                                val obj = JSONObject(response.body()).getJSONObject("object")
+
+                                putBoolean("isLogin", true)
+                                putString("isPass", obj.getString("isPass"))
+                                putString("mobile", obj.getString("mobile"))
+                                putString("msgsNum", obj.getString("msgsNum"))
+                                putString("rongtoken", if (obj.isNull("rongtoken")) "" else obj.getString("rongtoken"))
+                                putString("token", obj.getString("token"))
+
+                                startActivity(MainActivity::class.java)
+                                ActivityStack.getScreenManager().popActivities(this@LoginActivity::class.java)
+                            }
+
+                        })
             }
             R.id.tv_sign -> startActivity(RegisterActivity::class.java)
             R.id.tv_forget -> startActivity(ForgetActivity::class.java)
         }
+    }
+
+    private fun clearData() {
+        putBoolean("isLogin", false)
+        putString("token", "")
+        putString("rongToken", "")
+
+        putString("balanceSum", "0.00")
+        putString("profitSum", "0.00")
+        putString("withdrawSum", "0.00")
+        putString("levelName", "")
+        putString("platform", "")
+
+        putString("age", "")
+        putString("mobile", "")
+        putString("isPass", "")
+        putString("nickName", "")
+        putString("sex", "")
+        putString("userhead", "")
+
+        //清除通知栏消息
+        // RongCloudContext.getInstance().clearNotificationMessage()
+        // RongPushClient.clearAllPushNotifications(applicationContext)
+        // RongIM.getInstance().logout()
     }
 
     override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {

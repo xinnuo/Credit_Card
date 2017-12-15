@@ -2,26 +2,30 @@ package com.ruanmeng.credit_card
 
 import android.app.Activity
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.View
 import com.luck.picture.lib.PictureSelector
 import com.luck.picture.lib.config.PictureConfig
 import com.luck.picture.lib.config.PictureMimeType
 import com.luck.picture.lib.entity.LocalMedia
-import com.ruanmeng.base.BaseActivity
-import com.ruanmeng.base.GlideApp
-import com.ruanmeng.base.startActivity
+import com.lzy.extend.StringDialogCallback
+import com.lzy.okgo.OkGo
+import com.lzy.okgo.model.Response
+import com.ruanmeng.base.*
+import com.ruanmeng.share.BaseHttp
 import com.ruanmeng.share.Const
 import com.ruanmeng.utils.DialogHelper
+import io.rong.imkit.RongIM
+import io.rong.imlib.model.UserInfo
 import kotlinx.android.synthetic.main.activity_info.*
+import org.json.JSONObject
+import java.io.File
 import java.util.*
 
 class InfoActivity : BaseActivity() {
 
     private var selectList = ArrayList<LocalMedia>()
-    private var userhead_img = ""
-
-    private var sex = "1"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,17 +33,49 @@ class InfoActivity : BaseActivity() {
         init_title("个人资料")
     }
 
+    override fun onStart() {
+        super.onStart()
+        info_name.setRightString(getString("nickName"))
+    }
+
     override fun init_title() {
         super.init_title()
+        loadUserHead(getString("userhead"))
+        info_gender.setRightString(if (getString("sex") == "0") "女" else "男")
 
         info_gender.setOnClickListener {
             DialogHelper.showItemDialog(baseContext, "选择性别", Arrays.asList("男", "女")) { position, name ->
-                info_gender.setRightString(name)
-                sex = if (position == 0) "1" else "0"
+
+                OkGo.post<String>(BaseHttp.sex_change_sub)
+                        .tag(this@InfoActivity)
+                        .headers("token", getString("token"))
+                        .params("sex", if (position == 0) "1" else "0")
+                        .execute(object : StringDialogCallback(baseContext) {
+                            /*{
+                                "msg": "更新成功",
+                                "msgcode": 100
+                            }*/
+                            override fun onSuccessResponse(response: Response<String>, msg: String, msgCode: String) {
+                                toast(msg)
+                                putString("sex", if (position == 0) "1" else "0")
+
+                                info_gender.setRightString(name)
+                            }
+
+                        })
             }
         }
 
         info_name.setOnClickListener { startActivity(NicknameActivity::class.java) }
+    }
+
+    private fun loadUserHead(path: String) {
+        GlideApp.with(this@InfoActivity)
+                .load(BaseHttp.baseImg + path)
+                .placeholder(R.mipmap.default_user) // 等待时的图片
+                .error(R.mipmap.default_user)       // 加载失败的图片
+                .dontAnimate()
+                .into(info_img)
     }
 
     override fun doClick(v: View) {
@@ -120,11 +156,33 @@ class InfoActivity : BaseActivity() {
                     // 如果裁剪并压缩了，已取压缩路径为准，因为是先裁剪后压缩的
 
                     if (selectList[0].isCompressed) {
-                        userhead_img = selectList[0].compressPath
-                        GlideApp.with(baseContext)
-                                .load(userhead_img)
-                                .dontAnimate()
-                                .into(info_img)
+
+                        OkGo.post<String>(BaseHttp.userinfo_uploadhead_sub)
+                                .tag(this@InfoActivity)
+                                .isMultipart(true)
+                                .headers("token", getString("token"))
+                                .params("img", File(selectList[0].compressPath))
+                                .execute(object : StringDialogCallback(baseContext) {
+                                    /*{
+                                        "msg": "头像上传成功",
+                                        "msgcode": 100,
+                                        "object": "upload/userhead/31743A18B53842298BC9DDF861651658/F6FD163A606A46E8AC27C7AF9E866F23.jpg"
+                                    }*/
+                                    override fun onSuccessResponse(response: Response<String>, msg: String, msgCode: String) {
+                                        toast(msg)
+
+                                        val userhead = JSONObject(response.body()).getString("object")
+                                        putString("userhead", userhead)
+
+                                        RongIM.getInstance().refreshUserInfoCache(UserInfo(
+                                                getString("token"),
+                                                getString("nickName"),
+                                                Uri.parse(BaseHttp.baseImg + getString("userhead"))))
+
+                                        loadUserHead(userhead)
+                                    }
+
+                                })
                     }
                 }
             }

@@ -7,6 +7,7 @@ import android.os.Handler
 import android.os.Message
 import android.view.WindowManager
 import com.ruanmeng.base.BaseActivity
+import com.ruanmeng.base.getBoolean
 import com.ruanmeng.base.startActivity
 import com.ruanmeng.base.toast
 import com.ruanmeng.utils.ActivityStack
@@ -21,7 +22,7 @@ class GuideActivity : BaseActivity() {
         override fun handleMessage(msg: Message) {
             super.handleMessage(msg)
             if (isReady) {
-                startActivity(LoginActivity::class.java)
+                startActivity(if (getBoolean("isLogin")) MainActivity::class.java else LoginActivity::class.java)
                 ActivityStack.getScreenManager().popActivities(this@GuideActivity::class.java)
             } else {
                 isReady = true
