@@ -1,6 +1,22 @@
 {
     "logs": [
         {
+            "outputFile": "F:\\workspace\\Credit_Card\\GridPasswordView\\build\\intermediates\\incremental\\mergeDebugAndroidTestResources\\merged.dir\\values-v12\\values-v12.xml",
+            "map": [
+                {
+                    "source": "C:\\Users\\41614\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\4074de25f5ae5f0b99197a0be2a04e28\\res\\values-v12\\values-v12.xml",
+                    "from": {
+                        "startLines": "2,5,8,9",
+                        "startColumns": "4,4,4,4",
+                        "startOffsets": "55,279,479,598",
+                        "endLines": "4,7,8,9",
+                        "endColumns": "12,12,118,94",
+                        "endOffsets": "274,474,593,688"
+                    }
+                }
+            ]
+        },
+        {
             "outputFile": "D:\\workspace_studio\\Credit_Card\\GridPasswordView\\build\\intermediates\\incremental\\mergeDebugAndroidTestResources\\merged.dir\\values-v12\\values-v12.xml",
             "map": [
                 {
