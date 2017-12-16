@@ -86,7 +86,6 @@ class MainThirdFragment : BaseFragment() {
                         val data = obj.getJSONObject("userMsg")
                         putString("age", data.getString("age"))
                         putString("mobile", data.getString("mobile"))
-                        putString("isPass", data.getString("pass"))
                         putString("nickName", data.getString("nickName"))
                         putString("sex", data.getString("sex"))
                         putString("userhead", data.getString("userhead"))

@@ -86,7 +86,6 @@ class LoginActivity : BaseActivity() {
                                 val obj = JSONObject(response.body()).getJSONObject("object")
 
                                 putBoolean("isLogin", true)
-                                putString("isPass", obj.getString("isPass"))
                                 putString("mobile", obj.getString("mobile"))
                                 putString("msgsNum", obj.getString("msgsNum"))
                                 putString("rongtoken", if (obj.isNull("rongtoken")) "" else obj.getString("rongtoken"))

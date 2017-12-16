@@ -4,21 +4,10 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <FrameLayout
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/bank_list"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/bank_list"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:overScrollMode="never" />
-
-        <com.ruanmeng.sort.IndexLayout
-            android:id="@+id/index_layout"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
-
-    </FrameLayout>
+        android:layout_height="match_parent"
+        android:overScrollMode="never" />
 
 </LinearLayout>

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -25,14 +26,12 @@
                 android:layout_marginLeft="@dimen/dimen_size_10"
                 android:text="姓名" />
 
-            <EditText
-                android:id="@+id/et_name"
+            <TextView
+                android:id="@+id/saving_name"
                 style="@style/Font14_black_dark"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@android:color/white"
-                android:hint="请输入您的姓名"
-                android:maxLength="12"
+                android:gravity="center_vertical"
                 android:paddingLeft="@dimen/dimen_size_10" />
 
         </LinearLayout>
@@ -55,15 +54,12 @@
                 android:layout_marginLeft="@dimen/dimen_size_10"
                 android:text="身份证" />
 
-            <EditText
-                android:id="@+id/et_num"
+            <TextView
+                android:id="@+id/saving_num"
                 style="@style/Font14_black_dark"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@android:color/white"
-                android:hint="请输入您的身份证号码"
-                android:inputType="number"
-                android:maxLength="18"
+                android:gravity="center_vertical"
                 android:paddingLeft="@dimen/dimen_size_10" />
 
         </LinearLayout>
@@ -77,7 +73,8 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="@dimen/line_height">
+            android:layout_height="@dimen/line_height"
+            android:gravity="center_vertical">
 
             <TextView
                 style="@style/Font14_gray"
@@ -86,7 +83,7 @@
                 android:layout_marginLeft="@dimen/dimen_size_10"
                 android:text="储蓄卡号" />
 
-            <EditText
+            <com.santalu.maskedittext.MaskEditText
                 android:id="@+id/et_card"
                 style="@style/Font14_black_dark"
                 android:layout_width="0dp"
@@ -95,8 +92,8 @@
                 android:background="@android:color/white"
                 android:hint="请输入您的储蓄卡卡号"
                 android:inputType="number"
-                android:maxLength="18"
-                android:paddingLeft="@dimen/dimen_size_10" />
+                android:paddingLeft="@dimen/dimen_size_10"
+                app:mask="#### #### #### #### ###" />
 
             <ImageView
                 android:id="@+id/card_camera"
@@ -105,6 +102,7 @@
                 android:layout_marginRight="@dimen/dimen_size_5"
                 android:padding="@dimen/dimen_size_6"
                 android:src="@mipmap/icon_camera"
+                android:visibility="gone"
                 tools:ignore="ContentDescription" />
 
         </LinearLayout>

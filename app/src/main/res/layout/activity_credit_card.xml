@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
@@ -29,14 +30,12 @@
                     android:layout_marginLeft="@dimen/dimen_size_10"
                     android:text="姓名" />
 
-                <EditText
-                    android:id="@+id/et_name"
+                <TextView
+                    android:id="@+id/credit_name"
                     style="@style/Font14_black_dark"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="@android:color/white"
-                    android:hint="请输入姓名"
-                    android:maxLength="12"
+                    android:gravity="center_vertical"
                     android:paddingLeft="@dimen/dimen_size_10" />
 
             </LinearLayout>
@@ -59,15 +58,12 @@
                     android:layout_marginLeft="@dimen/dimen_size_10"
                     android:text="身份证" />
 
-                <EditText
-                    android:id="@+id/et_num"
+                <TextView
+                    android:id="@+id/credit_num"
                     style="@style/Font14_black_dark"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="@android:color/white"
-                    android:hint="请输入身份证号码"
-                    android:inputType="number"
-                    android:maxLength="18"
+                    android:gravity="center_vertical"
                     android:paddingLeft="@dimen/dimen_size_10" />
 
             </LinearLayout>
@@ -81,7 +77,8 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/line_height">
+                android:layout_height="@dimen/line_height"
+                android:gravity="center_vertical">
 
                 <TextView
                     style="@style/Font14_gray"
@@ -90,7 +87,7 @@
                     android:layout_marginLeft="@dimen/dimen_size_10"
                     android:text="卡号" />
 
-                <EditText
+                <com.santalu.maskedittext.MaskEditText
                     android:id="@+id/et_card"
                     style="@style/Font14_black_dark"
                     android:layout_width="0dp"
@@ -99,8 +96,8 @@
                     android:background="@android:color/white"
                     android:hint="请输入信用卡卡号"
                     android:inputType="number"
-                    android:maxLength="18"
-                    android:paddingLeft="@dimen/dimen_size_10" />
+                    android:paddingLeft="@dimen/dimen_size_10"
+                    app:mask="#### #### #### #### ###" />
 
                 <ImageView
                     android:id="@+id/card_camera"
@@ -109,6 +106,7 @@
                     android:layout_marginRight="@dimen/dimen_size_5"
                     android:padding="@dimen/dimen_size_6"
                     android:src="@mipmap/icon_camera"
+                    android:visibility="gone"
                     tools:ignore="ContentDescription" />
 
             </LinearLayout>
@@ -122,7 +120,8 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/line_height">
+                android:layout_height="@dimen/line_height"
+                android:gravity="center_vertical">
 
                 <TextView
                     style="@style/Font14_gray"
@@ -148,6 +147,7 @@
                     android:layout_width="@dimen/dimen_size_40"
                     android:layout_height="@dimen/dimen_size_40"
                     android:layout_marginRight="@dimen/dimen_size_5"
+                    android:onClick="doClick"
                     android:padding="@dimen/dimen_size_9"
                     android:src="@mipmap/icon_hint"
                     tools:ignore="ContentDescription" />
@@ -163,7 +163,8 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/line_height">
+                android:layout_height="@dimen/line_height"
+                android:gravity="center_vertical">
 
                 <TextView
                     style="@style/Font14_gray"
@@ -172,7 +173,7 @@
                     android:layout_marginLeft="@dimen/dimen_size_10"
                     android:text="有效期" />
 
-                <EditText
+                <com.santalu.maskedittext.MaskEditText
                     android:id="@+id/et_date"
                     style="@style/Font14_black_dark"
                     android:layout_width="0dp"
@@ -180,16 +181,17 @@
                     android:layout_weight="1"
                     android:background="@android:color/white"
                     android:digits="0123456789/"
-                    android:hint="请输入有效期(月/年)"
-                    android:inputType="date"
-                    android:maxLength="3"
-                    android:paddingLeft="@dimen/dimen_size_10" />
+                    android:hint="请输入有效期(月月/年年)"
+                    android:inputType="number"
+                    android:paddingLeft="@dimen/dimen_size_10"
+                    app:mask="##/##" />
 
                 <ImageView
                     android:id="@+id/date_hint"
                     android:layout_width="@dimen/dimen_size_40"
                     android:layout_height="@dimen/dimen_size_40"
                     android:layout_marginRight="@dimen/dimen_size_5"
+                    android:onClick="doClick"
                     android:padding="@dimen/dimen_size_9"
                     android:src="@mipmap/icon_hint"
                     tools:ignore="ContentDescription" />
@@ -259,7 +261,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:background="@android:color/white"
-                    android:hint="请输入信用卡额度"
+                    android:hint="请输入信用卡额度(元)"
                     android:inputType="number"
                     android:maxLength="9"
                     android:paddingLeft="@dimen/dimen_size_10" />
@@ -412,8 +414,8 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/dimen_size_10"
             android:layout_marginRight="@dimen/dimen_size_10"
-            android:lineSpacingExtra="@dimen/dimen_size_3"
             android:layout_marginTop="@dimen/dimen_size_5"
+            android:lineSpacingExtra="@dimen/dimen_size_3"
             android:text="注：添加信用卡成功后即做一笔10元的消费交易作为验证信用卡的正确性，交易成功后，消费金额将自动转入APP账户里"
             android:textColor="@color/red" />
 

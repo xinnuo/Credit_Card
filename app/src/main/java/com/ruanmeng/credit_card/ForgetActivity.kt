@@ -62,7 +62,7 @@ class ForgetActivity : BaseActivity() {
                         bt_yzm.postDelayed(thread, 1000)
                         time_count--
                     } else {
-                        bt_yzm.text = "获取验证码"
+                        bt_yzm.text = "发送验证码"
                         bt_yzm.isClickable = true
                         bt_yzm.setBackgroundResource(R.drawable.rec_bg_ova_orange)
                         time_count = 90
@@ -105,7 +105,7 @@ class ForgetActivity : BaseActivity() {
                 if (et_yzm.text.trim().toString() != YZM) {
                     et_yzm.requestFocus()
                     et_yzm.setText("")
-                    toast("验证码错误，请重新输入！")
+                    toast("验证码错误，请重新输入")
                     return
                 }
 
