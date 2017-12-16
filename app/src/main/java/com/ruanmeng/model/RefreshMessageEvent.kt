@@ -1,5 +1,5 @@
 /**
- * created by 小卷毛, 2017/10/26
+ * created by 小卷毛, 2017/12/16
  * Copyright (c) 2017, 416143467@qq.com All Rights Reserved.
  * #                   *********                            #
  * #                  ************                          #
@@ -27,30 +27,12 @@
  */
 package com.ruanmeng.model
 
-import java.io.Serializable
-
 /**
  * 项目名称：Credit_Card
  * 创建人：小卷毛
- * 创建时间：2017-12-16 11:17
+ * 创建时间：2017-12-16 14:20
  */
-data class CardData(
-        //信用卡列表
-        var billDay: String = "",
-        var creditcard: String = "",
-        var creditcardId: String = "",
-        var cvn2: String = "",
-        var invaridDate: String = "",
-        var quota: String = "",
-        var repaymentDay: String = "",
-
-        //储蓄卡列表
-        var bank: String = "",
-        var depositcard: String = "",
-        var depositcardId: String = "",
-        var identityCard: String = "",
+data class RefreshMessageEvent(
         var name: String = "",
-        var tel: String = "",
-
-        var isChecked: Boolean = false
-) : Serializable
+        var id: String = "",
+        var type: String = "")

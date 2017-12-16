@@ -12,11 +12,16 @@ import com.ruanmeng.base.*
 import com.ruanmeng.model.CardData
 import com.ruanmeng.model.CommonData
 import com.ruanmeng.model.CommonModel
+import com.ruanmeng.model.RefreshMessageEvent
 import com.ruanmeng.share.BaseHttp
+import com.ruanmeng.utils.ActivityStack
+import com.ruanmeng.utils.DialogHelper
 import com.ruanmeng.utils.Tools
 import kotlinx.android.synthetic.main.activity_bankcard.*
 import kotlinx.android.synthetic.main.layout_list.*
 import net.idik.lib.slimadapter.SlimAdapter
+import org.greenrobot.eventbus.EventBus
+import org.greenrobot.eventbus.Subscribe
 
 class BankcardActivity : BaseActivity() {
 
@@ -26,6 +31,8 @@ class BankcardActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_bankcard)
         init_title("我的银行卡")
+
+        EventBus.getDefault().register(this@BankcardActivity)
     }
 
     override fun init_title() {
@@ -78,7 +85,36 @@ class BankcardActivity : BaseActivity() {
                                 startActivity(intent)
                             }
 
-                            .clicked(R.id.item_bankcard_add) { startActivity(SavingsCardActivity::class.java) }
+                            .clicked(R.id.item_bankcard_add) {
+                                when (getString("isPass")) {
+                                    "-1" -> {
+                                        DialogHelper.showDialog(
+                                                baseContext,
+                                                "温馨提示",
+                                                "实名认证审核失败，是否现在去重新认证？",
+                                                "取消",
+                                                "去认证") {
+
+                                            startActivity(RealNameActivity::class.java)
+                                            ActivityStack.getScreenManager().popActivities(this@BankcardActivity::class.java)
+                                        }
+                                    }
+                                    "0" -> toast("实名认证信息正在审核中")
+                                    "1" -> startActivity(SavingsCardActivity::class.java)
+                                    else -> {
+                                        DialogHelper.showDialog(
+                                                baseContext,
+                                                "温馨提示",
+                                                "未进行实名认证，暂无法添加储蓄卡，是否现在去认证？",
+                                                "取消",
+                                                "去认证") {
+
+                                            startActivity(RealNameActivity::class.java)
+                                            ActivityStack.getScreenManager().popActivities(this@BankcardActivity::class.java)
+                                        }
+                                    }
+                                }
+                            }
                 }
                 .register<CardData>(R.layout.item_bankcard_list) { data, injector ->
                     injector.background(R.id.item_bankcard, R.drawable.rec_bg_414b80)
@@ -97,7 +133,36 @@ class BankcardActivity : BaseActivity() {
                                 startActivity(intent)
                             }
 
-                            .clicked(R.id.item_bankcard_add) { startActivity(CreditCardActivity::class.java) }
+                            .clicked(R.id.item_bankcard_add) {
+                                when (getString("isPass")) {
+                                    "-1" -> {
+                                        DialogHelper.showDialog(
+                                                baseContext,
+                                                "温馨提示",
+                                                "实名认证审核失败，是否现在去重新认证？",
+                                                "取消",
+                                                "去认证") {
+
+                                            startActivity(RealNameActivity::class.java)
+                                            ActivityStack.getScreenManager().popActivities(this@BankcardActivity::class.java)
+                                        }
+                                    }
+                                    "0" -> toast("实名认证信息正在审核中")
+                                    "1" -> startActivity(CreditCardActivity::class.java)
+                                    else -> {
+                                        DialogHelper.showDialog(
+                                                baseContext,
+                                                "温馨提示",
+                                                "未进行实名认证，暂无法添加信用卡，是否现在去认证？",
+                                                "取消",
+                                                "去认证") {
+
+                                            startActivity(RealNameActivity::class.java)
+                                            ActivityStack.getScreenManager().popActivities(this@BankcardActivity::class.java)
+                                        }
+                                    }
+                                }
+                            }
                 }
                 .attachTo(recycle_list)
     }
@@ -162,5 +227,24 @@ class BankcardActivity : BaseActivity() {
             mAdapter.updateData(list).notifyDataSetChanged()
         }
         getData(mPosition)
+    }
+
+    override fun onBackPressed() {
+        EventBus.getDefault().unregister(this@BankcardActivity)
+        super.onBackPressed()
+    }
+
+    @Subscribe
+    fun onMessageEvent(event: RefreshMessageEvent) {
+        when (event.name) {
+            "新增储蓄卡" -> {
+                swipe_refresh.isRefreshing = true
+                getData(mPosition)
+            }
+            "新增信用卡" -> {
+                swipe_refresh.isRefreshing = true
+                getData(mPosition)
+            }
+        }
     }
 }

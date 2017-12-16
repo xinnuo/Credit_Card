@@ -7,13 +7,16 @@ import android.support.v4.app.FragmentPagerAdapter
 import android.view.KeyEvent
 import android.view.View
 import android.widget.CompoundButton
-import com.ruanmeng.base.BaseActivity
-import com.ruanmeng.base.startActivity
-import com.ruanmeng.base.toast
+import com.lzy.extend.StringDialogCallback
+import com.lzy.okgo.OkGo
+import com.lzy.okgo.model.Response
+import com.ruanmeng.base.*
 import com.ruanmeng.fragment.MainFirstFragment
 import com.ruanmeng.fragment.MainSecondFragment
 import com.ruanmeng.fragment.MainThirdFragment
+import com.ruanmeng.share.BaseHttp
 import kotlinx.android.synthetic.main.activity_main.*
+import org.json.JSONObject
 
 class MainActivity : BaseActivity() {
 
@@ -30,6 +33,26 @@ class MainActivity : BaseActivity() {
         main_check1.setOnCheckedChangeListener(this)
         main_check2.setOnCheckedChangeListener(this)
         main_check3.setOnCheckedChangeListener(this)
+    }
+
+    override fun onStart() {
+        super.onStart()
+
+        OkGo.post<String>(BaseHttp.identity_Info)
+                .tag(this@MainActivity)
+                .headers("token", getString("token"))
+                .execute(object : StringDialogCallback(baseContext, false) {
+
+                    override fun onSuccessResponse(response: Response<String>, msg: String, msgCode: String) {
+                        val obj = JSONObject(response.body())
+
+                        putString("isPass", obj.getString("pass"))
+                        putString("real_name", if (obj.isNull("userName")) "" else obj.getString("userName"))
+                        putString("real_sex", if (obj.isNull("sex")) "" else obj.getString("sex"))
+                        putString("real_IDCard", if (obj.isNull("cardNo")) "" else obj.getString("cardNo"))
+                    }
+
+                })
     }
 
     override fun onCheckedChanged(buttonView: CompoundButton, isChecked: Boolean) {

@@ -102,21 +102,21 @@ data class CommonData(
         var chatRoomName: String = "",
 
         //信用卡列表
-        val billDay: String = "",
-        val creditcard: String = "",
-        val creditcardId: String = "",
-        val cvn2: String = "",
-        val invalidDate: String = "",
-        val quota: String = "",
-        val repaymentDay: String = "",
+        var billDay: String = "",
+        var creditcard: String = "",
+        var creditcardId: String = "",
+        var cvn2: String = "",
+        var invaridDate: String = "",
+        var quota: String = "",
+        var repaymentDay: String = "",
 
         //储蓄卡列表
-        val bank: String = "",
-        val depositcard: String = "",
-        val depositcardId: String = "",
-        val identityCard: String = "",
-        val name: String = "",
-        val tel: String = "",
+        var bank: String = "",
+        var depositcard: String = "",
+        var depositcardId: String = "",
+        var identityCard: String = "",
+        var name: String = "",
+        var tel: String = "",
 
         var isChecked: Boolean = false
 ) : Serializable
