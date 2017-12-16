@@ -1,13 +1,18 @@
 package com.ruanmeng.credit_card
 
+import android.content.Intent
 import android.os.Bundle
 import android.support.design.widget.TabLayout
+import android.view.View
+import com.lzy.extend.jackson.JacksonDialogCallback
 import com.lzy.okgo.OkGo
+import com.lzy.okgo.model.Response
 import com.makeramen.roundedimageview.RoundedImageView
-import com.ruanmeng.base.BaseActivity
-import com.ruanmeng.base.load_Linear
-import com.ruanmeng.base.refresh
+import com.ruanmeng.base.*
+import com.ruanmeng.model.CardData
 import com.ruanmeng.model.CommonData
+import com.ruanmeng.model.CommonModel
+import com.ruanmeng.share.BaseHttp
 import com.ruanmeng.utils.Tools
 import kotlinx.android.synthetic.main.activity_bankcard.*
 import kotlinx.android.synthetic.main.layout_list.*
@@ -21,20 +26,6 @@ class BankcardActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_bankcard)
         init_title("我的银行卡")
-
-        list.add(CommonData())
-        list.add(CommonData())
-        list.add(CommonData())
-        list.add(CommonData())
-        list.add(CommonData())
-        list.add(CommonData())
-        list.add(CommonData())
-        list.add(CommonData())
-        list.add(CommonData())
-        list.add(CommonData())
-        list.add(CommonData())
-        list.add(CommonData())
-        mAdapter.updateData(list).notifyDataSetChanged()
     }
 
     override fun init_title() {
@@ -47,11 +38,13 @@ class BankcardActivity : BaseActivity() {
                 override fun onTabUnselected(tab: TabLayout.Tab) {}
 
                 override fun onTabSelected(tab: TabLayout.Tab) {
-                    mPosition = tab.position + 1
+                    mPosition = tab.position
 
                     window.decorView.postDelayed({
                         runOnUiThread {
                             OkGo.getInstance().cancelTag(this@BankcardActivity)
+
+                            updateList()
                         }
                     }, 300)
                 }
@@ -64,22 +57,110 @@ class BankcardActivity : BaseActivity() {
             post { Tools.setIndicator(this, 50, 50) }
         }
 
-        swipe_refresh.refresh { getData(1) }
-        recycle_list.load_Linear(baseContext, swipe_refresh) {
-            if (!isLoadingMore) {
-                isLoadingMore = true
-                getData(pageNum)
-            }
-        }
+        swipe_refresh.refresh { getData(mPosition) }
+        recycle_list.load_Linear(baseContext)
 
         mAdapter = SlimAdapter.create()
                 .register<CommonData>(R.layout.item_bankcard_list) { data, injector ->
-                    injector.text(R.id.item_bankcard_name, data.title)
-                            .with<RoundedImageView>(R.id.item_bankcard_img) { view ->  }
-                            .clicked(R.id.item_bankcard) {
+                    injector.background(R.id.item_bankcard, R.drawable.rec_bg_ca566b)
+                            .text(R.id.item_bankcard_hint, "新增储蓄卡")
+                            .text(R.id.item_bankcard_name, data.bank)
+                            .text(R.id.item_bankcard_tail,
+                                    if (data.tel.isEmpty()) "0000" else data.tel.substring(data.tel.length - 4))
+                            .text(R.id.item_bankcard_num,
+                                    if (data.depositcard.isEmpty()) "0000" else data.depositcard.substring(data.depositcard.length - 4))
+                            .visibility(R.id.item_bankcard, if (data.isChecked) View.GONE else View.VISIBLE)
+                            .visibility(R.id.item_bankcard_add, if (!data.isChecked) View.GONE else View.VISIBLE)
 
+                            .clicked(R.id.item_bankcard) {
+                                val intent = Intent(baseContext, SavingsDetailActivity::class.java)
+                                intent.putExtra("depositcardId", data.depositcardId)
+                                startActivity(intent)
                             }
+
+                            .clicked(R.id.item_bankcard_add) { startActivity(SavingsCardActivity::class.java) }
+                }
+                .register<CardData>(R.layout.item_bankcard_list) { data, injector ->
+                    injector.background(R.id.item_bankcard, R.drawable.rec_bg_414b80)
+                            .text(R.id.item_bankcard_hint, "新增信用卡")
+                            .text(R.id.item_bankcard_name, data.bank)
+                            .text(R.id.item_bankcard_tail,
+                                    if (data.tel.isEmpty()) "0000" else data.tel.substring(data.tel.length - 4))
+                            .text(R.id.item_bankcard_num,
+                                    if (data.creditcard.isEmpty()) "0000" else data.creditcard.substring(data.creditcard.length - 4))
+                            .visibility(R.id.item_bankcard, if (data.isChecked) View.GONE else View.VISIBLE)
+                            .visibility(R.id.item_bankcard_add, if (!data.isChecked) View.GONE else View.VISIBLE)
+
+                            .clicked(R.id.item_bankcard) {
+                                val intent = Intent(baseContext, CreditDetailActivity::class.java)
+                                intent.putExtra("creditcardId", data.creditcardId)
+                                startActivity(intent)
+                            }
+
+                            .clicked(R.id.item_bankcard_add) { startActivity(CreditCardActivity::class.java) }
                 }
                 .attachTo(recycle_list)
+    }
+
+    override fun getData(pindex: Int) {
+        when (pindex) {
+            0 -> {
+                OkGo.post<CommonModel>(BaseHttp.depositcard_data)
+                        .tag(this@BankcardActivity)
+                        .headers("token", getString("token"))
+                        .execute(object : JacksonDialogCallback<CommonModel>(baseContext, CommonModel::class.java) {
+
+                            override fun onSuccess(response: Response<CommonModel>) {
+                                list.apply {
+                                    clear()
+                                    addItems(response.body().depositcards)
+
+                                    if (isEmpty()) add(CommonData().apply { isChecked = true })
+                                }
+
+                                mAdapter.updateData(list).notifyDataSetChanged()
+                            }
+
+                            override fun onFinish() {
+                                super.onFinish()
+                                swipe_refresh.isRefreshing = false
+                            }
+
+                        })
+            }
+            1 -> {
+                OkGo.post<CommonModel>(BaseHttp.creditcard_data)
+                        .tag(this@BankcardActivity)
+                        .headers("token", getString("token"))
+                        .execute(object : JacksonDialogCallback<CommonModel>(baseContext, CommonModel::class.java) {
+
+                            override fun onSuccess(response: Response<CommonModel>) {
+                                list.apply {
+                                    clear()
+                                    addItems(response.body().creditcards)
+
+                                    add(CardData().apply { isChecked = true })
+                                }
+
+                                mAdapter.updateData(list).notifyDataSetChanged()
+                            }
+
+                            override fun onFinish() {
+                                super.onFinish()
+                                swipe_refresh.isRefreshing = false
+                            }
+
+                        })
+            }
+        }
+    }
+
+    fun updateList() {
+        swipe_refresh.isRefreshing = true
+        if (list.size > 0) {
+            list.clear()
+            mAdapter.updateData(list).notifyDataSetChanged()
+        }
+        getData(mPosition)
     }
 }
