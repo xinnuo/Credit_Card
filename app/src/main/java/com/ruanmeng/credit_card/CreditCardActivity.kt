@@ -54,7 +54,7 @@ class CreditCardActivity : BaseActivity() {
         et_yzm.addTextChangedListener(this@CreditCardActivity)
 
         credit_name.text = getString("real_name")
-        credit_num.text = getString("real_IDCard")
+        credit_num.text = CommonUtil.idCardReplaceWithStar(getString("real_IDCard"))
     }
 
     @SuppressLint("SetTextI18n")

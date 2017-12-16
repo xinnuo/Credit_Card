@@ -16,7 +16,7 @@ class RealActivity : BaseActivity() {
 
     override fun init_title() {
         super.init_title()
-        real_name.text = CommonUtil.nameReplaceWithStar(getString("real_name"))
+        real_name.text = getString("real_name")
         real_gender.text = when (getString("real_sex")) {
             "0" -> "女"
             else -> "男"

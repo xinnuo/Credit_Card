@@ -48,7 +48,7 @@ class SavingsCardActivity : BaseActivity() {
         et_yzm.addTextChangedListener(this@SavingsCardActivity)
 
         saving_name.text = getString("real_name")
-        saving_num.text = getString("real_IDCard")
+        saving_num.text = CommonUtil.idCardReplaceWithStar(getString("real_IDCard"))
     }
 
     @SuppressLint("SetTextI18n")
