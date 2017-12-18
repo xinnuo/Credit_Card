@@ -231,19 +231,7 @@ class BankcardActivity : BaseActivity() {
     @Subscribe
     fun onMessageEvent(event: RefreshMessageEvent) {
         when (event.name) {
-            "新增储蓄卡" -> {
-                swipe_refresh.isRefreshing = true
-                getData(mPosition)
-            }
-            "新增信用卡" -> {
-                swipe_refresh.isRefreshing = true
-                getData(mPosition)
-            }
-            "更换银行卡" -> {
-                swipe_refresh.isRefreshing = true
-                getData(mPosition)
-            }
-            "删除信用卡" -> {
+            "新增储蓄卡", "新增信用卡", "更换银行卡", "删除信用卡" -> {
                 swipe_refresh.isRefreshing = true
                 getData(mPosition)
             }
