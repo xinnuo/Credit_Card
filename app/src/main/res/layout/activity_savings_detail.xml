@@ -156,6 +156,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@drawable/rec_bg_trans_stroke_white_radius_30"
+                android:onClick="doClick"
                 android:paddingBottom="@dimen/dimen_size_6"
                 android:paddingLeft="@dimen/dimen_size_20"
                 android:paddingRight="@dimen/dimen_size_20"
