@@ -6,10 +6,12 @@ import android.view.View
 import com.lzy.extend.jackson.JacksonDialogCallback
 import com.lzy.okgo.OkGo
 import com.lzy.okgo.model.Response
+import com.makeramen.roundedimageview.RoundedImageView
 import com.ruanmeng.base.*
 import com.ruanmeng.model.CommonData
 import com.ruanmeng.model.CommonModel
 import com.ruanmeng.share.BaseHttp
+import com.ruanmeng.utils.NumberHelper
 import com.ruanmeng.utils.Tools
 import kotlinx.android.synthetic.main.activity_plan.*
 import kotlinx.android.synthetic.main.layout_empty.*
@@ -25,20 +27,6 @@ class PlanActivity : BaseActivity() {
         setContentView(R.layout.activity_plan)
         setToolbarVisibility(false)
         init_title()
-
-        list.add(CommonData())
-        list.add(CommonData())
-        list.add(CommonData())
-        list.add(CommonData())
-        list.add(CommonData())
-        list.add(CommonData())
-        list.add(CommonData())
-        list.add(CommonData())
-        list.add(CommonData())
-        list.add(CommonData())
-        list.add(CommonData())
-        list.add(CommonData())
-        mAdapter.updateData(list).notifyDataSetChanged()
     }
 
     override fun init_title() {
@@ -74,13 +62,37 @@ class PlanActivity : BaseActivity() {
         }
 
         mAdapter = SlimAdapter.create()
-                .register<CommonData>(R.layout.item_plan_list) { data, injector ->  }
+                .register<CommonData>(R.layout.item_plan_list) { data, injector ->
+                    injector.text(R.id.item_plan_name, data.repaymentType)
+                            .text(R.id.item_plan_price, "￥${NumberHelper.fmtMicrometer(data.repaymentSum)}")
+                            .text(R.id.item_plan_type, if (data.cardType == "0") "储蓄卡" else "信用卡" + (if (mPosition == 0) "消费" else "还款"))
+                            .text(R.id.item_plan_num, "尾号(${data.cardNo.substring(data.cardNo.length - 4)})")
+                            .text(R.id.item_plan_time, data.repaymentTime)
+                            .text(R.id.item_plan_status, if (data.status == "1") "已还款" else "未还款")
+
+                            .with<RoundedImageView>(R.id.item_plan_img) { view ->
+                                when (data.repaymentType) {
+                                    "还款消费" -> view.setImageResource(R.mipmap.group01)
+                                    "快速还款" -> view.setImageResource(R.mipmap.group02)
+                                    "余额还款" -> view.setImageResource(R.mipmap.group03)
+                                    "消费计划" -> view.setImageResource(R.mipmap.group04)
+                                    "提现" -> view.setImageResource(R.mipmap.group05)
+                                    "充值" -> view.setImageResource(R.mipmap.group06)
+                                }
+                            }
+
+                            .visibility(R.id.item_plan_divider1, if (list.indexOf(data) == list.size - 1) View.GONE else View.VISIBLE)
+                            .visibility(R.id.item_plan_divider2, if (list.indexOf(data) != list.size - 1) View.GONE else View.VISIBLE)
+
+                            .clicked(R.id.item_plan) { }
+                }
                 .attachTo(recycle_list)
     }
 
     override fun getData(pindex: Int) {
         OkGo.post<CommonModel>(BaseHttp.repayment_data)
                 .tag(this@PlanActivity)
+                .headers("token", getString("token"))
                 .params("type", mPosition)
                 .params("page", pindex)
                 .execute(object : JacksonDialogCallback<CommonModel>(baseContext, CommonModel::class.java) {

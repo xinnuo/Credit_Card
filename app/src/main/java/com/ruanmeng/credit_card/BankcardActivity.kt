@@ -243,6 +243,10 @@ class BankcardActivity : BaseActivity() {
                 swipe_refresh.isRefreshing = true
                 getData(mPosition)
             }
+            "删除信用卡" -> {
+                swipe_refresh.isRefreshing = true
+                getData(mPosition)
+            }
         }
     }
 }

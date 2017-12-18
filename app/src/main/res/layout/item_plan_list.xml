@@ -16,7 +16,6 @@
             android:id="@+id/item_plan"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-
             android:padding="@dimen/dimen_size_10">
 
             <com.makeramen.roundedimageview.RoundedImageView

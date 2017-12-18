@@ -1,8 +1,10 @@
 package com.flyco.dialog.widget;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.util.ArrayMap;
 import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.View;
@@ -26,6 +28,8 @@ import com.flyco.dialog.utils.CornerUtils;
 import com.flyco.dialog.widget.base.BottomBaseDialog;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Dialog like iOS ActionSheet(iOS风格对话框)
@@ -79,6 +83,9 @@ public class ActionSheetDialog extends BottomBaseDialog<ActionSheetDialog> {
     private ArrayList<DialogMenuItem> mContents = new ArrayList<>();
     private OnOperItemClickL mOnOperItemClickL;
     private LayoutAnimationController mLac;
+
+    @SuppressLint("NewApi")
+    private Map<Integer, Integer> mPositionColors = new ArrayMap<>();
 
     public void setOnOperItemClickL(OnOperItemClickL onOperItemClickL) {
         mOnOperItemClickL = onOperItemClickL;
@@ -305,6 +312,12 @@ public class ActionSheetDialog extends BottomBaseDialog<ActionSheetDialog> {
         return this;
     }
 
+    /** set item poistion textcolor(item字体颜色) */
+    public ActionSheetDialog itemPositonColor(int positon, int itemTextColor) {
+        mPositionColors.put(positon, itemTextColor);
+        return this;
+    }
+
     /** set layoutAnimation(设置layout动画 ,传入null将不显示layout动画) */
     public ActionSheetDialog layoutAnimation(LayoutAnimationController lac) {
         mLac = lac;
@@ -362,7 +375,8 @@ public class ActionSheetDialog extends BottomBaseDialog<ActionSheetDialog> {
             tvItem.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT));
             tvItem.setSingleLine(true);
             tvItem.setGravity(Gravity.CENTER);
-            tvItem.setTextColor(mItemTextColor);
+            if (mPositionColors.containsKey(position)) tvItem.setTextColor(mPositionColors.get(position));
+            else tvItem.setTextColor(mItemTextColor);
             tvItem.setTextSize(TypedValue.COMPLEX_UNIT_SP, mItemTextSize);
             tvItem.setHeight(dp2px(mItemHeight));
 

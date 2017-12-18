@@ -10,11 +10,15 @@ import com.lzy.okgo.model.Response
 import com.ruanmeng.base.BaseActivity
 import com.ruanmeng.base.getString
 import com.ruanmeng.base.startActivity
+import com.ruanmeng.base.toast
+import com.ruanmeng.model.RefreshMessageEvent
 import com.ruanmeng.share.BaseHttp
+import com.ruanmeng.utils.ActivityStack
 import com.ruanmeng.utils.DialogHelper
 import com.ruanmeng.utils.NumberHelper
 import kotlinx.android.synthetic.main.activity_credit_detail.*
 import kotlinx.android.synthetic.main.layout_title_left.*
+import org.greenrobot.eventbus.EventBus
 import org.json.JSONObject
 
 class CreditDetailActivity : BaseActivity() {
@@ -46,6 +50,7 @@ class CreditDetailActivity : BaseActivity() {
                         .itemTextColor(resources.getColor(R.color.black_dark))
                         .itemHeight(40f)
                         .itemTextSize(15f)
+                        .itemPositonColor(0, resources.getColor(R.color.red))
                         .cancelText(resources.getColor(R.color.light))
                         .cancelTextSize(15f)
                         .layoutAnimation(null)
@@ -55,9 +60,30 @@ class CreditDetailActivity : BaseActivity() {
 
                     when (position) {
                         0 -> {
-                            DialogHelper.showDialog(baseContext)
+                            DialogHelper.showDialog(
+                                    baseContext,
+                                    "温馨提示",
+                                    "确定要删除该信用卡吗？",
+                                    "取消",
+                                    "确定",
+                                    null) {
+                                OkGo.post<String>(BaseHttp.creditcard_del_sub)
+                                        .tag(this@CreditDetailActivity)
+                                        .headers("token", getString("token"))
+                                        .params("creditcardId", intent.getStringExtra("creditcardId"))
+                                        .execute(object : StringDialogCallback(baseContext) {
+
+                                            override fun onSuccessResponse(response: Response<String>, msg: String, msgCode: String) {
+
+                                                toast(msg)
+                                                EventBus.getDefault().post(RefreshMessageEvent("删除信用卡"))
+                                                ActivityStack.getScreenManager().popActivities(this@CreditDetailActivity::class.java)
+                                            }
+
+                                        })
+                            }
                         }
-                        1 -> startActivity(PlanBackActivity::class.java)
+                        1 -> { }
                     }
                 }
             }
