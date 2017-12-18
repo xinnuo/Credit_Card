@@ -52,9 +52,11 @@
             android:layout_width="match_parent"
             android:layout_height="@dimen/line_height"
             android:gravity="center"
+            android:onClick="doClick"
             tools:ignore="UseCompoundDrawables">
 
             <TextView
+                android:id="@+id/bill_hint"
                 style="@style/Font15_black_dark"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

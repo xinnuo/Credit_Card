@@ -1,7 +1,6 @@
 package com.ruanmeng.credit_card
 
 import android.annotation.SuppressLint
-import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import com.flyco.dialog.widget.ActionSheetDialog
@@ -12,6 +11,7 @@ import com.ruanmeng.base.BaseActivity
 import com.ruanmeng.base.getString
 import com.ruanmeng.base.startActivity
 import com.ruanmeng.share.BaseHttp
+import com.ruanmeng.utils.DialogHelper
 import com.ruanmeng.utils.NumberHelper
 import kotlinx.android.synthetic.main.activity_credit_detail.*
 import kotlinx.android.synthetic.main.layout_title_left.*
@@ -33,6 +33,7 @@ class CreditDetailActivity : BaseActivity() {
         left_nav_right.visibility = View.VISIBLE
     }
 
+    @Suppress("DEPRECATION")
     override fun doClick(v: View) {
         super.doClick(v)
         when (v.id) {
@@ -49,9 +50,15 @@ class CreditDetailActivity : BaseActivity() {
                         .cancelTextSize(15f)
                         .layoutAnimation(null)
                         .show()
-                dialog.setOnOperItemClickL { _, _, _, _ ->
+                dialog.setOnOperItemClickL { _, _, position, _ ->
                     dialog.dismiss()
 
+                    when (position) {
+                        0 -> {
+                            DialogHelper.showDialog(baseContext)
+                        }
+                        1 -> startActivity(PlanBackActivity::class.java)
+                    }
                 }
             }
             R.id.credit_add -> {

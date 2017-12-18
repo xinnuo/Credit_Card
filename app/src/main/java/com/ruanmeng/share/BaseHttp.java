@@ -21,6 +21,9 @@ public class BaseHttp {
     public static String identify_getbyforget = baseIp + "/identify_getbyforget.rm"; //忘记密码获取验证码√
     public static String pwd_forget_sub = baseIp + "/pwd_forget_sub.rm";             //忘记密码找回提交√
 
+    public static String index_alldata = baseIp + "/index_alldata.rm"; //首页√
+    public static String payrecord_data = baseIp + "/payrecord_data.rm"; //账单列表√
+
     public static String user_msg_data = baseIp + "/user_msg_data.rm";                     //用户个人资料√
     public static String userinfo_uploadhead_sub = baseIp + "/userinfo_uploadhead_sub.rm"; //修改头像√
     public static String nickName_change_sub = baseIp + "/nickName_change_sub.rm";         //修改昵称√
@@ -34,4 +37,5 @@ public class BaseHttp {
     public static String depositcard_add_sub = baseIp + "/depositcard_add_sub.rm"; //新增储蓄卡√
     public static String creditcard_add_sub = baseIp + "/creditcard_add_sub.rm"; //新增信用卡√
     public static String creditcard_details = baseIp + "/creditcard_details.rm"; //信用卡详情√
+    public static String repayment_data = baseIp + "/repayment_data.rm"; //全部计划√
 }

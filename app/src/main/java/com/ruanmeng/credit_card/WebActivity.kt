@@ -20,6 +20,7 @@ class WebActivity : BaseActivity() {
             "用户协议" -> {}
             "关于我们" -> {}
             "服务协议" -> {}
+            "详情" -> {}
         }
     }
 
