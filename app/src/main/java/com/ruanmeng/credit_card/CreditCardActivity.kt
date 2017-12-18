@@ -7,6 +7,7 @@ import android.view.View
 import com.lzy.extend.StringDialogCallback
 import com.lzy.okgo.OkGo
 import com.lzy.okgo.model.Response
+import com.lzy.okgo.utils.OkLogger
 import com.ruanmeng.base.BaseActivity
 import com.ruanmeng.base.getString
 import com.ruanmeng.base.startActivity
@@ -188,6 +189,7 @@ class CreditCardActivity : BaseActivity() {
                                 "msgcode": 100
                             }*/
                             override fun onSuccessResponse(response: Response<String>, msg: String, msgCode: String) {
+                                OkLogger.i(msg)
 
                                 EventBus.getDefault().post(RefreshMessageEvent("新增信用卡"))
 

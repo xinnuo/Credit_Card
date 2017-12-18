@@ -109,6 +109,9 @@
         <activity
             android:name=".ScanActivity"
             android:screenOrientation="portrait" />
+        <activity
+            android:name=".RealNameActivity"
+            android:screenOrientation="portrait" />
 
         <!-- 融云即时通讯 start -->
         <!-- 会话界面 -->
@@ -150,7 +153,6 @@
         </provider>
         <!-- 融云即时通讯 end -->
 
-        <activity android:name=".RealNameActivity"></activity>
     </application>
 
 </manifest>

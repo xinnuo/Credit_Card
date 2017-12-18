@@ -33,4 +33,5 @@ public class BaseHttp {
     public static String identify_othercode = baseIp + "/identify_othercode.rm"; //获取其他验证码√
     public static String depositcard_add_sub = baseIp + "/depositcard_add_sub.rm"; //新增储蓄卡√
     public static String creditcard_add_sub = baseIp + "/creditcard_add_sub.rm"; //新增信用卡√
+    public static String creditcard_details = baseIp + "/creditcard_details.rm"; //信用卡详情√
 }

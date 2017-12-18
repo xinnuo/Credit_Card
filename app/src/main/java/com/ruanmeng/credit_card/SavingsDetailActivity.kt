@@ -1,19 +1,14 @@
 package com.ruanmeng.credit_card
 
 import android.content.Intent
-import android.graphics.Color
 import android.os.Bundle
 import android.view.View
-import android.widget.AdapterView
-import com.flyco.dialog.listener.OnOperItemClickL
 import com.flyco.dialog.widget.ActionSheetDialog
 import com.ruanmeng.base.BaseActivity
+import com.ruanmeng.base.startActivity
 import com.ruanmeng.model.CommonData
-import com.ruanmeng.share.Const
-import com.ruanmeng.utils.PreferencesUtils
 import kotlinx.android.synthetic.main.activity_savings_detail.*
 import kotlinx.android.synthetic.main.layout_title_left.*
-import org.json.JSONObject
 
 class SavingsDetailActivity : BaseActivity() {
 
@@ -41,14 +36,14 @@ class SavingsDetailActivity : BaseActivity() {
         super.doClick(v)
         when (v.id) {
             R.id.left_nav_right -> {
-                val dialog = ActionSheetDialog(this, arrayOf("更好银行卡"), null)
+                val dialog = ActionSheetDialog(this, arrayOf("更换银行卡"), null)
                 dialog.isTitleShow(false)
                         .lvBgColor(resources.getColor(R.color.white))
                         .itemTextColor(resources.getColor(R.color.black_dark))
                         .itemHeight(40f)
-                        .itemTextSize(14f)
+                        .itemTextSize(15f)
                         .cancelText(resources.getColor(R.color.light))
-                        .cancelTextSize(14f)
+                        .cancelTextSize(15f)
                         .layoutAnimation(null)
                         .show()
                 dialog.setOnOperItemClickL { _, _, _, _ ->
@@ -61,8 +56,7 @@ class SavingsDetailActivity : BaseActivity() {
                     }, 300)
                 }
             }
-            R.id.bankcard_cash -> {
-            }
+            R.id.bankcard_cash -> { startActivity(CashoutActivity::class.java) }
         }
     }
 }
