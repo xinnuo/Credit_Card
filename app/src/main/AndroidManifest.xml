@@ -112,6 +112,9 @@
         <activity
             android:name=".RealNameActivity"
             android:screenOrientation="portrait" />
+        <activity
+            android:name=".GatherActivity"
+            android:screenOrientation="portrait" />
 
         <!-- 融云即时通讯 start -->
         <!-- 会话界面 -->

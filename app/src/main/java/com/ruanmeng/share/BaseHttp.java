@@ -28,6 +28,7 @@ public class BaseHttp {
     public static String userinfo_uploadhead_sub = baseIp + "/userinfo_uploadhead_sub.rm"; //修改头像√
     public static String nickName_change_sub = baseIp + "/nickName_change_sub.rm";         //修改昵称√
     public static String sex_change_sub = baseIp + "/sex_change_sub.rm";                   //修改性别√
+    public static String password_change_sub = baseIp + "/password_change_sub.rm";         //修改密码√
     public static String certification_sub = baseIp + "/certification_sub.rm";             //实名认证√
     public static String depositcard_data = baseIp + "/depositcard_data.rm";               //储蓄卡列表√
     public static String creditcard_data = baseIp + "/creditcard_data.rm";                 //信用卡列表√

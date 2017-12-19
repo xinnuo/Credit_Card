@@ -26,26 +26,28 @@
             android:id="@+id/plan_type"
             android:layout_width="match_parent"
             android:layout_height="@dimen/dimen_size_45.5"
-            app:sBottomLineMargin="10dp"
+            app:sBottomLineMargin="@dimen/dimen_size_10"
             app:sLeftTextColor="@color/black_dark"
             app:sLeftTextMarginLeft="@dimen/dimen_size_10"
             app:sLeftTextString="还款类型"
             app:sLineShow="bottom"
             app:sRightIconMarginRight="@dimen/dimen_size_10"
-            app:sRightIconSize="13dp"
+            app:sRightIconRes="@mipmap/arrow_right"
+            app:sRightIconSize="@dimen/dimen_size_13"
             app:sRightTextColor="@color/black_dark"
-            app:sRightTextMarginRight="@dimen/dimen_size_10"
+            app:sRightTextMarginRight="@dimen/dimen_size_30"
             app:sRightTextString="快速还款" />
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="@dimen/line_height">
+            android:layout_height="@dimen/line_height"
+            android:paddingLeft="@dimen/dimen_size_10"
+            android:paddingRight="@dimen/dimen_size_10">
 
             <TextView
                 style="@style/Font14_black_dark"
                 android:layout_width="70dp"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/dimen_size_10"
                 android:text="还款总金额" />
 
             <EditText
@@ -125,7 +127,8 @@
                 android:id="@+id/plan_plus"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
-                android:padding="@dimen/dimen_size_12"
+                android:onClick="doClick"
+                android:padding="@dimen/dimen_size_13"
                 android:src="@mipmap/ic_plus_p"
                 tools:ignore="ContentDescription" />
 
@@ -141,11 +144,27 @@
                 android:id="@+id/plan_add"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
-                android:padding="@dimen/dimen_size_12"
+                android:onClick="doClick"
+                android:padding="@dimen/dimen_size_13"
                 android:src="@mipmap/ic_add_p"
                 tools:ignore="ContentDescription" />
 
         </LinearLayout>
+
+        <com.allen.library.SuperTextView
+            android:id="@+id/plan_fee"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimen_size_45.5"
+            app:sLeftTextColor="@color/black_dark"
+            app:sLeftTextMarginLeft="@dimen/dimen_size_10"
+            app:sLeftTextString="还款手续费"
+            app:sLineShow="top"
+            app:sRightIconMarginRight="@dimen/dimen_size_10"
+            app:sRightIconSize="@dimen/dimen_size_13"
+            app:sRightTextColor="@color/black_dark"
+            app:sRightTextMarginRight="@dimen/dimen_size_10"
+            app:sRightTextString="0.00"
+            app:sTopLineMargin="@dimen/dimen_size_10" />
 
     </LinearLayout>
 
@@ -171,9 +190,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="end"
-            android:layout_marginRight="@dimen/dimen_size_20"
+            android:layout_marginRight="@dimen/dimen_size_10"
+            android:onClick="doClick"
             android:padding="@dimen/dimen_size_10"
-            android:text="预览计划"
+            android:text="预览计划到列表"
             android:textColor="@color/colorAccent" />
 
     </FrameLayout>

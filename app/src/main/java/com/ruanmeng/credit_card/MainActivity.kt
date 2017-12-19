@@ -84,6 +84,7 @@ class MainActivity : BaseActivity() {
         when (v.id) {
             R.id.main_right -> startActivity(MessageActivity::class.java)
             R.id.first_agency -> startActivity(AgencyActivity::class.java)
+            R.id.first_get -> startActivity(GatherActivity::class.java)
             R.id.first_new -> {
                 val intent = Intent(baseContext, WebActivity::class.java)
                 intent.putExtra("title", "信用卡攻略")

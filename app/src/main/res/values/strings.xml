@@ -1,7 +1,7 @@
 <resources>
 
     <string name="app_name">诸葛管家</string>
-    
+
     <string-array name="bank_list">
 
         <item>工商银行</item>
