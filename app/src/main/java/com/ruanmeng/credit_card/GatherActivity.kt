@@ -1,6 +1,7 @@
 package com.ruanmeng.credit_card
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.os.Bundle
 import android.support.design.widget.BottomSheetDialog
 import android.support.v7.widget.DefaultItemAnimator
@@ -23,11 +24,13 @@ import com.ruanmeng.base.*
 import com.ruanmeng.model.CardData
 import com.ruanmeng.model.CommonModel
 import com.ruanmeng.share.BaseHttp
+import com.ruanmeng.utils.ActivityStack
 import com.ruanmeng.utils.DialogHelper
 import com.ruanmeng.utils.KeyboardHelper
 import com.ruanmeng.utils.NumberHelper
 import kotlinx.android.synthetic.main.activity_gather.*
 import net.idik.lib.slimadapter.SlimAdapter
+import org.json.JSONObject
 
 class GatherActivity : BaseActivity() {
 
@@ -115,7 +118,18 @@ class GatherActivity : BaseActivity() {
                                 override fun onTextChanged(psw: String) {}
 
                                 override fun onInputFinish(psw: String) {
+                                    OkGo.post<String>(BaseHttp.paypawd_check)
+                                            .tag(this@GatherActivity)
+                                            .headers("token", getString("token"))
+                                            .params("paypawd", psw)
+                                            .execute(object : StringDialogCallback(baseContext, false) {
 
+                                                override fun onSuccessResponse(response: Response<String>, msg: String, msgCode: String) {
+                                                    dismiss()
+                                                    getPay(mCount)
+                                                }
+
+                                            })
                                 }
 
                             })
@@ -127,6 +141,34 @@ class GatherActivity : BaseActivity() {
                 }
             }
         }
+    }
+
+    private fun getPay(count: String) {
+        OkGo.post<String>(BaseHttp.appYee_repayment)
+                .tag(this@GatherActivity)
+                .headers("token", getString("token"))
+                .params("carno", cardNo)
+                .params("amount", count)
+                .params("source", "B")
+                .execute(object : StringDialogCallback(baseContext, false) {
+                    /*{
+                        "msg": "收款成功",
+                        "msgcode": 100,
+                        "object": "https://shouyin.yeepay.com/nc-cashier-wap/wap/request/10016127996/rZZIga6mFzmWwVHne*OWsg%3D%3D"
+                    }*/
+                    override fun onSuccessResponse(response: Response<String>, msg: String, msgCode: String) {
+
+                        val obj = JSONObject(response.body())
+
+                        val intent = Intent(baseContext, WebActivity::class.java)
+                        intent.putExtra("title", "收款支付")
+                        intent.putExtra("url", obj.getString("object"))
+                        startActivity(intent)
+
+                        ActivityStack.getScreenManager().popActivities(this@GatherActivity::class.java)
+                    }
+
+                })
     }
 
     override fun getData() {
