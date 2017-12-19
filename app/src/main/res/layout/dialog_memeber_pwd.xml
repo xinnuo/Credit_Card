@@ -11,6 +11,7 @@
         android:layout_height="@dimen/line_height">
 
         <TextView
+            android:id="@+id/withdraw_title"
             style="@style/Font15_black_dark"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -18,7 +19,7 @@
             android:text="确认付款" />
 
         <ImageView
-            android:id="@+id/dialog_member_close"
+            android:id="@+id/withdraw_close"
             android:layout_width="@dimen/line_height"
             android:layout_height="match_parent"
             android:layout_gravity="end"
@@ -33,22 +34,22 @@
         android:background="@color/divider" />
 
     <TextView
-        android:id="@+id/tv_dialog_withdraw_hint"
+        android:id="@+id/withdraw_hint"
         style="@style/Font13_black_dark"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_margin="@dimen/dimen_size_15"
+        android:layout_marginTop="@dimen/dimen_size_15"
         android:text="输入您收到的短信验证码" />
 
     <com.jungly.gridpasswordview.GridPasswordView
-        android:id="@+id/gpv_dialog_withdraw_pwd"
+        android:id="@+id/withdraw_pwd"
         android:layout_width="match_parent"
         android:layout_height="@dimen/line_height"
         android:layout_marginBottom="@dimen/dimen_size_30"
         android:layout_marginLeft="@dimen/dimen_size_20"
         android:layout_marginRight="@dimen/dimen_size_20"
-        android:layout_marginTop="@dimen/dimen_size_10"
+        android:layout_marginTop="@dimen/dimen_size_20"
         app:gpvCornerRadius="3dp"
         app:gpvLineColor="@color/light"
         app:gpvLineWidth="@dimen/divider_height"

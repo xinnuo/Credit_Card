@@ -52,10 +52,7 @@ class MainThirdFragment : BaseFragment() {
                     startActivity(RealNameActivity::class.java)
                 }
                 "0" -> toast("实名认证信息正在审核中")
-                "1" -> {
-                    toast("已通过实名认证")
-                    startActivity(RealActivity::class.java)
-                }
+                "1" -> startActivity(RealActivity::class.java)
                 else -> startActivity(RealNameActivity::class.java)
             }
         }

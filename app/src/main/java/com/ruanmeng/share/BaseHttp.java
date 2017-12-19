@@ -15,14 +15,17 @@ public class BaseHttp {
 
     public static String baseImg = baseUrl + "/";
 
-    public static String register_sub = baseIp + "/register_sub.rm";                 //注册√
-    public static String identify_get = baseIp + "/identify_get.rm";                 //注册获取验证码√
-    public static String login_sub = baseIp + "/login_sub.rm";                       //登录√
-    public static String identify_getbyforget = baseIp + "/identify_getbyforget.rm"; //忘记密码获取验证码√
-    public static String pwd_forget_sub = baseIp + "/pwd_forget_sub.rm";             //忘记密码找回提交√
+    public static String register_sub = baseIp + "/register_sub.rm";                   //注册√
+    public static String identify_get = baseIp + "/identify_get.rm";                   //注册获取验证码√
+    public static String login_sub = baseIp + "/login_sub.rm";                         //登录√
+    public static String identify_getbyforget = baseIp + "/identify_getbyforget.rm";   //忘记密码获取验证码√
+    public static String pwd_forget_sub = baseIp + "/pwd_forget_sub.rm";               //忘记密码找回提交√
+    public static String paypawd_add_sub = baseIp + "/paypawd_add_sub.rm";             //新增支付密码√
+    public static String paypawd_change_mobile = baseIp + "/paypawd_change_mobile.rm"; //修改支付密码√
 
     public static String index_alldata = baseIp + "/index_alldata.rm"; //首页√
     public static String payrecord_data = baseIp + "/payrecord_data.rm"; //账单列表√
+    public static String pay_receive = baseIp + "/pay_receive.rm"; //收款√
 
     public static String user_msg_data = baseIp + "/user_msg_data.rm";                     //用户个人资料√
     public static String userinfo_uploadhead_sub = baseIp + "/userinfo_uploadhead_sub.rm"; //修改头像√
