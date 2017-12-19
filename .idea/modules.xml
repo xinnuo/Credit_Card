@@ -2,7 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/Credit_Card.iml" filepath="$PROJECT_DIR$/.idea/Credit_Card.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Credit_Card.iml" filepath="$PROJECT_DIR$/Credit_Card.iml" />
+      <module fileurl="file://$PROJECT_DIR$/FlycoDialog_Lib/FlycoDialog_Lib.iml" filepath="$PROJECT_DIR$/FlycoDialog_Lib/FlycoDialog_Lib.iml" />
       <module fileurl="file://$PROJECT_DIR$/GridPasswordView/GridPasswordView.iml" filepath="$PROJECT_DIR$/GridPasswordView/GridPasswordView.iml" />
       <module fileurl="file://$PROJECT_DIR$/MNProgressHUD/MNProgressHUD.iml" filepath="$PROJECT_DIR$/MNProgressHUD/MNProgressHUD.iml" />
       <module fileurl="file://$PROJECT_DIR$/RollViewPager/RollViewPager.iml" filepath="$PROJECT_DIR$/RollViewPager/RollViewPager.iml" />

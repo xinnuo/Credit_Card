@@ -17,8 +17,8 @@
 
         <com.makeramen.roundedimageview.RoundedImageView
             android:id="@+id/item_bank_img"
-            android:layout_width="@dimen/dimen_size_20"
-            android:layout_height="@dimen/dimen_size_20"
+            android:layout_width="@dimen/dimen_size_25"
+            android:layout_height="@dimen/dimen_size_25"
             android:adjustViewBounds="true"
             android:src="@mipmap/default_logo"
             app:riv_oval="true"
@@ -48,6 +48,7 @@
             android:adjustViewBounds="true"
             android:padding="@dimen/dimen_size_5"
             android:src="@mipmap/icon_choose"
+            android:visibility="invisible"
             tools:ignore="ContentDescription" />
 
     </LinearLayout>
@@ -56,5 +57,11 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/divider_height"
         android:background="@color/divider" />
+
+    <View
+        android:id="@+id/item_bank_divider"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimen_size_15"
+        android:visibility="gone" />
 
 </LinearLayout>

@@ -167,6 +167,20 @@
         <item name="android:textColorHint">@color/colorControlNormal</item>
     </style>
 
+    <style name="Font14_selector">
+        <item name="android:textSize">13sp</item>
+        <item name="android:textColor">@color/rb_main_selector_color</item>
+        <item name="android:textColorHint">@color/colorControlNormal</item>
+    </style>
+
+    <!-- popwidnow 显示消失 动画-->
+    <style name="pop_anim_style">
+        <!-- 指定显示的动画xml  -->
+        <item name="android:windowEnterAnimation">@anim/pop_on</item>
+        <!-- 指定消失的动画xml  -->
+        <item name="android:windowExitAnimation">@anim/pop_close</item>
+    </style>
+
     <!--默认样式 注意* 样式只可修改，不能删除任何一项 否则报错-->
     <style name="picture.customer.style" parent="Theme.AppCompat.Light.DarkActionBar">
         <!-- Customize your theme here. -->

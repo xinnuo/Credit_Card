@@ -47,6 +47,7 @@ class MainActivity : BaseActivity() {
                         val obj = JSONObject(response.body())
 
                         putString("isPass", obj.getString("pass"))
+                        putString("isPayPwd", obj.getString("payPass"))
                         putString("real_name", if (obj.isNull("userName")) "" else obj.getString("userName"))
                         putString("real_sex", if (obj.isNull("sex")) "" else obj.getString("sex"))
                         putString("real_IDCard", if (obj.isNull("cardNo")) "" else obj.getString("cardNo"))
@@ -84,6 +85,13 @@ class MainActivity : BaseActivity() {
         when (v.id) {
             R.id.main_right -> startActivity(MessageActivity::class.java)
             R.id.first_agency -> startActivity(AgencyActivity::class.java)
+            R.id.first_get -> {
+                when (getString("isPass")) {
+                    "-1" -> toast("实名认证审核未通过，无法进行收款")
+                    "0" -> toast("实名认证信息正在审核中，无法进行收款")
+                    "1" -> startActivity(GatherActivity::class.java)
+                }
+            }
             R.id.first_new -> {
                 val intent = Intent(baseContext, WebActivity::class.java)
                 intent.putExtra("title", "信用卡攻略")

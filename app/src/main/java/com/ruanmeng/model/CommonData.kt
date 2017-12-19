@@ -36,41 +36,27 @@ import java.io.Serializable
  */
 data class CommonData(
         //首页轮播图
-        var createDate: String = "",
+        var href: String = "",
         var sliderId: String = "",
-        var sliderTitle: String = "",
-        var content: String = "",
         var sliderImg: String = "",
-        var sliderType: String = "",
-        var sendStatus: String = "",
-        var jumpType: String = "",
-        var moduleType: String = "",
-
-        //首页公告
-        var coverImg: String = "",
-        var messageType: String = "",
-        var messageId: String = "",
-        var messageInfoId: String = "",
-        var readStatus: String = "",
-        var recAccountInfoId: String = "",
         var title: String = "",
 
-        //金融圈
-        var financialId: String = "",
-        var financialStatus: String = "",
-        var financialTitle: String = "",
-        var financialImage: String = "",
+        //首页公告
+        var createDate: String = "",
+        var newsnoticeId: String = "",
 
-        //行业类别
-        var industryId: String = "",
-        var industryName: String = "",
-        var position: Int = -1,
-        var childs: List<CommonData> ?= ArrayList(),
-
-        //猜你喜欢
-        var compLogo: String = "",
-        var compName: String = "",
-        var companyId: String = "",
+        //账单
+        var cardId: String = "",
+        var cardNo: String = "",
+        var cardType: String = "",
+        var payRecordId: String = "",
+        var paySum: String = "",
+        var payTime: String = "",
+        var payType: String = "",
+        var rate: String = "",
+        var status: String = "",
+        var type: String = "",
+        var userInfoId: String = "",
 
         //我的关注+关注我的
         var accountInfoId: String = "",
@@ -94,12 +80,12 @@ data class CommonData(
         var managerId: String = "",
         var id: String = "",
         var image: String = "",
-        var type: String = "",
 
-        //兴趣爱好
-        var chatRoomImage: String = "",
-        var chatRoomId: String = "",
-        var chatRoomName: String = "",
+        //全部计划
+        var repaymentId: String = "",
+        var repaymentSum: String = "",
+        var repaymentTime: String = "",
+        var repaymentType: String = "",
 
         //信用卡列表
         var billDay: String = "",

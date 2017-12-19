@@ -28,7 +28,6 @@
         android:layout_width="45dp"
         android:layout_height="45dp"
         android:layout_gravity="center_vertical|end"
-        android:clickable="true"
         android:onClick="doClick"
         android:padding="11dp"
         android:src="@mipmap/ic_set_card"

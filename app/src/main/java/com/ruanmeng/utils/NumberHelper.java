@@ -1,5 +1,7 @@
 package com.ruanmeng.utils;
 
+import android.text.TextUtils;
+
 import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -16,6 +18,7 @@ public class NumberHelper {
      */
     public static String fmtMicrometer(String text) {
         DecimalFormat df;
+        if (text == null || TextUtils.isEmpty(text)) return "";
         if (text.indexOf(".") > 0) {
             if (text.length() - text.indexOf(".") - 1 == 0) {
                 df = new DecimalFormat("###,##0.");

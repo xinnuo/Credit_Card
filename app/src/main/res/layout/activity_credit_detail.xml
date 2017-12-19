@@ -31,7 +31,7 @@
                     android:id="@+id/credit_img"
                     android:layout_width="@dimen/dimen_size_40"
                     android:layout_height="@dimen/dimen_size_40"
-                    android:src="@mipmap/default_user"
+                    android:src="@mipmap/default_logo"
                     app:riv_oval="true" />
 
                 <LinearLayout
@@ -140,7 +140,8 @@
                 android:layout_height="@dimen/btn_height"
                 android:layout_margin="@dimen/dimen_size_20"
                 android:background="@drawable/rec_bg_blue"
-                android:gravity="center">
+                android:gravity="center"
+                android:onClick="doClick">
 
                 <ImageView
                     android:layout_width="@dimen/dimen_size_18"
@@ -166,6 +167,7 @@
                 android:layout_marginRight="@dimen/dimen_size_20"
                 android:background="@drawable/rec_bg_trans_stroke_light"
                 android:gravity="center"
+                android:onClick="doClick"
                 android:text="查看全部计划" />
 
         </LinearLayout>

@@ -1,18 +1,19 @@
 package com.ruanmeng.credit_card
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import com.lzy.extend.StringDialogCallback
 import com.lzy.okgo.OkGo
 import com.lzy.okgo.model.Response
+import com.lzy.okgo.utils.OkLogger
 import com.ruanmeng.base.BaseActivity
 import com.ruanmeng.base.getString
 import com.ruanmeng.base.startActivity
 import com.ruanmeng.base.toast
 import com.ruanmeng.model.RefreshMessageEvent
 import com.ruanmeng.share.BaseHttp
-import com.ruanmeng.utils.ActivityStack
 import com.ruanmeng.utils.BankcardHelper
 import com.ruanmeng.utils.CommonUtil
 import com.ruanmeng.utils.DialogHelper
@@ -188,10 +189,14 @@ class CreditCardActivity : BaseActivity() {
                                 "msgcode": 100
                             }*/
                             override fun onSuccessResponse(response: Response<String>, msg: String, msgCode: String) {
-                                toast(msg)
+                                OkLogger.i(msg)
 
                                 EventBus.getDefault().post(RefreshMessageEvent("新增信用卡"))
-                                ActivityStack.getScreenManager().popActivities(this@CreditCardActivity::class.java)
+
+                                val intent = Intent(baseContext, BankDoneActivity::class.java)
+                                intent.putExtra("title", "新增信用卡")
+                                intent.putExtra("hint", "新增信用卡成功！")
+                                startActivity(intent)
                             }
 
                         })

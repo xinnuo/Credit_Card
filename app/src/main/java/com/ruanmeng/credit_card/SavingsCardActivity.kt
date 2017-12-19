@@ -1,18 +1,19 @@
 package com.ruanmeng.credit_card
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import com.lzy.extend.StringDialogCallback
 import com.lzy.okgo.OkGo
 import com.lzy.okgo.model.Response
+import com.lzy.okgo.utils.OkLogger
 import com.ruanmeng.base.BaseActivity
 import com.ruanmeng.base.getString
 import com.ruanmeng.base.startActivity
 import com.ruanmeng.base.toast
 import com.ruanmeng.model.RefreshMessageEvent
 import com.ruanmeng.share.BaseHttp
-import com.ruanmeng.utils.ActivityStack
 import com.ruanmeng.utils.BankcardHelper
 import com.ruanmeng.utils.CommonUtil
 import kotlinx.android.synthetic.main.activity_savings_card.*
@@ -30,7 +31,7 @@ class SavingsCardActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_savings_card)
-        init_title("新增储蓄卡")
+        init_title(if (intent.getBooleanExtra("isChanged", false)) "更换银行卡" else "新增储蓄卡")
 
         EventBus.getDefault().register(this@SavingsCardActivity)
     }
@@ -135,17 +136,30 @@ class SavingsCardActivity : BaseActivity() {
                         .params("bank", card_bank.text.toString())
                         .params("tel", mTel)
                         .params("smsCode", YZM)
-                        .params("type", 0)
+                        .params("type", if (intent.getBooleanExtra("isChanged", false)) 1 else 0)
                         .execute(object : StringDialogCallback(baseContext) {
                             /*{
                                 "msg": "提交成功，请等待审核",
                                 "msgcode": 100
                             }*/
                             override fun onSuccessResponse(response: Response<String>, msg: String, msgCode: String) {
-                                toast(msg)
+                                OkLogger.i(msg)
 
-                                EventBus.getDefault().post(RefreshMessageEvent("新增储蓄卡"))
-                                ActivityStack.getScreenManager().popActivities(this@SavingsCardActivity::class.java)
+                                if (intent.getBooleanExtra("isChanged", false)) {
+                                    EventBus.getDefault().post(RefreshMessageEvent("更换银行卡"))
+
+                                    val intent = Intent(baseContext, BankDoneActivity::class.java)
+                                    intent.putExtra("title", "更换银行卡")
+                                    intent.putExtra("hint", "更换银行卡成功！")
+                                    startActivity(intent)
+                                } else {
+                                    EventBus.getDefault().post(RefreshMessageEvent("新增储蓄卡"))
+
+                                    val intent = Intent(baseContext, BankDoneActivity::class.java)
+                                    intent.putExtra("title", "新增储蓄卡")
+                                    intent.putExtra("hint", "新增储蓄卡成功！")
+                                    startActivity(intent)
+                                }
                             }
 
                         })

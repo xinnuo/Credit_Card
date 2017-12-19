@@ -7,7 +7,6 @@ import android.view.View
 import com.lzy.extend.jackson.JacksonDialogCallback
 import com.lzy.okgo.OkGo
 import com.lzy.okgo.model.Response
-import com.makeramen.roundedimageview.RoundedImageView
 import com.ruanmeng.base.*
 import com.ruanmeng.model.CardData
 import com.ruanmeng.model.CommonData
@@ -46,14 +45,9 @@ class BankcardActivity : BaseActivity() {
 
                 override fun onTabSelected(tab: TabLayout.Tab) {
                     mPosition = tab.position
+                    OkGo.getInstance().cancelTag(this@BankcardActivity)
 
-                    window.decorView.postDelayed({
-                        runOnUiThread {
-                            OkGo.getInstance().cancelTag(this@BankcardActivity)
-
-                            updateList()
-                        }
-                    }, 300)
+                    window.decorView.postDelayed({ runOnUiThread { updateList() } }, 300)
                 }
 
             })
@@ -81,7 +75,7 @@ class BankcardActivity : BaseActivity() {
 
                             .clicked(R.id.item_bankcard) {
                                 val intent = Intent(baseContext, SavingsDetailActivity::class.java)
-                                intent.putExtra("depositcardId", data.depositcardId)
+                                intent.putExtra("data", data)
                                 startActivity(intent)
                             }
 
@@ -237,11 +231,7 @@ class BankcardActivity : BaseActivity() {
     @Subscribe
     fun onMessageEvent(event: RefreshMessageEvent) {
         when (event.name) {
-            "新增储蓄卡" -> {
-                swipe_refresh.isRefreshing = true
-                getData(mPosition)
-            }
-            "新增信用卡" -> {
+            "新增储蓄卡", "新增信用卡", "更换银行卡", "删除信用卡" -> {
                 swipe_refresh.isRefreshing = true
                 getData(mPosition)
             }

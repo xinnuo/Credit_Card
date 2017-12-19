@@ -2,7 +2,7 @@ package com.ruanmeng.credit_card
 
 import android.annotation.SuppressLint
 import android.os.Bundle
-import android.webkit.WebSettings
+import android.webkit.*
 import com.ruanmeng.base.BaseActivity
 import kotlinx.android.synthetic.main.activity_web.*
 import kotlinx.android.synthetic.main.layout_title_left.*
@@ -16,10 +16,12 @@ class WebActivity : BaseActivity() {
         init_title()
 
         when (intent.getStringExtra("title")) {
-            "信用卡攻略" -> {}
-            "用户协议" -> {}
-            "关于我们" -> {}
-            "服务协议" -> {}
+            "信用卡攻略" -> { }
+            "用户协议" -> { }
+            "关于我们" -> { }
+            "服务协议" -> { }
+            "详情" -> { }
+            "收款支付" -> wv_web.loadUrl(intent.getStringExtra("url"))
         }
     }
 
@@ -40,6 +42,13 @@ class WebActivity : BaseActivity() {
             // 设置出现缩放工具
             settings.builtInZoomControls = true
             settings.displayZoomControls = false
+
+            webViewClient = object : WebViewClient() {
+                override fun shouldOverrideUrlLoading(view: WebView, url: String): Boolean {
+                    view.loadUrl(url)
+                    return true
+                }
+            }
         }
     }
 }
