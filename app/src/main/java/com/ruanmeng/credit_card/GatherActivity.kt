@@ -257,7 +257,7 @@ class GatherActivity : BaseActivity() {
         val temp = s.toString()
         val posDot = temp.indexOf(".")
         if (posDot < 0) {
-            if (temp.length > 7) s.delete(4, 5)
+            if (temp.length > 7) s.delete(7, 8)
         } else {
             if (temp.length - posDot - 1 > 2) s.delete(posDot + 3, posDot + 4)
         }

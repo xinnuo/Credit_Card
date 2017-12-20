@@ -10,6 +10,7 @@ import android.widget.CompoundButton
 import com.lzy.extend.StringDialogCallback
 import com.lzy.okgo.OkGo
 import com.lzy.okgo.model.Response
+import com.lzy.okgo.utils.OkLogger
 import com.ruanmeng.base.*
 import com.ruanmeng.fragment.MainFirstFragment
 import com.ruanmeng.fragment.MainSecondFragment
@@ -96,6 +97,18 @@ class MainActivity : BaseActivity() {
                     "0" -> toast("实名认证信息正在审核中，无法进行收款")
                     "1" -> startActivity(GatherActivity::class.java)
                 }
+            }
+            R.id.first_card -> {
+                OkGo.post<String>(BaseHttp.appYee_withdraw)
+                        .tag(this@MainActivity)
+                        .params("receiveId", "38527DC0C5E549999B9467237409F449")
+                        .execute(object : StringDialogCallback(baseContext) {
+
+                            override fun onSuccessResponse(response: Response<String>, msg: String, msgCode: String) {
+                                OkLogger.i(response.body())
+                            }
+
+                        })
             }
             R.id.first_new -> {
                 val intent = Intent(baseContext, WebActivity::class.java)

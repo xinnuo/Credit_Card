@@ -3,8 +3,10 @@ package com.ruanmeng.credit_card
 import android.os.Bundle
 import android.view.View
 import com.ruanmeng.base.BaseActivity
+import com.ruanmeng.utils.DialogHelper
 import kotlinx.android.synthetic.main.activity_plan_back.*
 import kotlinx.android.synthetic.main.layout_title_left.*
+import java.util.*
 
 class PlanBackActivity : BaseActivity() {
 
@@ -29,10 +31,23 @@ class PlanBackActivity : BaseActivity() {
     override fun doClick(v: View) {
         super.doClick(v)
         when (v.id) {
-            R.id.plan_type_11 -> { }
+            R.id.plan_type_11 -> {
+                DialogHelper.showItemDialog(
+                        baseContext,
+                        "选择还款类型",
+                        Arrays.asList("快速还款", "余额还款", "还款消费")) { position, name ->
+                    plan_type.text = name
+                }
+            }
             R.id.plan_date_11 -> { }
-            R.id.plan_plus -> { }
-            R.id.plan_add -> { }
+            R.id.plan_plus -> {
+                val count = plan_count.text.toString().toInt()
+                if (count > 1) plan_count.text = (count - 1).toString()
+            }
+            R.id.plan_add -> {
+                val count = plan_count.text.toString().toInt()
+                plan_count.text = (count + 1).toString()
+            }
             R.id.plan_submit -> { }
             R.id.plan_preview -> { }
         }

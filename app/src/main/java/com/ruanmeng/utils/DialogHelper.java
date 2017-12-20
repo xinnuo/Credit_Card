@@ -292,7 +292,10 @@ public class DialogHelper {
                         int day_now = calendar.get(Calendar.DAY_OF_MONTH);
 
                         if (isLimited && year == year_now) {
-                            if (month < month_now + 1) month = month_now + 1;
+                            if (month < month_now + 1) {
+                                month = month_now + 1;
+                                day = day_now;
+                            }
                             if (month == month_now + 1 && day < day_now) day = day_now;
                         }
 

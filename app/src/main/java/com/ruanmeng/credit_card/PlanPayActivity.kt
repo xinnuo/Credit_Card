@@ -2,6 +2,7 @@ package com.ruanmeng.credit_card
 
 import android.annotation.SuppressLint
 import android.os.Bundle
+import android.text.Editable
 import android.view.View
 import com.lzy.extend.StringDialogCallback
 import com.lzy.okgo.OkGo
@@ -41,7 +42,6 @@ class PlanPayActivity : BaseActivity() {
         plan_submit.setBackgroundResource(R.drawable.rec_bg_d0d0d0)
         plan_submit.isClickable = false
 
-        plan_date.addTextChangedListener(this@PlanPayActivity)
         plan_count.addTextChangedListener(this@PlanPayActivity)
     }
 
@@ -62,6 +62,11 @@ class PlanPayActivity : BaseActivity() {
                 })
             }
             R.id.plan_submit -> {
+                if (plan_date.text.isEmpty()) {
+                    toast("请选择还款日期")
+                    return
+                }
+
                 OkGo.post<String>(BaseHttp.add_consumeplan)
                         .tag(this@PlanPayActivity)
                         .params("creditcardId", creditcardId)
@@ -79,14 +84,30 @@ class PlanPayActivity : BaseActivity() {
         }
     }
 
-    override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-        if (plan_date.text.isNotBlank()
-                && plan_count.text.isNotBlank()) {
+    override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
+        if (plan_count.text.isNotBlank()) {
             plan_submit.setBackgroundResource(R.drawable.rec_bg_blue)
             plan_submit.isClickable = true
         } else {
             plan_submit.setBackgroundResource(R.drawable.rec_bg_d0d0d0)
             plan_submit.isClickable = false
+        }
+
+        if (s.isNotEmpty()) {
+            if ("." == s.toString()) {
+                plan_count.setText("0.")
+                plan_count.setSelection(plan_count.text.length) //设置光标的位置
+            }
+        }
+    }
+
+    override fun afterTextChanged(s: Editable) {
+        val temp = s.toString()
+        val posDot = temp.indexOf(".")
+        if (posDot < 0) {
+            if (temp.length > 7) s.delete(7, 8)
+        } else {
+            if (temp.length - posDot - 1 > 2) s.delete(posDot + 3, posDot + 4)
         }
     }
 }

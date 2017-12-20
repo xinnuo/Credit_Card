@@ -26,6 +26,7 @@ public class BaseHttp {
     public static String index_alldata = baseIp + "/index_alldata.rm"; //首页√
     public static String payrecord_data = baseIp + "/payrecord_data.rm"; //账单列表√
     public static String appYee_repayment = baseIp + "/appYee_repayment.rm"; //收款√
+    public static String appYee_withdraw = baseIp + "/appYee_withdraw.rm"; //结算（测试）√
     public static String paypawd_check = baseIp + "/paypawd_check.rm"; //检验支付密码√
 
     public static String user_msg_data = baseIp + "/user_msg_data.rm";                     //用户个人资料√
