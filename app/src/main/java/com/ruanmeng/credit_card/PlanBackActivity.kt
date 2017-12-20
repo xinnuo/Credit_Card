@@ -1,7 +1,11 @@
 package com.ruanmeng.credit_card
 
 import android.os.Bundle
+import android.support.design.widget.BottomSheetDialog
+import android.support.v7.widget.RecyclerView
+import android.view.LayoutInflater
 import android.view.View
+import android.widget.TextView
 import com.ruanmeng.base.BaseActivity
 import com.ruanmeng.utils.DialogHelper
 import kotlinx.android.synthetic.main.activity_plan_back.*
@@ -39,7 +43,16 @@ class PlanBackActivity : BaseActivity() {
                     plan_type.text = name
                 }
             }
-            R.id.plan_date_11 -> { }
+            R.id.plan_date_11 -> {
+                val view = LayoutInflater.from(baseContext).inflate(R.layout.dialog_select_day, null) as View
+                val tv_cancel = view.findViewById(R.id.tv_dialog_select_cancle) as TextView
+                val tv_ok = view.findViewById(R.id.tv_dialog_select_ok) as TextView
+                val day_first = view.findViewById(R.id.tab_dialog_select_day) as RecyclerView
+                val dialog = BottomSheetDialog(baseContext)
+
+                dialog.setContentView(view)
+                dialog.show()
+            }
             R.id.plan_plus -> {
                 val count = plan_count.text.toString().toInt()
                 if (count > 1) plan_count.text = (count - 1).toString()
