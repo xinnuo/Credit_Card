@@ -37,6 +37,7 @@ public class BaseHttp {
     public static String depositcard_data = baseIp + "/depositcard_data.rm";               //储蓄卡列表√
     public static String creditcard_data = baseIp + "/creditcard_data.rm";                 //信用卡列表√
     public static String identity_Info = baseIp + "/identity_Info.rm";                     //是否实名认证√
+    public static String get_userQrcode = baseIp + "/get_userQrcode.rm";                   //获取推荐二维码√
 
     public static String identify_othercode = baseIp + "/identify_othercode.rm";   //获取其他验证码√
     public static String depositcard_add_sub = baseIp + "/depositcard_add_sub.rm"; //新增储蓄卡√
@@ -44,4 +45,6 @@ public class BaseHttp {
     public static String creditcard_details = baseIp + "/creditcard_details.rm";   //信用卡详情√
     public static String creditcard_del_sub = baseIp + "/creditcard_del_sub.rm";   //删除信用卡√
     public static String repayment_data = baseIp + "/repayment_data.rm";           //全部计划√
+    public static String add_consumeplan = baseIp + "/add_consumeplan.rm";         //新增消费计划√
+    public static String add_repaymentplan = baseIp + "/add_repaymentplan.rm";     //新增还款计划√
 }

@@ -11,10 +11,13 @@ import com.lzy.okgo.model.Response
 import com.ruanmeng.base.BaseActivity
 import com.ruanmeng.base.startActivity
 import com.ruanmeng.base.toast
+import com.ruanmeng.model.RefreshMessageEvent
 import com.ruanmeng.share.BaseHttp
 import com.ruanmeng.utils.ActivityStack
 import com.ruanmeng.utils.CommonUtil
 import kotlinx.android.synthetic.main.activity_register.*
+import org.greenrobot.eventbus.EventBus
+import org.greenrobot.eventbus.Subscribe
 import org.json.JSONObject
 
 class RegisterActivity : BaseActivity() {
@@ -28,6 +31,8 @@ class RegisterActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_register)
         init_title("注册")
+
+        EventBus.getDefault().register(this@RegisterActivity)
     }
 
     override fun init_title() {
@@ -127,9 +132,9 @@ class RegisterActivity : BaseActivity() {
                         .params("mobile", et_name.text.toString())
                         .params("smscode", et_yzm.text.toString())
                         .params("password", et_pwd.text.toString())
-                        .params("nickName", et_name.text.toString())
+                        .params("toRecommend", et_code.text.toString())
                         .params("loginType", "mobile")
-                        .execute(object : StringDialogCallback(this@RegisterActivity) {
+                        .execute(object : StringDialogCallback(baseContext) {
 
                             override fun onSuccessResponse(response: Response<String>, msg: String, msgCode: String) {
 
@@ -165,6 +170,21 @@ class RegisterActivity : BaseActivity() {
         } else {
             bt_sign.setBackgroundResource(R.drawable.rec_bg_d0d0d0)
             bt_sign.isClickable = false
+        }
+    }
+
+    override fun finish() {
+        super.finish()
+        EventBus.getDefault().unregister(this@RegisterActivity)
+    }
+
+    @Subscribe
+    fun onMessageEvent(event: RefreshMessageEvent) {
+        when (event.name) {
+            "扫描二维码" -> {
+                val code = event.id
+                if (CommonUtil.isMobileNumber(code.substring(0, 11))) et_code.setText(code)
+            }
         }
     }
 }

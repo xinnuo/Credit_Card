@@ -7,7 +7,10 @@ import android.view.WindowManager
 import cn.bingoogolapple.qrcode.core.QRCodeView
 import com.lzy.okgo.utils.OkLogger
 import com.ruanmeng.base.BaseActivity
+import com.ruanmeng.model.RefreshMessageEvent
+import com.ruanmeng.utils.ActivityStack
 import kotlinx.android.synthetic.main.activity_scan.*
+import org.greenrobot.eventbus.EventBus
 
 class ScanActivity : BaseActivity(), QRCodeView.Delegate {
 
@@ -53,6 +56,8 @@ class ScanActivity : BaseActivity(), QRCodeView.Delegate {
     override fun onScanQRCodeSuccess(result: String) {
         vibrate()
         OkLogger.i(result)
+        EventBus.getDefault().post(RefreshMessageEvent("扫描二维码", result))
+        ActivityStack.getScreenManager().popActivities(this@ScanActivity::class.java)
     }
 
     override fun onScanQRCodeOpenCameraError() {

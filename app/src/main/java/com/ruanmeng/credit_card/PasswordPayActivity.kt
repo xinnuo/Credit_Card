@@ -21,7 +21,6 @@ class PasswordPayActivity : BaseActivity() {
     private var time_count: Int = 90
     private lateinit var thread: Runnable
     private var YZM: String = ""
-    private var mTel: String = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -97,9 +96,6 @@ class PasswordPayActivity : BaseActivity() {
                     return
                 }
 
-                if (getString("isPayPwd") != "1") {
-
-                }
                 OkGo.post<String>(if (getString("isPayPwd") != "1") BaseHttp.paypawd_add_sub else BaseHttp.paypawd_change_mobile)
                         .tag(this@PasswordPayActivity)
                         .headers("token", getString("token"))

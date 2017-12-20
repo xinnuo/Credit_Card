@@ -22,21 +22,36 @@
         android:background="@color/white"
         android:orientation="vertical">
 
-        <com.allen.library.SuperTextView
-            android:id="@+id/plan_type"
+        <LinearLayout
+            android:id="@+id/plan_type_11"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/dimen_size_45.5"
-            app:sBottomLineMargin="@dimen/dimen_size_10"
-            app:sLeftTextColor="@color/black_dark"
-            app:sLeftTextMarginLeft="@dimen/dimen_size_10"
-            app:sLeftTextString="还款类型"
-            app:sLineShow="bottom"
-            app:sRightIconMarginRight="@dimen/dimen_size_10"
-            app:sRightIconRes="@mipmap/arrow_right"
-            app:sRightIconSize="@dimen/dimen_size_13"
-            app:sRightTextColor="@color/black_dark"
-            app:sRightTextMarginRight="@dimen/dimen_size_30"
-            app:sRightTextString="快速还款" />
+            android:layout_height="@dimen/line_height"
+            android:gravity="center_vertical"
+            android:onClick="doClick"
+            android:paddingLeft="@dimen/dimen_size_10"
+            android:paddingRight="@dimen/dimen_size_10">
+
+            <TextView
+                style="@style/Font14_black_dark"
+                android:layout_width="70dp"
+                android:layout_height="wrap_content"
+                android:text="还款类型" />
+
+            <TextView
+                android:id="@+id/plan_type"
+                style="@style/Font14_black_dark"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:paddingLeft="@dimen/dimen_size_10" />
+
+            <ImageView
+                android:layout_width="13dp"
+                android:layout_height="13dp"
+                android:src="@mipmap/arrow_right"
+                tools:ignore="ContentDescription" />
+
+        </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -88,7 +103,7 @@
 
             <TextView
                 android:id="@+id/plan_date"
-                style="@style/Font14_gray"
+                style="@style/Font14_black_dark"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -163,7 +178,7 @@
             app:sRightIconSize="@dimen/dimen_size_13"
             app:sRightTextColor="@color/black_dark"
             app:sRightTextMarginRight="@dimen/dimen_size_10"
-            app:sRightTextString="0.00"
+            app:sRightTextString=""
             app:sTopLineMargin="@dimen/dimen_size_10" />
 
     </LinearLayout>

@@ -18,17 +18,35 @@ class PlanBackActivity : BaseActivity() {
     override fun init_title() {
         left_nav_title.text = "新增还款计划"
 
-        plan_type.setOnClickListener {  }
+        plan_submit.setBackgroundResource(R.drawable.rec_bg_d0d0d0)
+        plan_submit.isClickable = false
+
+        plan_type.addTextChangedListener(this@PlanBackActivity)
+        plan_total.addTextChangedListener(this@PlanBackActivity)
+        plan_date.addTextChangedListener(this@PlanBackActivity)
     }
 
     override fun doClick(v: View) {
         super.doClick(v)
         when (v.id) {
+            R.id.plan_type_11 -> { }
             R.id.plan_date_11 -> { }
             R.id.plan_plus -> { }
             R.id.plan_add -> { }
             R.id.plan_submit -> { }
             R.id.plan_preview -> { }
+        }
+    }
+
+    override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+        if (plan_type.text.isNotBlank()
+                && plan_total.text.isNotBlank()
+                && plan_date.text.isNotBlank()) {
+            plan_submit.setBackgroundResource(R.drawable.rec_bg_blue)
+            plan_submit.isClickable = true
+        } else {
+            plan_submit.setBackgroundResource(R.drawable.rec_bg_d0d0d0)
+            plan_submit.isClickable = false
         }
     }
 }

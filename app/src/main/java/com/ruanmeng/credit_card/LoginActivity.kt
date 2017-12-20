@@ -114,7 +114,6 @@ class LoginActivity : BaseActivity() {
         putString("platform", "")
 
         putString("age", "")
-        putString("mobile", "")
         putString("isPass", "")
         putString("nickName", "")
         putString("sex", "")
