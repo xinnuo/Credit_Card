@@ -127,7 +127,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/dimen_size_10"
-                android:text="推荐码" />
+                android:text="推荐人" />
 
             <EditText
                 android:id="@+id/et_code"

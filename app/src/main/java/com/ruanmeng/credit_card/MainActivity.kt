@@ -85,6 +85,11 @@ class MainActivity : BaseActivity() {
         when (v.id) {
             R.id.main_right -> startActivity(MessageActivity::class.java)
             R.id.first_agency -> startActivity(AgencyActivity::class.java)
+            R.id.first_pay -> {
+                val intent = Intent(baseContext, BankcardActivity::class.java)
+                intent.putExtra("isPlan", true)
+                startActivity(intent)
+            }
             R.id.first_get -> {
                 when (getString("isPass")) {
                     "-1" -> toast("实名认证审核未通过，无法进行收款")
@@ -97,7 +102,6 @@ class MainActivity : BaseActivity() {
                 intent.putExtra("title", "信用卡攻略")
                 startActivity(intent)
             }
-            R.id.first_pay -> { }
             R.id.second_update -> startActivity(MemberActivity::class.java)
         }
     }
