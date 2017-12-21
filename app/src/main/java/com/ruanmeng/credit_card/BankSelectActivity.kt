@@ -1,6 +1,7 @@
 package com.ruanmeng.credit_card
 
 import android.os.Bundle
+import android.widget.ImageView
 import com.ruanmeng.base.BaseActivity
 import com.ruanmeng.base.load_Linear
 import com.ruanmeng.model.RefreshMessageEvent
@@ -27,6 +28,24 @@ class BankSelectActivity : BaseActivity() {
         mAdapter = SlimAdapter.create()
                 .register<String>(R.layout.item_bank_select_list) { data, injector ->
                     injector.text(R.id.item_bank_name, data)
+
+                            .with<ImageView>(R.id.item_bank_img, { view ->
+                                when (data) {
+                                    "工商银行" -> view.setImageResource(R.mipmap.bank01)
+                                    "农业银行" -> view.setImageResource(R.mipmap.bank02)
+                                    "招商银行" -> view.setImageResource(R.mipmap.bank03)
+                                    "建设银行" -> view.setImageResource(R.mipmap.bank04)
+                                    "交通银行" -> view.setImageResource(R.mipmap.bank05)
+                                    "中信银行" -> view.setImageResource(R.mipmap.bank06)
+                                    "光大银行" -> view.setImageResource(R.mipmap.bank07)
+                                    "北京银行" -> view.setImageResource(R.mipmap.bank08)
+                                    "平安银行" -> view.setImageResource(R.mipmap.bank09)
+                                    "中国银行" -> view.setImageResource(R.mipmap.bank10)
+                                    "兴业银行" -> view.setImageResource(R.mipmap.bank11)
+                                    "民生银行" -> view.setImageResource(R.mipmap.bank12)
+                                    "华夏银行" -> view.setImageResource(R.mipmap.bank13)
+                                }
+                            })
 
                             .clicked(R.id.item_bank) {
                                 EventBus.getDefault().post(RefreshMessageEvent("选择银行", data))

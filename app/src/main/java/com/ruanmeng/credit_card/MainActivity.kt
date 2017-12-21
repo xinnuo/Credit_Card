@@ -7,15 +7,16 @@ import android.support.v4.app.FragmentPagerAdapter
 import android.view.KeyEvent
 import android.view.View
 import android.widget.CompoundButton
+import cn.jpush.android.api.JPushInterface
 import com.lzy.extend.StringDialogCallback
 import com.lzy.okgo.OkGo
 import com.lzy.okgo.model.Response
-import com.lzy.okgo.utils.OkLogger
 import com.ruanmeng.base.*
 import com.ruanmeng.fragment.MainFirstFragment
 import com.ruanmeng.fragment.MainSecondFragment
 import com.ruanmeng.fragment.MainThirdFragment
 import com.ruanmeng.share.BaseHttp
+import com.ruanmeng.share.Const
 import kotlinx.android.synthetic.main.activity_main.*
 import org.json.JSONObject
 
@@ -26,6 +27,13 @@ class MainActivity : BaseActivity() {
         setContentView(R.layout.activity_main)
         setToolbarVisibility(false)
         init_title()
+
+        JPushInterface.resumePush(applicationContext)
+        //设置别名（先注册）
+        JPushInterface.setAlias(
+                applicationContext,
+                Const.JPUSH_SEQUENCE,
+                getString("token"))
 
         main_check1.performClick()
     }
@@ -98,18 +106,7 @@ class MainActivity : BaseActivity() {
                     "1" -> startActivity(GatherActivity::class.java)
                 }
             }
-            R.id.first_card -> {
-                OkGo.post<String>(BaseHttp.appYee_withdraw)
-                        .tag(this@MainActivity)
-                        .params("receiveId", "38527DC0C5E549999B9467237409F449")
-                        .execute(object : StringDialogCallback(baseContext) {
-
-                            override fun onSuccessResponse(response: Response<String>, msg: String, msgCode: String) {
-                                OkLogger.i(response.body())
-                            }
-
-                        })
-            }
+            R.id.first_card -> { }
             R.id.first_new -> {
                 val intent = Intent(baseContext, WebActivity::class.java)
                 intent.putExtra("title", "信用卡攻略")

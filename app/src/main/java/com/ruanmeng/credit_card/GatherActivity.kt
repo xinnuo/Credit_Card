@@ -216,7 +216,23 @@ class GatherActivity : BaseActivity() {
                                 .text(R.id.item_bank_tail,
                                         "(${data.creditcard.substring(data.creditcard.length - 4)})")
 
-                                .with<RoundedImageView>(R.id.item_bank_img, { view -> })
+                                .with<RoundedImageView>(R.id.item_bank_img, { view ->
+                                    when (data.bank) {
+                                        "工商银行" -> view.setImageResource(R.mipmap.bank01)
+                                        "农业银行" -> view.setImageResource(R.mipmap.bank02)
+                                        "招商银行" -> view.setImageResource(R.mipmap.bank03)
+                                        "建设银行" -> view.setImageResource(R.mipmap.bank04)
+                                        "交通银行" -> view.setImageResource(R.mipmap.bank05)
+                                        "中信银行" -> view.setImageResource(R.mipmap.bank06)
+                                        "光大银行" -> view.setImageResource(R.mipmap.bank07)
+                                        "北京银行" -> view.setImageResource(R.mipmap.bank08)
+                                        "平安银行" -> view.setImageResource(R.mipmap.bank09)
+                                        "中国银行" -> view.setImageResource(R.mipmap.bank10)
+                                        "兴业银行" -> view.setImageResource(R.mipmap.bank11)
+                                        "民生银行" -> view.setImageResource(R.mipmap.bank12)
+                                        "华夏银行" -> view.setImageResource(R.mipmap.bank13)
+                                    }
+                                })
 
                                 .clicked(R.id.item_bank, {
                                     list.filter { it.isChecked }.forEach { it.isChecked = false }

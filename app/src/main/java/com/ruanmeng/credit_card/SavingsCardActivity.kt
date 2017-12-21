@@ -190,7 +190,7 @@ class SavingsCardActivity : BaseActivity() {
     @Subscribe
     fun onMessageEvent(event: RefreshMessageEvent) {
         when (event.name) {
-            "选择银行" -> card_bank.text = if (event.id == "平安银行") "深圳发展银行" else event.id
+            "选择银行" -> card_bank.text = event.id
         }
     }
 }

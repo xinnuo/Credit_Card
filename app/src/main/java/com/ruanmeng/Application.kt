@@ -29,6 +29,7 @@ package com.ruanmeng
 
 import android.app.ActivityManager
 import android.content.Context
+import cn.jpush.android.api.JPushInterface
 import com.lzy.okgo.OkGo
 import com.lzy.okgo.cache.CacheEntity
 import com.lzy.okgo.cache.CacheMode
@@ -38,6 +39,7 @@ import com.lzy.okgo.https.HttpsUtils
 import com.lzy.okgo.interceptor.HttpLoggingInterceptor
 import com.lzy.okgo.utils.OkLogger
 import com.ruanmeng.credit_card.BuildConfig
+import com.ruanmeng.utils.PreferencesUtils
 import io.rong.imkit.RongIM
 import okhttp3.OkHttpClient
 import java.util.concurrent.TimeUnit
@@ -54,6 +56,12 @@ class Application : android.app.Application() {
         super.onCreate()
 
         initOkGo()
+
+        //极光推送
+        JPushInterface.setDebugMode(BuildConfig.LOG_DEBUG) //设置开启日志,发布时请关闭日志
+        JPushInterface.init(this@Application)              //初始化 JPush
+        if (!PreferencesUtils.getBoolean(this, "isLogin"))
+            JPushInterface.stopPush(this@Application)      //停止推送服务
 
         /*
         * OnCreate 会被多个进程重入，这段保护代码，确保只有您需要使用 RongIM 的进程和 Push 进程执行了 init。

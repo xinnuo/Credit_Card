@@ -5,11 +5,13 @@ import android.text.method.HideReturnsTransformationMethod
 import android.text.method.PasswordTransformationMethod
 import android.view.View
 import android.widget.CompoundButton
+import cn.jpush.android.api.JPushInterface
 import com.lzy.extend.StringDialogCallback
 import com.lzy.okgo.OkGo
 import com.lzy.okgo.model.Response
 import com.ruanmeng.base.*
 import com.ruanmeng.share.BaseHttp
+import com.ruanmeng.share.Const
 import com.ruanmeng.utils.ActivityStack
 import com.ruanmeng.utils.CommonUtil
 import kotlinx.android.synthetic.main.activity_login.*
@@ -118,6 +120,8 @@ class LoginActivity : BaseActivity() {
         putString("nickName", "")
         putString("sex", "")
         putString("userhead", "")
+
+        JPushInterface.stopPush(applicationContext)
 
         //清除通知栏消息
         // RongCloudContext.getInstance().clearNotificationMessage()

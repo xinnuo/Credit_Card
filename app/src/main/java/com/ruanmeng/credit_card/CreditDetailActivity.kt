@@ -141,7 +141,23 @@ class CreditDetailActivity : BaseActivity() {
                         creditcard = obj.getString("creditcard")
                         bank = obj.getString("bank")
 
-                        credit_bank.text = bank
+                        when (bank) {
+                            "工商银行" -> credit_img.setImageResource(R.mipmap.bank01)
+                            "农业银行" -> credit_img.setImageResource(R.mipmap.bank02)
+                            "招商银行" -> credit_img.setImageResource(R.mipmap.bank03)
+                            "建设银行" -> credit_img.setImageResource(R.mipmap.bank04)
+                            "交通银行" -> credit_img.setImageResource(R.mipmap.bank05)
+                            "中信银行" -> credit_img.setImageResource(R.mipmap.bank06)
+                            "光大银行" -> credit_img.setImageResource(R.mipmap.bank07)
+                            "北京银行" -> credit_img.setImageResource(R.mipmap.bank08)
+                            "平安银行" -> credit_img.setImageResource(R.mipmap.bank09)
+                            "中国银行" -> credit_img.setImageResource(R.mipmap.bank10)
+                            "兴业银行" -> credit_img.setImageResource(R.mipmap.bank11)
+                            "民生银行" -> credit_img.setImageResource(R.mipmap.bank12)
+                            "华夏银行" -> credit_img.setImageResource(R.mipmap.bank13)
+                        }
+
+                        credit_bank.text = bank + "信用卡"
                         credit_tail.text = "尾号${creditcard.substring(creditcard.length - 4)}"
                         credit_bill.setRightString(obj.getString("billDay") + "日")
                         credit_pay.setRightString(obj.getString("repaymentDay") + "日")
