@@ -23,6 +23,8 @@ data class CommonModel(
         var las: List<CommonData>? = ArrayList(),
         var levelName: String = "",
 
+        var msgs: List<CommonData>? = ArrayList(),
+
         var msg: String = "",
         var msgcode: String = "",
         var success: String = ""

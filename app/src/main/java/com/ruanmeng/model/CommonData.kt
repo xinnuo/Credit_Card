@@ -66,6 +66,11 @@ data class CommonData(
         var recommenduserId: String = "",
         var userHead: String = "",
 
+        //消息中心
+        var content: String = "",
+        var msgReciveId: String = "",
+        var sendDate: String = "",
+
         //升级列表
         var agentId: String = "",
         var agentLevel: String = "",

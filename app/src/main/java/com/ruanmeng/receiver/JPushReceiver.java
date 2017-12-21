@@ -6,6 +6,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 
+import com.ruanmeng.credit_card.LoginActivity;
+import com.ruanmeng.credit_card.MessageActivity;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -45,7 +48,9 @@ public class JPushReceiver extends BroadcastReceiver {
             Log.d(TAG, "[JPushReceiver] 用户点击打开了通知");
             //打开自定义的Activity
 
-
+            intent = new Intent(context, MessageActivity.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            context.startActivity(intent);
         } else if (JPushInterface.ACTION_RICHPUSH_CALLBACK.equals(intent.getAction())) {
             Log.d(TAG, "[JPushReceiver] 用户收到到RICH PUSH CALLBACK: " + (bundle != null ? bundle.getString(JPushInterface.EXTRA_EXTRA) : ""));
             //在这里根据 JPushInterface.EXTRA_EXTRA 的内容处理代码，比如打开新的Activity， 打开一个网页等..

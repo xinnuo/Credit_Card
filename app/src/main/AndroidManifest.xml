@@ -30,6 +30,7 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".MessageActivity"
+            android:launchMode="singleTask"
             android:screenOrientation="portrait" />
         <activity
             android:name=".CashoutActivity"
