@@ -12,8 +12,7 @@ public class ActivityStack {
     private static Stack<Activity> mActivityStack;
     private static ActivityStack instance;
 
-    private ActivityStack() {
-    }
+    private ActivityStack() { }
 
     public static ActivityStack getScreenManager() {
         if (instance == null) {

@@ -67,7 +67,7 @@ class Application : android.app.Application() {
         * OnCreate 会被多个进程重入，这段保护代码，确保只有您需要使用 RongIM 的进程和 Push 进程执行了 init。
         * io.rong.push 为融云 push 进程名称，不可修改。
         */
-        /*if (applicationInfo.packageName == getCurrentProcessName(applicationContext)
+        if (applicationInfo.packageName == getCurrentProcessName(applicationContext)
                 || "io.rong.push" == getCurrentProcessName(applicationContext)) {
 
             // RongPushClient.registerHWPush(this@Application)         //华为推送
@@ -76,13 +76,12 @@ class Application : android.app.Application() {
 
             RongIM.init(this@Application)
 
-            *//*
-             * 融云SDK事件监听处理
-             *//*
+
+            /* 融云SDK事件监听处理 */
             if (applicationInfo.packageName == getCurrentProcessName(applicationContext)) {
                 RongCloudContext.init(this@Application)
             }
-        }*/
+        }
     }
 
     private fun initOkGo() {

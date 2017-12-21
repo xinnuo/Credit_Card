@@ -34,66 +34,16 @@ import java.io.Serializable
  * 创建人：小卷毛
  * 创建时间：2017-12-05 16:35
  */
-data class CommonData(
-        //首页轮播图
-        var href: String = "",
-        var sliderId: String = "",
-        var sliderImg: String = "",
-        var title: String = "",
-
-        //首页公告
+data class IncomeData(
+        //收益列表
+        var businessId: String = "",
         var createDate: String = "",
-        var newsnoticeId: String = "",
-
-        //账单
-        var cardId: String = "",
-        var cardNo: String = "",
-        var cardType: String = "",
-        var payRecordId: String = "",
-        var paySum: String = "",
-        var payTime: String = "",
-        var payType: String = "",
-        var rate: String = "",
-        var status: String = "",
-        var type: String = "",
-        var userInfoId: String = "",
-
-        //下级列表
-        var fromRecommend: String = "",
-        var mobile: String = "",
-        var nickName: String = "",
+        var profitExplain: String = "",
+        var profitId: String = "",
+        var profitRate: String = "",
         var profitSum: String = "",
-        var recommenduserId: String = "",
+        var profitType: String = "",
+        var tradeSum: String = "",
         var userHead: String = "",
-
-        //升级列表
-        var agentId: String = "",
-        var agentLevel: String = "",
-        var cost: String = "",
-        var levelName: String = "",
-
-        //全部计划
-        var repaymentId: String = "",
-        var repaymentSum: String = "",
-        var repaymentTime: String = "",
-        var repaymentType: String = "",
-
-        //信用卡列表
-        var billDay: String = "",
-        var creditcard: String = "",
-        var creditcardId: String = "",
-        var cvn2: String = "",
-        var invaridDate: String = "",
-        var quota: String = "",
-        var repaymentDay: String = "",
-
-        //储蓄卡列表
-        var bank: String = "",
-        var depositcard: String = "",
-        var depositcardId: String = "",
-        var identityCard: String = "",
-        var name: String = "",
-        var tel: String = "",
-
-        var isChecked: Boolean = false
+        var userInfoId: String = ""
 ) : Serializable

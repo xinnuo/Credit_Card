@@ -81,12 +81,11 @@
         app:sLeftTextString="支付方式"
         app:sLineShow="bottom"
         app:sRightIconMarginRight="@dimen/dimen_size_10"
-        app:sRightIconRes="@mipmap/arrow_right"
         app:sRightIconSize="13dp"
         app:sRightTextColor="@color/black_dark"
-        app:sRightTextMarginRight="@dimen/dimen_size_25"
+        app:sRightTextMarginRight="@dimen/dimen_size_15"
         app:sRightTextSize="14sp"
-        app:sRightTextString="银行卡  (尾号0000)" />
+        app:sRightTextString="银行卡 (尾号0000)" />
 
     <Button
         android:id="@+id/dialog_member_next"

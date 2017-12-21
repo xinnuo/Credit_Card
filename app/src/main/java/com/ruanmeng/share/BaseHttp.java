@@ -23,11 +23,19 @@ public class BaseHttp {
     public static String paypawd_add_sub = baseIp + "/paypawd_add_sub.rm";             //新增支付密码√
     public static String paypawd_change_mobile = baseIp + "/paypawd_change_mobile.rm"; //修改支付密码√
 
-    public static String index_alldata = baseIp + "/index_alldata.rm"; //首页√
-    public static String payrecord_data = baseIp + "/payrecord_data.rm"; //账单列表√
-    public static String appYee_repayment = baseIp + "/appYee_repayment.rm"; //收款√
-    public static String appYee_withdraw = baseIp + "/appYee_withdraw.rm"; //结算（测试）√
-    public static String paypawd_check = baseIp + "/paypawd_check.rm"; //检验支付密码√
+    public static String index_alldata = baseIp + "/index_alldata.rm";           //首页√
+    public static String agent_userInfo = baseIp + "/agent_userInfo.rm";         //代理商信息√
+    public static String profit_data = baseIp + "/profit_data.rm";               //收益列表√
+    public static String user_children_data = baseIp + "/user_children_data.rm"; //下级列表√
+    public static String payrecord_data = baseIp + "/payrecord_data.rm";         //账单列表√
+    public static String appYee_repayment = baseIp + "/appYee_repayment.rm";     //收款√
+    public static String paypawd_check = baseIp + "/paypawd_check.rm";           //检验支付密码√
+    public static String appYee_withdraw = baseIp + "/appYee_withdraw.rm";       //结算（测试）√
+    public static String add_withdraw = baseIp + "/add_withdraw.rm";             //提现√
+
+    public static String up_vip_list = baseIp + "/up_vip_list.rm"; //升级列表√
+    public static String card_Info_list = baseIp + "/card_Info_list.rm"; //银行卡列表√
+    public static String add_upvip_sub = baseIp + "/add_upvip_sub.rm"; //升级会员√
 
     public static String user_msg_data = baseIp + "/user_msg_data.rm";                     //用户个人资料√
     public static String userinfo_uploadhead_sub = baseIp + "/userinfo_uploadhead_sub.rm"; //修改头像√
