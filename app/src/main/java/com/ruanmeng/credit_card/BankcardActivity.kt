@@ -26,6 +26,7 @@ import org.greenrobot.eventbus.Subscribe
 class BankcardActivity : BaseActivity() {
 
     private val list = ArrayList<Any>()
+    private val list_depositcard = ArrayList<Any>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -180,7 +181,14 @@ class BankcardActivity : BaseActivity() {
                                         }
                                     }
                                     "0" -> toast("实名认证信息正在审核中")
-                                    "1" -> startActivity(CreditCardActivity::class.java)
+                                    "1" -> {
+                                        if (list_depositcard.isEmpty()) {
+                                            toast("您还未绑定储蓄卡，请先添加储蓄卡")
+                                            return@clicked
+                                        }
+
+                                        startActivity(CreditCardActivity::class.java)
+                                    }
                                     else -> {
                                         DialogHelper.showDialog(
                                                 baseContext,
@@ -214,6 +222,8 @@ class BankcardActivity : BaseActivity() {
 
                                     if (isEmpty()) add(CommonData().apply { isChecked = true })
                                 }
+
+                                list_depositcard.addItems(response.body().depositcards)
 
                                 mAdapter.updateData(list).notifyDataSetChanged()
                             }

@@ -185,17 +185,18 @@ class CreditCardActivity : BaseActivity() {
                         .params("smsCode", YZM)
                         .execute(object : StringDialogCallback(baseContext) {
                             /*{
-                                "msg": "提交成功，请等待审核",
-                                "msgcode": 100
+                                "msg": "收款成功",
+                                "msgcode": 100,
+                                "object": "https://shouyin.yeepay.com/nc-cashier-wap/wap/request/10016127996/21pDrF18M9579RwWZbqnJQ%3D%3D"
                             }*/
                             override fun onSuccessResponse(response: Response<String>, msg: String, msgCode: String) {
                                 OkLogger.i(msg)
 
-                                EventBus.getDefault().post(RefreshMessageEvent("新增信用卡"))
+                                val obj = JSONObject(response.body())
 
-                                val intent = Intent(baseContext, BankDoneActivity::class.java)
-                                intent.putExtra("title", "新增信用卡")
-                                intent.putExtra("hint", "新增信用卡成功！")
+                                val intent = Intent(baseContext, WebActivity::class.java)
+                                intent.putExtra("title", "支付验证")
+                                intent.putExtra("url", obj.getString("object"))
                                 startActivity(intent)
                             }
 
