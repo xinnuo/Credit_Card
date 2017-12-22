@@ -1,25 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="50dp"
+    android:layout_width="match_parent"
     android:layout_height="40dp">
 
     <View
-        android:layout_width="50dp"
+        android:id="@+id/item_tab_top"
+        android:layout_width="match_parent"
         android:layout_height="@dimen/divider_height"
         android:background="@color/light" />
 
     <View
-        android:layout_width="50dp"
+        android:id="@+id/item_tab_bottom"
+        android:layout_width="match_parent"
         android:layout_height="@dimen/divider_height"
         android:layout_gravity="bottom"
         android:background="@color/light" />
 
     <View
+        android:id="@+id/item_tab_left"
         android:layout_width="@dimen/divider_height"
         android:layout_height="40dp"
         android:background="@color/light" />
 
     <View
+        android:id="@+id/item_tab_right"
         android:layout_width="@dimen/divider_height"
         android:layout_height="40dp"
         android:layout_gravity="end"
@@ -27,7 +31,7 @@
 
     <TextView
         android:id="@+id/item_tab"
-        style="@style/Font14_black_dark"
+        style="@style/Font15_black_dark"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_gravity="center"
