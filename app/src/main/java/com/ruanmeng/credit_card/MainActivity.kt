@@ -17,11 +17,13 @@ import com.ruanmeng.base.*
 import com.ruanmeng.fragment.MainFirstFragment
 import com.ruanmeng.fragment.MainSecondFragment
 import com.ruanmeng.fragment.MainThirdFragment
+import com.ruanmeng.model.CountMessageEvent
 import com.ruanmeng.share.BaseHttp
 import com.ruanmeng.share.Const
 import io.rong.imkit.RongIM
 import io.rong.imlib.RongIMClient
 import kotlinx.android.synthetic.main.activity_main.*
+import org.greenrobot.eventbus.EventBus
 import org.json.JSONObject
 
 class MainActivity : BaseActivity() {
@@ -55,22 +57,8 @@ class MainActivity : BaseActivity() {
     override fun onStart() {
         super.onStart()
 
-        OkGo.post<String>(BaseHttp.identity_Info)
-                .tag(this@MainActivity)
-                .headers("token", getString("token"))
-                .execute(object : StringDialogCallback(baseContext, false) {
-
-                    override fun onSuccessResponse(response: Response<String>, msg: String, msgCode: String) {
-                        val obj = JSONObject(response.body())
-
-                        putString("isPass", obj.getString("pass"))
-                        putString("isPayPwd", obj.getString("payPass"))
-                        putString("real_name", if (obj.isNull("userName")) "" else obj.getString("userName"))
-                        putString("real_sex", if (obj.isNull("sex")) "" else obj.getString("sex"))
-                        putString("real_IDCard", if (obj.isNull("cardNo")) "" else obj.getString("cardNo"))
-                    }
-
-                })
+        getIdentityInfo()
+        getMessageCount()
     }
 
     override fun onCheckedChanged(buttonView: CompoundButton, isChecked: Boolean) {
@@ -124,8 +112,47 @@ class MainActivity : BaseActivity() {
         }
     }
 
-    private var exitTime: Long = 0
+    private fun getIdentityInfo() {
+        OkGo.post<String>(BaseHttp.identity_Info)
+                .tag(this@MainActivity)
+                .headers("token", getString("token"))
+                .execute(object : StringDialogCallback(baseContext, false) {
 
+                    override fun onSuccessResponse(response: Response<String>, msg: String, msgCode: String) {
+                        val obj = JSONObject(response.body())
+
+                        putString("isPass", obj.getString("pass"))
+                        putString("isPayPwd", obj.getString("payPass"))
+                        putString("real_name", if (obj.isNull("userName")) "" else obj.getString("userName"))
+                        putString("real_sex", if (obj.isNull("sex")) "" else obj.getString("sex"))
+                        putString("real_IDCard", if (obj.isNull("cardNo")) "" else obj.getString("cardNo"))
+                    }
+
+                })
+    }
+
+    private fun getMessageCount() {
+        OkGo.post<String>(BaseHttp.get_msgCount)
+                .tag(this@MainActivity)
+                .headers("token", getString("token"))
+                .execute(object : StringDialogCallback(baseContext, false) {
+                    /*{
+                        "count": 5,
+                        "msg": "",
+                        "msgcode": 100,
+                        "success": true
+                    }*/
+                    override fun onSuccessResponse(response: Response<String>, msg: String, msgCode: String) {
+
+                        val msgCount = JSONObject(response.body()).getString("count")
+                        putString("msgCount", msgCount)
+                        EventBus.getDefault().post(CountMessageEvent("未读消息", msgCount))
+                    }
+
+                })
+    }
+
+    private var exitTime: Long = 0
     override fun onKeyDown(keyCode: Int, event: KeyEvent): Boolean {
         if (keyCode == KeyEvent.KEYCODE_BACK && event.action == KeyEvent.ACTION_DOWN) {
             if (System.currentTimeMillis() - exitTime > 2000) {

@@ -34,6 +34,7 @@ public class BaseHttp {
     public static String add_withdraw = baseIp + "/add_withdraw.rm";             //提现√
     public static String get_MsgInfo = baseIp + "/get_MsgInfo.rm";               //获取消息√
     public static String msgInfo_details = baseIp + "/msgInfo_details.rm";       //消息详细√
+    public static String get_msgCount = baseIp + "/get_msgCount.rm";             //未读消息数量√
 
     public static String up_vip_list = baseIp + "/up_vip_list.rm"; //升级列表√
     public static String card_Info_list = baseIp + "/card_Info_list.rm"; //银行卡列表√

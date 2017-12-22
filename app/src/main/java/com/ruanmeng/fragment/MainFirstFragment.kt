@@ -20,6 +20,7 @@ import com.ruanmeng.credit_card.R
 import com.ruanmeng.credit_card.WebActivity
 import com.ruanmeng.model.CommonData
 import com.ruanmeng.model.CommonModel
+import com.ruanmeng.model.CountMessageEvent
 import com.ruanmeng.share.BaseHttp
 import com.ruanmeng.utils.NumberHelper
 import com.ruanmeng.view.SwitcherTextView
@@ -27,6 +28,8 @@ import kotlinx.android.synthetic.main.layout_list.*
 import kotlinx.android.synthetic.main.layout_title_main.*
 import net.idik.lib.slimadapter.SlimAdapter
 import net.idik.lib.slimadapter.SlimAdapterEx
+import org.greenrobot.eventbus.EventBus
+import org.greenrobot.eventbus.Subscribe
 import java.util.ArrayList
 
 class MainFirstFragment : BaseFragment() {
@@ -55,6 +58,8 @@ class MainFirstFragment : BaseFragment() {
         super.onViewCreated(view, savedInstanceState)
         init_title()
 
+        EventBus.getDefault().register(this@MainFirstFragment)
+
         swipe_refresh.isRefreshing = true
         getData()
     }
@@ -63,6 +68,8 @@ class MainFirstFragment : BaseFragment() {
     override fun init_title() {
         main_title.text = "诸葛智能管家"
         main_right.visibility = View.VISIBLE
+        val count = getString("msgCount", "0").toInt()
+        main_hint.visibility = if (count > 0) View.VISIBLE else View.INVISIBLE
 
         swipe_refresh.refresh { getData() }
         recycle_list.load_Linear(activity)
@@ -160,5 +167,20 @@ class MainFirstFragment : BaseFragment() {
                     }
 
                 })
+    }
+
+    override fun onDestroy() {
+        EventBus.getDefault().unregister(this@MainFirstFragment)
+        super.onDestroy()
+    }
+
+    @Subscribe
+    fun onMessageEvent(event: CountMessageEvent) {
+        when (event.name) {
+            "未读消息" -> {
+                val count = event.count.toInt()
+                main_hint.visibility = if (count > 0) View.VISIBLE else View.INVISIBLE
+            }
+        }
     }
 }

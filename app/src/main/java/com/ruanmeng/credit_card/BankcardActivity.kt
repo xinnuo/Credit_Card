@@ -261,9 +261,9 @@ class BankcardActivity : BaseActivity() {
         getData(mPosition)
     }
 
-    override fun onBackPressed() {
+    override fun finish() {
         EventBus.getDefault().unregister(this@BankcardActivity)
-        super.onBackPressed()
+        super.finish()
     }
 
     @Subscribe

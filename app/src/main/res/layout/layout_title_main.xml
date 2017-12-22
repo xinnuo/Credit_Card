@@ -32,11 +32,11 @@
 
         <ImageView
             android:id="@+id/main_hint"
-            android:layout_width="@dimen/dimen_size_8"
-            android:layout_height="@dimen/dimen_size_8"
+            android:layout_width="@dimen/dimen_size_6"
+            android:layout_height="@dimen/dimen_size_6"
             android:layout_gravity="end"
-            android:layout_marginRight="@dimen/dimen_size_7"
-            android:layout_marginTop="@dimen/dimen_size_10"
+            android:layout_marginRight="@dimen/dimen_size_8"
+            android:layout_marginTop="@dimen/dimen_size_12"
             android:src="@drawable/red_num_oval"
             android:visibility="invisible"
             tools:ignore="ContentDescription" />

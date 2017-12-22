@@ -182,9 +182,9 @@ class SavingsCardActivity : BaseActivity() {
         }
     }
 
-    override fun onBackPressed() {
+    override fun finish() {
         EventBus.getDefault().unregister(this@SavingsCardActivity)
-        super.onBackPressed()
+        super.finish()
     }
 
     @Subscribe

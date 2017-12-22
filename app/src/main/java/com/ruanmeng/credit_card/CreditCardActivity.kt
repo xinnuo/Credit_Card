@@ -224,9 +224,9 @@ class CreditCardActivity : BaseActivity() {
         }
     }
 
-    override fun onBackPressed() {
+    override fun finish() {
         EventBus.getDefault().unregister(this@CreditCardActivity)
-        super.onBackPressed()
+        super.finish()
     }
 
     @Subscribe
