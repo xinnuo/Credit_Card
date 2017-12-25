@@ -40,6 +40,9 @@ import com.lzy.okgo.interceptor.HttpLoggingInterceptor
 import com.lzy.okgo.utils.OkLogger
 import com.ruanmeng.credit_card.BuildConfig
 import com.ruanmeng.utils.PreferencesUtils
+import com.umeng.socialize.Config
+import com.umeng.socialize.PlatformConfig
+import com.umeng.socialize.UMShareAPI
 import io.rong.imkit.RongIM
 import okhttp3.OkHttpClient
 import java.util.concurrent.TimeUnit
@@ -82,6 +85,13 @@ class Application : android.app.Application() {
                 RongCloudContext.init(this@Application)
             }
         }
+
+        //友盟分享
+        PlatformConfig.setWeixin("wxc2d100c58d663a71", "173dd4f60edae5d6be1eaa6a3db46787")
+        PlatformConfig.setQQZone("1106461503", "J8ky4clnxm2maLZd")
+        UMShareAPI.get(this@Application)
+        Config.DEBUG = BuildConfig.LOG_DEBUG
+        Config.isJumptoAppStore = true
     }
 
     private fun initOkGo() {

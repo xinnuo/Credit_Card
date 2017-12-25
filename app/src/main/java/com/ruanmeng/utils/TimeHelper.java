@@ -495,6 +495,7 @@ public class TimeHelper {
      */
     public String getAfterMonth(String str, int month) {
         Calendar c = Calendar.getInstance();//获得一个日历的实例
+        @SuppressLint("SimpleDateFormat")
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         Date date = null;
         try {
@@ -511,8 +512,9 @@ public class TimeHelper {
      * 得到二个日期间的间隔天数
      */
     public String getTwoDay(String sj1, String sj2) {
+        @SuppressLint("SimpleDateFormat")
         SimpleDateFormat myFormatter = new SimpleDateFormat("yyyy-MM-dd");
-        long day = 0;
+        long day;
         try {
             Date date = myFormatter.parse(sj1);
             Date mydate = myFormatter.parse(sj2);

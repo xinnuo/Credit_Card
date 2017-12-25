@@ -116,6 +116,10 @@
         <activity
             android:name=".GatherActivity"
             android:screenOrientation="portrait" />
+        <activity
+            android:name=".RecommendActivity"
+            android:screenOrientation="portrait" />
+
 
         <!-- 融云即时通讯 start -->
         <!-- 会话界面 -->
@@ -157,6 +161,7 @@
         </provider>
         <!-- 融云即时通讯 end -->
 
+
         <!-- JPush 用户自定义的广播接收器 -->
         <receiver
             android:name="com.ruanmeng.receiver.JPushReceiver"
@@ -185,6 +190,16 @@
             </intent-filter>
         </receiver>
         <!-- JPush end -->
+
+
+        <!-- 微信分享 start -->
+        <activity
+            android:name=".wxapi.WXEntryActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:exported="true"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+        <!-- 微信分享 end -->
 
     </application>
 

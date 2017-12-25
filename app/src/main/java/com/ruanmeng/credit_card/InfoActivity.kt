@@ -13,12 +13,16 @@ import com.lzy.extend.StringDialogCallback
 import com.lzy.okgo.OkGo
 import com.lzy.okgo.model.Response
 import com.ruanmeng.base.*
+import com.ruanmeng.model.RefreshMessageEvent
 import com.ruanmeng.share.BaseHttp
 import com.ruanmeng.share.Const
+import com.ruanmeng.utils.CommonUtil
 import com.ruanmeng.utils.DialogHelper
 import io.rong.imkit.RongIM
 import io.rong.imlib.model.UserInfo
 import kotlinx.android.synthetic.main.activity_info.*
+import org.greenrobot.eventbus.EventBus
+import org.greenrobot.eventbus.Subscribe
 import org.json.JSONObject
 import java.io.File
 import java.util.*
@@ -26,11 +30,16 @@ import java.util.*
 class InfoActivity : BaseActivity() {
 
     private var selectList = ArrayList<LocalMedia>()
+    private var mobile = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_info)
         init_title("个人资料")
+
+        EventBus.getDefault().register(this@InfoActivity)
+
+        getData()
     }
 
     override fun onStart() {
@@ -40,6 +49,7 @@ class InfoActivity : BaseActivity() {
 
     override fun init_title() {
         super.init_title()
+        info_rec_11.visibility = View.GONE
         loadUserHead(getString("userhead"))
         info_gender.setRightString(if (getString("sex") == "0") "女" else "男")
 
@@ -67,6 +77,9 @@ class InfoActivity : BaseActivity() {
         }
 
         info_name.setOnClickListener { startActivity(NicknameActivity::class.java) }
+        info_rec.setOnClickListener {
+            if (mobile.isEmpty()) startActivity(RecommendActivity::class.java)
+        }
     }
 
     private fun loadUserHead(path: String) {
@@ -185,6 +198,39 @@ class InfoActivity : BaseActivity() {
                                 })
                     }
                 }
+            }
+        }
+    }
+
+    override fun getData() {
+        OkGo.post<String>(BaseHttp.recommend_user)
+                .tag(this@InfoActivity)
+                .headers("token", getString("token"))
+                .execute(object : StringDialogCallback(baseContext) {
+
+                    override fun onSuccessResponse(response: Response<String>, msg: String, msgCode: String) {
+
+                        mobile = JSONObject(response.body()).getString("mobile")
+                        info_rec.text = if (mobile.isEmpty()) "未绑定" else CommonUtil.phoneReplaceWithStar(mobile)
+                        info_rec_arrow.visibility = if (mobile.isEmpty()) View.VISIBLE else View.GONE
+                        info_rec_11.visibility = View.VISIBLE
+                    }
+
+                })
+    }
+
+    override fun finish() {
+        super.finish()
+        EventBus.getDefault().unregister(this@InfoActivity)
+    }
+
+    @Subscribe
+    fun onMessageEvent(event: RefreshMessageEvent) {
+        when (event.name) {
+            "绑定推荐人" -> {
+                mobile = event.id
+                info_rec.text = CommonUtil.phoneReplaceWithStar(mobile)
+                info_rec_arrow.visibility = View.GONE
             }
         }
     }

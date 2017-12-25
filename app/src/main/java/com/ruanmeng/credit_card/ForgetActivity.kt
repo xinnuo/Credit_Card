@@ -16,7 +16,7 @@ import org.json.JSONObject
 
 class ForgetActivity : BaseActivity() {
 
-    private var time_count: Int = 90
+    private var time_count: Int = 180
     private lateinit var thread: Runnable
     private var YZM: String = ""
     private var mTel: String = ""
@@ -65,7 +65,7 @@ class ForgetActivity : BaseActivity() {
                         bt_yzm.text = "发送验证码"
                         bt_yzm.isClickable = true
                         bt_yzm.setBackgroundResource(R.drawable.rec_bg_ova_orange)
-                        time_count = 90
+                        time_count = 180
                     }
                 }
 
@@ -82,7 +82,7 @@ class ForgetActivity : BaseActivity() {
 
                                 bt_yzm.isClickable = false
                                 bt_yzm.setBackgroundResource(R.drawable.rec_bg_ova_d0d0d0)
-                                time_count = 90
+                                time_count = 180
                                 bt_yzm.post(thread)
                             }
 

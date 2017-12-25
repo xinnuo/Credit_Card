@@ -52,6 +52,8 @@ public class BaseHttp {
     public static String identity_Info = baseIp + "/identity_Info.rm";                     //是否实名认证√
     public static String get_userQrcode = baseIp + "/get_userQrcode.rm";                   //获取推荐二维码√
     public static String help_center = baseIp + "/help_center.rm";                         //帮助中心√
+    public static String recommend_user = baseIp + "/recommend_user.rm";                   //推荐人信息√
+    public static String add_recommenduser = baseIp + "/add_recommenduser.rm";             //绑定推荐人√
 
     public static String identify_othercode = baseIp + "/identify_othercode.rm";   //获取其他验证码√
     public static String depositcard_add_sub = baseIp + "/depositcard_add_sub.rm"; //新增储蓄卡√

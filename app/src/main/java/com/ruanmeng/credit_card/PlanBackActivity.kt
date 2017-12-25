@@ -111,8 +111,10 @@ class PlanBackActivity : BaseActivity() {
                     adapter = SlimAdapter.create()
                             .register<CommonData>(R.layout.item_tab_list) { data, injector ->
                                 injector.text(R.id.item_tab, data.title)
-                                        .textColor(R.id.item_tab,
-                                                resources.getColor(if (data.isChecked) R.color.colorAccent else R.color.black_dark))
+                                        .with<TextView>(R.id.item_tab) { view ->
+                                            view.setTextColor(resources.getColor(if (data.isChecked) R.color.colorAccent else R.color.black_dark))
+                                            view.setBackgroundColor(resources.getColor(if (data.isChecked) R.color.lighter else R.color.white))
+                                        }
                                         .visibility(R.id.item_tab_left,
                                                 if (item_first.indexOf(data) % 7 == 0) View.VISIBLE else View.INVISIBLE)
                                         .visibility(R.id.item_tab_top,
@@ -131,8 +133,10 @@ class PlanBackActivity : BaseActivity() {
                     adapter = SlimAdapter.create()
                             .register<CommonData>(R.layout.item_tab_list) { data, injector ->
                                 injector.text(R.id.item_tab, data.title)
-                                        .textColor(R.id.item_tab,
-                                                resources.getColor(if (data.isChecked) R.color.colorAccent else R.color.black_dark))
+                                        .with<TextView>(R.id.item_tab) { view ->
+                                            view.setTextColor(resources.getColor(if (data.isChecked) R.color.colorAccent else R.color.black_dark))
+                                            view.setBackgroundColor(resources.getColor(if (data.isChecked) R.color.lighter else R.color.white))
+                                        }
                                         .visibility(R.id.item_tab_left,
                                                 if (item_second.indexOf(data) % 7 == 0) View.VISIBLE else View.INVISIBLE)
                                         .visibility(R.id.item_tab_top,
