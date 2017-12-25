@@ -32,7 +32,4 @@ package com.ruanmeng.model
  * 创建人：小卷毛
  * 创建时间：2017-12-16 14:20
  */
-data class RefreshMessageEvent(
-        var name: String = "",
-        var id: String = "",
-        var type: String = "")
+data class RefreshMessageEvent(var name: String = "", var id: String = "", var type: String = "")

@@ -127,7 +127,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/dimen_size_10"
-                android:text="推荐码" />
+                android:text="推荐人" />
 
             <EditText
                 android:id="@+id/et_code"
@@ -137,8 +137,8 @@
                 android:layout_weight="1"
                 android:background="@android:color/white"
                 android:hint="扫描二维码"
-                android:inputType="textWebPassword"
-                android:maxLength="20"
+                android:inputType="number"
+                android:maxLength="11"
                 android:paddingLeft="@dimen/dimen_size_10" />
 
             <ImageView

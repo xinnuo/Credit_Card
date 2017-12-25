@@ -10,10 +10,20 @@ import java.io.Serializable
 data class CommonModel(
         var depositcards: List<CommonData>? = ArrayList(),
         var creditcards: List<CardData>? = ArrayList(),
+        var cards: List<CommonData>? = ArrayList(),
+
         var repayments: List<CommonData>? = ArrayList(),
         var news: List<CommonData>? = ArrayList(),
         var payrecords: List<CommonData>? = ArrayList(),
         var slider: List<CommonData>? = ArrayList(),
+
+        var profits: List<IncomeData>? = ArrayList(),
+        var ls: List<CommonData>? = ArrayList(),
+
+        var las: List<CommonData>? = ArrayList(),
+        var levelName: String = "",
+
+        var msgs: List<CommonData>? = ArrayList(),
 
         var msg: String = "",
         var msgcode: String = "",

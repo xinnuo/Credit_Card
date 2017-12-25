@@ -24,7 +24,7 @@ import org.json.JSONObject
 
 class CreditCardActivity : BaseActivity() {
 
-    private var time_count: Int = 90
+    private var time_count: Int = 180
     private lateinit var thread: Runnable
     private var YZM: String = ""
     private var mTel: String = ""
@@ -100,7 +100,7 @@ class CreditCardActivity : BaseActivity() {
                         bt_yzm.text = "发送验证码"
                         bt_yzm.isClickable = true
                         bt_yzm.setBackgroundResource(R.drawable.rec_bg_ova_orange)
-                        time_count = 90
+                        time_count = 180
                     }
                 }
 
@@ -119,7 +119,7 @@ class CreditCardActivity : BaseActivity() {
 
                                 bt_yzm.isClickable = false
                                 bt_yzm.setBackgroundResource(R.drawable.rec_bg_ova_d0d0d0)
-                                time_count = 90
+                                time_count = 180
                                 bt_yzm.post(thread)
                             }
 
@@ -185,17 +185,18 @@ class CreditCardActivity : BaseActivity() {
                         .params("smsCode", YZM)
                         .execute(object : StringDialogCallback(baseContext) {
                             /*{
-                                "msg": "提交成功，请等待审核",
-                                "msgcode": 100
+                                "msg": "收款成功",
+                                "msgcode": 100,
+                                "object": "https://shouyin.yeepay.com/nc-cashier-wap/wap/request/10016127996/21pDrF18M9579RwWZbqnJQ%3D%3D"
                             }*/
                             override fun onSuccessResponse(response: Response<String>, msg: String, msgCode: String) {
                                 OkLogger.i(msg)
 
-                                EventBus.getDefault().post(RefreshMessageEvent("新增信用卡"))
+                                val obj = JSONObject(response.body())
 
-                                val intent = Intent(baseContext, BankDoneActivity::class.java)
-                                intent.putExtra("title", "新增信用卡")
-                                intent.putExtra("hint", "新增信用卡成功！")
+                                val intent = Intent(baseContext, WebActivity::class.java)
+                                intent.putExtra("title", "支付验证")
+                                intent.putExtra("url", obj.getString("object"))
                                 startActivity(intent)
                             }
 
@@ -224,15 +225,15 @@ class CreditCardActivity : BaseActivity() {
         }
     }
 
-    override fun onBackPressed() {
+    override fun finish() {
         EventBus.getDefault().unregister(this@CreditCardActivity)
-        super.onBackPressed()
+        super.finish()
     }
 
     @Subscribe
     fun onMessageEvent(event: RefreshMessageEvent) {
         when (event.name) {
-            "选择银行" -> card_bank.text = if (event.id == "平安银行") "深圳发展银行" else event.id
+            "选择银行" -> card_bank.text = event.id
         }
     }
 }

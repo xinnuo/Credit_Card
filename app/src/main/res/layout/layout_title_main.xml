@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/layout_title"
     android:layout_width="match_parent"
     android:layout_height="48dp"
@@ -12,16 +13,34 @@
         android:layout_gravity="center"
         android:gravity="center"
         android:textColor="@android:color/black"
-        android:textSize="18sp"/>
+        android:textSize="18sp" />
 
-    <ImageView
-        android:id="@+id/main_right"
+    <FrameLayout
         android:layout_width="40dp"
         android:layout_height="@dimen/line_height"
-        android:layout_gravity="center_vertical|end"
-        android:onClick="doClick"
-        android:padding="10dp"
-        android:src="@mipmap/icon_msg"
-        android:visibility="visible" />
+        android:layout_gravity="center_vertical|end">
+
+        <ImageView
+            android:id="@+id/main_right"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:onClick="doClick"
+            android:padding="10dp"
+            android:src="@mipmap/icon_msg"
+            android:visibility="visible"
+            tools:ignore="ContentDescription" />
+
+        <ImageView
+            android:id="@+id/main_hint"
+            android:layout_width="@dimen/dimen_size_6"
+            android:layout_height="@dimen/dimen_size_6"
+            android:layout_gravity="end"
+            android:layout_marginRight="@dimen/dimen_size_8"
+            android:layout_marginTop="@dimen/dimen_size_12"
+            android:src="@drawable/red_num_oval"
+            android:visibility="invisible"
+            tools:ignore="ContentDescription" />
+
+    </FrameLayout>
 
 </FrameLayout>

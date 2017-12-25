@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:gravity="center_vertical">
+
+        <TextView
+            style="@style/Font14_black_dark"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dimen_size_10"
+            android:text="推荐人" />
+
+        <EditText
+            android:id="@+id/et_code"
+            style="@style/Font14_black_dark"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/line_height"
+            android:layout_weight="1"
+            android:background="@android:color/white"
+            android:hint="输入推荐人手机号或扫描二维码"
+            android:inputType="number"
+            android:maxLength="11"
+            android:paddingLeft="@dimen/dimen_size_10" />
+
+        <ImageView
+            android:id="@+id/rec_qrcode"
+            android:layout_width="@dimen/dimen_size_40"
+            android:layout_height="@dimen/dimen_size_40"
+            android:layout_marginRight="@dimen/dimen_size_10"
+            android:padding="@dimen/dimen_size_10"
+            android:onClick="doClick"
+            android:src="@mipmap/icon_scan"
+            tools:ignore="ContentDescription" />
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/divider_height"
+        android:background="@color/divider" />
+
+    <Button
+        android:id="@+id/bt_ok"
+        style="@style/Font15_white"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/btn_height"
+        android:layout_margin="@dimen/dimen_size_20"
+        android:background="@drawable/rec_bg_blue"
+        android:onClick="doClick"
+        android:text="确定" />
+
+</LinearLayout>

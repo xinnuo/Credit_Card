@@ -5,13 +5,18 @@ import android.text.method.HideReturnsTransformationMethod
 import android.text.method.PasswordTransformationMethod
 import android.view.View
 import android.widget.CompoundButton
+import cn.jpush.android.api.JPushInterface
 import com.lzy.extend.StringDialogCallback
 import com.lzy.okgo.OkGo
 import com.lzy.okgo.model.Response
+import com.ruanmeng.RongCloudContext
 import com.ruanmeng.base.*
 import com.ruanmeng.share.BaseHttp
+import com.ruanmeng.share.Const
 import com.ruanmeng.utils.ActivityStack
 import com.ruanmeng.utils.CommonUtil
+import io.rong.imkit.RongIM
+import io.rong.push.RongPushClient
 import kotlinx.android.synthetic.main.activity_login.*
 import org.json.JSONObject
 
@@ -77,7 +82,6 @@ class LoginActivity : BaseActivity() {
                                     "cusTel": "",
                                     "isPass": 0,
                                     "mobile": "17603870563",
-                                    "msgsNum": 28,
                                     "rongtoken": "Q4DZc5aadc9rp8f7PWRFNc6IEHMWJRjuP/Un2Bh7R8OALyAioDNc8UX8RXn+TR8MVsC9MnbwkUndHZG64866M6nQ9l89IT/nN2JWgpjVAAH9/snaemskGR3HEfdi28dVDHGbu4/6NK8=",
                                     "token": "31743A18B53842298BC9DDF861651658"
                                 }
@@ -87,7 +91,6 @@ class LoginActivity : BaseActivity() {
 
                                 putBoolean("isLogin", true)
                                 putString("mobile", obj.getString("mobile"))
-                                putString("msgsNum", obj.getString("msgsNum"))
                                 putString("rongtoken", if (obj.isNull("rongtoken")) "" else obj.getString("rongtoken"))
                                 putString("token", obj.getString("token"))
 
@@ -105,7 +108,7 @@ class LoginActivity : BaseActivity() {
     private fun clearData() {
         putBoolean("isLogin", false)
         putString("token", "")
-        putString("rongToken", "")
+        putString("rongtoken", "")
 
         putString("balanceSum", "0.00")
         putString("profitSum", "0.00")
@@ -114,16 +117,17 @@ class LoginActivity : BaseActivity() {
         putString("platform", "")
 
         putString("age", "")
-        putString("mobile", "")
         putString("isPass", "")
         putString("nickName", "")
         putString("sex", "")
         putString("userhead", "")
 
+        JPushInterface.stopPush(applicationContext)
+
         //清除通知栏消息
-        // RongCloudContext.getInstance().clearNotificationMessage()
-        // RongPushClient.clearAllPushNotifications(applicationContext)
-        // RongIM.getInstance().logout()
+        RongCloudContext.getInstance().clearNotificationMessage()
+        RongPushClient.clearAllPushNotifications(applicationContext)
+        RongIM.getInstance().logout()
     }
 
     override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {

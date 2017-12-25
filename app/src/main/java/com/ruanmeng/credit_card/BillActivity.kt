@@ -55,6 +55,9 @@ class BillActivity : BaseActivity() {
                             .text(R.id.item_first_time, data.payTime)
                             .text(R.id.item_first_status, if (data.status == "1") "交易成功" else "交易失败")
 
+                            .visibility(R.id.item_first_divider1, if (list.indexOf(data) == list.size - 1) View.GONE else View.VISIBLE)
+                            .visibility(R.id.item_first_divider2, if (list.indexOf(data) != list.size - 1) View.GONE else View.VISIBLE)
+
                             .with<RoundedImageView>(R.id.item_first_img) { view ->
                                 when (data.payType) {
                                     "还款消费" -> view.setImageResource(R.mipmap.group01)
@@ -65,9 +68,6 @@ class BillActivity : BaseActivity() {
                                     "充值" -> view.setImageResource(R.mipmap.group06)
                                 }
                             }
-
-                            .visibility(R.id.item_first_divider1, if (list.indexOf(data) == list.size - 1) View.GONE else View.VISIBLE)
-                            .visibility(R.id.item_first_divider2, if (list.indexOf(data) != list.size - 1) View.GONE else View.VISIBLE)
 
                             .clicked(R.id.item_first) { }
                 }

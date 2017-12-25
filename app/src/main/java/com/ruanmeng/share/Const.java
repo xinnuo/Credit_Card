@@ -9,6 +9,7 @@ package com.ruanmeng.share;
 public class Const {
 
     public static final String SAVE_FILE = "/Credit_Card";
+    public static final int JPUSH_SEQUENCE = 100;
 
     /**
      * "00" -生产环境

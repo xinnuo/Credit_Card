@@ -5,6 +5,7 @@ import android.content.Context;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.IBinder;
+import android.support.annotation.NonNull;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
@@ -170,7 +171,7 @@ public class BaseActivity extends AppCompatActivity implements
     }
 
     //标题栏的返回按钮，onclick = "doClick"
-    public void doClick(View v) {
+    public void doClick(@NonNull View v) {
         switch (v.getId()) {
             case R.id.iv_nav_back:
                 onBackPressed();

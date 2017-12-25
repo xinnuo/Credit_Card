@@ -58,28 +58,24 @@ data class CommonData(
         var type: String = "",
         var userInfoId: String = "",
 
-        //我的关注+关注我的
-        var accountInfoId: String = "",
-        var colleconId: String = "",
-        var userName: String = "",
-        var userhead: String = "",
+        //下级列表
+        var fromRecommend: String = "",
+        var mobile: String = "",
+        var nickName: String = "",
+        var profitSum: String = "",
+        var recommenduserId: String = "",
+        var userHead: String = "",
 
-        //我的收藏
-        var address: String = "",
-        var productId: String = "",
-        var productName: String = "",
-        var productPic: String = "",
-        var productPrice: String = "",
+        //消息中心
+        var content: String = "",
+        var msgReciveId: String = "",
+        var sendDate: String = "",
 
-        //我的产品
-        var retailPrice: String = "",
-        var supplyDescribe: String = "",
-        var supplyId: String = "",
-        var supplyPic: String = "",
-
-        var managerId: String = "",
-        var id: String = "",
-        var image: String = "",
+        //升级列表
+        var agentId: String = "",
+        var agentLevel: String = "",
+        var cost: String = "",
+        var levelName: String = "",
 
         //全部计划
         var repaymentId: String = "",

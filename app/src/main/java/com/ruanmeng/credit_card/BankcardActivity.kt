@@ -7,6 +7,7 @@ import android.view.View
 import com.lzy.extend.jackson.JacksonDialogCallback
 import com.lzy.okgo.OkGo
 import com.lzy.okgo.model.Response
+import com.makeramen.roundedimageview.RoundedImageView
 import com.ruanmeng.base.*
 import com.ruanmeng.model.CardData
 import com.ruanmeng.model.CommonData
@@ -25,6 +26,7 @@ import org.greenrobot.eventbus.Subscribe
 class BankcardActivity : BaseActivity() {
 
     private val list = ArrayList<Any>()
+    private val list_depositcard = ArrayList<Any>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -52,8 +54,9 @@ class BankcardActivity : BaseActivity() {
 
             })
 
-            addTab(this.newTab().setText("储蓄卡"), true)
-            addTab(this.newTab().setText("信用卡"), false)
+            val isPlan = intent.getBooleanExtra("isPlan", false)
+            addTab(this.newTab().setText("储蓄卡"), !isPlan)
+            addTab(this.newTab().setText("信用卡"), isPlan)
 
             post { Tools.setIndicator(this, 50, 50) }
         }
@@ -65,13 +68,31 @@ class BankcardActivity : BaseActivity() {
                 .register<CommonData>(R.layout.item_bankcard_list) { data, injector ->
                     injector.background(R.id.item_bankcard, R.drawable.rec_bg_ca566b)
                             .text(R.id.item_bankcard_hint, "新增储蓄卡")
-                            .text(R.id.item_bankcard_name, data.bank)
+                            .text(R.id.item_bankcard_name, data.bank + "储蓄卡")
                             .text(R.id.item_bankcard_tail,
                                     if (data.tel.isEmpty()) "0000" else data.tel.substring(data.tel.length - 4))
                             .text(R.id.item_bankcard_num,
                                     if (data.depositcard.isEmpty()) "0000" else data.depositcard.substring(data.depositcard.length - 4))
                             .visibility(R.id.item_bankcard, if (data.isChecked) View.GONE else View.VISIBLE)
                             .visibility(R.id.item_bankcard_add, if (!data.isChecked) View.GONE else View.VISIBLE)
+
+                            .with<RoundedImageView>(R.id.item_bankcard_img) { view ->
+                                when (data.bank) {
+                                    "工商银行" -> view.setImageResource(R.mipmap.bank01)
+                                    "农业银行" -> view.setImageResource(R.mipmap.bank02)
+                                    "招商银行" -> view.setImageResource(R.mipmap.bank03)
+                                    "建设银行" -> view.setImageResource(R.mipmap.bank04)
+                                    "交通银行" -> view.setImageResource(R.mipmap.bank05)
+                                    "中信银行" -> view.setImageResource(R.mipmap.bank06)
+                                    "光大银行" -> view.setImageResource(R.mipmap.bank07)
+                                    "北京银行" -> view.setImageResource(R.mipmap.bank08)
+                                    "平安银行" -> view.setImageResource(R.mipmap.bank09)
+                                    "中国银行" -> view.setImageResource(R.mipmap.bank10)
+                                    "兴业银行" -> view.setImageResource(R.mipmap.bank11)
+                                    "民生银行" -> view.setImageResource(R.mipmap.bank12)
+                                    "华夏银行" -> view.setImageResource(R.mipmap.bank13)
+                                }
+                            }
 
                             .clicked(R.id.item_bankcard) {
                                 val intent = Intent(baseContext, SavingsDetailActivity::class.java)
@@ -113,13 +134,31 @@ class BankcardActivity : BaseActivity() {
                 .register<CardData>(R.layout.item_bankcard_list) { data, injector ->
                     injector.background(R.id.item_bankcard, R.drawable.rec_bg_414b80)
                             .text(R.id.item_bankcard_hint, "新增信用卡")
-                            .text(R.id.item_bankcard_name, data.bank)
+                            .text(R.id.item_bankcard_name, data.bank + "信用卡")
                             .text(R.id.item_bankcard_tail,
                                     if (data.tel.isEmpty()) "0000" else data.tel.substring(data.tel.length - 4))
                             .text(R.id.item_bankcard_num,
                                     if (data.creditcard.isEmpty()) "0000" else data.creditcard.substring(data.creditcard.length - 4))
                             .visibility(R.id.item_bankcard, if (data.isChecked) View.GONE else View.VISIBLE)
                             .visibility(R.id.item_bankcard_add, if (!data.isChecked) View.GONE else View.VISIBLE)
+
+                            .with<RoundedImageView>(R.id.item_bankcard_img) { view ->
+                                when (data.bank) {
+                                    "工商银行" -> view.setImageResource(R.mipmap.bank01)
+                                    "农业银行" -> view.setImageResource(R.mipmap.bank02)
+                                    "招商银行" -> view.setImageResource(R.mipmap.bank03)
+                                    "建设银行" -> view.setImageResource(R.mipmap.bank04)
+                                    "交通银行" -> view.setImageResource(R.mipmap.bank05)
+                                    "中信银行" -> view.setImageResource(R.mipmap.bank06)
+                                    "光大银行" -> view.setImageResource(R.mipmap.bank07)
+                                    "北京银行" -> view.setImageResource(R.mipmap.bank08)
+                                    "平安银行" -> view.setImageResource(R.mipmap.bank09)
+                                    "中国银行" -> view.setImageResource(R.mipmap.bank10)
+                                    "兴业银行" -> view.setImageResource(R.mipmap.bank11)
+                                    "民生银行" -> view.setImageResource(R.mipmap.bank12)
+                                    "华夏银行" -> view.setImageResource(R.mipmap.bank13)
+                                }
+                            }
 
                             .clicked(R.id.item_bankcard) {
                                 val intent = Intent(baseContext, CreditDetailActivity::class.java)
@@ -142,7 +181,14 @@ class BankcardActivity : BaseActivity() {
                                         }
                                     }
                                     "0" -> toast("实名认证信息正在审核中")
-                                    "1" -> startActivity(CreditCardActivity::class.java)
+                                    "1" -> {
+                                        if (list_depositcard.isEmpty()) {
+                                            toast("您还未绑定储蓄卡，请先添加储蓄卡")
+                                            return@clicked
+                                        }
+
+                                        startActivity(CreditCardActivity::class.java)
+                                    }
                                     else -> {
                                         DialogHelper.showDialog(
                                                 baseContext,
@@ -176,6 +222,8 @@ class BankcardActivity : BaseActivity() {
 
                                     if (isEmpty()) add(CommonData().apply { isChecked = true })
                                 }
+
+                                list_depositcard.addItems(response.body().depositcards)
 
                                 mAdapter.updateData(list).notifyDataSetChanged()
                             }
@@ -223,9 +271,9 @@ class BankcardActivity : BaseActivity() {
         getData(mPosition)
     }
 
-    override fun onBackPressed() {
+    override fun finish() {
         EventBus.getDefault().unregister(this@BankcardActivity)
-        super.onBackPressed()
+        super.finish()
     }
 
     @Subscribe

@@ -1,6 +1,7 @@
 package com.ruanmeng.credit_card
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import com.flyco.dialog.widget.ActionSheetDialog
@@ -22,6 +23,10 @@ import org.greenrobot.eventbus.EventBus
 import org.json.JSONObject
 
 class CreditDetailActivity : BaseActivity() {
+
+    private var creditcardId = ""
+    private var creditcard = ""
+    private var bank = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -104,7 +109,15 @@ class CreditDetailActivity : BaseActivity() {
                     dialog.dismiss()
 
                     when (position) {
-                        0 -> startActivity(PlanPayActivity::class.java)
+                        0 -> {
+                            if (creditcardId.isEmpty()) return@setOnOperItemClickL
+
+                            val intent = Intent(baseContext, PlanPayActivity::class.java)
+                            intent.putExtra("creditcardId", creditcardId)
+                            intent.putExtra("creditcard", creditcard)
+                            intent.putExtra("bank", bank)
+                            startActivity(intent)
+                        }
                         1 -> startActivity(PlanBackActivity::class.java)
                     }
                 }
@@ -124,9 +137,27 @@ class CreditDetailActivity : BaseActivity() {
                     override fun onSuccessResponse(response: Response<String>, msg: String, msgCode: String) {
 
                         val obj = JSONObject(response.body())
-                        val creditcard = obj.getString("creditcard")
+                        creditcardId = obj.getString("creditcardId")
+                        creditcard = obj.getString("creditcard")
+                        bank = obj.getString("bank")
 
-                        credit_bank.text = obj.getString("bank")
+                        when (bank) {
+                            "工商银行" -> credit_img.setImageResource(R.mipmap.bank01)
+                            "农业银行" -> credit_img.setImageResource(R.mipmap.bank02)
+                            "招商银行" -> credit_img.setImageResource(R.mipmap.bank03)
+                            "建设银行" -> credit_img.setImageResource(R.mipmap.bank04)
+                            "交通银行" -> credit_img.setImageResource(R.mipmap.bank05)
+                            "中信银行" -> credit_img.setImageResource(R.mipmap.bank06)
+                            "光大银行" -> credit_img.setImageResource(R.mipmap.bank07)
+                            "北京银行" -> credit_img.setImageResource(R.mipmap.bank08)
+                            "平安银行" -> credit_img.setImageResource(R.mipmap.bank09)
+                            "中国银行" -> credit_img.setImageResource(R.mipmap.bank10)
+                            "兴业银行" -> credit_img.setImageResource(R.mipmap.bank11)
+                            "民生银行" -> credit_img.setImageResource(R.mipmap.bank12)
+                            "华夏银行" -> credit_img.setImageResource(R.mipmap.bank13)
+                        }
+
+                        credit_bank.text = bank + "信用卡"
                         credit_tail.text = "尾号${creditcard.substring(creditcard.length - 4)}"
                         credit_bill.setRightString(obj.getString("billDay") + "日")
                         credit_pay.setRightString(obj.getString("repaymentDay") + "日")

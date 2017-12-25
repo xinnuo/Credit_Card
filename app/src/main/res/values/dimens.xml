@@ -27,6 +27,7 @@
     <dimen name="dimen_size_10">10dp</dimen>
     <dimen name="dimen_size_9">9dp</dimen>
     <dimen name="dimen_size_8">8dp</dimen>
+    <dimen name="dimen_size_7">7dp</dimen>
     <dimen name="dimen_size_6">6dp</dimen>
     <dimen name="dimen_size_5">5dp</dimen>
     <dimen name="dimen_size_3">3dp</dimen>

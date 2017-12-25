@@ -10,12 +10,6 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/divider_height" />
 
-    <View
-        android:id="@+id/item_member_divider2"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/dimen_size_5"
-        android:visibility="gone" />
-
     <LinearLayout
         android:id="@+id/item_member"
         android:layout_width="match_parent"
@@ -32,6 +26,7 @@
             android:adjustViewBounds="true"
             android:padding="@dimen/dimen_size_5"
             android:src="@mipmap/icon_vip"
+            android:visibility="gone"
             tools:ignore="ContentDescription" />
 
         <TextView
@@ -56,10 +51,16 @@
             android:id="@+id/item_member_check"
             android:layout_width="@dimen/dimen_size_25"
             android:layout_height="@dimen/dimen_size_25"
-            android:button="@null"
             android:background="@drawable/cb_member_selector"
+            android:button="@null"
             android:clickable="false" />
 
     </LinearLayout>
+
+    <View
+        android:id="@+id/item_member_divider2"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimen_size_5"
+        android:visibility="gone" />
 
 </LinearLayout>

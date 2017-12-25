@@ -5,10 +5,12 @@
       <module fileurl="file://$PROJECT_DIR$/Credit_Card.iml" filepath="$PROJECT_DIR$/Credit_Card.iml" />
       <module fileurl="file://$PROJECT_DIR$/FlycoDialog_Lib/FlycoDialog_Lib.iml" filepath="$PROJECT_DIR$/FlycoDialog_Lib/FlycoDialog_Lib.iml" />
       <module fileurl="file://$PROJECT_DIR$/GridPasswordView/GridPasswordView.iml" filepath="$PROJECT_DIR$/GridPasswordView/GridPasswordView.iml" />
+      <module fileurl="file://$PROJECT_DIR$/JPush/JPush.iml" filepath="$PROJECT_DIR$/JPush/JPush.iml" />
       <module fileurl="file://$PROJECT_DIR$/MNProgressHUD/MNProgressHUD.iml" filepath="$PROJECT_DIR$/MNProgressHUD/MNProgressHUD.iml" />
       <module fileurl="file://$PROJECT_DIR$/RollViewPager/RollViewPager.iml" filepath="$PROJECT_DIR$/RollViewPager/RollViewPager.iml" />
       <module fileurl="file://$PROJECT_DIR$/RongCloudIMkit/RongCloudIMkit.iml" filepath="$PROJECT_DIR$/RongCloudIMkit/RongCloudIMkit.iml" />
       <module fileurl="file://$PROJECT_DIR$/SuperText/SuperText.iml" filepath="$PROJECT_DIR$/SuperText/SuperText.iml" />
+      <module fileurl="file://$PROJECT_DIR$/UmengSocial/UmengSocial.iml" filepath="$PROJECT_DIR$/UmengSocial/UmengSocial.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/okgo-lib/okgo-lib.iml" filepath="$PROJECT_DIR$/okgo-lib/okgo-lib.iml" />
     </modules>

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@android:color/white"
@@ -12,14 +13,29 @@
         android:layout_height="wrap_content"
         android:padding="@dimen/dimen_size_10">
 
-        <com.makeramen.roundedimageview.RoundedImageView
-            android:id="@+id/item_message_img"
+        <FrameLayout
             android:layout_width="45dp"
-            android:layout_height="45dp"
-            android:layout_gravity="center_horizontal"
-            android:scaleType="centerCrop"
-            android:src="@mipmap/default_logo"
-            app:riv_corner_radius="5dp" />
+            android:layout_height="45dp">
+
+            <com.makeramen.roundedimageview.RoundedImageView
+                android:id="@+id/item_message_img"
+                android:layout_width="@dimen/dimen_size_40"
+                android:layout_height="@dimen/dimen_size_40"
+                android:layout_gravity="center"
+                android:scaleType="centerCrop"
+                android:src="@mipmap/default_logo"
+                app:riv_corner_radius="5dp" />
+
+            <ImageView
+                android:id="@+id/item_message_status"
+                android:layout_width="@dimen/dimen_size_10"
+                android:layout_height="@dimen/dimen_size_10"
+                android:layout_gravity="end"
+                android:src="@drawable/red_oval"
+                android:visibility="invisible"
+                tools:ignore="ContentDescription" />
+
+        </FrameLayout>
 
         <LinearLayout
             android:layout_width="match_parent"

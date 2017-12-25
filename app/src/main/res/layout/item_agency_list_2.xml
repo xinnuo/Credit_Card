@@ -19,7 +19,7 @@
             android:layout_width="@dimen/dimen_size_30"
             android:layout_height="@dimen/dimen_size_30"
             android:layout_marginLeft="@dimen/dimen_size_5"
-            android:layout_marginTop="@dimen/dimen_size_8"
+            android:layout_marginTop="@dimen/dimen_size_9"
             android:scaleType="centerCrop"
             android:src="@mipmap/default_user"
             app:riv_oval="true" />

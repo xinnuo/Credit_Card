@@ -29,6 +29,7 @@ package com.ruanmeng
 
 import android.app.ActivityManager
 import android.content.Context
+import cn.jpush.android.api.JPushInterface
 import com.lzy.okgo.OkGo
 import com.lzy.okgo.cache.CacheEntity
 import com.lzy.okgo.cache.CacheMode
@@ -38,6 +39,10 @@ import com.lzy.okgo.https.HttpsUtils
 import com.lzy.okgo.interceptor.HttpLoggingInterceptor
 import com.lzy.okgo.utils.OkLogger
 import com.ruanmeng.credit_card.BuildConfig
+import com.ruanmeng.utils.PreferencesUtils
+import com.umeng.socialize.Config
+import com.umeng.socialize.PlatformConfig
+import com.umeng.socialize.UMShareAPI
 import io.rong.imkit.RongIM
 import okhttp3.OkHttpClient
 import java.util.concurrent.TimeUnit
@@ -55,11 +60,17 @@ class Application : android.app.Application() {
 
         initOkGo()
 
+        //极光推送
+        JPushInterface.setDebugMode(BuildConfig.LOG_DEBUG) //设置开启日志,发布时请关闭日志
+        JPushInterface.init(this@Application)              //初始化 JPush
+        if (!PreferencesUtils.getBoolean(this, "isLogin"))
+            JPushInterface.stopPush(this@Application)      //停止推送服务
+
         /*
         * OnCreate 会被多个进程重入，这段保护代码，确保只有您需要使用 RongIM 的进程和 Push 进程执行了 init。
         * io.rong.push 为融云 push 进程名称，不可修改。
         */
-        /*if (applicationInfo.packageName == getCurrentProcessName(applicationContext)
+        if (applicationInfo.packageName == getCurrentProcessName(applicationContext)
                 || "io.rong.push" == getCurrentProcessName(applicationContext)) {
 
             // RongPushClient.registerHWPush(this@Application)         //华为推送
@@ -68,13 +79,19 @@ class Application : android.app.Application() {
 
             RongIM.init(this@Application)
 
-            *//*
-             * 融云SDK事件监听处理
-             *//*
+
+            /* 融云SDK事件监听处理 */
             if (applicationInfo.packageName == getCurrentProcessName(applicationContext)) {
                 RongCloudContext.init(this@Application)
             }
-        }*/
+        }
+
+        //友盟分享
+        PlatformConfig.setWeixin("wxc2d100c58d663a71", "173dd4f60edae5d6be1eaa6a3db46787")
+        PlatformConfig.setQQZone("1106461503", "J8ky4clnxm2maLZd")
+        UMShareAPI.get(this@Application)
+        Config.DEBUG = BuildConfig.LOG_DEBUG
+        Config.isJumptoAppStore = true
     }
 
     private fun initOkGo() {

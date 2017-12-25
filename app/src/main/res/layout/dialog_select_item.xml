@@ -24,7 +24,7 @@
 
         <TextView
             android:id="@+id/tv_dialog_select_title"
-            style="@style/Font13_black_dark"
+            style="@style/Font15_black_dark"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"

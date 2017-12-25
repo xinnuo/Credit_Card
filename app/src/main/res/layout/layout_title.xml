@@ -33,6 +33,7 @@
         android:clickable="true"
         android:onClick="doClick"
         android:padding="13dp"
+        android:src="@mipmap/icon_share"
         android:visibility="invisible" />
 
     <ImageView

@@ -1,5 +1,6 @@
 package com.ruanmeng.credit_card
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
@@ -21,12 +22,30 @@ class SavingsDetailActivity : BaseActivity() {
         init_title()
     }
 
+    @SuppressLint("SetTextI18n")
     override fun init_title() {
         left_nav_title.text = "储蓄卡"
         left_nav_right.visibility = View.VISIBLE
 
         data = intent.getSerializableExtra("data") as CommonData
-        bankcard_name.text = data.bank
+
+        when (data.bank) {
+            "工商银行" -> bankcard_img.setImageResource(R.mipmap.bank01)
+            "农业银行" -> bankcard_img.setImageResource(R.mipmap.bank02)
+            "招商银行" -> bankcard_img.setImageResource(R.mipmap.bank03)
+            "建设银行" -> bankcard_img.setImageResource(R.mipmap.bank04)
+            "交通银行" -> bankcard_img.setImageResource(R.mipmap.bank05)
+            "中信银行" -> bankcard_img.setImageResource(R.mipmap.bank06)
+            "光大银行" -> bankcard_img.setImageResource(R.mipmap.bank07)
+            "北京银行" -> bankcard_img.setImageResource(R.mipmap.bank08)
+            "平安银行" -> bankcard_img.setImageResource(R.mipmap.bank09)
+            "中国银行" -> bankcard_img.setImageResource(R.mipmap.bank10)
+            "兴业银行" -> bankcard_img.setImageResource(R.mipmap.bank11)
+            "民生银行" -> bankcard_img.setImageResource(R.mipmap.bank12)
+            "华夏银行" -> bankcard_img.setImageResource(R.mipmap.bank13)
+        }
+
+        bankcard_name.text = data.bank + "储蓄卡"
         bankcard_tail.text = data.tel.substring(data.tel.length - 4)
         bankcard_num.text = data.depositcard.substring(data.depositcard.length - 4)
     }

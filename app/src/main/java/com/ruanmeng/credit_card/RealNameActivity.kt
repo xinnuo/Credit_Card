@@ -12,10 +12,7 @@ import com.luck.picture.lib.entity.LocalMedia
 import com.lzy.extend.StringDialogCallback
 import com.lzy.okgo.OkGo
 import com.lzy.okgo.model.Response
-import com.ruanmeng.base.BaseActivity
-import com.ruanmeng.base.GlideApp
-import com.ruanmeng.base.getString
-import com.ruanmeng.base.toast
+import com.ruanmeng.base.*
 import com.ruanmeng.share.BaseHttp
 import com.ruanmeng.share.Const
 import com.ruanmeng.utils.ActivityStack
@@ -122,7 +119,7 @@ class RealNameActivity : BaseActivity() {
                             }*/
                             override fun onSuccessResponse(response: Response<String>, msg: String, msgCode: String) {
                                 toast(msg)
-
+                                putString("isPass", "0")
                                 ActivityStack.getScreenManager().popActivities(this@RealNameActivity::class.java)
                             }
 
