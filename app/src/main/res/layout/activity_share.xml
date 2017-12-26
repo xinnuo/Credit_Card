@@ -76,7 +76,7 @@
                 android:id="@+id/share_qrcode"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_margin="@dimen/dimen_size_2"
+                android:layout_margin="@dimen/dimen_size_8"
                 tools:ignore="ContentDescription" />
 
         </FrameLayout>

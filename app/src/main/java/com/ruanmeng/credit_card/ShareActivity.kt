@@ -20,9 +20,16 @@ import kotlinx.android.synthetic.main.activity_share.*
 import org.json.JSONObject
 import android.content.Intent
 import android.graphics.Bitmap
+import cn.bingoogolapple.qrcode.core.BGAQRCodeUtil
+import cn.bingoogolapple.qrcode.zxing.QRCodeEncoder
 import com.umeng.socialize.ShareAction
 import com.umeng.socialize.bean.SHARE_MEDIA
 import com.umeng.socialize.media.UMImage
+import io.reactivex.Observable
+import io.reactivex.ObservableOnSubscribe
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.functions.Consumer
+import io.reactivex.schedulers.Schedulers
 
 
 class ShareActivity : BaseActivity() {
@@ -128,8 +135,14 @@ class ShareActivity : BaseActivity() {
                     override fun onSuccessResponse(response: Response<String>, msg: String, msgCode: String) {
 
                         val qr_code = JSONObject(response.body()).getString("qrcode")
-                        qrcode = Tools.strToBitmap(qr_code)
-                        share_qrcode.setImageBitmap(qrcode)
+
+                        Observable.create(ObservableOnSubscribe<Bitmap> { e ->
+                            qrcode = QRCodeEncoder.syncEncodeQRCode(qr_code, BGAQRCodeUtil.dp2px(baseContext, 200f))
+                            e.onNext(qrcode)
+                        }).subscribeOn(Schedulers.newThread())
+                                .observeOn(AndroidSchedulers.mainThread())
+                                .subscribe { bitmap -> share_qrcode.setImageBitmap(bitmap) }
+
                     }
 
                 })

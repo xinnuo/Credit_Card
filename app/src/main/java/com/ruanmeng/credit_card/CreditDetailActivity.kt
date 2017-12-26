@@ -21,6 +21,7 @@ import kotlinx.android.synthetic.main.activity_credit_detail.*
 import kotlinx.android.synthetic.main.layout_title_left.*
 import org.greenrobot.eventbus.EventBus
 import org.json.JSONObject
+import java.text.DecimalFormat
 
 class CreditDetailActivity : BaseActivity() {
 
@@ -161,9 +162,13 @@ class CreditDetailActivity : BaseActivity() {
                         credit_tail.text = "尾号${creditcard.substring(creditcard.length - 4)}"
                         credit_bill.setRightString(obj.getString("billDay") + "日")
                         credit_pay.setRightString(obj.getString("repaymentDay") + "日")
-                        credit_yi.setRightString(NumberHelper.fmtMicrometer(obj.getString("paySum")))
-                        credit_wei.setRightString(NumberHelper.fmtMicrometer(obj.getString("nopaySum")))
-                        credit_dang.setRightString("￥" + NumberHelper.fmtMicrometer(obj.getString("currentSum")))
+
+                        val paySum = DecimalFormat("########0.0#####").format(obj.getString("paySum").toDouble())
+                        val nopaySum = DecimalFormat("########0.0#####").format(obj.getString("nopaySum").toDouble())
+                        val currentSum = DecimalFormat("########0.0#####").format(obj.getString("currentSum").toDouble())
+                        credit_yi.setRightString(NumberHelper.fmtMicrometer(paySum))
+                        credit_wei.setRightString(NumberHelper.fmtMicrometer(nopaySum))
+                        credit_dang.setRightString("￥" + NumberHelper.fmtMicrometer(currentSum))
                     }
 
                 })
