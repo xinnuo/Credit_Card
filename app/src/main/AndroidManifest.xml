@@ -119,6 +119,9 @@
         <activity
             android:name=".RecommendActivity"
             android:screenOrientation="portrait" />
+        <activity
+            android:name=".PlanPreviewActivity"
+            android:screenOrientation="portrait" />
 
 
         <!-- 融云即时通讯 start -->

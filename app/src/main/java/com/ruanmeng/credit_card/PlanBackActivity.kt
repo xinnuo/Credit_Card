@@ -1,6 +1,7 @@
 package com.ruanmeng.credit_card
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.os.Bundle
 import android.support.design.widget.BottomSheetDialog
 import android.support.v7.widget.RecyclerView
@@ -12,9 +13,11 @@ import com.lzy.extend.StringDialogCallback
 import com.lzy.okgo.OkGo
 import com.lzy.okgo.model.Response
 import com.ruanmeng.base.BaseActivity
+import com.ruanmeng.base.getString
 import com.ruanmeng.base.toast
 import com.ruanmeng.model.CommonData
 import com.ruanmeng.share.BaseHttp
+import com.ruanmeng.utils.ActivityStack
 import com.ruanmeng.utils.DialogHelper
 import com.ruanmeng.utils.TimeHelper
 import com.ruanmeng.view.FullyGridLayoutManager
@@ -197,8 +200,54 @@ class PlanBackActivity : BaseActivity() {
                     toast("请选择还款日期")
                     return
                 }
+
+                val repaymentDay = list.toString()
+                        .replace("[", "")
+                        .replace("]", "")
+                        .replace(" ", "")
+
+                OkGo.post<String>(BaseHttp.add_repaymentplan)
+                        .tag(this@PlanBackActivity)
+                        .headers("token", getString("token"))
+                        .params("creditcardId", intent.getStringExtra("creditcardId"))
+                        .params("repaymentType", plan_type.text.toString())
+                        .params("repaymentSum", plan_total.text.toString())
+                        .params("repaymentDay", repaymentDay)
+                        .params("repaymentNum", plan_count.text.toString())
+                        .params("cardType", "1")
+                        .execute(object : StringDialogCallback(baseContext) {
+
+                            override fun onSuccessResponse(response: Response<String>, msg: String, msgCode: String) {
+
+                                toast(msg)
+                                ActivityStack.getScreenManager().popActivities(this@PlanBackActivity::class.java)
+                            }
+
+                        })
             }
-            R.id.plan_preview -> { }
+            R.id.plan_preview -> {
+                if (plan_type.text.isEmpty()) {
+                    toast("请选择还款类型")
+                    return
+                }
+
+                if (list.isEmpty()) {
+                    toast("请选择还款日期")
+                    return
+                }
+
+                val repaymentDay = list.toString()
+                        .replace("[", "")
+                        .replace("]", "")
+                        .replace(" ", "")
+
+                intent.setClass(baseContext, PlanPreviewActivity::class.java)
+                intent.putExtra("repaymentType", plan_type.text.toString())
+                intent.putExtra("repaymentSum", plan_total.text.toString())
+                intent.putExtra("repaymentDay", repaymentDay)
+                intent.putExtra("repaymentNum", plan_count.text.toString())
+                startActivity(intent)
+            }
         }
     }
 

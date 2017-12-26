@@ -109,17 +109,21 @@ class CreditDetailActivity : BaseActivity() {
                 dialog.setOnOperItemClickL { _, _, position, _ ->
                     dialog.dismiss()
 
+                    if (creditcardId.isEmpty()) return@setOnOperItemClickL
+
                     when (position) {
                         0 -> {
-                            if (creditcardId.isEmpty()) return@setOnOperItemClickL
-
                             val intent = Intent(baseContext, PlanPayActivity::class.java)
                             intent.putExtra("creditcardId", creditcardId)
                             intent.putExtra("creditcard", creditcard)
                             intent.putExtra("bank", bank)
                             startActivity(intent)
                         }
-                        1 -> startActivity(PlanBackActivity::class.java)
+                        1 -> {
+                            val intent = Intent(baseContext, PlanBackActivity::class.java)
+                            intent.putExtra("creditcardId", creditcardId)
+                            startActivity(intent)
+                        }
                     }
                 }
             }

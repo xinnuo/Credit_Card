@@ -55,13 +55,14 @@ public class BaseHttp {
     public static String recommend_user = baseIp + "/recommend_user.rm";                   //推荐人信息√
     public static String add_recommenduser = baseIp + "/add_recommenduser.rm";             //绑定推荐人√
 
-    public static String identify_othercode = baseIp + "/identify_othercode.rm";   //获取其他验证码√
-    public static String depositcard_add_sub = baseIp + "/depositcard_add_sub.rm"; //新增储蓄卡√
-    public static String creditcard_add_sub = baseIp + "/creditcard_add_sub.rm";   //新增信用卡√
-    public static String creditcard_details = baseIp + "/creditcard_details.rm";   //信用卡详情√
-    public static String creditcard_del_sub = baseIp + "/creditcard_del_sub.rm";   //删除信用卡√
-    public static String repayment_data = baseIp + "/repayment_data.rm";           //全部计划√
-    public static String add_consumeplan = baseIp + "/add_consumeplan.rm";         //新增消费计划√
-    public static String add_repaymentplan = baseIp + "/add_repaymentplan.rm";     //新增还款计划√
-    public static String base_rate_data = baseIp + "/base_rate_data.rm";           //基本费率√
+    public static String identify_othercode = baseIp + "/identify_othercode.rm";     //获取其他验证码√
+    public static String depositcard_add_sub = baseIp + "/depositcard_add_sub.rm";   //新增储蓄卡√
+    public static String creditcard_add_sub = baseIp + "/creditcard_add_sub.rm";     //新增信用卡√
+    public static String creditcard_details = baseIp + "/creditcard_details.rm";     //信用卡详情√
+    public static String creditcard_del_sub = baseIp + "/creditcard_del_sub.rm";     //删除信用卡√
+    public static String repayment_data = baseIp + "/repayment_data.rm";             //全部计划√
+    public static String add_consumeplan = baseIp + "/add_consumeplan.rm";           //新增消费计划√
+    public static String add_repaymentplan = baseIp + "/add_repaymentplan.rm";       //新增还款计划√
+    public static String before_repaymentplan = baseIp + "/before_repaymentplan.rm"; //预览还款计划√
+    public static String base_rate_data = baseIp + "/base_rate_data.rm";             //基本费率√
 }
