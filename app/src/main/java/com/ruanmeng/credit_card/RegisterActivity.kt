@@ -182,8 +182,8 @@ class RegisterActivity : BaseActivity() {
     fun onMessageEvent(event: RefreshMessageEvent) {
         when (event.name) {
             "扫描二维码" -> {
-                val code = event.id
-                if (CommonUtil.isMobileNumber(code.substring(0, 11))) {
+                val code = event.id.substring(event.id.length - 11)
+                if (CommonUtil.isMobileNumber(code)) {
                     et_code.setText(code)
                     et_code.setSelection(et_code.text.length)
                 }
