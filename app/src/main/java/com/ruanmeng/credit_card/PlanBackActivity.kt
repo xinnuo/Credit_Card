@@ -1,7 +1,6 @@
 package com.ruanmeng.credit_card
 
 import android.annotation.SuppressLint
-import android.content.Intent
 import android.os.Bundle
 import android.support.design.widget.BottomSheetDialog
 import android.support.v7.widget.RecyclerView
@@ -34,6 +33,7 @@ class PlanBackActivity : BaseActivity() {
     private val list = ArrayList<Any>()
     private val list_title = ArrayList<Any>()
     private var mRate = 1.0
+    private var mPayRate = 1.0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -185,10 +185,22 @@ class PlanBackActivity : BaseActivity() {
             R.id.plan_plus -> {
                 val count = plan_count.text.toString().toInt()
                 if (count > 1) plan_count.text = (count - 1).toString()
+
+                if (plan_total.text.isNotEmpty()) {
+                    val fee_pay = plan_count.text.toString().toInt() * mPayRate
+                    val fee = (plan_total.text.toString().toDouble() + fee_pay) * mRate + fee_pay
+                    plan_fee.setRightString(DecimalFormat("########0.0#####").format(fee))
+                }
             }
             R.id.plan_add -> {
                 val count = plan_count.text.toString().toInt()
                 plan_count.text = (count + 1).toString()
+
+                if (plan_total.text.isNotEmpty()) {
+                    val fee_pay = plan_count.text.toString().toInt() * mPayRate
+                    val fee = (plan_total.text.toString().toDouble() + fee_pay) * mRate + fee_pay
+                    plan_fee.setRightString(DecimalFormat("########0.0#####").format(fee))
+                }
             }
             R.id.plan_submit -> {
                 if (plan_type.text.isEmpty()) {
@@ -258,10 +270,9 @@ class PlanBackActivity : BaseActivity() {
 
                     override fun onSuccessResponse(response: Response<String>, msg: String, msgCode: String) {
 
-                        mRate = JSONObject(response.body())
-                                .getJSONObject("pingTai")
-                                .getString("consumeRate")
-                                .toDouble()
+                        val obj = JSONObject(response.body()).getJSONObject("pingTai")
+                        mRate = obj.getString("consumeRate").toDouble()
+                        mPayRate = obj.getString("payRate").toDouble()
                     }
 
                 })
@@ -281,9 +292,16 @@ class PlanBackActivity : BaseActivity() {
                 plan_total.setText("0.")
                 plan_total.setSelection(plan_total.text.length) //设置光标的位置
             } else {
-                plan_fee.setRightString(DecimalFormat("########0.0#####").format(s.toString().toDouble() * mRate))
+                val fee_total = s.toString().toDouble()
+                if (fee_total == 0.0) {
+                    plan_fee.setRightString(DecimalFormat("########0.0#####").format(fee_total))
+                } else {
+                    val fee_pay = plan_count.text.toString().toInt() * mPayRate
+                    val fee = (fee_total + fee_pay) * mRate + fee_pay
+                    plan_fee.setRightString(DecimalFormat("########0.0#####").format(fee))
+                }
             }
-        }
+        } else plan_fee.setRightString("")
     }
 
     override fun afterTextChanged(s: Editable) {
