@@ -161,6 +161,13 @@ class MainFirstFragment : BaseFragment() {
                         }
                     }
 
+                    /**
+                     * 当缓存读取成功后，回调该方法，如果只复写了onSuccess方法，是无法获取缓存的
+                     */
+                    override fun onCacheSuccess(response: Response<CommonModel>) {
+                        onSuccess(response)
+                    }
+
                     override fun onFinish() {
                         super.onFinish()
                         swipe_refresh.isRefreshing = false
