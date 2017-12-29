@@ -1,12 +1,16 @@
 package com.ruanmeng.credit_card
 
 import android.annotation.SuppressLint
+import android.content.Intent
+import android.graphics.Bitmap
 import android.os.Bundle
 import android.support.design.widget.BottomSheetDialog
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.LinearLayout
 import android.widget.TextView
+import cn.bingoogolapple.qrcode.core.BGAQRCodeUtil
+import cn.bingoogolapple.qrcode.zxing.QRCodeEncoder
 import com.lzy.extend.StringDialogCallback
 import com.lzy.okgo.OkGo
 import com.lzy.okgo.model.Response
@@ -14,22 +18,16 @@ import com.ruanmeng.base.BaseActivity
 import com.ruanmeng.base.GlideApp
 import com.ruanmeng.base.getString
 import com.ruanmeng.share.BaseHttp
-import com.ruanmeng.utils.Tools
-import com.umeng.socialize.UMShareAPI
-import kotlinx.android.synthetic.main.activity_share.*
-import org.json.JSONObject
-import android.content.Intent
-import android.graphics.Bitmap
-import cn.bingoogolapple.qrcode.core.BGAQRCodeUtil
-import cn.bingoogolapple.qrcode.zxing.QRCodeEncoder
 import com.umeng.socialize.ShareAction
+import com.umeng.socialize.UMShareAPI
 import com.umeng.socialize.bean.SHARE_MEDIA
 import com.umeng.socialize.media.UMImage
 import io.reactivex.Observable
 import io.reactivex.ObservableOnSubscribe
 import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.functions.Consumer
 import io.reactivex.schedulers.Schedulers
+import kotlinx.android.synthetic.main.activity_share.*
+import org.json.JSONObject
 
 
 class ShareActivity : BaseActivity() {
@@ -79,24 +77,20 @@ class ShareActivity : BaseActivity() {
                 ll_wechat.setOnClickListener {
                     dialog.dismiss()
 
-                    /*ShareAction(baseContext)
+                    ShareAction(baseContext)
                             .setPlatform(SHARE_MEDIA.WEIXIN)
-                            .withTitle("")
-                            .withText("")
-                            .withTargetUrl("")
-                            .withMedia(UMImage(baseContext, File("")))
-                            .share()*/
+                            .withText("诸葛信用管家")
+                            .withMedia(UMImage(baseContext, qrcode))
+                            .share()
                 }
                 ll_circle.setOnClickListener {
                     dialog.dismiss()
 
-                    /*ShareAction(baseContext)
+                    ShareAction(baseContext)
                             .setPlatform(SHARE_MEDIA.WEIXIN_CIRCLE)
-                            .withTitle("")
-                            .withText("")
-                            .withTargetUrl("")
-                            .withMedia(UMImage(baseContext, File("")))
-                            .share()*/
+                            .withText("诸葛信用管家")
+                            .withMedia(UMImage(baseContext, qrcode))
+                            .share()
                 }
                 ll_qq.setOnClickListener {
                     dialog.dismiss()
