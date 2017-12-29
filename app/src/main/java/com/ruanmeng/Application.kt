@@ -87,7 +87,7 @@ class Application : android.app.Application() {
         }
 
         //友盟分享
-        PlatformConfig.setWeixin("wxc2d100c58d663a71", "173dd4f60edae5d6be1eaa6a3db46787")
+        PlatformConfig.setWeixin("wxd7038f874af9ea2e", "173dd4f60edae5d6be1eaa6a3db46787")
         PlatformConfig.setQQZone("1106461503", "J8ky4clnxm2maLZd")
         UMShareAPI.get(this@Application)
         Config.DEBUG = BuildConfig.LOG_DEBUG
