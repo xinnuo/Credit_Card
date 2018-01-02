@@ -54,6 +54,9 @@ public class BaseHttp {
     public static String help_center = baseIp + "/help_center.rm";                         //帮助中心√
     public static String recommend_user = baseIp + "/recommend_user.rm";                   //推荐人信息√
     public static String add_recommenduser = baseIp + "/add_recommenduser.rm";             //绑定推荐人√
+    public static String city1_data = baseIp + "/city1_data.rm";                           //获取所有省份√
+    public static String city2_data = baseIp + "/city2_data.rm";                           //获取某省份所有市√
+    public static String appChanpay_backOpenCard = baseIp + "/appChanpay_backOpenCard.rm"; //绑卡√
 
     public static String identify_othercode = baseIp + "/identify_othercode.rm";     //获取其他验证码√
     public static String depositcard_add_sub = baseIp + "/depositcard_add_sub.rm";   //新增储蓄卡√

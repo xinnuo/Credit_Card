@@ -5,21 +5,23 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import com.lzy.extend.StringDialogCallback
+import com.lzy.extend.jackson.JacksonDialogCallback
 import com.lzy.okgo.OkGo
 import com.lzy.okgo.model.Response
-import com.lzy.okgo.utils.OkLogger
-import com.ruanmeng.base.BaseActivity
-import com.ruanmeng.base.getString
-import com.ruanmeng.base.startActivity
-import com.ruanmeng.base.toast
+import com.ruanmeng.base.*
+import com.ruanmeng.model.CommonData
+import com.ruanmeng.model.CommonModel
 import com.ruanmeng.model.RefreshMessageEvent
 import com.ruanmeng.share.BaseHttp
 import com.ruanmeng.utils.BankcardHelper
 import com.ruanmeng.utils.CommonUtil
+import com.ruanmeng.utils.DialogHelper
+import com.weigan.loopview.LoopView
 import kotlinx.android.synthetic.main.activity_savings_card.*
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
 import org.json.JSONObject
+import java.util.*
 
 class SavingsCardActivity : BaseActivity() {
 
@@ -27,6 +29,11 @@ class SavingsCardActivity : BaseActivity() {
     private lateinit var thread: Runnable
     private var YZM: String = ""
     private var mTel: String = ""
+
+    private var list_province = ArrayList<CommonData>()
+    private var list_city = ArrayList<CommonData>()
+    private var bankProvince = ""
+    private var bankCity = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -46,7 +53,8 @@ class SavingsCardActivity : BaseActivity() {
         et_card.addTextChangedListener(this@SavingsCardActivity)
         card_bank.addTextChangedListener(this@SavingsCardActivity)
         et_phone.addTextChangedListener(this@SavingsCardActivity)
-        et_yzm.addTextChangedListener(this@SavingsCardActivity)
+        et_bank.addTextChangedListener(this@SavingsCardActivity)
+        card_city.addTextChangedListener(this@SavingsCardActivity)
 
         saving_name.text = getString("real_name")
         saving_num.text = CommonUtil.idCardReplaceWithStar(getString("real_IDCard"))
@@ -105,6 +113,50 @@ class SavingsCardActivity : BaseActivity() {
 
                         })
             }
+            R.id.card_city_ll -> {
+                showLoadingDialog()
+
+                getProvince(object : ResultCallBack {
+
+                    override fun doWork() {
+                        cancelLoadingDialog()
+
+                        DialogHelper.showAddressDialog(
+                                baseContext,
+                                list_province,
+                                list_city,
+                                object : DialogHelper.AddressCallBack {
+
+                                    override fun doWork(pos_province: Int, pos_city: Int) {
+                                        bankProvince = list_province[pos_province].areaName
+                                        bankCity = list_city[pos_city].areaName
+
+                                        if (bankCity.contains(bankProvince)) card_city.text = bankCity
+                                        else card_city.text = bankProvince + bankCity
+                                    }
+
+                                    override fun getCities(loopView: LoopView, pos: Int) {
+                                        getCity(list_province[pos].areaId, object : ResultCallBack {
+
+                                            override fun doWork() {
+                                                val cities = ArrayList<String>()
+                                                list_city.mapTo(cities) { it.areaName }
+
+                                                if (cities.size > 0) {
+                                                    loopView.visibility = View.VISIBLE
+                                                    loopView.setItems(cities)
+                                                    loopView.setCurrentPosition(0)
+                                                } else loopView.visibility = View.INVISIBLE
+                                            }
+
+                                        })
+                                    }
+
+                                })
+                    }
+
+                })
+            }
             R.id.card_sure -> {
                 if (!BankcardHelper.checkBankCard(et_card.rawText)) {
                     toast("请输入正确的储蓄卡卡号")
@@ -116,15 +168,15 @@ class SavingsCardActivity : BaseActivity() {
                     return
                 }
 
-                if (et_phone.text.trim().toString() != mTel) {
+                /*if (et_phone.text.trim().toString() != mTel) {
                     toast("手机号码不匹配，请重新获取验证码")
                     return
-                }
+                }*/
 
-                if (et_yzm.text.trim().toString() != YZM) {
+                /*if (et_yzm.text.trim().toString() != YZM) {
                     toast("验证码错误，请重新输入")
                     return
-                }
+                }*/
 
                 OkGo.post<String>(BaseHttp.depositcard_add_sub)
                         .tag(this@SavingsCardActivity)
@@ -134,8 +186,10 @@ class SavingsCardActivity : BaseActivity() {
                         .params("identityCard", getString("real_IDCard"))
                         .params("depositcard", et_card.rawText)
                         .params("bank", card_bank.text.toString())
-                        .params("tel", mTel)
-                        .params("smsCode", YZM)
+                        .params("bankSubName", et_bank.text.trim().toString())
+                        .params("bankProvince", bankProvince)
+                        .params("bankCity", bankCity)
+                        .params("tel", et_phone.text.trim().toString())
                         .params("type", if (intent.getBooleanExtra("isChanged", false)) 1 else 0)
                         .execute(object : StringDialogCallback(baseContext) {
                             /*{
@@ -143,28 +197,54 @@ class SavingsCardActivity : BaseActivity() {
                                 "msgcode": 100
                             }*/
                             override fun onSuccessResponse(response: Response<String>, msg: String, msgCode: String) {
-                                OkLogger.i(msg)
 
-                                if (intent.getBooleanExtra("isChanged", false)) {
-                                    EventBus.getDefault().post(RefreshMessageEvent("更换银行卡"))
-
-                                    val intent = Intent(baseContext, BankDoneActivity::class.java)
-                                    intent.putExtra("title", "更换银行卡")
-                                    intent.putExtra("hint", "更换银行卡成功！")
-                                    startActivity(intent)
-                                } else {
-                                    EventBus.getDefault().post(RefreshMessageEvent("新增储蓄卡"))
-
-                                    val intent = Intent(baseContext, BankDoneActivity::class.java)
-                                    intent.putExtra("title", "新增储蓄卡")
-                                    intent.putExtra("hint", "新增储蓄卡成功！")
-                                    startActivity(intent)
-                                }
+                                val intent = Intent(baseContext, BankCodeActivity::class.java)
+                                intent.putExtra("title", "储蓄卡")
+                                startActivity(intent)
                             }
 
                         })
             }
         }
+    }
+
+    private fun getProvince(callback: ResultCallBack) {
+        OkGo.post<CommonModel>(BaseHttp.city1_data)
+                .tag(this@SavingsCardActivity)
+                .execute(object : JacksonDialogCallback<CommonModel>(baseContext, CommonModel::class.java) {
+
+                    override fun onSuccess(response: Response<CommonModel>) {
+                        list_province.apply {
+                            clear()
+                            addItems(response.body().areas)
+                        }
+                    }
+
+                    override fun onFinish() {
+                        if (list_province.size > 0) getCity(list_province[0].areaId, callback)
+                    }
+
+                })
+    }
+
+    private fun getCity(id: String, callback: ResultCallBack) {
+        OkGo.post<CommonModel>(BaseHttp.city2_data)
+                .tag(this@SavingsCardActivity)
+                .params("areaId", id)
+                .execute(object : JacksonDialogCallback<CommonModel>(baseContext, CommonModel::class.java) {
+
+                    override fun onSuccess(response: Response<CommonModel>) {
+                        list_city.apply {
+                            clear()
+                            addItems(response.body().areas)
+                        }
+                    }
+
+                    override fun onFinish() {
+                        callback.doWork()
+                    }
+
+                })
     }
 
     override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
@@ -173,7 +253,8 @@ class SavingsCardActivity : BaseActivity() {
                 && et_card.text.isNotBlank()
                 && card_bank.text.isNotBlank()
                 && et_phone.text.isNotBlank()
-                && et_yzm.text.isNotBlank()) {
+                && card_city.text.isNotBlank()
+                && et_bank.text.isNotBlank()) {
             card_sure.setBackgroundResource(R.drawable.rec_bg_blue)
             card_sure.isClickable = true
         } else {
@@ -192,5 +273,9 @@ class SavingsCardActivity : BaseActivity() {
         when (event.name) {
             "选择银行" -> card_bank.text = event.id
         }
+    }
+
+    interface ResultCallBack {
+        fun doWork()
     }
 }

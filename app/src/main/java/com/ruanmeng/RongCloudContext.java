@@ -473,8 +473,7 @@ public class RongCloudContext implements RongIM.ConversationListBehaviorListener
      * @param locationCallback 回调
      */
     @Override
-    public void onStartLocation(Context context, LocationCallback locationCallback) {
-    }
+    public void onStartLocation(Context context, LocationCallback locationCallback) { }
 
 
     @Override

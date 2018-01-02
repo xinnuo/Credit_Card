@@ -26,6 +26,8 @@ data class CommonModel(
         var msgs: List<CommonData>? = ArrayList(),
         var `object`: List<CommonData>? = ArrayList(),
 
+        var areas: List<CommonData>? = ArrayList(),
+
         var msg: String = "",
         var msgcode: String = "",
         var success: String = ""
