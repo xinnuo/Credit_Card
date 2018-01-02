@@ -35,7 +35,7 @@ class BankCodeActivity : BaseActivity() {
                 return@setOnClickListener
             }
 
-            OkGo.post<String>(BaseHttp.depositcard_add_sub)
+            OkGo.post<String>(BaseHttp.appChanpay_backOpenCard)
                     .tag(this@BankCodeActivity)
                     .headers("token", getString("token"))
                     .params("smsCode", et_code.text.toString())

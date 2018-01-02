@@ -8,6 +8,7 @@ import com.lzy.extend.StringDialogCallback
 import com.lzy.extend.jackson.JacksonDialogCallback
 import com.lzy.okgo.OkGo
 import com.lzy.okgo.model.Response
+import com.lzy.okgo.utils.OkLogger
 import com.ruanmeng.base.*
 import com.ruanmeng.model.CommonData
 import com.ruanmeng.model.CommonModel
@@ -193,14 +194,27 @@ class SavingsCardActivity : BaseActivity() {
                         .params("type", if (intent.getBooleanExtra("isChanged", false)) 1 else 0)
                         .execute(object : StringDialogCallback(baseContext) {
                             /*{
-                                "msg": "提交成功，请等待审核",
+                                "msg": "储蓄卡添加成功",
                                 "msgcode": 100
                             }*/
                             override fun onSuccessResponse(response: Response<String>, msg: String, msgCode: String) {
+                                OkLogger.i(msg)
 
-                                val intent = Intent(baseContext, BankCodeActivity::class.java)
-                                intent.putExtra("title", "储蓄卡")
-                                startActivity(intent)
+                                if (intent.getBooleanExtra("isChanged", false)) {
+                                    EventBus.getDefault().post(RefreshMessageEvent("更换银行卡"))
+
+                                    val intent = Intent(baseContext, BankDoneActivity::class.java)
+                                    intent.putExtra("title", "更换银行卡")
+                                    intent.putExtra("hint", "更换银行卡成功！")
+                                    startActivity(intent)
+                                } else {
+                                    EventBus.getDefault().post(RefreshMessageEvent("新增储蓄卡"))
+
+                                    val intent = Intent(baseContext, BankDoneActivity::class.java)
+                                    intent.putExtra("title", "新增储蓄卡")
+                                    intent.putExtra("hint", "新增储蓄卡成功！")
+                                    startActivity(intent)
+                                }
                             }
 
                         })
