@@ -16,15 +16,16 @@ import net.idik.lib.slimadapter.SlimAdapter
 
 class PlanPreviewActivity : BaseActivity() {
 
-    private val list = ArrayList<Any>()
+    private var list = ArrayList<CommonData>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_plan_preview)
         init_title("预览计划")
 
-        swipe_refresh.isRefreshing = true
-        getData()
+        @Suppress("UNCHECKED_CAST")
+        list = intent.getSerializableExtra("data") as ArrayList<CommonData>
+        mAdapter.updateData(list).notifyDataSetChanged()
     }
 
     override fun init_title() {
@@ -40,6 +41,8 @@ class PlanPreviewActivity : BaseActivity() {
                             .text(R.id.item_plan_num, "尾号(${data.cardNo.substring(data.cardNo.length - 4)})")
                             .text(R.id.item_plan_time, data.repaymentTime + ":00")
                             .text(R.id.item_plan_status, if (data.status == "1") "已还款" else "未还款")
+                            .text(R.id.item_plan_fee, "手续费：￥" + data.rateSum)
+                            .visible(R.id.item_plan_fee)
 
                             .with<RoundedImageView>(R.id.item_plan_img) { view ->
                                 when (data.repaymentType) {
@@ -54,8 +57,6 @@ class PlanPreviewActivity : BaseActivity() {
 
                             .visibility(R.id.item_plan_divider1, if (list.indexOf(data) == list.size - 1) View.GONE else View.VISIBLE)
                             .visibility(R.id.item_plan_divider2, if (list.indexOf(data) != list.size - 1) View.GONE else View.VISIBLE)
-
-                            .clicked(R.id.item_plan) { }
                 }
                 .attachTo(recycle_list)
     }
@@ -63,6 +64,7 @@ class PlanPreviewActivity : BaseActivity() {
     override fun getData() {
         OkGo.post<CommonModel>(BaseHttp.before_repaymentplan)
                 .tag(this@PlanPreviewActivity)
+                .isMultipart(true)
                 .headers("token", getString("token"))
                 .params("creditcardId", intent.getStringExtra("creditcardId"))
                 .params("repaymentType", intent.getStringExtra("repaymentType"))

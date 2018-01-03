@@ -54,6 +54,7 @@ data class CommonData(
         var payTime: String = "",
         var payType: String = "",
         var rate: String = "",
+        var rateSum: String = "",
         var status: String = "",
         var type: String = "",
         var userInfoId: String = "",

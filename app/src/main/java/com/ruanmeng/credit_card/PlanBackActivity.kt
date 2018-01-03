@@ -1,6 +1,7 @@
 package com.ruanmeng.credit_card
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.os.Bundle
 import android.support.design.widget.BottomSheetDialog
 import android.support.v7.widget.RecyclerView
@@ -9,12 +10,15 @@ import android.view.LayoutInflater
 import android.view.View
 import android.widget.TextView
 import com.lzy.extend.StringDialogCallback
+import com.lzy.extend.jackson.JacksonDialogCallback
 import com.lzy.okgo.OkGo
 import com.lzy.okgo.model.Response
 import com.ruanmeng.base.BaseActivity
+import com.ruanmeng.base.addItems
 import com.ruanmeng.base.getString
 import com.ruanmeng.base.toast
 import com.ruanmeng.model.CommonData
+import com.ruanmeng.model.CommonModel
 import com.ruanmeng.share.BaseHttp
 import com.ruanmeng.utils.ActivityStack
 import com.ruanmeng.utils.DialogHelper
@@ -23,8 +27,6 @@ import com.ruanmeng.view.FullyGridLayoutManager
 import kotlinx.android.synthetic.main.activity_plan_back.*
 import kotlinx.android.synthetic.main.layout_title_left.*
 import net.idik.lib.slimadapter.SlimAdapter
-import org.json.JSONObject
-import java.text.DecimalFormat
 import java.util.*
 import kotlin.collections.ArrayList
 
@@ -32,16 +34,12 @@ class PlanBackActivity : BaseActivity() {
 
     private val list = ArrayList<Any>()
     private val list_title = ArrayList<Any>()
-    private var mRate = 1.0
-    private var mPayRate = 1.0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_plan_back)
         setToolbarVisibility(false)
         init_title()
-
-        getData()
     }
 
     override fun init_title() {
@@ -185,22 +183,10 @@ class PlanBackActivity : BaseActivity() {
             R.id.plan_plus -> {
                 val count = plan_count.text.toString().toInt()
                 if (count > 1) plan_count.text = (count - 1).toString()
-
-                if (plan_total.text.isNotEmpty()) {
-                    val fee_pay = plan_count.text.toString().toInt() * mPayRate
-                    val fee = (plan_total.text.toString().toDouble() + fee_pay) * mRate + fee_pay
-                    plan_fee.setRightString(DecimalFormat("########0.0#####").format(fee))
-                }
             }
             R.id.plan_add -> {
                 val count = plan_count.text.toString().toInt()
                 plan_count.text = (count + 1).toString()
-
-                if (plan_total.text.isNotEmpty()) {
-                    val fee_pay = plan_count.text.toString().toInt() * mPayRate
-                    val fee = (plan_total.text.toString().toDouble() + fee_pay) * mRate + fee_pay
-                    plan_fee.setRightString(DecimalFormat("########0.0#####").format(fee))
-                }
             }
             R.id.plan_submit -> {
                 if (plan_type.text.isEmpty()) {
@@ -218,8 +204,9 @@ class PlanBackActivity : BaseActivity() {
                         .replace("]", "")
                         .replace(" ", "")
 
-                OkGo.post<String>(BaseHttp.add_repaymentplan)
+                OkGo.post<CommonModel>(BaseHttp.add_repaymentplan)
                         .tag(this@PlanBackActivity)
+                        .isMultipart(true)
                         .headers("token", getString("token"))
                         .params("creditcardId", intent.getStringExtra("creditcardId"))
                         .params("repaymentType", plan_type.text.toString())
@@ -227,12 +214,19 @@ class PlanBackActivity : BaseActivity() {
                         .params("repaymentDay", repaymentDay)
                         .params("repaymentNum", plan_count.text.toString())
                         .params("cardType", "1")
-                        .execute(object : StringDialogCallback(baseContext) {
+                        .execute(object : JacksonDialogCallback<CommonModel>(baseContext, CommonModel::class.java) {
+                            override fun onSuccess(response: Response<CommonModel>) {
 
-                            override fun onSuccessResponse(response: Response<String>, msg: String, msgCode: String) {
+                                toast(response.body().msg)
+                                if (response.body().msgcode == "100") {
+                                    val list = ArrayList<CommonData>()
+                                    list.addItems(response.body().`object`)
+                                    val intent = Intent(baseContext, PlanPreviewActivity::class.java)
+                                    intent.putExtra("data", list)
+                                    startActivity(intent)
 
-                                toast(msg)
-                                ActivityStack.getScreenManager().popActivities(this@PlanBackActivity::class.java)
+                                    ActivityStack.getScreenManager().popActivities(this@PlanBackActivity::class.java)
+                                }
                             }
 
                         })
@@ -263,21 +257,6 @@ class PlanBackActivity : BaseActivity() {
         }
     }
 
-    override fun getData() {
-        OkGo.post<String>(BaseHttp.base_rate_data)
-                .tag(this@PlanBackActivity)
-                .execute(object : StringDialogCallback(baseContext, false) {
-
-                    override fun onSuccessResponse(response: Response<String>, msg: String, msgCode: String) {
-
-                        val obj = JSONObject(response.body()).getJSONObject("pingTai")
-                        mRate = obj.getString("consumeRate").toDouble()
-                        mPayRate = obj.getString("payRate").toDouble()
-                    }
-
-                })
-    }
-
     override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
         if (plan_total.text.isNotBlank()) {
             plan_submit.setBackgroundResource(R.drawable.rec_bg_blue)
@@ -291,17 +270,8 @@ class PlanBackActivity : BaseActivity() {
             if ("." == s.toString()) {
                 plan_total.setText("0.")
                 plan_total.setSelection(plan_total.text.length) //设置光标的位置
-            } else {
-                val fee_total = s.toString().toDouble()
-                if (fee_total == 0.0) {
-                    plan_fee.setRightString(DecimalFormat("########0.0#####").format(fee_total))
-                } else {
-                    val fee_pay = plan_count.text.toString().toInt() * mPayRate
-                    val fee = (fee_total + fee_pay) * mRate + fee_pay
-                    plan_fee.setRightString(DecimalFormat("########0.0#####").format(fee))
-                }
             }
-        } else plan_fee.setRightString("")
+        }
     }
 
     override fun afterTextChanged(s: Editable) {

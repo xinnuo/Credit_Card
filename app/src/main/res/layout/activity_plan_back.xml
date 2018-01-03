@@ -180,21 +180,6 @@
 
         </LinearLayout>
 
-        <com.allen.library.SuperTextView
-            android:id="@+id/plan_fee"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/dimen_size_45.5"
-            app:sLeftTextColor="@color/black_dark"
-            app:sLeftTextMarginLeft="@dimen/dimen_size_10"
-            app:sLeftTextString="还款手续费"
-            app:sLineShow="top"
-            app:sRightIconMarginRight="@dimen/dimen_size_10"
-            app:sRightIconSize="@dimen/dimen_size_13"
-            app:sRightTextColor="@color/black_dark"
-            app:sRightTextMarginRight="@dimen/dimen_size_10"
-            app:sRightTextString=""
-            app:sTopLineMargin="@dimen/dimen_size_10" />
-
     </LinearLayout>
 
     <Button
@@ -211,7 +196,8 @@
 
     <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:visibility="gone">
 
         <TextView
             android:id="@+id/plan_preview"

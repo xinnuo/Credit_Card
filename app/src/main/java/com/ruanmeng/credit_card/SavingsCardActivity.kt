@@ -14,6 +14,7 @@ import com.ruanmeng.model.CommonData
 import com.ruanmeng.model.CommonModel
 import com.ruanmeng.model.RefreshMessageEvent
 import com.ruanmeng.share.BaseHttp
+import com.ruanmeng.utils.BankCardUtil
 import com.ruanmeng.utils.BankcardHelper
 import com.ruanmeng.utils.CommonUtil
 import com.ruanmeng.utils.DialogHelper
@@ -163,8 +164,14 @@ class SavingsCardActivity : BaseActivity() {
                 })
             }
             R.id.card_sure -> {
-                if (!BankcardHelper.checkBankCard(et_card.rawText)) {
+                if (!BankcardHelper.checkBankCard(et_card.rawText)
+                        || BankCardUtil(et_card.rawText).cardType != "储蓄卡") {
                     toast("请输入正确的储蓄卡卡号")
+                    return
+                }
+
+                if (BankCardUtil(et_card.rawText).bankName != card_bank.text.toString()) {
+                    toast("卡号与所属银行不符，请选择正确的所属银行")
                     return
                 }
 

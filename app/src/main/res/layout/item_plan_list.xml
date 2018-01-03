@@ -100,6 +100,14 @@
                         android:layout_weight="1"
                         android:text="2017-12-06 11:22" />
 
+                    <TextView
+                        android:id="@+id/item_plan_fee"
+                        style="@style/Font13_black_dark"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="手续费：￥0.0"
+                        android:visibility="gone"/>
+
                 </LinearLayout>
 
             </LinearLayout>
