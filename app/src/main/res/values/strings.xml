@@ -6,7 +6,6 @@
 
         <item>工商银行</item>
         <item>农业银行</item>
-        <item>招商银行</item>
         <item>建设银行</item>
         <item>交通银行</item>
         <item>中信银行</item>
@@ -17,6 +16,33 @@
         <item>兴业银行</item>
         <item>民生银行</item>
         <item>华夏银行</item>
+
+    </string-array>
+
+    <string-array name="bank_saving">
+
+        <item>工商银行</item>
+        <item>农业银行</item>
+        <item>中国银行</item>
+        <item>建设银行</item>
+        <item>交通银行</item>
+        <item>光大银行</item>
+        <item>兴业银行</item>
+        <item>中信银行</item>
+        <item>平安银行</item>
+
+    </string-array>
+
+    <string-array name="bank_credit">
+
+        <item>工商银行</item>
+        <item>中国银行</item>
+        <item>建设银行</item>
+        <item>光大银行</item>
+        <item>兴业银行</item>
+        <item>民生银行</item>
+        <item>平安银行</item>
+        <item>北京银行</item>
 
     </string-array>
 

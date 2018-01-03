@@ -65,7 +65,11 @@ class SavingsCardActivity : BaseActivity() {
     override fun doClick(v: View) {
         super.doClick(v)
         when (v.id) {
-            R.id.card_bank_ll -> startActivity(BankSelectActivity::class.java)
+            R.id.card_bank_ll -> {
+                val intent = Intent(baseContext, BankSelectActivity::class.java)
+                intent.putExtra("title", "储蓄卡")
+                startActivity(intent)
+            }
             R.id.bt_yzm -> {
                 if (et_phone.text.isBlank()) {
                     et_phone.requestFocus()

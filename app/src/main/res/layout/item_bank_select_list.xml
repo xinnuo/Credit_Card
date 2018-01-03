@@ -32,10 +32,18 @@
     </LinearLayout>
 
     <View
+        android:id="@+id/item_bank_divider1"
         android:layout_width="match_parent"
         android:layout_height="@dimen/divider_height"
         android:layout_marginLeft="@dimen/dimen_size_10"
         android:layout_marginRight="@dimen/dimen_size_10"
         android:background="@color/divider" />
+
+    <View
+        android:id="@+id/item_bank_divider2"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/divider_height"
+        android:background="@color/divider"
+        android:visibility="gone" />
 
 </LinearLayout>

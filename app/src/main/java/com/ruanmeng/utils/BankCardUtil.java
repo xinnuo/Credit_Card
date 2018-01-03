@@ -281,11 +281,6 @@ public class BankCardUtil {
     private String s205 = "^(622336|621760)\\d{11}$";
     private String s206 = "^(622165)\\d{10}$";
     private String s207 = "^(622315|625950|628295)\\d{10}$";
-    //龙江银行
-    private String s208 = "^(621037|621097|621588|622977)\\d{13}$";
-    private String s209 = "^(62321601)\\d{11}$";
-    private String s210 = "^(622860)\\d{10}$";
-    private String s211 = "^(622644|628333)\\d{10}$";
     //上海农商银行
     private String s212 = "^(622478|940013|621495)\\d{10}$";
     private String s213 = "^(625500)\\d{10}$";
@@ -352,7 +347,7 @@ public class BankCardUtil {
     private String s253 = "^(622937)\\d{13}$";
     private String s254 = "^(628397)\\d{10}$";
     //承德银行
-    private String ss254 = "^(628397)\\d{10}$";
+    private String ss254 = "^(628229)\\d{10}$";
     //云南农村信用社
     private String s255 = "^(622469|628307)\\d{10}$";
     //柳州银行
@@ -598,8 +593,6 @@ public class BankCardUtil {
             return "泉州银行";
         } else if (Pattern.matches(s205, totalBankcode) || Pattern.matches(s206, totalBankcode) || Pattern.matches(s207, totalBankcode)) {
             return "包商银行";
-        } else if (Pattern.matches(s208, totalBankcode) || Pattern.matches(s209, totalBankcode) || Pattern.matches(s210, totalBankcode) || Pattern.matches(s211, totalBankcode)) {
-            return "龙江银行";
         } else if (Pattern.matches(s212, totalBankcode) || Pattern.matches(s213, totalBankcode) || Pattern.matches(s214, totalBankcode)) {
             return "上海农商银行";
         } else if (Pattern.matches(s215, totalBankcode) || Pattern.matches(s216, totalBankcode)) {
@@ -739,68 +732,92 @@ public class BankCardUtil {
 
     public String getCardType() {
 
-        if (Pattern.matches(s1, totalBankcode) || Pattern.matches(s2, totalBankcode) || Pattern.matches(s4, totalBankcode) || Pattern.matches(s5, totalBankcode) || Pattern.matches(s6, totalBankcode) || Pattern.matches(s7, totalBankcode)
-                || Pattern.matches(s14, totalBankcode) || Pattern.matches(s15, totalBankcode) || Pattern.matches(s16, totalBankcode)
-                || Pattern.matches(s19, totalBankcode) || Pattern.matches(s20, totalBankcode) || Pattern.matches(s26, totalBankcode) || Pattern.matches(s27, totalBankcode) || Pattern.matches(s28, totalBankcode)
-                || Pattern.matches(s34, totalBankcode) || Pattern.matches(s35, totalBankcode) || Pattern.matches(s36, totalBankcode) || Pattern.matches(s41, totalBankcode) || Pattern.matches(s42, totalBankcode) || Pattern.matches(s43, totalBankcode)
-                || Pattern.matches(s47, totalBankcode) || Pattern.matches(s50, totalBankcode) || Pattern.matches(s51, totalBankcode) || Pattern.matches(s52, totalBankcode) || Pattern.matches(s53, totalBankcode)
-                || Pattern.matches(s55, totalBankcode) || Pattern.matches(s56, totalBankcode) || Pattern.matches(s59, totalBankcode) || Pattern.matches(s61, totalBankcode) || Pattern.matches(s62, totalBankcode)
-                || Pattern.matches(s65, totalBankcode) || Pattern.matches(s66, totalBankcode) || Pattern.matches(s67, totalBankcode) || Pattern.matches(s70, totalBankcode) || Pattern.matches(s71, totalBankcode)
-                || Pattern.matches(s73, totalBankcode) || Pattern.matches(s74, totalBankcode) || Pattern.matches(s79, totalBankcode) || Pattern.matches(s80, totalBankcode)
-                || Pattern.matches(s83, totalBankcode) || Pattern.matches(s84, totalBankcode) || Pattern.matches(s85, totalBankcode) || Pattern.matches(s87, totalBankcode) || Pattern.matches(s89, totalBankcode) || Pattern.matches(s90, totalBankcode)
-                || Pattern.matches(s92, totalBankcode) || Pattern.matches(s93, totalBankcode) || Pattern.matches(s95, totalBankcode) || Pattern.matches(s97, totalBankcode) || Pattern.matches(s98, totalBankcode)
-                || Pattern.matches(s100, totalBankcode) || Pattern.matches(s102, totalBankcode) || Pattern.matches(s104, totalBankcode) || Pattern.matches(s105, totalBankcode) || Pattern.matches(s106, totalBankcode)
-                || Pattern.matches(s108, totalBankcode) || Pattern.matches(s110, totalBankcode) || Pattern.matches(s112, totalBankcode) || Pattern.matches(s115, totalBankcode) || Pattern.matches(s116, totalBankcode) || Pattern.matches(s117, totalBankcode)
-                || Pattern.matches(s118, totalBankcode) || Pattern.matches(s120, totalBankcode) || Pattern.matches(s121, totalBankcode) || Pattern.matches(s123, totalBankcode) || Pattern.matches(s124, totalBankcode)
-                || Pattern.matches(s125, totalBankcode) || Pattern.matches(s126, totalBankcode) || Pattern.matches(s128, totalBankcode) || Pattern.matches(s130, totalBankcode) || Pattern.matches(s131, totalBankcode) || Pattern.matches(s132, totalBankcode)
-                || Pattern.matches(s133, totalBankcode) || Pattern.matches(s134, totalBankcode) | Pattern.matches(s135, totalBankcode) | Pattern.matches(s136, totalBankcode) || Pattern.matches(s138, totalBankcode) || Pattern.matches(s139, totalBankcode)
-                || Pattern.matches(s140, totalBankcode) || Pattern.matches(s141, totalBankcode) || Pattern.matches(s144, totalBankcode) || Pattern.matches(s145, totalBankcode) || Pattern.matches(s146, totalBankcode)
-                || Pattern.matches(s147, totalBankcode) || Pattern.matches(s148, totalBankcode) || Pattern.matches(s150, totalBankcode) || Pattern.matches(s151, totalBankcode) || Pattern.matches(s152, totalBankcode)
-                || Pattern.matches(s153, totalBankcode) || Pattern.matches(s154, totalBankcode) || Pattern.matches(s155, totalBankcode) || Pattern.matches(s156, totalBankcode) || Pattern.matches(s157, totalBankcode) || Pattern.matches(s159, totalBankcode)
-                || Pattern.matches(s160, totalBankcode) || Pattern.matches(s162, totalBankcode) || Pattern.matches(s164, totalBankcode) || Pattern.matches(s166, totalBankcode) || Pattern.matches(s167, totalBankcode)
-                || Pattern.matches(s169, totalBankcode) || Pattern.matches(s170, totalBankcode) || Pattern.matches(s171, totalBankcode) || Pattern.matches(s172, totalBankcode) || Pattern.matches(s173, totalBankcode) || Pattern.matches(s174, totalBankcode) || Pattern.matches(s175, totalBankcode)
-                || Pattern.matches(s176, totalBankcode) || Pattern.matches(s178, totalBankcode) || Pattern.matches(s179, totalBankcode) || Pattern.matches(s180, totalBankcode) || Pattern.matches(s181, totalBankcode) || Pattern.matches(s182, totalBankcode)
-                || Pattern.matches(s183, totalBankcode) || Pattern.matches(s184, totalBankcode) || Pattern.matches(s185, totalBankcode) || Pattern.matches(s186, totalBankcode) || Pattern.matches(s187, totalBankcode) || Pattern.matches(s188, totalBankcode)
-                || Pattern.matches(s189, totalBankcode) || Pattern.matches(s192, totalBankcode) || Pattern.matches(s193, totalBankcode) || Pattern.matches(s194, totalBankcode) || Pattern.matches(s197, totalBankcode) || Pattern.matches(s198, totalBankcode)
-                || Pattern.matches(s201, totalBankcode) || Pattern.matches(s202, totalBankcode) || Pattern.matches(s203, totalBankcode) || Pattern.matches(s205, totalBankcode) || Pattern.matches(s206, totalBankcode) || Pattern.matches(s208, totalBankcode)
-                || Pattern.matches(s209, totalBankcode) || Pattern.matches(s210, totalBankcode) || Pattern.matches(s212, totalBankcode) || Pattern.matches(s217, totalBankcode) || Pattern.matches(s219, totalBankcode)
-                || Pattern.matches(s221, totalBankcode) || Pattern.matches(s222, totalBankcode) || Pattern.matches(s224, totalBankcode) || Pattern.matches(s225, totalBankcode) || Pattern.matches(s226, totalBankcode) || Pattern.matches(s229, totalBankcode)
-                || Pattern.matches(s231, totalBankcode) || Pattern.matches(s233, totalBankcode) || Pattern.matches(s235, totalBankcode) || Pattern.matches(s238, totalBankcode) || Pattern.matches(s240, totalBankcode) || Pattern.matches(s242, totalBankcode)
-                || Pattern.matches(s244, totalBankcode) || Pattern.matches(s245, totalBankcode) || Pattern.matches(s246, totalBankcode) || Pattern.matches(s247, totalBankcode) || Pattern.matches(s249, totalBankcode) || Pattern.matches(s251, totalBankcode)
-                || Pattern.matches(s253, totalBankcode) || Pattern.matches(s256, totalBankcode) || Pattern.matches(s257, totalBankcode) || Pattern.matches(s259, totalBankcode) || Pattern.matches(s262, totalBankcode) || Pattern.matches(s264, totalBankcode)
-                || Pattern.matches(s267, totalBankcode) || Pattern.matches(s268, totalBankcode) || Pattern.matches(s270, totalBankcode) || Pattern.matches(s271, totalBankcode) || Pattern.matches(s273, totalBankcode) || Pattern.matches(s275, totalBankcode) || Pattern.matches(s277, totalBankcode)
-                || Pattern.matches(s279, totalBankcode) || Pattern.matches(s280, totalBankcode) || Pattern.matches(s282, totalBankcode) || Pattern.matches(s284, totalBankcode) || Pattern.matches(s285, totalBankcode) || Pattern.matches(s286, totalBankcode)
-                || Pattern.matches(s287, totalBankcode) || Pattern.matches(s288, totalBankcode) || Pattern.matches(s289, totalBankcode) || Pattern.matches(s290, totalBankcode) || Pattern.matches(s291, totalBankcode) || Pattern.matches(s292, totalBankcode)
-                || Pattern.matches(s293, totalBankcode) || Pattern.matches(s294, totalBankcode) || Pattern.matches(s295, totalBankcode) || Pattern.matches(s296, totalBankcode) || Pattern.matches(s298, totalBankcode) || Pattern.matches(s299, totalBankcode) || Pattern.matches(s300, totalBankcode)
-                || Pattern.matches(s302, totalBankcode) || Pattern.matches(s304, totalBankcode) || Pattern.matches(s305, totalBankcode) || Pattern.matches(s308, totalBankcode) || Pattern.matches(s309, totalBankcode)
-                || Pattern.matches(s312, totalBankcode) || Pattern.matches(s314, totalBankcode)) {
+        if (
+                Pattern.matches(s1, totalBankcode) || Pattern.matches(s2, totalBankcode) || Pattern.matches(s4, totalBankcode) || Pattern.matches(s5, totalBankcode)
+                        || Pattern.matches(s6, totalBankcode) || Pattern.matches(s7, totalBankcode) || Pattern.matches(s14, totalBankcode) || Pattern.matches(s15, totalBankcode)
+                        || Pattern.matches(s16, totalBankcode) || Pattern.matches(s19, totalBankcode) || Pattern.matches(s20, totalBankcode) || Pattern.matches(s26, totalBankcode)
+                        || Pattern.matches(s27, totalBankcode) || Pattern.matches(s28, totalBankcode) || Pattern.matches(s34, totalBankcode) || Pattern.matches(s35, totalBankcode)
+                        || Pattern.matches(s36, totalBankcode) || Pattern.matches(s41, totalBankcode) || Pattern.matches(s42, totalBankcode) || Pattern.matches(s43, totalBankcode)
+                        || Pattern.matches(s47, totalBankcode) || Pattern.matches(s50, totalBankcode) || Pattern.matches(s51, totalBankcode) || Pattern.matches(s52, totalBankcode)
+                        || Pattern.matches(s53, totalBankcode) || Pattern.matches(s55, totalBankcode) || Pattern.matches(s56, totalBankcode) || Pattern.matches(s59, totalBankcode)
+                        || Pattern.matches(s61, totalBankcode) || Pattern.matches(s62, totalBankcode) || Pattern.matches(s65, totalBankcode) || Pattern.matches(s66, totalBankcode)
+                        || Pattern.matches(s67, totalBankcode) || Pattern.matches(s70, totalBankcode) || Pattern.matches(s71, totalBankcode) || Pattern.matches(s73, totalBankcode)
+                        || Pattern.matches(s74, totalBankcode) || Pattern.matches(s79, totalBankcode) || Pattern.matches(s80, totalBankcode) || Pattern.matches(s83, totalBankcode)
+                        || Pattern.matches(s84, totalBankcode) || Pattern.matches(s85, totalBankcode) || Pattern.matches(s87, totalBankcode) || Pattern.matches(s89, totalBankcode)
+                        || Pattern.matches(s90, totalBankcode) || Pattern.matches(s92, totalBankcode) || Pattern.matches(s93, totalBankcode) || Pattern.matches(s95, totalBankcode)
+                        || Pattern.matches(s97, totalBankcode) || Pattern.matches(s98, totalBankcode) || Pattern.matches(s100, totalBankcode) || Pattern.matches(s102, totalBankcode)
+                        || Pattern.matches(s104, totalBankcode) || Pattern.matches(s105, totalBankcode) || Pattern.matches(s106, totalBankcode) || Pattern.matches(s108, totalBankcode)
+                        || Pattern.matches(s110, totalBankcode) || Pattern.matches(s112, totalBankcode) || Pattern.matches(s115, totalBankcode) || Pattern.matches(s116, totalBankcode)
+                        || Pattern.matches(s117, totalBankcode) || Pattern.matches(s118, totalBankcode) || Pattern.matches(s120, totalBankcode) || Pattern.matches(s121, totalBankcode)
+                        || Pattern.matches(s123, totalBankcode) || Pattern.matches(s124, totalBankcode) || Pattern.matches(s125, totalBankcode) || Pattern.matches(s126, totalBankcode)
+                        || Pattern.matches(s128, totalBankcode) || Pattern.matches(s130, totalBankcode) || Pattern.matches(s131, totalBankcode) || Pattern.matches(s132, totalBankcode)
+                        || Pattern.matches(s133, totalBankcode) || Pattern.matches(s134, totalBankcode) || Pattern.matches(s135, totalBankcode) || Pattern.matches(s136, totalBankcode)
+                        || Pattern.matches(s138, totalBankcode) || Pattern.matches(s139, totalBankcode) || Pattern.matches(s140, totalBankcode) || Pattern.matches(s141, totalBankcode)
+                        || Pattern.matches(s144, totalBankcode) || Pattern.matches(s145, totalBankcode) || Pattern.matches(s146, totalBankcode) || Pattern.matches(s147, totalBankcode)
+                        || Pattern.matches(s148, totalBankcode) || Pattern.matches(s150, totalBankcode) || Pattern.matches(s151, totalBankcode) || Pattern.matches(s152, totalBankcode)
+                        || Pattern.matches(s153, totalBankcode) || Pattern.matches(s154, totalBankcode) || Pattern.matches(s155, totalBankcode) || Pattern.matches(s156, totalBankcode)
+                        || Pattern.matches(s157, totalBankcode) || Pattern.matches(s159, totalBankcode) || Pattern.matches(s160, totalBankcode) || Pattern.matches(s162, totalBankcode)
+                        || Pattern.matches(s164, totalBankcode) || Pattern.matches(s166, totalBankcode) || Pattern.matches(s167, totalBankcode) || Pattern.matches(s169, totalBankcode)
+                        || Pattern.matches(s170, totalBankcode) || Pattern.matches(s171, totalBankcode) || Pattern.matches(s172, totalBankcode) || Pattern.matches(s173, totalBankcode)
+                        || Pattern.matches(s174, totalBankcode) || Pattern.matches(s175, totalBankcode) || Pattern.matches(s176, totalBankcode) || Pattern.matches(s178, totalBankcode)
+                        || Pattern.matches(s179, totalBankcode) || Pattern.matches(s180, totalBankcode) || Pattern.matches(s181, totalBankcode) || Pattern.matches(s182, totalBankcode)
+                        || Pattern.matches(s183, totalBankcode) || Pattern.matches(s184, totalBankcode) || Pattern.matches(s185, totalBankcode) || Pattern.matches(s186, totalBankcode)
+                        || Pattern.matches(s187, totalBankcode) || Pattern.matches(s188, totalBankcode) || Pattern.matches(s189, totalBankcode) || Pattern.matches(s192, totalBankcode)
+                        || Pattern.matches(s193, totalBankcode) || Pattern.matches(s194, totalBankcode) || Pattern.matches(s197, totalBankcode) || Pattern.matches(s198, totalBankcode)
+                        || Pattern.matches(s201, totalBankcode) || Pattern.matches(s202, totalBankcode) || Pattern.matches(s203, totalBankcode) || Pattern.matches(s205, totalBankcode)
+                        || Pattern.matches(s206, totalBankcode) || Pattern.matches(s212, totalBankcode) || Pattern.matches(s217, totalBankcode) || Pattern.matches(s219, totalBankcode)
+                        || Pattern.matches(s221, totalBankcode) || Pattern.matches(s222, totalBankcode) || Pattern.matches(s224, totalBankcode) || Pattern.matches(s225, totalBankcode)
+                        || Pattern.matches(s226, totalBankcode) || Pattern.matches(s229, totalBankcode) || Pattern.matches(s231, totalBankcode) || Pattern.matches(s233, totalBankcode)
+                        || Pattern.matches(s235, totalBankcode) || Pattern.matches(s238, totalBankcode) || Pattern.matches(s240, totalBankcode) || Pattern.matches(s242, totalBankcode)
+                        || Pattern.matches(s244, totalBankcode) || Pattern.matches(s245, totalBankcode) || Pattern.matches(s246, totalBankcode) || Pattern.matches(s247, totalBankcode)
+                        || Pattern.matches(s249, totalBankcode) || Pattern.matches(s251, totalBankcode) || Pattern.matches(s253, totalBankcode) || Pattern.matches(s256, totalBankcode)
+                        || Pattern.matches(s257, totalBankcode) || Pattern.matches(s259, totalBankcode) || Pattern.matches(s262, totalBankcode) || Pattern.matches(s264, totalBankcode)
+                        || Pattern.matches(s267, totalBankcode) || Pattern.matches(s268, totalBankcode) || Pattern.matches(s270, totalBankcode) || Pattern.matches(s271, totalBankcode)
+                        || Pattern.matches(s273, totalBankcode) || Pattern.matches(s275, totalBankcode) || Pattern.matches(s277, totalBankcode) || Pattern.matches(s279, totalBankcode)
+                        || Pattern.matches(s280, totalBankcode) || Pattern.matches(s282, totalBankcode) || Pattern.matches(s284, totalBankcode) || Pattern.matches(s285, totalBankcode)
+                        || Pattern.matches(s286, totalBankcode) || Pattern.matches(s287, totalBankcode) || Pattern.matches(s288, totalBankcode) || Pattern.matches(s289, totalBankcode)
+                        || Pattern.matches(s290, totalBankcode) || Pattern.matches(s291, totalBankcode) || Pattern.matches(s292, totalBankcode) || Pattern.matches(s293, totalBankcode)
+                        || Pattern.matches(s294, totalBankcode) || Pattern.matches(s295, totalBankcode) || Pattern.matches(s296, totalBankcode) || Pattern.matches(s298, totalBankcode)
+                        || Pattern.matches(s299, totalBankcode) || Pattern.matches(s300, totalBankcode) || Pattern.matches(s302, totalBankcode) || Pattern.matches(s304, totalBankcode)
+                        || Pattern.matches(s305, totalBankcode) || Pattern.matches(s308, totalBankcode) || Pattern.matches(s309, totalBankcode) || Pattern.matches(s312, totalBankcode)
+                        || Pattern.matches(s314, totalBankcode)) {
             return "储蓄卡";
-        } else if (Pattern.matches(s3, totalBankcode) || Pattern.matches(s8, totalBankcode) || Pattern.matches(s9, totalBankcode) || Pattern.matches(s10, totalBankcode) || Pattern.matches(s17, totalBankcode) || Pattern.matches(s21, totalBankcode)
-                || Pattern.matches(s29, totalBankcode) || Pattern.matches(s30, totalBankcode) || Pattern.matches(s31, totalBankcode) || Pattern.matches(s37, totalBankcode) || Pattern.matches(s38, totalBankcode)
-                || Pattern.matches(s44, totalBankcode) || Pattern.matches(s45, totalBankcode) || Pattern.matches(s48, totalBankcode) || Pattern.matches(s49, totalBankcode) || Pattern.matches(s54, totalBankcode)
-                || Pattern.matches(s57, totalBankcode) || Pattern.matches(s58, totalBankcode) || Pattern.matches(s60, totalBankcode) || Pattern.matches(s63, totalBankcode) || Pattern.matches(s68, totalBankcode) || Pattern.matches(s72, totalBankcode)
-                || Pattern.matches(s75, totalBankcode) || Pattern.matches(s81, totalBankcode) || Pattern.matches(s82, totalBankcode) || Pattern.matches(s86, totalBankcode) || Pattern.matches(s88, totalBankcode)
-                || Pattern.matches(s91, totalBankcode) || Pattern.matches(s94, totalBankcode) || Pattern.matches(s96, totalBankcode) || Pattern.matches(s99, totalBankcode) || Pattern.matches(s101, totalBankcode) || Pattern.matches(s103, totalBankcode)
-                || Pattern.matches(s107, totalBankcode) || Pattern.matches(s109, totalBankcode) || Pattern.matches(s111, totalBankcode) || Pattern.matches(s113, totalBankcode) || Pattern.matches(s114, totalBankcode) || Pattern.matches(s119, totalBankcode)
-                || Pattern.matches(s122, totalBankcode) || Pattern.matches(s127, totalBankcode) || Pattern.matches(s129, totalBankcode) | Pattern.matches(s137, totalBankcode) || Pattern.matches(s142, totalBankcode)
-                || Pattern.matches(s158, totalBankcode) || Pattern.matches(s161, totalBankcode) || Pattern.matches(s163, totalBankcode) || Pattern.matches(s165, totalBankcode) || Pattern.matches(s167, totalBankcode)
-                || Pattern.matches(s177, totalBankcode) || Pattern.matches(s191, totalBankcode) || Pattern.matches(s190, totalBankcode) || Pattern.matches(s195, totalBankcode) || Pattern.matches(s199, totalBankcode)
-                || Pattern.matches(s204, totalBankcode) || Pattern.matches(s207, totalBankcode) || Pattern.matches(s211, totalBankcode) || Pattern.matches(s214, totalBankcode) || Pattern.matches(s216, totalBankcode)
-                || Pattern.matches(s218, totalBankcode) || Pattern.matches(s220, totalBankcode) || Pattern.matches(s223, totalBankcode) || Pattern.matches(s228, totalBankcode) || Pattern.matches(s230, totalBankcode) || Pattern.matches(s232, totalBankcode)
-                || Pattern.matches(s234, totalBankcode) || Pattern.matches(s236, totalBankcode) || Pattern.matches(s237, totalBankcode) || Pattern.matches(s239, totalBankcode) || Pattern.matches(s241, totalBankcode) || Pattern.matches(s243, totalBankcode)
-                || Pattern.matches(s248, totalBankcode) || Pattern.matches(s250, totalBankcode) || Pattern.matches(s252, totalBankcode) || Pattern.matches(s254, totalBankcode) || Pattern.matches(ss254, totalBankcode) || Pattern.matches(s255, totalBankcode)
-                || Pattern.matches(s258, totalBankcode) || Pattern.matches(s260, totalBankcode) || Pattern.matches(s261, totalBankcode) || Pattern.matches(s263, totalBankcode) || Pattern.matches(s265, totalBankcode) || Pattern.matches(s266, totalBankcode)
-                || Pattern.matches(s269, totalBankcode) || Pattern.matches(s272, totalBankcode) || Pattern.matches(s274, totalBankcode) || Pattern.matches(s276, totalBankcode) || Pattern.matches(s278, totalBankcode) || Pattern.matches(s281, totalBankcode)
-                || Pattern.matches(s283, totalBankcode) || Pattern.matches(s297, totalBankcode) || Pattern.matches(s301, totalBankcode) || Pattern.matches(s303, totalBankcode) || Pattern.matches(s306, totalBankcode)
-                || Pattern.matches(s313, totalBankcode)) {
+        } else if (
+                Pattern.matches(s3, totalBankcode) || Pattern.matches(s8, totalBankcode) || Pattern.matches(s9, totalBankcode) || Pattern.matches(s10, totalBankcode)
+                        || Pattern.matches(s17, totalBankcode) || Pattern.matches(s21, totalBankcode) || Pattern.matches(s29, totalBankcode) || Pattern.matches(s30, totalBankcode)
+                        || Pattern.matches(s31, totalBankcode) || Pattern.matches(s37, totalBankcode) || Pattern.matches(s38, totalBankcode) || Pattern.matches(s44, totalBankcode)
+                        || Pattern.matches(s45, totalBankcode) || Pattern.matches(s48, totalBankcode) || Pattern.matches(s49, totalBankcode) || Pattern.matches(s54, totalBankcode)
+                        || Pattern.matches(s57, totalBankcode) || Pattern.matches(s58, totalBankcode) || Pattern.matches(s60, totalBankcode) || Pattern.matches(s63, totalBankcode)
+                        || Pattern.matches(s68, totalBankcode) || Pattern.matches(s72, totalBankcode) || Pattern.matches(s75, totalBankcode) || Pattern.matches(s81, totalBankcode)
+                        || Pattern.matches(s82, totalBankcode) || Pattern.matches(s86, totalBankcode) || Pattern.matches(s88, totalBankcode) || Pattern.matches(s91, totalBankcode)
+                        || Pattern.matches(s94, totalBankcode) || Pattern.matches(s96, totalBankcode) || Pattern.matches(s99, totalBankcode) || Pattern.matches(s101, totalBankcode)
+                        || Pattern.matches(s103, totalBankcode) || Pattern.matches(s107, totalBankcode) || Pattern.matches(s109, totalBankcode) || Pattern.matches(s111, totalBankcode)
+                        || Pattern.matches(s113, totalBankcode) || Pattern.matches(s114, totalBankcode) || Pattern.matches(s119, totalBankcode) || Pattern.matches(s122, totalBankcode)
+                        || Pattern.matches(s127, totalBankcode) || Pattern.matches(s129, totalBankcode) || Pattern.matches(s137, totalBankcode) || Pattern.matches(s142, totalBankcode)
+                        || Pattern.matches(s158, totalBankcode) || Pattern.matches(s161, totalBankcode) || Pattern.matches(s163, totalBankcode) || Pattern.matches(s165, totalBankcode)
+                        || Pattern.matches(s167, totalBankcode) || Pattern.matches(s177, totalBankcode) || Pattern.matches(s191, totalBankcode) || Pattern.matches(s190, totalBankcode)
+                        || Pattern.matches(s195, totalBankcode) || Pattern.matches(s199, totalBankcode) || Pattern.matches(s204, totalBankcode) || Pattern.matches(s207, totalBankcode)
+                        || Pattern.matches(s214, totalBankcode) || Pattern.matches(s216, totalBankcode) || Pattern.matches(s218, totalBankcode) || Pattern.matches(s220, totalBankcode)
+                        || Pattern.matches(s223, totalBankcode) || Pattern.matches(s228, totalBankcode) || Pattern.matches(s230, totalBankcode) || Pattern.matches(s232, totalBankcode)
+                        || Pattern.matches(s234, totalBankcode) || Pattern.matches(s236, totalBankcode) || Pattern.matches(s237, totalBankcode) || Pattern.matches(s239, totalBankcode)
+                        || Pattern.matches(s241, totalBankcode) || Pattern.matches(s243, totalBankcode) || Pattern.matches(s248, totalBankcode) || Pattern.matches(s250, totalBankcode)
+                        || Pattern.matches(s252, totalBankcode) || Pattern.matches(s254, totalBankcode) || Pattern.matches(ss254, totalBankcode) || Pattern.matches(s255, totalBankcode)
+                        || Pattern.matches(s258, totalBankcode) || Pattern.matches(s260, totalBankcode) || Pattern.matches(s261, totalBankcode) || Pattern.matches(s263, totalBankcode)
+                        || Pattern.matches(s265, totalBankcode) || Pattern.matches(s266, totalBankcode) || Pattern.matches(s269, totalBankcode) || Pattern.matches(s272, totalBankcode)
+                        || Pattern.matches(s274, totalBankcode) || Pattern.matches(s276, totalBankcode) || Pattern.matches(s278, totalBankcode) || Pattern.matches(s281, totalBankcode)
+                        || Pattern.matches(s283, totalBankcode) || Pattern.matches(s297, totalBankcode) || Pattern.matches(s301, totalBankcode) || Pattern.matches(s303, totalBankcode)
+                        || Pattern.matches(s306, totalBankcode) || Pattern.matches(s313, totalBankcode)) {
             return "信用卡(贷记卡)";
-        } else if (Pattern.matches(s11, totalBankcode) || Pattern.matches(s18, totalBankcode) || Pattern.matches(s22, totalBankcode) || Pattern.matches(s23, totalBankcode) || Pattern.matches(s32, totalBankcode) || Pattern.matches(s33, totalBankcode)
-                || Pattern.matches(s39, totalBankcode) || Pattern.matches(s76, totalBankcode) || Pattern.matches(s196, totalBankcode) || Pattern.matches(s213, totalBankcode) || Pattern.matches(s215, totalBankcode)
-                || Pattern.matches(s227, totalBankcode)) {
+        } else if (
+                Pattern.matches(s11, totalBankcode) || Pattern.matches(s18, totalBankcode) || Pattern.matches(s22, totalBankcode) || Pattern.matches(s23, totalBankcode)
+                        || Pattern.matches(s32, totalBankcode) || Pattern.matches(s33, totalBankcode) || Pattern.matches(s39, totalBankcode) || Pattern.matches(s76, totalBankcode)
+                        || Pattern.matches(s196, totalBankcode) || Pattern.matches(s213, totalBankcode) || Pattern.matches(s215, totalBankcode) || Pattern.matches(s227, totalBankcode)) {
             return "准贷记卡";
-        } else if (Pattern.matches(s12, totalBankcode) || Pattern.matches(s13, totalBankcode) || Pattern.matches(s24, totalBankcode) || Pattern.matches(s25, totalBankcode) || Pattern.matches(s40, totalBankcode)
-                || Pattern.matches(s46, totalBankcode) || Pattern.matches(s64, totalBankcode) || Pattern.matches(s69, totalBankcode) || Pattern.matches(s77, totalBankcode) || Pattern.matches(s143, totalBankcode)
-                || Pattern.matches(s149, totalBankcode) || Pattern.matches(s200, totalBankcode) || Pattern.matches(s307, totalBankcode) || Pattern.matches(s310, totalBankcode) || Pattern.matches(s311, totalBankcode)) {
+        } else if (
+                Pattern.matches(s12, totalBankcode) || Pattern.matches(s13, totalBankcode) || Pattern.matches(s24, totalBankcode) || Pattern.matches(s25, totalBankcode)
+                        || Pattern.matches(s40, totalBankcode) || Pattern.matches(s46, totalBankcode) || Pattern.matches(s64, totalBankcode) || Pattern.matches(s69, totalBankcode)
+                        || Pattern.matches(s77, totalBankcode) || Pattern.matches(s143, totalBankcode) || Pattern.matches(s149, totalBankcode) || Pattern.matches(s200, totalBankcode)
+                        || Pattern.matches(s307, totalBankcode) || Pattern.matches(s310, totalBankcode) || Pattern.matches(s311, totalBankcode)) {
             return "预付费卡";
         } else {
             return "未知";

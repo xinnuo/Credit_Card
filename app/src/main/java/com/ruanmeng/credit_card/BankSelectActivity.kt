@@ -1,6 +1,7 @@
 package com.ruanmeng.credit_card
 
 import android.os.Bundle
+import android.view.View
 import android.widget.ImageView
 import com.ruanmeng.base.BaseActivity
 import com.ruanmeng.base.load_Linear
@@ -12,12 +13,18 @@ import org.greenrobot.eventbus.EventBus
 
 class BankSelectActivity : BaseActivity() {
 
+    private val list = ArrayList<Any>()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_bank_select)
         init_title("选择银行")
 
-        val list = resources.getStringArray(R.array.bank_list).asList()
+        when (intent.getStringExtra("title")) {
+            "储蓄卡" -> list.addAll(resources.getStringArray(R.array.bank_saving).asList())
+            "信用卡" -> list.addAll(resources.getStringArray(R.array.bank_credit).asList())
+            else -> list.addAll(resources.getStringArray(R.array.bank_list).asList())
+        }
         mAdapter.updateData(list).notifyDataSetChanged()
     }
 
@@ -28,6 +35,8 @@ class BankSelectActivity : BaseActivity() {
         mAdapter = SlimAdapter.create()
                 .register<String>(R.layout.item_bank_select_list) { data, injector ->
                     injector.text(R.id.item_bank_name, data)
+                            .visibility(R.id.item_bank_divider1, if (list.indexOf(data) == list.size - 1) View.GONE else View.VISIBLE)
+                            .visibility(R.id.item_bank_divider2, if (list.indexOf(data) != list.size - 1) View.GONE else View.VISIBLE)
 
                             .with<ImageView>(R.id.item_bank_img, { view ->
                                 when (data) {
