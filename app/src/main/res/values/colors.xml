@@ -19,7 +19,7 @@
     <color name="white">@android:color/white</color>
     <color name="orange">#FFCA02</color>
     <color name="red">#FB4846</color>
-    <color name="brown">#DDA650</color>
+    <color name="brown">#D3A567</color>
 
     <color name="black_overlay">#66000000</color>
 </resources>
