@@ -27,6 +27,9 @@ class PlanActivity : BaseActivity() {
         setContentView(R.layout.activity_plan)
         setToolbarVisibility(false)
         init_title()
+
+        mPosition = 1
+        updateList()
     }
 
     override fun init_title() {
@@ -74,6 +77,7 @@ class PlanActivity : BaseActivity() {
                                 when (data.repaymentType) {
                                     "还款消费" -> view.setImageResource(R.mipmap.group01)
                                     "快速还款" -> view.setImageResource(R.mipmap.group02)
+                                    "智能还款" -> view.setImageResource(R.mipmap.group02)
                                     "余额还款" -> view.setImageResource(R.mipmap.group03)
                                     "消费计划" -> view.setImageResource(R.mipmap.group04)
                                     "提现" -> view.setImageResource(R.mipmap.group05)

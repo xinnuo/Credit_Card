@@ -59,7 +59,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dimen_size_3"
-                    android:text="诸葛信用卡管家很好用，分享给你！" />
+                    android:text="诸葛信用管家很好用，分享给你！" />
 
             </LinearLayout>
 

@@ -60,7 +60,7 @@ class PlanBackActivity : BaseActivity() {
                 DialogHelper.showItemDialog(
                         baseContext,
                         "选择还款类型",
-                        Arrays.asList("快速还款", "余额还款", "还款消费")) { position, name ->
+                        Arrays.asList(/*"快速还款", "余额还款", */"智能还款")) { _, name ->
                     plan_type.text = name
                 }
             }

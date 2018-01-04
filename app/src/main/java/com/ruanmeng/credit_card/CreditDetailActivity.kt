@@ -94,7 +94,7 @@ class CreditDetailActivity : BaseActivity() {
                 }
             }
             R.id.credit_add -> {
-                val dialog = ActionSheetDialog(this, arrayOf("消费计划", "还款计划"), null)
+                val dialog = ActionSheetDialog(this, arrayOf(/*"消费计划", */"还款计划"), null)
                 dialog.isTitleShow(false)
                         .lvBgColor(resources.getColor(R.color.white))
                         .dividerColor(resources.getColor(R.color.divider))
@@ -112,14 +112,14 @@ class CreditDetailActivity : BaseActivity() {
                     if (creditcardId.isEmpty()) return@setOnOperItemClickL
 
                     when (position) {
-                        0 -> {
+                        /*0 -> {
                             val intent = Intent(baseContext, PlanPayActivity::class.java)
                             intent.putExtra("creditcardId", creditcardId)
                             intent.putExtra("creditcard", creditcard)
                             intent.putExtra("bank", bank)
                             startActivity(intent)
-                        }
-                        1 -> {
+                        }*/
+                        0 -> {
                             val intent = Intent(baseContext, PlanBackActivity::class.java)
                             intent.putExtra("creditcardId", creditcardId)
                             startActivity(intent)
@@ -167,12 +167,20 @@ class CreditDetailActivity : BaseActivity() {
                         credit_bill.setRightString(obj.getString("billDay") + "日")
                         credit_pay.setRightString(obj.getString("repaymentDay") + "日")
 
-                        val paySum = DecimalFormat("########0.0#####").format(obj.getString("paySum").toDouble())
-                        val nopaySum = DecimalFormat("########0.0#####").format(obj.getString("nopaySum").toDouble())
-                        val currentSum = DecimalFormat("########0.0#####").format(obj.getString("currentSum").toDouble())
-                        credit_yi.setRightString(NumberHelper.fmtMicrometer(paySum))
-                        credit_wei.setRightString(NumberHelper.fmtMicrometer(nopaySum))
-                        credit_dang.setRightString("￥" + NumberHelper.fmtMicrometer(currentSum))
+                        if (!obj.isNull("paySum")) {
+                            val paySum = DecimalFormat("########0.0#####").format(obj.getString("paySum").toDouble())
+                            credit_yi.setRightString(NumberHelper.fmtMicrometer(paySum))
+                        }
+
+                        if (!obj.isNull("nopaySum")) {
+                            val nopaySum = DecimalFormat("########0.0#####").format(obj.getString("nopaySum").toDouble())
+                            credit_wei.setRightString(NumberHelper.fmtMicrometer(nopaySum))
+                        }
+
+                        if (!obj.isNull("currentSum")) {
+                            val currentSum = DecimalFormat("########0.0#####").format(obj.getString("currentSum").toDouble())
+                            credit_dang.setRightString("￥" + NumberHelper.fmtMicrometer(currentSum))
+                        }
                     }
 
                 })

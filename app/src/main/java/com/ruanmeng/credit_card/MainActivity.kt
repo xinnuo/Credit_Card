@@ -102,10 +102,32 @@ class MainActivity : BaseActivity() {
                     "1" -> startActivity(GatherActivity::class.java)
                 }
             }
-            R.id.first_card -> { }
+            R.id.first_card -> {
+                val intent = Intent(baseContext, WebActivity::class.java)
+                intent.putExtra("title", "在线办卡")
+                startActivity(intent)
+            }
+            R.id.first_express -> {
+                val intent = Intent(baseContext, WebActivity::class.java)
+                intent.putExtra("title", "快递查询")
+                startActivity(intent)
+            }
+            R.id.first_offend -> {
+                val intent = Intent(baseContext, WebActivity::class.java)
+                intent.putExtra("title", "违章查询")
+                startActivity(intent)
+            }
             R.id.first_new -> {
+                toast("该功能正在开发中")
+                return
+
                 val intent = Intent(baseContext, WebActivity::class.java)
                 intent.putExtra("title", "信用卡攻略")
+                startActivity(intent)
+            }
+            R.id.first_safe -> {
+                val intent = Intent(baseContext, WebActivity::class.java)
+                intent.putExtra("title", "安全保障")
                 startActivity(intent)
             }
             R.id.second_update -> startActivity(MemberActivity::class.java)

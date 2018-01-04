@@ -23,6 +23,7 @@ public class BaseHttp {
     public static String paypawd_add_sub = baseIp + "/paypawd_add_sub.rm";             //新增支付密码√
     public static String paypawd_change_mobile = baseIp + "/paypawd_change_mobile.rm"; //修改支付密码√
 
+    public static String guide_info = baseIp + "/guide_info.rm";                 //引导页√
     public static String index_alldata = baseIp + "/index_alldata.rm";           //首页√
     public static String agent_userInfo = baseIp + "/agent_userInfo.rm";         //代理商信息√
     public static String profit_data = baseIp + "/profit_data.rm";               //收益列表√
@@ -30,7 +31,6 @@ public class BaseHttp {
     public static String payrecord_data = baseIp + "/payrecord_data.rm";         //账单列表√
     public static String appYee_repayment = baseIp + "/appYee_repayment.rm";     //收款√
     public static String paypawd_check = baseIp + "/paypawd_check.rm";           //检验支付密码√
-    public static String appYee_withdraw = baseIp + "/appYee_withdraw.rm";       //结算（测试）√
     public static String add_withdraw = baseIp + "/add_withdraw.rm";             //提现√
     public static String newsnotice_Info = baseIp + "/newsnotice_Info.rm";       //公告详情√
     public static String get_MsgInfo = baseIp + "/get_MsgInfo.rm";               //获取消息√
