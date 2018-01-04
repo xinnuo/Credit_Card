@@ -65,6 +65,7 @@ class BillActivity : BaseActivity() {
                                     "智能还款" -> view.setImageResource(R.mipmap.group02)
                                     "余额还款" -> view.setImageResource(R.mipmap.group03)
                                     "消费计划" -> view.setImageResource(R.mipmap.group04)
+                                    "收款" -> view.setImageResource(R.mipmap.group03)
                                     "提现" -> view.setImageResource(R.mipmap.group05)
                                     "充值" -> view.setImageResource(R.mipmap.group06)
                                 }
@@ -85,11 +86,15 @@ class BillActivity : BaseActivity() {
                         baseContext,
                         bill_divider,
                         mPosBill,
-                        listOf("全部账单", "消费计划", "快速还款", "还款消费", "余额还款", "提现", "充值"),
+                        listOf("全部账单", "消费计划", "快速还款", "还款消费", "余额还款", "收款", "提现", "充值"),
                         object : PopupWindowUtils.PopupWindowCallBack {
 
                             override fun doWork(position: Int, name: String) {
                                 bill_hint.text = name
+                                mPayType = when (name) {
+                                    "全部账单" -> ""
+                                    else -> name
+                                }
                                 mPosBill = position
 
                                 updateList()
@@ -105,9 +110,10 @@ class BillActivity : BaseActivity() {
     override fun getData(pindex: Int) {
         OkGo.post<CommonModel>(BaseHttp.payrecord_data)
                 .tag(this@BillActivity)
+                .isMultipart(true)
                 .headers("token", getString("token"))
                 .params("page", pindex)
-                .params("type", mPayType)
+                .params("payType", mPayType)
                 .execute(object : JacksonDialogCallback<CommonModel>(baseContext, CommonModel::class.java) {
 
                     override fun onSuccess(response: Response<CommonModel>) {

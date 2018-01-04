@@ -108,6 +108,7 @@ class MainFirstFragment : BaseFragment() {
                                     "智能还款" -> view.setImageResource(R.mipmap.group02)
                                     "余额还款" -> view.setImageResource(R.mipmap.group03)
                                     "消费计划" -> view.setImageResource(R.mipmap.group04)
+                                    "收款" -> view.setImageResource(R.mipmap.group03)
                                     "提现" -> view.setImageResource(R.mipmap.group05)
                                     "充值" -> view.setImageResource(R.mipmap.group06)
                                 }
