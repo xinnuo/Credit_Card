@@ -9,6 +9,7 @@ import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
 import android.view.Gravity;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
@@ -31,7 +32,7 @@ public class PopupWindowUtils {
     public static void showDatePopWindow(
             final Context context,
             View anchor,
-            int selected,
+            final int selected,
             final List<String> items,
             final PopupWindowCallBack callBack) {
         @SuppressLint("InflateParams")
@@ -53,7 +54,7 @@ public class PopupWindowUtils {
             }
         });
 
-        for (String item : items) {
+        for (final String item : items) {
             RadioButton rb = new RadioButton(context);
             RadioGroup.LayoutParams params = new RadioGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, DensityUtil.dp2px(45));
             rb.setLayoutParams(params);
@@ -62,7 +63,18 @@ public class PopupWindowUtils {
             rb.setButtonDrawable(new ColorDrawable(Color.TRANSPARENT));
             rb.setText(item);
             rb.setId(items.indexOf(item));
-            if (items.indexOf(item) == selected) rb.setChecked(true);
+            if (items.indexOf(item) == selected) {
+                rb.setChecked(true);
+
+                rb.setOnTouchListener(new View.OnTouchListener() {
+                    @Override
+                    public boolean onTouch(View v, MotionEvent event) {
+                        popupWindow.dismiss();
+                        callBack.doWork(selected, item);
+                        return true;
+                    }
+                });
+            }
             rg.addView(rb);
 
             RadioGroup.LayoutParams param = new RadioGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, DensityUtil.dp2px(0.5f));
