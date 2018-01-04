@@ -45,7 +45,7 @@ class CashoutActivity : BaseActivity() {
         left_nav_title.text = "提现"
 
         withdrawSum = getString("withdrawSum").toDouble()
-        cashout_total.text = DecimalFormat("########0.0#####").format(withdrawSum) + "元"
+        cashout_total.text = DecimalFormat("########0.00####").format(withdrawSum) + "元"
 
         cashout_ok.setBackgroundResource(R.drawable.rec_bg_d0d0d0)
         cashout_ok.isClickable = false

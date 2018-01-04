@@ -36,6 +36,8 @@
                 android:layout_height="@dimen/dimen_size_25"
                 android:adjustViewBounds="true"
                 android:src="@mipmap/default_logo"
+                android:padding="@dimen/dimen_size_2"
+                android:background="@drawable/white_oval"
                 app:riv_oval="true"
                 tools:ignore="ContentDescription" />
 
