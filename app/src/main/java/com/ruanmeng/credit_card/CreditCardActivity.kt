@@ -240,7 +240,7 @@ class CreditCardActivity : BaseActivity() {
                         .params("identityCard", getString("real_IDCard"))
                         .params("creditcard", et_card.rawText)
                         .params("cvn2", et_back.text.trim().toString())
-                        .params("invalidDate", et_date.text.trim().toString())
+                        .params("invalidDate", et_date.rawText)
                         .params("bank", card_bank.text.toString())
                         .params("bankSubName", et_bank.text.trim().toString())
                         .params("bankProvince", bankProvince)
