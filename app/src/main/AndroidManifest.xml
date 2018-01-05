@@ -119,7 +119,12 @@
         <activity
             android:name=".RecommendActivity"
             android:screenOrientation="portrait" />
-
+        <activity
+            android:name=".PlanPreviewActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".BankCodeActivity"
+            android:screenOrientation="portrait" />
 
         <!-- 融云即时通讯 start -->
         <!-- 会话界面 -->

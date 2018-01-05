@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -29,7 +28,8 @@
             android:gravity="center_vertical"
             android:onClick="doClick"
             android:paddingLeft="@dimen/dimen_size_10"
-            android:paddingRight="@dimen/dimen_size_10">
+            android:paddingRight="@dimen/dimen_size_10"
+            android:visibility="gone" >
 
             <TextView
                 style="@style/Font14_black_dark"
@@ -60,7 +60,8 @@
             android:layout_height="@dimen/divider_height"
             android:layout_marginLeft="@dimen/dimen_size_10"
             android:layout_marginRight="@dimen/dimen_size_10"
-            android:background="@color/divider" />
+            android:background="@color/divider"
+            android:visibility="gone" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -180,21 +181,6 @@
 
         </LinearLayout>
 
-        <com.allen.library.SuperTextView
-            android:id="@+id/plan_fee"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/dimen_size_45.5"
-            app:sLeftTextColor="@color/black_dark"
-            app:sLeftTextMarginLeft="@dimen/dimen_size_10"
-            app:sLeftTextString="还款手续费"
-            app:sLineShow="top"
-            app:sRightIconMarginRight="@dimen/dimen_size_10"
-            app:sRightIconSize="@dimen/dimen_size_13"
-            app:sRightTextColor="@color/black_dark"
-            app:sRightTextMarginRight="@dimen/dimen_size_10"
-            app:sRightTextString=""
-            app:sTopLineMargin="@dimen/dimen_size_10" />
-
     </LinearLayout>
 
     <Button
@@ -211,7 +197,8 @@
 
     <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:visibility="gone">
 
         <TextView
             android:id="@+id/plan_preview"

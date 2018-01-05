@@ -49,7 +49,7 @@ public abstract class JsonDialogCallback<T> extends JsonCallback<T> {
     }
 
     public JsonDialogCallback(Activity activity) {
-        initDialog(activity);
+        this(activity, false);
     }
 
     public JsonDialogCallback(Activity activity, boolean isVisible) {

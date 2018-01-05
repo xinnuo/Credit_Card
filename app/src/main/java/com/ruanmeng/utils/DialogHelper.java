@@ -13,6 +13,7 @@ import com.flyco.dialog.widget.MaterialDialog;
 import com.flyco.dialog.widget.base.BottomBaseDialog;
 import com.maning.mndialoglibrary.MProgressDialog;
 import com.ruanmeng.credit_card.R;
+import com.ruanmeng.model.CommonData;
 import com.weigan.loopview.LoopView;
 import com.weigan.loopview.OnItemSelectedListener;
 
@@ -437,6 +438,75 @@ public class DialogHelper {
         return items;
     }
 
+    public static void showAddressDialog(
+            final Context context,
+            final List<CommonData> list_province,
+            final List<CommonData> list_city,
+            final AddressCallBack callBack) {
+
+        BottomBaseDialog dialog = new BottomBaseDialog(context) {
+
+            private LoopView province, city;
+
+            @Override
+            public View onCreateView() {
+                View view = View.inflate(context, R.layout.dialog_select_address, null);
+
+                TextView tv_cancel = view.findViewById(R.id.tv_dialog_select_cancle);
+                TextView tv_ok = view.findViewById(R.id.tv_dialog_select_ok);
+                province = view.findViewById(R.id.lv_dialog_select_province);
+                city = view.findViewById(R.id.lv_dialog_select_city);
+
+                province.setTextSize(14f);
+                province.setDividerColor(context.getResources().getColor(R.color.divider));
+                province.setNotLoop();
+                city.setTextSize(14f);
+                city.setDividerColor(context.getResources().getColor(R.color.divider));
+                city.setNotLoop();
+
+                tv_cancel.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        dismiss();
+                    }
+                });
+
+                tv_ok.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        dismiss();
+
+                        callBack.doWork(province.getSelectedItem(), city.getSelectedItem());
+                    }
+                });
+
+                return view;
+            }
+
+            @Override
+            public void setUiBeforShow() {
+                List<String> provinces = new ArrayList<>();
+                List<String> cities = new ArrayList<>();
+
+                for (CommonData item : list_province) provinces.add(item.getAreaName());
+                for (CommonData item : list_city) cities.add(item.getAreaName());
+
+                if (provinces.size() > 0) province.setItems(provinces);
+                if (cities.size() > 0) city.setItems(cities);
+
+                province.setListener(new OnItemSelectedListener() {
+                    @Override
+                    public void onItemSelected(int index) {
+                        callBack.getCities(city, province.getSelectedItem());
+                    }
+                });
+            }
+
+        };
+
+        dialog.show();
+    }
+
     public interface HintCallBack {
         void doWork();
     }
@@ -447,5 +517,11 @@ public class DialogHelper {
 
     public interface DateAllCallBack {
         void doWork(int year, int month, int day, int hour, int minute, String date);
+    }
+
+    public interface AddressCallBack {
+        void doWork(int pos_province, int pos_city);
+
+        void getCities(LoopView loopView, int pos);
     }
 }

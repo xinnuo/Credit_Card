@@ -66,7 +66,7 @@ class MainFirstFragment : BaseFragment() {
 
     @SuppressLint("InflateParams")
     override fun init_title() {
-        main_title.text = "诸葛智能管家"
+        main_title.text = "诸葛信用管家"
         main_right.visibility = View.VISIBLE
         val count = getString("msgCount", "0").toInt()
         main_hint.visibility = if (count > 0) View.VISIBLE else View.INVISIBLE
@@ -105,8 +105,10 @@ class MainFirstFragment : BaseFragment() {
                                 when (data.payType) {
                                     "还款消费" -> view.setImageResource(R.mipmap.group01)
                                     "快速还款" -> view.setImageResource(R.mipmap.group02)
+                                    "智能还款" -> view.setImageResource(R.mipmap.group02)
                                     "余额还款" -> view.setImageResource(R.mipmap.group03)
                                     "消费计划" -> view.setImageResource(R.mipmap.group04)
+                                    "收款" -> view.setImageResource(R.mipmap.group03)
                                     "提现" -> view.setImageResource(R.mipmap.group05)
                                     "充值" -> view.setImageResource(R.mipmap.group06)
                                 }
@@ -159,6 +161,13 @@ class MainFirstFragment : BaseFragment() {
                                 startActivity(intent)
                             }, mSwitchText)
                         }
+                    }
+
+                    /**
+                     * 当缓存读取成功后，回调该方法，如果只复写了onSuccess方法，是无法获取缓存的
+                     */
+                    override fun onCacheSuccess(response: Response<CommonModel>) {
+                        onSuccess(response)
                     }
 
                     override fun onFinish() {

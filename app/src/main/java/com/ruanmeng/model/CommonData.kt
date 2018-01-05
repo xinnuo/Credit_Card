@@ -54,6 +54,7 @@ data class CommonData(
         var payTime: String = "",
         var payType: String = "",
         var rate: String = "",
+        var rateSum: String = "",
         var status: String = "",
         var type: String = "",
         var userInfoId: String = "",
@@ -82,6 +83,11 @@ data class CommonData(
         var repaymentSum: String = "",
         var repaymentTime: String = "",
         var repaymentType: String = "",
+
+        //省、市
+        var areaId: String = "",
+        var areaCode: String = "",
+        var areaName: String = "",
 
         //信用卡列表
         var billDay: String = "",

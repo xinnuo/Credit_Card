@@ -59,7 +59,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dimen_size_3"
-                    android:text="诸葛信用卡管家很好用，分享给你！" />
+                    android:text="诸葛信用管家很好用，分享给你！" />
 
             </LinearLayout>
 
@@ -76,7 +76,7 @@
                 android:id="@+id/share_qrcode"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_margin="@dimen/dimen_size_2"
+                android:layout_margin="@dimen/dimen_size_8"
                 tools:ignore="ContentDescription" />
 
         </FrameLayout>

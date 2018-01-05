@@ -8,6 +8,7 @@ import com.lzy.extend.StringDialogCallback
 import com.lzy.okgo.OkGo
 import com.lzy.okgo.model.Response
 import com.ruanmeng.base.BaseActivity
+import com.ruanmeng.base.getString
 import com.ruanmeng.base.toast
 import com.ruanmeng.share.BaseHttp
 import com.ruanmeng.utils.ActivityStack
@@ -69,7 +70,11 @@ class PlanPayActivity : BaseActivity() {
 
                 OkGo.post<String>(BaseHttp.add_consumeplan)
                         .tag(this@PlanPayActivity)
+                        .isMultipart(true)
+                        .headers("token", getString("token"))
                         .params("creditcardId", creditcardId)
+                        .params("repaymentType", "消费计划")
+                        .params("repaymentSum", plan_count.text.toString())
                         .params("repaymentDay", plan_date.text.toString())
                         .params("cardType", "1")
                         .execute(object : StringDialogCallback(baseContext) {

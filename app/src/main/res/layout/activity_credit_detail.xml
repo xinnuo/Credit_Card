@@ -24,7 +24,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="#414B80"
+                android:background="@color/colorAccent"
                 android:padding="@dimen/dimen_size_10">
 
                 <com.makeramen.roundedimageview.RoundedImageView
@@ -32,6 +32,8 @@
                     android:layout_width="@dimen/dimen_size_40"
                     android:layout_height="@dimen/dimen_size_40"
                     android:src="@mipmap/default_logo"
+                    android:padding="@dimen/dimen_size_3"
+                    android:background="@drawable/white_oval"
                     app:riv_oval="true" />
 
                 <LinearLayout
@@ -102,7 +104,7 @@
                 app:sRightIconSize="13dp"
                 app:sRightTextColor="@color/black_dark"
                 app:sRightTextMarginRight="@dimen/dimen_size_10"
-                app:sRightTextString="0.00" />
+                app:sRightTextString="0.0" />
 
             <com.allen.library.SuperTextView
                 android:id="@+id/credit_wei"
@@ -117,7 +119,7 @@
                 app:sRightIconSize="13dp"
                 app:sRightTextColor="@color/black_dark"
                 app:sRightTextMarginRight="@dimen/dimen_size_10"
-                app:sRightTextString="0.00" />
+                app:sRightTextString="0.0" />
 
             <com.allen.library.SuperTextView
                 android:id="@+id/credit_dang"
@@ -132,7 +134,7 @@
                 app:sRightIconSize="13dp"
                 app:sRightTextColor="@color/black_dark"
                 app:sRightTextMarginRight="@dimen/dimen_size_10"
-                app:sRightTextString="￥0.00" />
+                app:sRightTextString="￥0.0" />
 
             <LinearLayout
                 android:id="@+id/credit_add"

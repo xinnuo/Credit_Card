@@ -42,7 +42,7 @@ class MainThirdFragment : BaseFragment() {
         main_title.text = "个人中心"
         main_right.visibility = View.INVISIBLE
 
-        third_img.setOnClickListener { startActivity(InfoActivity::class.java) }
+        third_info.setOnClickListener { startActivity(InfoActivity::class.java) }
         third_card.setOnClickListener { startActivity(BankcardActivity::class.java) }
         third_bill.setOnClickListener { startActivity(BillActivity::class.java) }
         third_real.setOnClickListener {

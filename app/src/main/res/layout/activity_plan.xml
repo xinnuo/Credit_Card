@@ -12,8 +12,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            app:layout_scrollFlags="scroll|enterAlways">
+            android:orientation="vertical">
 
             <FrameLayout
                 android:layout_width="match_parent"
@@ -51,6 +50,7 @@
             android:layout_width="match_parent"
             android:layout_height="@dimen/line_height"
             android:background="@color/white"
+            android:visibility="gone"
             app:tabIndicatorColor="@color/colorAccent"
             app:tabSelectedTextColor="@color/colorAccent"
             app:tabTextColor="@color/gray" />
@@ -58,7 +58,8 @@
         <View
             android:layout_width="match_parent"
             android:layout_height="@dimen/divider_height"
-            android:background="@color/divider" />
+            android:background="@color/divider"
+            android:visibility="gone" />
 
     </android.support.design.widget.AppBarLayout>
 

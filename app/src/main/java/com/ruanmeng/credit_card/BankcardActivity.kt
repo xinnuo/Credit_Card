@@ -132,7 +132,7 @@ class BankcardActivity : BaseActivity() {
                             }
                 }
                 .register<CardData>(R.layout.item_bankcard_list) { data, injector ->
-                    injector.background(R.id.item_bankcard, R.drawable.rec_bg_414b80)
+                    injector.background(R.id.item_bankcard, R.drawable.rec_bg_blue)
                             .text(R.id.item_bankcard_hint, "新增信用卡")
                             .text(R.id.item_bankcard_name, data.bank + "信用卡")
                             .text(R.id.item_bankcard_tail,

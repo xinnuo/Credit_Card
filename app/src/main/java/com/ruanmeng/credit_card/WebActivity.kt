@@ -213,6 +213,10 @@ class WebActivity : BaseActivity() {
             }
             "收款支付" -> wv_web.loadUrl(intent.getStringExtra("url"))
             "支付验证" -> wv_web.loadUrl(intent.getStringExtra("url"))
+            "在线办卡" -> wv_web.loadUrl("http://partner.51credit.com/xzf/")
+            "快递查询" -> wv_web.loadUrl("http://www.kuaidi100.com/?from=openv")
+            "违章查询" -> wv_web.loadUrl("http://www.4008000000.com/weizhangchaxun.html?WT.mc_id=C03-BDJG-PEFIND-bd0027&WT.srch=1")
+            "安全保障" -> wv_web.loadUrl("https://m.ecpic.com.cn/mobilemsb/product/initPrd?mId=1678313&vCode=334216")
         }
     }
 
@@ -235,6 +239,12 @@ class WebActivity : BaseActivity() {
             settings.displayZoomControls = false
 
             webViewClient = object : WebViewClient() {
+
+                /* 这个事件，将在用户点击链接时触发。
+                 * 通过判断url，可确定如何操作，
+                 * 如果返回true，表示我们已经处理了这个request，
+                 * 如果返回false，表示没有处理，那么浏览器将会根据url获取网页
+                 */
                 override fun shouldOverrideUrlLoading(view: WebView, url: String): Boolean {
                     view.loadUrl(url)
                     return true
@@ -251,6 +261,10 @@ class WebActivity : BaseActivity() {
                 ActivityStack.getScreenManager().popActivities(
                         this@WebActivity::class.java,
                         CreditCardActivity::class.java)
+            }
+            "在线办卡", "快递查询", "违章查询", "安全保障" -> if (wv_web.canGoBack()) {
+                wv_web.goBack()
+                return
             }
         }
         super.onBackPressed()

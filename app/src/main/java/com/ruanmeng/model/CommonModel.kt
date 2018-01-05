@@ -24,6 +24,12 @@ data class CommonModel(
         var levelName: String = "",
 
         var msgs: List<CommonData>? = ArrayList(),
+        var `object`: List<CommonData>? = ArrayList(),
+
+        var areas: List<CommonData>? = ArrayList(),
+
+        var changge: String = "",
+        var imgs: List<String>? = ArrayList(),
 
         var msg: String = "",
         var msgcode: String = "",

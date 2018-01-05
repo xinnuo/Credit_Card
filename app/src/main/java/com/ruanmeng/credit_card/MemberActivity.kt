@@ -58,10 +58,10 @@ class MemberActivity : BaseActivity() {
                             .text(R.id.item_member_price,
                                     "￥${DecimalFormat("########0.0#####").format(data.cost.toDouble())}")
                             .checked(R.id.item_member_check, data.isChecked)
-                            .visibility(R.id.item_member_logo, if (data.levelName == "联合创始人") View.VISIBLE else View.GONE)
+                            .visibility(R.id.item_member_logo, if (data.levelName == "钻石代理") View.VISIBLE else View.GONE)
 
                             .visibility(R.id.item_member_divider1, if (list.indexOf(data) == 0) View.GONE else View.VISIBLE)
-                            .visibility(R.id.item_member_divider2, if (data.levelName == "联合创始人") View.VISIBLE else View.GONE)
+                            .visibility(R.id.item_member_divider2, if (data.levelName == "钻石代理") View.VISIBLE else View.GONE)
 
                             .clicked(R.id.item_member) {
                                 list.filter { it.isChecked }.forEach { it.isChecked = false }

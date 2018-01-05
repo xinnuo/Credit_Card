@@ -1,14 +1,26 @@
 package com.ruanmeng.credit_card
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.os.Bundle
 import android.support.design.widget.BottomSheetDialog
 import android.support.v7.widget.RecyclerView
+import android.text.Editable
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.TextView
+import com.lzy.extend.StringDialogCallback
+import com.lzy.extend.jackson.JacksonDialogCallback
+import com.lzy.okgo.OkGo
+import com.lzy.okgo.model.Response
 import com.ruanmeng.base.BaseActivity
+import com.ruanmeng.base.addItems
+import com.ruanmeng.base.getString
+import com.ruanmeng.base.toast
 import com.ruanmeng.model.CommonData
+import com.ruanmeng.model.CommonModel
+import com.ruanmeng.share.BaseHttp
+import com.ruanmeng.utils.ActivityStack
 import com.ruanmeng.utils.DialogHelper
 import com.ruanmeng.utils.TimeHelper
 import com.ruanmeng.view.FullyGridLayoutManager
@@ -36,9 +48,7 @@ class PlanBackActivity : BaseActivity() {
         plan_submit.setBackgroundResource(R.drawable.rec_bg_d0d0d0)
         plan_submit.isClickable = false
 
-        plan_type.addTextChangedListener(this@PlanBackActivity)
         plan_total.addTextChangedListener(this@PlanBackActivity)
-        plan_date.addTextChangedListener(this@PlanBackActivity)
     }
 
     @Suppress("DEPRECATION")
@@ -50,7 +60,7 @@ class PlanBackActivity : BaseActivity() {
                 DialogHelper.showItemDialog(
                         baseContext,
                         "选择还款类型",
-                        Arrays.asList("快速还款", "余额还款", "还款消费")) { position, name ->
+                        Arrays.asList(/*"快速还款", "余额还款", */"智能还款")) { _, name ->
                     plan_type.text = name
                 }
             }
@@ -178,20 +188,98 @@ class PlanBackActivity : BaseActivity() {
                 val count = plan_count.text.toString().toInt()
                 plan_count.text = (count + 1).toString()
             }
-            R.id.plan_submit -> { }
-            R.id.plan_preview -> { }
+            R.id.plan_submit -> {
+                /*if (plan_type.text.isEmpty()) {
+                    toast("请选择还款类型")
+                    return
+                }*/
+
+                if (list.isEmpty()) {
+                    toast("请选择还款日期")
+                    return
+                }
+
+                val repaymentDay = list.toString()
+                        .replace("[", "")
+                        .replace("]", "")
+                        .replace(" ", "")
+
+                OkGo.post<CommonModel>(BaseHttp.add_repaymentplan)
+                        .tag(this@PlanBackActivity)
+                        .isMultipart(true)
+                        .headers("token", getString("token"))
+                        .params("creditcardId", intent.getStringExtra("creditcardId"))
+                        .params("repaymentSum", plan_total.text.toString())
+                        .params("repaymentDay", repaymentDay)
+                        .params("repaymentNum", plan_count.text.toString())
+                        .params("cardType", "1")
+                        .execute(object : JacksonDialogCallback<CommonModel>(baseContext, CommonModel::class.java) {
+                            override fun onSuccess(response: Response<CommonModel>) {
+
+                                toast(response.body().msg)
+                                if (response.body().msgcode == "100") {
+                                    val list = ArrayList<CommonData>()
+                                    list.addItems(response.body().`object`)
+                                    val intent = Intent(baseContext, PlanPreviewActivity::class.java)
+                                    intent.putExtra("data", list)
+                                    startActivity(intent)
+
+                                    ActivityStack.getScreenManager().popActivities(this@PlanBackActivity::class.java)
+                                }
+                            }
+
+                        })
+            }
+            R.id.plan_preview -> {
+                if (plan_type.text.isEmpty()) {
+                    toast("请选择还款类型")
+                    return
+                }
+
+                if (list.isEmpty()) {
+                    toast("请选择还款日期")
+                    return
+                }
+
+                val repaymentDay = list.toString()
+                        .replace("[", "")
+                        .replace("]", "")
+                        .replace(" ", "")
+
+                intent.setClass(baseContext, PlanPreviewActivity::class.java)
+                intent.putExtra("repaymentType", plan_type.text.toString())
+                intent.putExtra("repaymentSum", plan_total.text.toString())
+                intent.putExtra("repaymentDay", repaymentDay)
+                intent.putExtra("repaymentNum", plan_count.text.toString())
+                startActivity(intent)
+            }
         }
     }
 
-    override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-        if (plan_type.text.isNotBlank()
-                && plan_total.text.isNotBlank()
-                && plan_date.text.isNotBlank()) {
+    override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
+        if (plan_total.text.isNotBlank()) {
             plan_submit.setBackgroundResource(R.drawable.rec_bg_blue)
             plan_submit.isClickable = true
         } else {
             plan_submit.setBackgroundResource(R.drawable.rec_bg_d0d0d0)
             plan_submit.isClickable = false
+        }
+
+        if (s.isNotEmpty()) {
+            if ("." == s.toString()) {
+                plan_total.setText("0.")
+                plan_total.setSelection(plan_total.text.length) //设置光标的位置
+            }
+        }
+    }
+
+    override fun afterTextChanged(s: Editable) {
+        val temp = s.toString()
+        val posDot = temp.indexOf(".")
+        if (posDot < 0) {
+            if (temp.length > 7) s.delete(7, 8)
+        } else {
+            if (temp.length - posDot - 1 > 2) s.delete(posDot + 3, posDot + 4)
         }
     }
 }

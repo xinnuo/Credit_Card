@@ -5,6 +5,8 @@ package com.ruanmeng.utils;
  * 作    者：小卷毛
  * 创建时间：2017-12-04 10:16
  * 描    述：银行卡校验，获取银行卡所属银行
+ *
+ * 支 付 宝：https://ccdcapi.alipay.com/validateAndCacheCardInfo.json?_input_charset=utf-8&cardNo=银行卡卡号&cardBinCheck=true
  */
 
 public class BankcardHelper {
