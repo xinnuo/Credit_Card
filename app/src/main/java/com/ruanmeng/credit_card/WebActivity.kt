@@ -239,6 +239,12 @@ class WebActivity : BaseActivity() {
             settings.displayZoomControls = false
 
             webViewClient = object : WebViewClient() {
+
+                /* 这个事件，将在用户点击链接时触发。
+                 * 通过判断url，可确定如何操作，
+                 * 如果返回true，表示我们已经处理了这个request，
+                 * 如果返回false，表示没有处理，那么浏览器将会根据url获取网页
+                 */
                 override fun shouldOverrideUrlLoading(view: WebView, url: String): Boolean {
                     view.loadUrl(url)
                     return true
@@ -255,6 +261,10 @@ class WebActivity : BaseActivity() {
                 ActivityStack.getScreenManager().popActivities(
                         this@WebActivity::class.java,
                         CreditCardActivity::class.java)
+            }
+            "在线办卡", "快递查询", "违章查询", "安全保障" -> if (wv_web.canGoBack()) {
+                wv_web.goBack()
+                return
             }
         }
         super.onBackPressed()

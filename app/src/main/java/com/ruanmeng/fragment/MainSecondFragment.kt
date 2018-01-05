@@ -50,7 +50,6 @@ class MainSecondFragment : BaseFragment() {
 
         val count = getString("msgCount", "0").toInt()
         main_hint.visibility = if (count > 0) View.VISIBLE else View.INVISIBLE
-        second_update.visibility = View.GONE
 
         second_web.apply {
             //支持javascript
