@@ -189,10 +189,10 @@ class PlanBackActivity : BaseActivity() {
                 plan_count.text = (count + 1).toString()
             }
             R.id.plan_submit -> {
-                if (plan_type.text.isEmpty()) {
+                /*if (plan_type.text.isEmpty()) {
                     toast("请选择还款类型")
                     return
-                }
+                }*/
 
                 if (list.isEmpty()) {
                     toast("请选择还款日期")
@@ -209,7 +209,6 @@ class PlanBackActivity : BaseActivity() {
                         .isMultipart(true)
                         .headers("token", getString("token"))
                         .params("creditcardId", intent.getStringExtra("creditcardId"))
-                        .params("repaymentType", plan_type.text.toString())
                         .params("repaymentSum", plan_total.text.toString())
                         .params("repaymentDay", repaymentDay)
                         .params("repaymentNum", plan_count.text.toString())

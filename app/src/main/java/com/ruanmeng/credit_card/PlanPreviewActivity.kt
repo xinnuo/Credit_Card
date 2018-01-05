@@ -30,7 +30,12 @@ class PlanPreviewActivity : BaseActivity() {
 
     override fun init_title() {
         super.init_title()
-        swipe_refresh.refresh { getData() }
+        swipe_refresh.refresh {
+            window.decorView.postDelayed({ runOnUiThread {
+                swipe_refresh.isRefreshing = false
+                mAdapter.updateData(list).notifyDataSetChanged()
+            } }, 500)
+        }
         recycle_list.load_Linear(baseContext)
 
         mAdapter = SlimAdapter.create()

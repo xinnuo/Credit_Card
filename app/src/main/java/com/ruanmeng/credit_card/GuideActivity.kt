@@ -70,7 +70,7 @@ class GuideActivity : BaseActivity() {
 
         guide_in.setOnClickListener { quitGuide() }
 
-        timer = object : CountDownTimer(3000, 1000) {
+        timer = object : CountDownTimer(4000, 1000) {
 
             @SuppressLint("SetTextI18n")
             override fun onTick(millisUntilFinished: Long) {
@@ -100,6 +100,7 @@ class GuideActivity : BaseActivity() {
         }
         mLoopAdapter.setImgs(imgs)
         guide_in.visibility = View.VISIBLE
+        if (imgs.size == 1) timer.start()
     }
 
     override fun getData() {
