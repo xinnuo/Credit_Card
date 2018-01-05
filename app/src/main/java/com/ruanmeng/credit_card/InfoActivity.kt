@@ -112,10 +112,16 @@ class InfoActivity : BaseActivity() {
                         .previewImage(true)
                         // 是否可预览视频 true or false
                         .previewVideo(false)
+                        // 是否可播放音频 true or false
+                        .enablePreviewAudio(false)
                         // 是否显示拍照按钮 true or false
                         .isCamera(true)
+                        // 拍照保存图片格式后缀，默认jpeg
+                        .imageFormat(PictureMimeType.PNG)
                         // 图片列表点击 缩放效果 默认true
                         .isZoomAnim(true)
+                        // glide 加载图片大小 0~1之间 如设置 .glideOverride()无效
+                        // .sizeMultiplier(0.5f)
                         // 自定义拍照保存路径,可不填
                         .setOutputCameraPath(Const.SAVE_FILE)
                         // 是否压缩 true or false

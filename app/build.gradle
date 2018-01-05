@@ -97,10 +97,11 @@ dependencies {
     implementation 'cn.bingoogolapple:bga-qrcodecore:1.1.9@aar'
     implementation 'cn.bingoogolapple:bga-zxing:1.1.9@aar'
 
+    implementation 'com.github.LuckSiege.PictureSelector:picture_library:v2.1.7'
+
     implementation 'net.idik:slimadapter:2.1.2'
     implementation 'com.yanzhenjie:permission:1.1.2'
     implementation 'org.greenrobot:eventbus:3.0.0'
-    implementation 'com.github.LuckSiege.PictureSelector:picture_library:v2.1.5'
     implementation 'com.makeramen:roundedimageview:2.3.0'
     implementation 'com.weigan:loopView:0.1.2'
     implementation 'com.github.santalu:mask-edittext:1.0.1'

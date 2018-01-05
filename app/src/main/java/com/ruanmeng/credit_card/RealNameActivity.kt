@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.text.InputFilter
 import android.view.View
 import com.luck.picture.lib.PictureSelector
+import com.luck.picture.lib.compress.Luban
 import com.luck.picture.lib.config.PictureConfig
 import com.luck.picture.lib.config.PictureMimeType
 import com.luck.picture.lib.entity.LocalMedia
@@ -18,9 +19,11 @@ import com.ruanmeng.share.Const
 import com.ruanmeng.utils.ActivityStack
 import com.ruanmeng.utils.CommonUtil
 import com.ruanmeng.utils.NameLengthFilter
+import io.reactivex.Flowable
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.activity_real_name.*
 import java.io.File
-import java.util.ArrayList
 
 class RealNameActivity : BaseActivity() {
 
@@ -139,6 +142,7 @@ class RealNameActivity : BaseActivity() {
                 .previewImage(true)
                 .previewVideo(false)
                 .isCamera(true)
+                .imageFormat(PictureMimeType.PNG)
                 .isZoomAnim(true)
                 .setOutputCameraPath(Const.SAVE_FILE)
                 .compress(true)
@@ -181,6 +185,8 @@ class RealNameActivity : BaseActivity() {
                                     .load(image_first)
                                     .dontAnimate()
                                     .into(real_img1)
+
+                            compress(1, selectList[0].compressPath)
                         }
                         2 -> {
                             image_second = selectList[0].compressPath
@@ -189,6 +195,8 @@ class RealNameActivity : BaseActivity() {
                                     .load(image_second)
                                     .dontAnimate()
                                     .into(real_img2)
+
+                            compress(2, selectList[0].compressPath)
                         }
                         3 -> {
                             image_third = selectList[0].compressPath
@@ -197,6 +205,8 @@ class RealNameActivity : BaseActivity() {
                                     .load(image_third)
                                     .dontAnimate()
                                     .into(real_img3)
+
+                            compress(3, selectList[0].compressPath)
                         }
                         4 -> {
                             image_fourth = selectList[0].compressPath
@@ -205,11 +215,34 @@ class RealNameActivity : BaseActivity() {
                                     .load(image_fourth)
                                     .dontAnimate()
                                     .into(real_img4)
+
+                            compress(4, selectList[0].compressPath)
                         }
                     }
                 }
             }
         }
+    }
+
+    private fun compress(type: Int, path: String) {
+        Flowable.just<List<LocalMedia>>(listOf(LocalMedia().apply { this.path = path }))
+                .map { list ->
+                    return@map Luban.with(baseContext)
+                            .setTargetDir(cacheDir.absolutePath)
+                            .ignoreBy(500)
+                            .loadLocalMedia(list)
+                            .get()
+                }
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe { files ->
+                    when (type) {
+                        1 -> image_first = files[0].absolutePath
+                        2 -> image_second = files[0].absolutePath
+                        3 -> image_third = files[0].absolutePath
+                        4 -> image_fourth = files[0].absolutePath
+                    }
+                }
     }
 
     override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
