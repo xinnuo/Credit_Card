@@ -99,6 +99,8 @@ dependencies {
 
     implementation 'com.github.LuckSiege.PictureSelector:picture_library:v2.1.7'
 
+    implementation 'com.qianwen:update-app-kotlin:1.1.0'
+
     implementation 'net.idik:slimadapter:2.1.2'
     implementation 'com.yanzhenjie:permission:1.1.2'
     implementation 'org.greenrobot:eventbus:3.0.0'

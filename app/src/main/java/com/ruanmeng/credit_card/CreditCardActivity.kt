@@ -72,11 +72,7 @@ class CreditCardActivity : BaseActivity() {
     override fun doClick(v: View) {
         super.doClick(v)
         when (v.id) {
-            R.id.card_bank_ll -> {
-                val intent = Intent(baseContext, BankSelectActivity::class.java)
-                intent.putExtra("title", "信用卡")
-                startActivity(intent)
-            }
+            R.id.card_bank_ll -> startActivity(BankSelectActivity::class.java)
             R.id.back_hint -> {
                 DialogHelper.showDialog(
                         baseContext,

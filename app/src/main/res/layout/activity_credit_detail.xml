@@ -110,7 +110,7 @@
                 android:id="@+id/credit_wei"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/dimen_size_45.5"
-                app:sBottomLineMargin="10dp"
+                app:sBottomLineMargin="0dp"
                 app:sLeftTextColor="@color/black_dark"
                 app:sLeftTextMarginLeft="@dimen/dimen_size_10"
                 app:sLeftTextString="未还金额"
@@ -120,21 +120,6 @@
                 app:sRightTextColor="@color/black_dark"
                 app:sRightTextMarginRight="@dimen/dimen_size_10"
                 app:sRightTextString="0.0" />
-
-            <com.allen.library.SuperTextView
-                android:id="@+id/credit_dang"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/dimen_size_45.5"
-                app:sBottomLineMargin="0dp"
-                app:sLeftTextColor="@color/black_dark"
-                app:sLeftTextMarginLeft="@dimen/dimen_size_10"
-                app:sLeftTextString="当前保证金"
-                app:sLineShow="bottom"
-                app:sRightIconMarginRight="@dimen/dimen_size_10"
-                app:sRightIconSize="13dp"
-                app:sRightTextColor="@color/black_dark"
-                app:sRightTextMarginRight="@dimen/dimen_size_10"
-                app:sRightTextString="￥0.0" />
 
             <LinearLayout
                 android:id="@+id/credit_add"

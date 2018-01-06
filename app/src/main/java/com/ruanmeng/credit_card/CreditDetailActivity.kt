@@ -146,6 +146,12 @@ class CreditDetailActivity : BaseActivity() {
                         creditcard = obj.getString("creditcard")
                         bank = obj.getString("bank")
 
+                        val list_bank = resources.getStringArray(R.array.bank_credit).asList()
+                        if (!list_bank.contains(bank)) {
+                            credit_add.visibility = View.GONE
+                            credit_look.visibility = View.GONE
+                        }
+
                         when (bank) {
                             "工商银行" -> credit_img.setImageResource(R.mipmap.bank01)
                             "农业银行" -> credit_img.setImageResource(R.mipmap.bank02)
@@ -175,11 +181,6 @@ class CreditDetailActivity : BaseActivity() {
                         if (!obj.isNull("nopaySum")) {
                             val nopaySum = DecimalFormat("########0.0#####").format(obj.getString("nopaySum").toDouble())
                             credit_wei.setRightString(NumberHelper.fmtMicrometer(nopaySum))
-                        }
-
-                        if (!obj.isNull("currentSum")) {
-                            val currentSum = DecimalFormat("########0.0#####").format(obj.getString("currentSum").toDouble())
-                            credit_dang.setRightString("￥" + NumberHelper.fmtMicrometer(currentSum))
                         }
                     }
 

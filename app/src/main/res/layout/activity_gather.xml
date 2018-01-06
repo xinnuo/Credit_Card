@@ -63,6 +63,46 @@
             android:layout_marginRight="@dimen/dimen_size_10"
             android:background="@color/divider" />
 
+        <LinearLayout
+            android:id="@+id/gather_type_ll"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/line_height"
+            android:gravity="center_vertical"
+            android:onClick="doClick"
+            android:paddingLeft="@dimen/dimen_size_10"
+            android:paddingRight="@dimen/dimen_size_10">
+
+            <TextView
+                style="@style/Font14_black_dark"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="收款方式" />
+
+            <TextView
+                android:id="@+id/gather_type"
+                style="@style/Font14_black_dark"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="@dimen/dimen_size_5"
+                android:layout_weight="1"
+                android:gravity="end"
+                android:hint="请选择收款方式" />
+
+            <ImageView
+                android:layout_width="13dp"
+                android:layout_height="13dp"
+                android:src="@mipmap/arrow_right"
+                tools:ignore="ContentDescription" />
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/divider_height"
+            android:layout_marginLeft="@dimen/dimen_size_10"
+            android:layout_marginRight="@dimen/dimen_size_10"
+            android:background="@color/divider" />
+
         <TextView
             style="@style/Font14_black_dark"
             android:layout_width="match_parent"

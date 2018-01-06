@@ -37,9 +37,9 @@ public class BaseHttp {
     public static String msgInfo_details = baseIp + "/msgInfo_details.rm";       //消息详细√
     public static String get_msgCount = baseIp + "/get_msgCount.rm";             //未读消息数量√
 
-    public static String up_vip_list = baseIp + "/up_vip_list.rm"; //升级列表√
+    public static String up_vip_list = baseIp + "/up_vip_list.rm";       //升级列表√
     public static String card_Info_list = baseIp + "/card_Info_list.rm"; //银行卡列表√
-    public static String add_upvip_sub = baseIp + "/add_upvip_sub.rm"; //升级会员√
+    public static String add_upvip_sub = baseIp + "/add_upvip_sub.rm";   //升级会员√
 
     public static String user_msg_data = baseIp + "/user_msg_data.rm";                     //用户个人资料√
     public static String userinfo_uploadhead_sub = baseIp + "/userinfo_uploadhead_sub.rm"; //修改头像√
@@ -57,6 +57,7 @@ public class BaseHttp {
     public static String city1_data = baseIp + "/city1_data.rm";                           //获取所有省份√
     public static String city2_data = baseIp + "/city2_data.rm";                           //获取某省份所有市√
     public static String appChanpay_backOpenCard = baseIp + "/appChanpay_backOpenCard.rm"; //绑卡√
+    public static String get_versioninfo = baseIp + "/get_versioninfo.rm";                 //获取版本信息√
 
     public static String identify_othercode = baseIp + "/identify_othercode.rm";     //获取其他验证码√
     public static String depositcard_add_sub = baseIp + "/depositcard_add_sub.rm";   //新增储蓄卡√

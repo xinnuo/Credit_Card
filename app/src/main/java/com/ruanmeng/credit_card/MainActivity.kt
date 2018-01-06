@@ -2,6 +2,7 @@ package com.ruanmeng.credit_card
 
 import android.content.Intent
 import android.os.Bundle
+import android.os.Environment
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentPagerAdapter
 import android.view.KeyEvent
@@ -20,6 +21,12 @@ import com.ruanmeng.fragment.MainThirdFragment
 import com.ruanmeng.model.CountMessageEvent
 import com.ruanmeng.share.BaseHttp
 import com.ruanmeng.share.Const
+import com.ruanmeng.utils.OkGoUpdateHttpUtil
+import com.ruanmeng.utils.Tools
+import com.vector.update_app.UpdateAppBean
+import com.vector.update_app.UpdateAppManager
+import com.vector.update_app_kotlin.check
+import com.vector.update_app_kotlin.updateApp
 import io.rong.imkit.RongIM
 import io.rong.imlib.RongIMClient
 import kotlinx.android.synthetic.main.activity_main.*
@@ -44,6 +51,8 @@ class MainActivity : BaseActivity() {
         if (getString("rongtoken").isNotEmpty()) {
             connect(getString("rongtoken"))
         }
+
+        checkUpdate()
 
         main_check1.performClick()
     }
@@ -90,11 +99,7 @@ class MainActivity : BaseActivity() {
         when (v.id) {
             R.id.main_right -> startActivity(MessageActivity::class.java)
             R.id.first_agency -> startActivity(AgencyActivity::class.java)
-            R.id.first_pay -> {
-                val intent = Intent(baseContext, BankcardActivity::class.java)
-                intent.putExtra("isPlan", true)
-                startActivity(intent)
-            }
+            R.id.first_pay -> startActivity(RepaymentActivity::class.java)
             R.id.first_get -> {
                 when (getString("isPass")) {
                     "-1" -> toast("实名认证审核未通过，无法进行收款")
@@ -227,5 +232,58 @@ class MainActivity : BaseActivity() {
                 OkLogger.e("融云token错误！！！")
             }
         })
+    }
+
+    /**
+     * 版本更新
+     */
+    private fun checkUpdate() {
+        //下载路径
+        val path = Environment.getExternalStorageDirectory().absolutePath + Const.SAVE_FILE
+
+        updateApp(BaseHttp.get_versioninfo, OkGoUpdateHttpUtil()) {
+            //设置请求方式，默认get
+            isPost = true
+            //设置apk下砸路径
+            targetPath = path
+        }.check {
+            parseJson {
+                val obj = JSONObject(it)
+                val version_new = obj.optString("versionNo").replace(".", "").toInt()
+                val version_old = Tools.getVersion(baseContext).replace(".", "").toInt()
+
+                UpdateAppBean()
+                        //（必须）是否更新Yes,No
+                        .setUpdate(if (version_new > version_old) "Yes" else "No")
+                        //（必须）新版本号，
+                        .setNewVersion(obj.optString("versionNo"))
+                        //（必须）下载地址
+                        // .setApkFileUrl(obj.optString("url"))
+                        .setApkFileUrl(Const.DOWNLOAD_URL)
+                        //（必须）更新内容
+                        .setUpdateLog(obj.optString("content"))
+                        //是否强制更新，可以不设置
+                        .setConstraint(obj.optString("forces") == "1")
+            }
+            hasNewApp { updateApp, updateAppManager -> showDownloadDialog(updateApp, updateAppManager) }
+        }
+    }
+
+    /**
+     * 自定义对话框
+     */
+    private fun showDownloadDialog(updateApp: UpdateAppBean, updateAppManager: UpdateAppManager) {
+        dialog("版本更新", "是否升级到${updateApp.newVersion}版本？\n\n${updateApp.updateLog}") {
+            positiveButton("升级") { }
+            cancellable(!updateApp.isConstraint)
+            onKey { _, _ -> return@onKey updateApp.isConstraint }
+            if (!updateApp.isConstraint) negativeButton("暂不升级") { }
+            show()
+            // 必须要先调show()方法，后面的getButton才有效
+            getPositiveButton().setOnClickListener {
+                if (!updateApp.isConstraint) dismiss()
+                updateAppManager.download()
+            }
+        }
     }
 }

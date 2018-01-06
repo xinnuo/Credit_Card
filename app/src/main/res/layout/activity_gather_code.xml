@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginLeft="@dimen/dimen_size_30"
+        android:layout_marginRight="@dimen/dimen_size_30"
+        android:background="@color/white"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        android:layout_marginBottom="@dimen/dimen_size_40"
+        android:padding="@dimen/dimen_size_10">
+
+        <ImageView
+            android:id="@+id/gather_qrcode"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="@dimen/dimen_size_20"
+            tools:ignore="ContentDescription" />
+
+        <TextView
+            style="@style/Font13_light"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/dimen_size_15"
+            android:text="扫一扫上面的二维码，在线收款" />
+
+    </LinearLayout>
+
+</FrameLayout>
