@@ -67,30 +67,6 @@ public class PaaCreator {
 		Log.d("PaaCreator", "PaaCreator md5Str " + md5Str);
 		try {
 			paaParams.put("signMsg", md5Str);
-//				paaParams.put("ship_to_country", "US");
-//				paaParams.put("ship_to_state", "AL");
-//				paaParams.put("ship_to_city", "city");
-//				paaParams.put("ship_to_street1", "street_1");
-//				paaParams.put("ship_to_street2", "street_2"); 
-//				paaParams.put("ship_to_phonenumber", "13812345678");
-//				paaParams.put("ship_to_postalcode", "20004");
-//				paaParams.put("ship_to_firstname", "Smith");
-//				paaParams.put("ship_to_lastname", "Black");
-//				paaParams.put("registration_name", "abc");
-//				paaParams.put("registration_email", "abc@gmail.com");
-//				paaParams.put("registration_phone", "999-13800000000");
-//				paaParams.put("buyerid_period", "200");
-//				paaParams.put("fnpay_mode", "1");
-//				paaParams.put("bill_firstname", "handon");
-//				paaParams.put("bill_lastname", "hao");
-//				paaParams.put("expireddate", "1919");
-//				paaParams.put("cvv2", "888");
-//				paaParams.put("bill_email", "abc@gmail.com");
-//				paaParams.put("bill_country", "US"); 
-//				paaParams.put("bill_address", "billaddress");
-//				paaParams.put("bill_city", "billcity");
-//				paaParams.put("bill_state", "IL");
-//				paaParams.put("bill_zip", "12345");
 		} catch (JSONException e) {
 			e.printStackTrace();
 		}
