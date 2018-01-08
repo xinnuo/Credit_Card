@@ -24,7 +24,7 @@
                 android:layout_width="@dimen/dimen_size_35"
                 android:layout_height="@dimen/dimen_size_35"
                 android:scaleType="centerCrop"
-                android:src="@mipmap/group03"
+                android:src="@mipmap/default_logo"
                 app:riv_oval="true" />
 
             <LinearLayout

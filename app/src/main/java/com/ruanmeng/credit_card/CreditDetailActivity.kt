@@ -48,7 +48,7 @@ class CreditDetailActivity : BaseActivity() {
         super.doClick(v)
         when (v.id) {
             R.id.left_nav_right -> {
-                val dialog = ActionSheetDialog(this, arrayOf("删除该信用卡", "预约删除未执行的计划"), null)
+                val dialog = ActionSheetDialog(this, arrayOf("删除该信用卡"), null)
                 dialog.isTitleShow(false)
                         .lvBgColor(resources.getColor(R.color.white))
                         .dividerColor(resources.getColor(R.color.divider))
@@ -89,7 +89,6 @@ class CreditDetailActivity : BaseActivity() {
                                         })
                             }
                         }
-                        1 -> { }
                     }
                 }
             }
@@ -127,7 +126,11 @@ class CreditDetailActivity : BaseActivity() {
                     }
                 }
             }
-            R.id.credit_look -> startActivity(PlanActivity::class.java)
+            R.id.credit_look -> {
+                val intent = Intent(baseContext, PlanActivity::class.java)
+                intent.putExtra("creditcardId", creditcardId)
+                startActivity(intent)
+            }
         }
     }
 

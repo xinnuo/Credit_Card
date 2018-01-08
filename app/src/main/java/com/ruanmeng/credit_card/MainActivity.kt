@@ -10,6 +10,7 @@ import android.view.View
 import android.widget.CompoundButton
 import cn.jpush.android.api.JPushInterface
 import com.lzy.extend.StringDialogCallback
+import com.lzy.extend.jackson.JacksonDialogCallback
 import com.lzy.okgo.OkGo
 import com.lzy.okgo.model.Response
 import com.lzy.okgo.utils.OkLogger
@@ -18,6 +19,8 @@ import com.ruanmeng.base.*
 import com.ruanmeng.fragment.MainFirstFragment
 import com.ruanmeng.fragment.MainSecondFragment
 import com.ruanmeng.fragment.MainThirdFragment
+import com.ruanmeng.model.CommonData
+import com.ruanmeng.model.CommonModel
 import com.ruanmeng.model.CountMessageEvent
 import com.ruanmeng.share.BaseHttp
 import com.ruanmeng.share.Const
@@ -32,8 +35,12 @@ import io.rong.imlib.RongIMClient
 import kotlinx.android.synthetic.main.activity_main.*
 import org.greenrobot.eventbus.EventBus
 import org.json.JSONObject
+import java.util.ArrayList
 
 class MainActivity : BaseActivity() {
+
+    private var isNewVersion = false
+    private var isFirst = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -123,9 +130,6 @@ class MainActivity : BaseActivity() {
                 startActivity(intent)
             }
             R.id.first_new -> {
-                toast("该功能正在开发中")
-                return
-
                 val intent = Intent(baseContext, WebActivity::class.java)
                 intent.putExtra("title", "信用卡攻略")
                 startActivity(intent)
@@ -153,6 +157,8 @@ class MainActivity : BaseActivity() {
                         putString("real_name", if (obj.isNull("userName")) "" else obj.getString("userName"))
                         putString("real_sex", if (obj.isNull("sex")) "" else obj.getString("sex"))
                         putString("real_IDCard", if (obj.isNull("cardNo")) "" else obj.getString("cardNo"))
+
+                        getCardData()
                     }
 
                 })
@@ -174,6 +180,46 @@ class MainActivity : BaseActivity() {
                         val msgCount = JSONObject(response.body()).getString("count")
                         putString("msgCount", msgCount)
                         EventBus.getDefault().post(CountMessageEvent("未读消息", msgCount))
+                    }
+
+                })
+    }
+
+    private fun getCardData() {
+        OkGo.post<CommonModel>(BaseHttp.depositcard_data)
+                .tag(this@MainActivity)
+                .headers("token", getString("token"))
+                .execute(object : JacksonDialogCallback<CommonModel>(baseContext, CommonModel::class.java) {
+
+                    override fun onSuccess(response: Response<CommonModel>) {
+
+                        val list = ArrayList<CommonData>()
+                        list.addItems(response.body().depositcards)
+
+                        if (!isFirst && !isNewVersion) {
+                            isFirst = true
+
+                            when (getString("isPass")) {
+                                "-1" -> showHintDialog(
+                                        "实名认证审核未通过，是否重新认证？",
+                                        "去认证") {
+                                    startActivity(RealNameActivity::class.java)
+                                }
+                                "0" -> { }
+                                "1" -> if (list.isEmpty()) {
+                                    showHintDialog(
+                                            "您还未绑定储蓄卡，是否现在去添加储蓄卡？",
+                                            "去添加") {
+                                        startActivity(BankcardActivity::class.java)
+                                    }
+                                }
+                                else -> showHintDialog(
+                                        "您还没有进行实名认证，是否现在去认证？",
+                                        "去认证") {
+                                    startActivity(RealNameActivity::class.java)
+                                }
+                            }
+                        }
                     }
 
                 })
@@ -234,6 +280,13 @@ class MainActivity : BaseActivity() {
         })
     }
 
+    private fun showHintDialog(hint: String, hintButton: String, click: () -> Unit) {
+        dialog("温馨提示", hint) {
+            positiveButton(hintButton) { click() }
+            show()
+        }
+    }
+
     /**
      * 版本更新
      */
@@ -265,7 +318,10 @@ class MainActivity : BaseActivity() {
                         //是否强制更新，可以不设置
                         .setConstraint(obj.optString("forces") == "1")
             }
-            hasNewApp { updateApp, updateAppManager -> showDownloadDialog(updateApp, updateAppManager) }
+            hasNewApp { updateApp, updateAppManager ->
+                isNewVersion = true
+                showDownloadDialog(updateApp, updateAppManager)
+            }
         }
     }
 

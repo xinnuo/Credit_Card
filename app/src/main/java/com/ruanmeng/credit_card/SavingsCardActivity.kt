@@ -160,8 +160,7 @@ class SavingsCardActivity : BaseActivity() {
                 })
             }
             R.id.card_sure -> {
-                if (!BankcardHelper.checkBankCard(et_card.rawText)
-                        || BankCardUtil(et_card.rawText).cardType != "储蓄卡") {
+                if (!BankcardHelper.checkBankCard(et_card.rawText)) {
                     toast("请输入正确的储蓄卡卡号")
                     return
                 }

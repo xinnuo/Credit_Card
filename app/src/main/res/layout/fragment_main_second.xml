@@ -33,10 +33,11 @@
                 android:id="@+id/second_update"
                 style="@style/Font15_white"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/btn_height"
+                android:layout_height="@dimen/dimen_size_40"
                 android:layout_margin="@dimen/dimen_size_20"
                 android:background="@drawable/rec_bg_blue"
                 android:onClick="doClick"
+                android:textSize="@dimen/sp_size_20"
                 android:text="升级会员" />
 
         </LinearLayout>

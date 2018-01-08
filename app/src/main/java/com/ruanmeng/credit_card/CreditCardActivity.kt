@@ -180,8 +180,7 @@ class CreditCardActivity : BaseActivity() {
                 })
             }
             R.id.card_sure -> {
-                if (!BankcardHelper.checkBankCard(et_card.rawText)
-                        || BankCardUtil(et_card.rawText).cardType != "信用卡(贷记卡)") {
+                if (!BankcardHelper.checkBankCard(et_card.rawText)) {
                     toast("请输入正确的信用卡卡号")
                     return
                 }

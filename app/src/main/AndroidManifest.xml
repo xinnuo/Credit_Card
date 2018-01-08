@@ -127,6 +127,15 @@
         <activity
             android:name=".BankCodeActivity"
             android:screenOrientation="portrait" />
+        <activity
+            android:name=".GatherCodeActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".RepaymentActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".PlanDownActivity"
+            android:screenOrientation="portrait" />
 
         <!-- 融云即时通讯 start -->
         <!-- 会话界面 -->
@@ -210,8 +219,7 @@
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Translucent.NoTitleBar" />
         <!-- 微信分享 end -->
-        <activity android:name=".GatherCodeActivity" />
-        <activity android:name=".RepaymentActivity"></activity>
+
     </application>
 
 </manifest>

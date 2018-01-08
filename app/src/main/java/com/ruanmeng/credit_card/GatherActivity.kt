@@ -12,7 +12,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
-import com.flyco.dialog.widget.base.BottomBaseDialog
 import com.jungly.gridpasswordview.GridPasswordView
 import com.jungly.gridpasswordview.PasswordType
 import com.lzy.extend.StringDialogCallback
