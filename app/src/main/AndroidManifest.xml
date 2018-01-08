@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.ruanmeng.credit_card">
 
     <application
@@ -9,7 +10,8 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
+        android:theme="@style/AppTheme"
+        tools:ignore="AllowBackup">
         <activity
             android:name=".GuideActivity"
             android:screenOrientation="portrait">
@@ -125,6 +127,15 @@
         <activity
             android:name=".BankCodeActivity"
             android:screenOrientation="portrait" />
+        <activity
+            android:name=".GatherCodeActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".RepaymentActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".PlanDownActivity"
+            android:screenOrientation="portrait" />
 
         <!-- 融云即时通讯 start -->
         <!-- 会话界面 -->
@@ -146,7 +157,8 @@
         <!-- 必须实现，否则会收不到推送消息，自定义的类继承自 PushMessageReceiver -->
         <receiver
             android:name="com.ruanmeng.receiver.RongPushReceiver"
-            android:exported="true">
+            android:exported="true"
+            tools:ignore="ExportedReceiver">
             <intent-filter>
                 <action android:name="io.rong.push.intent.MESSAGE_ARRIVED" />
                 <action android:name="io.rong.push.intent.MI_MESSAGE_ARRIVED" />
@@ -187,7 +199,9 @@
         <!-- Required since 3.0.7 -->
         <!-- 新的tag/alias接口结果返回需要开发者配置一个自定的广播 -->
         <!-- 该广播需要继承JPush提供的JPushMessageReceiver类, 并如下新增一个 Intent-Filter -->
-        <receiver android:name="com.ruanmeng.receiver.JPushMessageReceiver">
+        <receiver
+            android:name="com.ruanmeng.receiver.JPushMessageReceiver"
+            tools:ignore="ExportedReceiver">
             <intent-filter>
                 <action android:name="cn.jpush.android.intent.RECEIVE_MESSAGE" />
 

@@ -11,6 +11,7 @@ import com.ruanmeng.model.CommonData
 import com.ruanmeng.model.CommonModel
 import com.ruanmeng.share.BaseHttp
 import com.ruanmeng.utils.AnimationHelper
+import com.ruanmeng.utils.BankCardUtil
 import com.ruanmeng.utils.NumberHelper
 import com.ruanmeng.utils.PopupWindowUtils
 import kotlinx.android.synthetic.main.activity_bill.*
@@ -59,15 +60,20 @@ class BillActivity : BaseActivity() {
                             .visibility(R.id.item_first_divider2, if (list.indexOf(data) != list.size - 1) View.GONE else View.VISIBLE)
 
                             .with<RoundedImageView>(R.id.item_first_img) { view ->
-                                when (data.payType) {
-                                    "还款消费" -> view.setImageResource(R.mipmap.group01)
-                                    "快速还款" -> view.setImageResource(R.mipmap.group02)
-                                    "智能还款" -> view.setImageResource(R.mipmap.group02)
-                                    "余额还款" -> view.setImageResource(R.mipmap.group03)
-                                    "消费计划" -> view.setImageResource(R.mipmap.group04)
-                                    "收款" -> view.setImageResource(R.mipmap.group03)
-                                    "提现" -> view.setImageResource(R.mipmap.group05)
-                                    "充值" -> view.setImageResource(R.mipmap.group06)
+                                when (BankCardUtil(data.cardNo).bankName) {
+                                    "工商银行" -> view.setImageResource(R.mipmap.bank01)
+                                    "农业银行" -> view.setImageResource(R.mipmap.bank02)
+                                    "招商银行" -> view.setImageResource(R.mipmap.bank03)
+                                    "建设银行" -> view.setImageResource(R.mipmap.bank04)
+                                    "交通银行" -> view.setImageResource(R.mipmap.bank05)
+                                    "中信银行" -> view.setImageResource(R.mipmap.bank06)
+                                    "光大银行" -> view.setImageResource(R.mipmap.bank07)
+                                    "北京银行" -> view.setImageResource(R.mipmap.bank08)
+                                    "平安银行" -> view.setImageResource(R.mipmap.bank09)
+                                    "中国银行" -> view.setImageResource(R.mipmap.bank10)
+                                    "兴业银行" -> view.setImageResource(R.mipmap.bank11)
+                                    "民生银行" -> view.setImageResource(R.mipmap.bank12)
+                                    "华夏银行" -> view.setImageResource(R.mipmap.bank13)
                                 }
                             }
 
@@ -134,7 +140,7 @@ class BillActivity : BaseActivity() {
                         swipe_refresh.isRefreshing = false
                         isLoadingMore = false
 
-                        empty_view.visibility = if (list.size == 0) View.VISIBLE else View.GONE
+                        empty_view.visibility = if (list.isEmpty()) View.VISIBLE else View.GONE
                     }
 
                 })

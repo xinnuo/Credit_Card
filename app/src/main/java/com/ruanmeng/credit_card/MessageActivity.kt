@@ -96,7 +96,7 @@ class MessageActivity : BaseActivity() {
                         swipe_refresh.isRefreshing = false
                         isLoadingMore = false
 
-                        empty_view.visibility = if (list.size == 0) View.VISIBLE else View.GONE
+                        empty_view.visibility = if (list.isEmpty()) View.VISIBLE else View.GONE
                     }
 
                 })

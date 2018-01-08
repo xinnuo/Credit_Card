@@ -1,8 +1,9 @@
 package com.ruanmeng.credit_card
 
+import android.content.Intent
 import android.os.Bundle
-import android.support.design.widget.TabLayout
 import android.view.View
+import com.lzy.extend.StringDialogCallback
 import com.lzy.extend.jackson.JacksonDialogCallback
 import com.lzy.okgo.OkGo
 import com.lzy.okgo.model.Response
@@ -11,9 +12,9 @@ import com.ruanmeng.base.*
 import com.ruanmeng.model.CommonData
 import com.ruanmeng.model.CommonModel
 import com.ruanmeng.share.BaseHttp
+import com.ruanmeng.utils.BankCardUtil
+import com.ruanmeng.utils.DialogHelper
 import com.ruanmeng.utils.NumberHelper
-import com.ruanmeng.utils.Tools
-import kotlinx.android.synthetic.main.activity_plan.*
 import kotlinx.android.synthetic.main.layout_empty.*
 import kotlinx.android.synthetic.main.layout_list.*
 import net.idik.lib.slimadapter.SlimAdapter
@@ -25,36 +26,15 @@ class PlanActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_plan)
-        setToolbarVisibility(false)
-        init_title()
+        init_title("全部计划")
 
-        mPosition = 1
-        updateList()
+        swipe_refresh.isRefreshing = true
+        getData(pageNum)
     }
 
     override fun init_title() {
+        super.init_title()
         empty_hint.text = "暂无相关计划信息！"
-
-        plan_tab.apply {
-            addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
-
-                override fun onTabReselected(tab: TabLayout.Tab) {}
-                override fun onTabUnselected(tab: TabLayout.Tab) {}
-
-                override fun onTabSelected(tab: TabLayout.Tab) {
-                    mPosition = 1 - tab.position
-                    OkGo.getInstance().cancelTag(this@PlanActivity)
-
-                    window.decorView.postDelayed({ runOnUiThread { updateList() } }, 300)
-                }
-
-            })
-
-            addTab(this.newTab().setText("还款计划"), true)
-            addTab(this.newTab().setText("消费计划"), false)
-
-            post { Tools.setIndicator(this, 50, 50) }
-        }
 
         swipe_refresh.refresh { getData(1) }
         recycle_list.load_Linear(baseContext, swipe_refresh) {
@@ -65,39 +45,81 @@ class PlanActivity : BaseActivity() {
         }
 
         mAdapter = SlimAdapter.create()
-                .register<CommonData>(R.layout.item_plan_list) { data, injector ->
+                .register<CommonData>(R.layout.item_plan_up_list) { data, injector ->
                     injector.text(R.id.item_plan_name, data.repaymentType)
                             .text(R.id.item_plan_price, "￥${NumberHelper.fmtMicrometer(data.repaymentSum)}")
-                            .text(R.id.item_plan_type, if (data.cardType == "0") "储蓄卡" else "信用卡" + (if (mPosition == 0) "消费" else "还款"))
+                            .text(R.id.item_plan_type, "信用卡还款")
                             .text(R.id.item_plan_num, "尾号(${data.cardNo.substring(data.cardNo.length - 4)})")
-                            .text(R.id.item_plan_time, data.repaymentTime)
-                            .text(R.id.item_plan_status, if (data.status == "1") "已还款" else "未还款")
+                            .text(
+                                    R.id.item_plan_time,
+                                    data.repaymentDay
+                                            .split(",")
+                                            .toString()
+                                            .replace("[", "")
+                                            .replace("]", ""))
 
                             .with<RoundedImageView>(R.id.item_plan_img) { view ->
-                                when (data.repaymentType) {
-                                    "还款消费" -> view.setImageResource(R.mipmap.group01)
-                                    "快速还款" -> view.setImageResource(R.mipmap.group02)
-                                    "智能还款" -> view.setImageResource(R.mipmap.group02)
-                                    "余额还款" -> view.setImageResource(R.mipmap.group03)
-                                    "消费计划" -> view.setImageResource(R.mipmap.group04)
-                                    "提现" -> view.setImageResource(R.mipmap.group05)
-                                    "充值" -> view.setImageResource(R.mipmap.group06)
+                                when (BankCardUtil(data.cardNo).bankName) {
+                                    "工商银行" -> view.setImageResource(R.mipmap.bank01)
+                                    "农业银行" -> view.setImageResource(R.mipmap.bank02)
+                                    "招商银行" -> view.setImageResource(R.mipmap.bank03)
+                                    "建设银行" -> view.setImageResource(R.mipmap.bank04)
+                                    "交通银行" -> view.setImageResource(R.mipmap.bank05)
+                                    "中信银行" -> view.setImageResource(R.mipmap.bank06)
+                                    "光大银行" -> view.setImageResource(R.mipmap.bank07)
+                                    "北京银行" -> view.setImageResource(R.mipmap.bank08)
+                                    "平安银行" -> view.setImageResource(R.mipmap.bank09)
+                                    "中国银行" -> view.setImageResource(R.mipmap.bank10)
+                                    "兴业银行" -> view.setImageResource(R.mipmap.bank11)
+                                    "民生银行" -> view.setImageResource(R.mipmap.bank12)
+                                    "华夏银行" -> view.setImageResource(R.mipmap.bank13)
                                 }
                             }
 
                             .visibility(R.id.item_plan_divider1, if (list.indexOf(data) == list.size - 1) View.GONE else View.VISIBLE)
                             .visibility(R.id.item_plan_divider2, if (list.indexOf(data) != list.size - 1) View.GONE else View.VISIBLE)
 
-                            .clicked(R.id.item_plan) { }
+                            .clicked(R.id.item_plan_delete) {
+                                DialogHelper.showDialog(
+                                        baseContext,
+                                        "温馨提示",
+                                        "确定要删除该计划吗？",
+                                        "取消",
+                                        "删除",
+                                        null) {
+                                    OkGo.post<String>(BaseHttp.remove_repaymentplan)
+                                            .tag(this@PlanActivity)
+                                            .headers("token", getString("token"))
+                                            .params("repaymentplanId", data.repaymentplanId)
+                                            .execute(object : StringDialogCallback(baseContext) {
+
+                                                override fun onSuccessResponse(response: Response<String>, msg: String, msgCode: String) {
+
+                                                    toast(msg)
+                                                    list.remove(data)
+                                                    mAdapter.updateData(list).notifyDataSetChanged()
+
+                                                    empty_view.visibility = if (list.isEmpty()) View.VISIBLE else View.GONE
+                                                }
+
+                                            })
+                                }
+                            }
+
+                            .clicked(R.id.item_plan) {
+                                val intent = Intent(baseContext, PlanDownActivity::class.java)
+                                intent.putExtra("repaymentplanId", data.repaymentplanId)
+                                startActivity(intent)
+                            }
                 }
                 .attachTo(recycle_list)
     }
 
     override fun getData(pindex: Int) {
-        OkGo.post<CommonModel>(BaseHttp.repayment_data)
+        OkGo.post<CommonModel>(BaseHttp.repaymentplan_data)
                 .tag(this@PlanActivity)
                 .headers("token", getString("token"))
-                .params("type", mPosition)
+                .params("creditcardId", intent.getStringExtra("creditcardId"))
                 .params("page", pindex)
                 .execute(object : JacksonDialogCallback<CommonModel>(baseContext, CommonModel::class.java) {
 
@@ -119,18 +141,9 @@ class PlanActivity : BaseActivity() {
                         swipe_refresh.isRefreshing = false
                         isLoadingMore = false
 
-                        empty_view.visibility = if (list.size == 0) View.VISIBLE else View.GONE
+                        empty_view.visibility = if (list.isEmpty()) View.VISIBLE else View.GONE
                     }
 
                 })
-    }
-
-    fun updateList() {
-        swipe_refresh.isRefreshing = true
-        if (list.size > 0) {
-            list.clear()
-            mAdapter.updateData(list).notifyDataSetChanged()
-        }
-        getData(mPosition)
     }
 }

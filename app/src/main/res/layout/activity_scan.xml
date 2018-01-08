@@ -29,7 +29,7 @@
         app:qrcv_isTipTextBelowRect="true"
         app:qrcv_maskColor="#33FFFFFF"
         app:qrcv_qrCodeTipText="将二维码/条码放入框内，即可自动扫描"
-        app:qrcv_rectWidth="200dp"
+        app:qrcv_rectWidth="220dp"
         app:qrcv_scanLineColor="@color/colorAccent"
         app:qrcv_scanLineMargin="0dp"
         app:qrcv_scanLineSize="@dimen/dimen_size_0.5"

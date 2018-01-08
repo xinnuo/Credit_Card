@@ -43,7 +43,8 @@ class WebActivity : BaseActivity() {
                                         "</style>\n" +
                                         "<body style=\"padding:0; margin:0; \">" +
                                         "<div class=\"con\">" +
-                                        JSONObject(response.body()).getString("help") +
+                                        // JSONObject(response.body()).getString("help") +
+                                        "该功能正在开发中" +
                                         "</div>" +
                                         "</body>" +
                                         "</html>"

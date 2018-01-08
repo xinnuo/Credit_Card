@@ -37,9 +37,9 @@ public class BaseHttp {
     public static String msgInfo_details = baseIp + "/msgInfo_details.rm";       //消息详细√
     public static String get_msgCount = baseIp + "/get_msgCount.rm";             //未读消息数量√
 
-    public static String up_vip_list = baseIp + "/up_vip_list.rm"; //升级列表√
+    public static String up_vip_list = baseIp + "/up_vip_list.rm";       //升级列表√
     public static String card_Info_list = baseIp + "/card_Info_list.rm"; //银行卡列表√
-    public static String add_upvip_sub = baseIp + "/add_upvip_sub.rm"; //升级会员√
+    public static String add_upvip_sub = baseIp + "/add_upvip_sub.rm";   //升级会员√
 
     public static String user_msg_data = baseIp + "/user_msg_data.rm";                     //用户个人资料√
     public static String userinfo_uploadhead_sub = baseIp + "/userinfo_uploadhead_sub.rm"; //修改头像√
@@ -57,15 +57,17 @@ public class BaseHttp {
     public static String city1_data = baseIp + "/city1_data.rm";                           //获取所有省份√
     public static String city2_data = baseIp + "/city2_data.rm";                           //获取某省份所有市√
     public static String appChanpay_backOpenCard = baseIp + "/appChanpay_backOpenCard.rm"; //绑卡√
+    public static String get_versioninfo = baseIp + "/get_versioninfo.rm";                 //获取版本信息√
 
     public static String identify_othercode = baseIp + "/identify_othercode.rm";     //获取其他验证码√
     public static String depositcard_add_sub = baseIp + "/depositcard_add_sub.rm";   //新增储蓄卡√
     public static String creditcard_add_sub = baseIp + "/creditcard_add_sub.rm";     //新增信用卡√
     public static String creditcard_details = baseIp + "/creditcard_details.rm";     //信用卡详情√
     public static String creditcard_del_sub = baseIp + "/creditcard_del_sub.rm";     //删除信用卡√
-    public static String repayment_data = baseIp + "/repayment_data.rm";             //全部计划√
+    public static String repaymentplan_data = baseIp + "/repaymentplan_data.rm";     //全部计划√
+    public static String repayment_list = baseIp + "/repayment_list.rm";             //子计划√
+    public static String remove_repaymentplan = baseIp + "/remove_repaymentplan.rm"; //删除计划√
     public static String add_consumeplan = baseIp + "/add_consumeplan.rm";           //新增消费计划√
     public static String add_repaymentplan = baseIp + "/add_repaymentplan.rm";       //新增还款计划√
     public static String before_repaymentplan = baseIp + "/before_repaymentplan.rm"; //预览还款计划√
-    public static String base_rate_data = baseIp + "/base_rate_data.rm";             //基本费率√
 }

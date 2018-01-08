@@ -38,6 +38,8 @@ public class DialogHelper {
     }
 
     public static void showDialog(Context context) {
+        dismissDialog();
+
         mMProgressDialog = new MProgressDialog.Builder(context)
                 .setCancelable(true)
                 .isCanceledOnTouchOutside(false)

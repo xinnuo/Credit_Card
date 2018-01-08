@@ -48,7 +48,7 @@ class CreditDetailActivity : BaseActivity() {
         super.doClick(v)
         when (v.id) {
             R.id.left_nav_right -> {
-                val dialog = ActionSheetDialog(this, arrayOf("删除该信用卡", "预约删除未执行的计划"), null)
+                val dialog = ActionSheetDialog(this, arrayOf("删除该信用卡"), null)
                 dialog.isTitleShow(false)
                         .lvBgColor(resources.getColor(R.color.white))
                         .dividerColor(resources.getColor(R.color.divider))
@@ -89,7 +89,6 @@ class CreditDetailActivity : BaseActivity() {
                                         })
                             }
                         }
-                        1 -> { }
                     }
                 }
             }
@@ -127,7 +126,11 @@ class CreditDetailActivity : BaseActivity() {
                     }
                 }
             }
-            R.id.credit_look -> startActivity(PlanActivity::class.java)
+            R.id.credit_look -> {
+                val intent = Intent(baseContext, PlanActivity::class.java)
+                intent.putExtra("creditcardId", creditcardId)
+                startActivity(intent)
+            }
         }
     }
 
@@ -145,6 +148,12 @@ class CreditDetailActivity : BaseActivity() {
                         creditcardId = obj.getString("creditcardId")
                         creditcard = obj.getString("creditcard")
                         bank = obj.getString("bank")
+
+                        val list_bank = resources.getStringArray(R.array.bank_credit).asList()
+                        if (!list_bank.contains(bank)) {
+                            credit_add.visibility = View.GONE
+                            credit_look.visibility = View.GONE
+                        }
 
                         when (bank) {
                             "工商银行" -> credit_img.setImageResource(R.mipmap.bank01)
@@ -175,11 +184,6 @@ class CreditDetailActivity : BaseActivity() {
                         if (!obj.isNull("nopaySum")) {
                             val nopaySum = DecimalFormat("########0.0#####").format(obj.getString("nopaySum").toDouble())
                             credit_wei.setRightString(NumberHelper.fmtMicrometer(nopaySum))
-                        }
-
-                        if (!obj.isNull("currentSum")) {
-                            val currentSum = DecimalFormat("########0.0#####").format(obj.getString("currentSum").toDouble())
-                            credit_dang.setRightString("￥" + NumberHelper.fmtMicrometer(currentSum))
                         }
                     }
 

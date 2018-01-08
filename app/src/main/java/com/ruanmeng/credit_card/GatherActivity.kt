@@ -12,7 +12,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
-import com.flyco.dialog.widget.base.BottomBaseDialog
 import com.jungly.gridpasswordview.GridPasswordView
 import com.jungly.gridpasswordview.PasswordType
 import com.lzy.extend.StringDialogCallback
@@ -31,11 +30,13 @@ import com.ruanmeng.utils.NumberHelper
 import kotlinx.android.synthetic.main.activity_gather.*
 import net.idik.lib.slimadapter.SlimAdapter
 import org.json.JSONObject
+import java.util.*
 
 class GatherActivity : BaseActivity() {
 
     private val list = ArrayList<CardData>()
     private var cardNo = ""
+    private var source = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -63,9 +64,23 @@ class GatherActivity : BaseActivity() {
 
                 showSheetDialog()
             }
+            R.id.gather_type_ll -> {
+                DialogHelper.showItemDialog(
+                        baseContext,
+                        "选择收款方式",
+                        Arrays.asList("在线收款", "二维码收款")) { position, name ->
+                    gather_type.text = name
+                    source = if (position == 0) "B" else "T"
+                }
+            }
             R.id.gather_ok -> {
                 if (cardNo.isEmpty()) {
                     toast("请选择收款信用卡")
+                    return
+                }
+
+                if (source.isEmpty()) {
+                    toast("请选择收款方式")
                     return
                 }
 
@@ -149,7 +164,7 @@ class GatherActivity : BaseActivity() {
                 .headers("token", getString("token"))
                 .params("carno", cardNo)
                 .params("amount", count)
-                .params("source", "B")
+                .params("source", source)
                 .execute(object : StringDialogCallback(baseContext, false) {
                     /*{
                         "msg": "收款成功",
@@ -160,12 +175,25 @@ class GatherActivity : BaseActivity() {
 
                         val obj = JSONObject(response.body())
 
-                        val intent = Intent(baseContext, WebActivity::class.java)
-                        intent.putExtra("title", "收款支付")
-                        intent.putExtra("url", obj.getString("object"))
-                        startActivity(intent)
+                        when (source) {
+                            "B" -> {
+                                val intent = Intent(baseContext, WebActivity::class.java)
+                                intent.putExtra("title", "收款支付")
+                                intent.putExtra("url", obj.getString("object"))
+                                startActivity(intent)
 
-                        ActivityStack.getScreenManager().popActivities(this@GatherActivity::class.java)
+                                ActivityStack.getScreenManager().popActivities(this@GatherActivity::class.java)
+                            }
+                            "T" -> {
+                                val intent = Intent(baseContext, GatherCodeActivity::class.java)
+                                intent.putExtra("title", "收款二维码")
+                                intent.putExtra("url", obj.getString("object"))
+                                startActivity(intent)
+
+                                ActivityStack.getScreenManager().popActivities(this@GatherActivity::class.java)
+                            }
+                        }
+
                     }
 
                 })

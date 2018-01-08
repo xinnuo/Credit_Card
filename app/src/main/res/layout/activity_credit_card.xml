@@ -485,7 +485,7 @@
             android:layout_marginRight="@dimen/dimen_size_10"
             android:layout_marginTop="@dimen/dimen_size_5"
             android:lineSpacingExtra="@dimen/dimen_size_3"
-            android:text="注：添加信用卡成功后即做一笔10元的消费交易作为验证信用卡的正确性，交易成功后，消费金额将自动转入APP账户里"
+            android:text="注：添加信用卡成功后即做一笔20元的消费交易作为验证信用卡的正确性，交易成功后，消费金额将自动转入绑定的储蓄卡里"
             android:textColor="@color/red" />
 
         <Button

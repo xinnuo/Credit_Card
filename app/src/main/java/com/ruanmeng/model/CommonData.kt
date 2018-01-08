@@ -83,6 +83,8 @@ data class CommonData(
         var repaymentSum: String = "",
         var repaymentTime: String = "",
         var repaymentType: String = "",
+        var repaymentNum: String = "",
+        var repaymentplanId: String = "",
 
         //省、市
         var areaId: String = "",

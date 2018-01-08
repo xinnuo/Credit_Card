@@ -54,9 +54,8 @@ class BankcardActivity : BaseActivity() {
 
             })
 
-            val isPlan = intent.getBooleanExtra("isPlan", false)
-            addTab(this.newTab().setText("储蓄卡"), !isPlan)
-            addTab(this.newTab().setText("信用卡"), isPlan)
+            addTab(this.newTab().setText("储蓄卡"), true)
+            addTab(this.newTab().setText("信用卡"), false)
 
             post { Tools.setIndicator(this, 50, 50) }
         }

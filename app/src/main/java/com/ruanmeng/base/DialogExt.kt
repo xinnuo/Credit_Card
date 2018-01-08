@@ -59,6 +59,9 @@ class KAlertDialogBuilder(private val ctx: Context) {
     private var dialog: AlertDialog? = null
 
     fun dismiss() = dialog?.dismiss()
+    fun getPositiveButton() = dialog?.getButton(AlertDialog.BUTTON_POSITIVE)!!
+    fun getNegativeButton() = dialog?.getButton(AlertDialog.BUTTON_NEGATIVE)!!
+    fun getNeutralButton() = dialog?.getButton(AlertDialog.BUTTON_NEUTRAL)!!
 
     fun show(): KAlertDialogBuilder {
         dialog = builder.create()
