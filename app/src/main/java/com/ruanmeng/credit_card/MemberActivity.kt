@@ -10,12 +10,15 @@ import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import com.allen.library.SuperTextView
+import com.allinpay.appayassistex.APPayAssistEx
 import com.jungly.gridpasswordview.GridPasswordView
 import com.jungly.gridpasswordview.PasswordType
 import com.lzy.extend.StringDialogCallback
 import com.lzy.extend.jackson.JacksonDialogCallback
 import com.lzy.okgo.OkGo
 import com.lzy.okgo.model.Response
+import com.lzy.okgo.utils.OkLogger
+import com.ruanmeng.allinpay.PaaCreator
 import com.ruanmeng.base.*
 import com.ruanmeng.model.CommonData
 import com.ruanmeng.model.CommonModel
@@ -27,6 +30,7 @@ import com.ruanmeng.utils.NumberHelper
 import kotlinx.android.synthetic.main.activity_member.*
 import kotlinx.android.synthetic.main.layout_title_left.*
 import net.idik.lib.slimadapter.SlimAdapter
+import org.json.JSONObject
 import java.text.DecimalFormat
 
 class MemberActivity : BaseActivity() {
@@ -189,7 +193,8 @@ class MemberActivity : BaseActivity() {
                                         override fun onSuccessResponse(response: Response<String>, msg: String, msgCode: String) {
                                             dismiss()
 
-                                            window.decorView.postDelayed({ runOnUiThread { getPay() } }, 300)
+                                            // window.decorView.postDelayed({ runOnUiThread { getPay() } }, 300)
+                                            window.decorView.postDelayed({ runOnUiThread { startPay() } }, 300)
                                         }
 
                                     })
@@ -244,5 +249,28 @@ class MemberActivity : BaseActivity() {
                     }
 
                 })
+    }
+
+    private fun startPay() {
+        val payData = PaaCreator.randomPaa().toString()
+        APPayAssistEx.startPay(this@MemberActivity, payData, APPayAssistEx.MODE_PRODUCT)
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        if (APPayAssistEx.REQUESTCODE == requestCode) {
+			if (null != data) {
+                val payRes: String
+                val payAmount: String
+                val payTime: String
+                val payOrderId: String
+                val resultJson = JSONObject(data.extras.getString("result"))
+					payRes = resultJson.getString(APPayAssistEx.KEY_PAY_RES)
+					payAmount = resultJson.getString("payAmount")
+					payTime = resultJson.getString("payTime")
+					payOrderId = resultJson.getString("payOrderId")
+				OkLogger.e("payResult", "payRes: $payRes  payAmount: $payAmount  payTime: $payTime  payOrderId: $payOrderId")
+			}
+		}
+        super.onActivityResult(requestCode, resultCode, data)
     }
 }

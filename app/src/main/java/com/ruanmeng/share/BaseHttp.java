@@ -63,6 +63,7 @@ public class BaseHttp {
     public static String depositcard_add_sub = baseIp + "/depositcard_add_sub.rm";   //新增储蓄卡√
     public static String creditcard_add_sub = baseIp + "/creditcard_add_sub.rm";     //新增信用卡√
     public static String creditcard_details = baseIp + "/creditcard_details.rm";     //信用卡详情√
+    public static String creditcard_edit_sub = baseIp + "/creditcard_edit_sub.rm";   //更新信用卡√
     public static String creditcard_del_sub = baseIp + "/creditcard_del_sub.rm";     //删除信用卡√
     public static String repaymentplan_data = baseIp + "/repaymentplan_data.rm";     //全部计划√
     public static String repayment_list = baseIp + "/repayment_list.rm";             //子计划√

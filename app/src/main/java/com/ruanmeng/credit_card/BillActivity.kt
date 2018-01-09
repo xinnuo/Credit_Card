@@ -54,7 +54,11 @@ class BillActivity : BaseActivity() {
                             .text(R.id.item_first_num, "尾号(${data.cardNo.substring(data.cardNo.length - 4)})")
                             .text(R.id.item_first_rate, "费率 ${ if (data.rate.isEmpty()) "0.0" else (data.rate.toDouble() * 100).toString() }%")
                             .text(R.id.item_first_time, data.payTime)
-                            .text(R.id.item_first_status, if (data.status == "1") "交易成功" else "交易失败")
+                            .text(R.id.item_first_status, when (data.status) {
+                                "1" -> "交易成功"
+                                "-2" -> "交易中"
+                                else -> "交易失败"
+                            })
 
                             .visibility(R.id.item_first_divider1, if (list.indexOf(data) == list.size - 1) View.GONE else View.VISIBLE)
                             .visibility(R.id.item_first_divider2, if (list.indexOf(data) != list.size - 1) View.GONE else View.VISIBLE)

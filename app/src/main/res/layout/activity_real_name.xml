@@ -302,6 +302,17 @@
 
                 </LinearLayout>
 
+                <TextView
+                    android:id="@+id/real_hint"
+                    style="@style/Font12_black_dark"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/dimen_size_10"
+                    android:layout_marginTop="@dimen/dimen_size_10"
+                    android:gravity="center_vertical"
+                    android:text="注："
+                    android:textColor="@color/red"/>
+
             </LinearLayout>
 
         </LinearLayout>
