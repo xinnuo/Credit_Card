@@ -86,6 +86,23 @@ public abstract class StringDialogCallback extends StringCallback {
 
     public void onSuccessResponseErrorCode(Response<String> response, String msg, String msgCode) { }
 
+    /**
+     * 当缓存读取成功后，回调该方法
+     */
+    @Override
+    public void onCacheSuccess(Response<String> response) {
+        try {
+            JSONObject obj = new JSONObject(response.body());
+
+            String msgCode = new JSONObject(response.body()).getString("msgcode");
+            String msg = obj.isNull("msg") ? "请求成功！" : obj.getString("msg");
+
+            if (TextUtils.equals("100", msgCode)) onSuccessResponse(response, msg, msgCode);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+    }
+
     @Override
     public void onFinish() {
         mMProgressDialog.dismiss();

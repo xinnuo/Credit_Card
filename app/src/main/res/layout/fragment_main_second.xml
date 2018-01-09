@@ -15,7 +15,8 @@
 
     <android.support.v4.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:overScrollMode="never" >
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -37,8 +38,8 @@
                 android:layout_margin="@dimen/dimen_size_20"
                 android:background="@drawable/rec_bg_blue"
                 android:onClick="doClick"
-                android:textSize="@dimen/sp_size_20"
-                android:text="升级会员" />
+                android:text="升级会员"
+                android:textSize="@dimen/sp_size_20" />
 
         </LinearLayout>
 

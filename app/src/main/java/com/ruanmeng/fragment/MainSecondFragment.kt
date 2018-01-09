@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.webkit.WebSettings
 import com.lzy.extend.StringDialogCallback
 import com.lzy.okgo.OkGo
+import com.lzy.okgo.cache.CacheMode
 import com.lzy.okgo.model.Response
 import com.ruanmeng.base.BaseFragment
 import com.ruanmeng.base.getString
@@ -71,6 +72,8 @@ class MainSecondFragment : BaseFragment() {
         OkGo.post<String>(BaseHttp.help_center)
                 .tag(this@MainSecondFragment)
                 .params("htmlKey", "hysj")
+                .cacheMode(CacheMode.REQUEST_FAILED_READ_CACHE)
+                .cacheKey(BaseHttp.help_center + "hysj")
                 .execute(object : StringDialogCallback(activity) {
 
                     override fun onSuccessResponse(response: Response<String>, msg: String, msgCode: String) {
