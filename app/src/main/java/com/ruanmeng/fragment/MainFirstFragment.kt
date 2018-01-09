@@ -1,7 +1,6 @@
 package com.ruanmeng.fragment
 
 import android.annotation.SuppressLint
-import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -16,8 +15,8 @@ import com.makeramen.roundedimageview.RoundedImageView
 import com.ruanmeng.adapter.LoopAdapter
 import com.ruanmeng.base.*
 import com.ruanmeng.credit_card.BillActivity
+import com.ruanmeng.credit_card.NoticeActivity
 import com.ruanmeng.credit_card.R
-import com.ruanmeng.credit_card.WebActivity
 import com.ruanmeng.model.CommonData
 import com.ruanmeng.model.CommonModel
 import com.ruanmeng.model.CountMessageEvent
@@ -87,9 +86,7 @@ class MainFirstFragment : BaseFragment() {
                     mLoopAdapter = LoopAdapter(activity, banner)
                     banner.apply {
                         setAdapter(mLoopAdapter)
-                        setOnItemClickListener { position ->
-                            //轮播图点击事件
-                        }
+                        setOnItemClickListener { position -> /*轮播图点击事件*/ }
                     }
                     addHeader(view)
                 }
@@ -164,11 +161,14 @@ class MainFirstFragment : BaseFragment() {
                         }
 
                         if (list_notice.size > 0) {
-                            mSwitchText.setData(list_notice, { position ->
-                                val intent = Intent(activity, WebActivity::class.java)
+                            mSwitchText.setData(list_notice, {
+
+                                startActivity(NoticeActivity::class.java)
+
+                                /*val intent = Intent(activity, WebActivity::class.java)
                                 intent.putExtra("title", "详情")
                                 intent.putExtra("newsnoticeId", list_notice[position].newsnoticeId)
-                                startActivity(intent)
+                                startActivity(intent)*/
                             }, mSwitchText)
                         }
                     }
