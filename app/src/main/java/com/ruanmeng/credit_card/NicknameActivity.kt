@@ -3,7 +3,6 @@ package com.ruanmeng.credit_card
 import android.net.Uri
 import android.os.Bundle
 import android.text.InputFilter
-import android.text.TextUtils
 import android.view.View
 import com.lzy.extend.StringDialogCallback
 import com.lzy.okgo.OkGo
@@ -78,7 +77,7 @@ class NicknameActivity : BaseActivity() {
     }
 
     override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-        if (!TextUtils.isEmpty(et_name.text.toString())) {
+        if (et_name.text.isNotBlank()) {
             bt_ok.setBackgroundResource(R.drawable.rec_bg_blue)
             bt_ok.isClickable = true
         } else {
