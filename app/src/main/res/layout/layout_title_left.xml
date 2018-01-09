@@ -7,17 +7,18 @@
 
     <TextView
         android:id="@+id/left_nav_title"
-        android:layout_width="200dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
-        android:layout_marginLeft="35dp"
+        android:layout_marginLeft="@dimen/dimen_size_35"
+        android:layout_marginRight="@dimen/dimen_size_45"
         android:textColor="@android:color/black"
-        android:textSize="18sp" />
+        android:textSize="18sp"/>
 
     <ImageView
         android:id="@id/iv_nav_back"
-        android:layout_width="35dp"
-        android:layout_height="45dp"
+        android:layout_width="@dimen/dimen_size_35"
+        android:layout_height="@dimen/dimen_size_45"
         android:layout_gravity="center_vertical"
         android:onClick="doClick"
         android:padding="9dp"
@@ -25,11 +26,11 @@
 
     <ImageView
         android:id="@+id/left_nav_right"
-        android:layout_width="45dp"
-        android:layout_height="45dp"
+        android:layout_width="@dimen/dimen_size_45"
+        android:layout_height="@dimen/dimen_size_45"
         android:layout_gravity="center_vertical|end"
         android:onClick="doClick"
-        android:padding="11dp"
+        android:padding="@dimen/dimen_size_11"
         android:src="@mipmap/ic_set_card"
         android:visibility="invisible" />
 

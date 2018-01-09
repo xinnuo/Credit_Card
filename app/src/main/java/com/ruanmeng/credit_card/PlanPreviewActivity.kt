@@ -42,7 +42,12 @@ class PlanPreviewActivity : BaseActivity() {
                 .register<CommonData>(R.layout.item_plan_list) { data, injector ->
                     injector.text(R.id.item_plan_name, data.repaymentType)
                             .text(R.id.item_plan_price, "￥${NumberHelper.fmtMicrometer(data.repaymentSum)}")
-                            .text(R.id.item_plan_type, if (data.cardType == "0") "储蓄卡" else "信用卡" + "还款")
+                            .text(R.id.item_plan_type,
+                                    "信用卡" + when (data.type) {
+                                        "0" -> "还款"
+                                        "1" -> "消费"
+                                        else -> ""
+                                    })
                             .text(R.id.item_plan_num, "尾号(${data.cardNo.substring(data.cardNo.length - 4)})")
                             .text(R.id.item_plan_time, data.repaymentTime + ":00")
                             .text(R.id.item_plan_status, if (data.status == "1") "已还款" else "未还款")

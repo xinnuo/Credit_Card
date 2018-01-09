@@ -93,7 +93,15 @@ class MainFirstFragment : BaseFragment() {
                 .register<CommonData>(R.layout.item_first_list) { data, injector ->
                     injector.text(R.id.item_first_name, data.payType)
                             .text(R.id.item_first_price, "￥${NumberHelper.fmtMicrometer(data.paySum)}")
-                            .text(R.id.item_first_type, if (data.cardType == "0") "储蓄卡" else "信用卡" + "还款")
+                            .text(R.id.item_first_type,
+                                    if (data.cardType == "0") "储蓄卡" else "信用卡" + when (data.type) {
+                                        "0" -> "还款"
+                                        "1" -> "消费"
+                                        "2" -> "提现"
+                                        "3" -> "充值"
+                                        "4" -> "收款"
+                                        else -> ""
+                                    })
                             .text(R.id.item_first_num, "尾号(${data.cardNo.substring(data.cardNo.length - 4)})")
                             .text(R.id.item_first_rate, "费率 ${if (data.rate.isEmpty()) "0.0" else (data.rate.toDouble() * 100).toString()}%")
                             .text(R.id.item_first_time, data.payTime)

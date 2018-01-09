@@ -142,6 +142,8 @@ class WebActivity : BaseActivity() {
                         })
             }
             "详情" -> {
+                left_nav_title.text = intent.getStringExtra("newstitle")
+
                 OkGo.post<String>(BaseHttp.newsnotice_Info)
                         .tag(this@WebActivity)
                         .params("newsnoticeId", intent.getStringExtra("newsnoticeId"))
@@ -153,17 +155,12 @@ class WebActivity : BaseActivity() {
                                         "<meta charset=\"utf-8\">" +
                                         "<style type=\"text/css\">" +
                                         "body{ padding:0; margin:0; }\n" +
-                                        ".view_h1{ width:95%; margin:0 auto; margin-top:20px; text-align:center; display:block; overflow:hidden;  font-size:1.1em; color:#333; padding:0.5em 0; line-height:1.5em; }\n" +
-                                        ".view_time{ width:95%; margin:0 auto; display:block; overflow:hidden; font-size:0.8em; color:#999; }\n" +
                                         ".con{ width:95%; margin:0 auto; color:#fff; color:#666; padding:0.5em 0; overflow:hidden; display:block; font-size:0.92em; line-height:1.8em; }\n" +
-                                        ".con h1,h2,h3,h4,h5,h6{ font-size:1em;}\n " +
+                                        ".con h1,h2,h3,h4,h5,h6{ font-size:1em; }\n " +
                                         "img{ width:auto; max-width: 100% !important; height:auto !important; margin:0 auto; display:block; }\n" +
                                         "*{ max-width:100% !important; }\n" +
                                         "</style>\n" +
                                         "<body style=\"padding:0; margin:0; \">" +
-                                        "<div class=\"view_h1\">" +
-                                        JSONObject(response.body()).getString("title") +
-                                        "</div>" +
                                         "<div class=\"con\">" +
                                         JSONObject(response.body()).getString("content") +
                                         "</div>" +

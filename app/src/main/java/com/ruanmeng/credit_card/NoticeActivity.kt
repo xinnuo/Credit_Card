@@ -49,6 +49,7 @@ class NoticeActivity : BaseActivity() {
                             .clicked(R.id.item_notice) {
                                 val intent = Intent(baseContext, WebActivity::class.java)
                                 intent.putExtra("title", "详情")
+                                intent.putExtra("newstitle", data.title)
                                 intent.putExtra("newsnoticeId", data.newsnoticeId)
                                 startActivity(intent)
                             }
