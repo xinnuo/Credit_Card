@@ -28,6 +28,8 @@ class CreditDetailActivity : BaseActivity() {
     private var creditcardId = ""
     private var creditcard = ""
     private var bank = ""
+    private var billDay = ""
+    private var repaymentDay = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -50,6 +52,7 @@ class CreditDetailActivity : BaseActivity() {
             val intent = Intent(baseContext, CreditModifyActivity::class.java)
             intent.putExtra("title", "修改账单日")
             intent.putExtra("creditcardId", creditcardId)
+            intent.putExtra("day", billDay)
             startActivity(intent)
         }
         credit_pay.setOnClickListener {
@@ -58,6 +61,7 @@ class CreditDetailActivity : BaseActivity() {
             val intent = Intent(baseContext, CreditModifyActivity::class.java)
             intent.putExtra("title", "修改还款日")
             intent.putExtra("creditcardId", creditcardId)
+            intent.putExtra("day", repaymentDay)
             startActivity(intent)
         }
     }
@@ -167,6 +171,8 @@ class CreditDetailActivity : BaseActivity() {
                         creditcardId = obj.getString("creditcardId")
                         creditcard = obj.getString("creditcard")
                         bank = obj.getString("bank")
+                        billDay = obj.getString("billDay")
+                        repaymentDay = obj.getString("repaymentDay")
 
                         val list_bank = resources.getStringArray(R.array.bank_credit).asList()
                         if (!list_bank.contains(bank)) {
@@ -192,8 +198,8 @@ class CreditDetailActivity : BaseActivity() {
 
                         credit_bank.text = bank + "信用卡"
                         credit_tail.text = "尾号${creditcard.substring(creditcard.length - 4)}"
-                        credit_bill.setRightString(obj.getString("billDay") + "日")
-                        credit_pay.setRightString(obj.getString("repaymentDay") + "日")
+                        credit_bill.setRightString(billDay + "日")
+                        credit_pay.setRightString(repaymentDay + "日")
 
                         if (!obj.isNull("paySum")) {
                             val paySum = DecimalFormat("########0.0#####").format(obj.getString("paySum").toDouble())

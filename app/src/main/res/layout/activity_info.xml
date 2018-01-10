@@ -86,11 +86,13 @@
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/info_rec_11"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
         android:layout_marginTop="@dimen/dimen_size_10"
-        android:background="@color/white">
+        android:background="@color/white"
+        android:onClick="doClick"
+        android:orientation="vertical">
 
         <View
             android:layout_width="match_parent"
@@ -98,11 +100,9 @@
             android:background="@color/divider" />
 
         <LinearLayout
-            android:id="@+id/info_rec_11"
             android:layout_width="match_parent"
             android:layout_height="@dimen/line_height"
             android:gravity="center_vertical"
-            android:onClick="doClick"
             android:paddingLeft="@dimen/dimen_size_10"
             android:paddingRight="@dimen/dimen_size_10">
 
@@ -119,15 +119,15 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="end"
-                android:text="未绑定"
-                android:paddingLeft="@dimen/dimen_size_10" />
+                android:paddingLeft="@dimen/dimen_size_10"
+                android:text="未绑定" />
 
             <ImageView
                 android:id="@+id/info_rec_arrow"
                 android:layout_width="13dp"
                 android:layout_height="13dp"
-                android:src="@mipmap/arrow_right"
                 android:layout_marginLeft="@dimen/dimen_size_5"
+                android:src="@mipmap/arrow_right"
                 tools:ignore="ContentDescription" />
 
         </LinearLayout>

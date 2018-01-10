@@ -41,8 +41,17 @@ class CreditModifyActivity : BaseActivity() {
 
         modify_day.addTextChangedListener(this@CreditModifyActivity)
 
+        modify_day.setText(intent.getStringExtra("day"))
+        modify_day.setSelection(modify_day.text.length)
+
         modify_sure.setOnClickListener {
             val day = modify_day.text.trim().toString().toInt()
+
+            if (day == intent.getStringExtra("day").toInt()) {
+                ActivityStack.getScreenManager().popActivities(this@CreditModifyActivity::class.java)
+                return@setOnClickListener
+            }
+
             if (day < 0 || day > 31) {
                 toast("请输入正确的${modify_hint.text}（两位数字）")
                 return@setOnClickListener

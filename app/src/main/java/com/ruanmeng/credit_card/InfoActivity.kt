@@ -38,8 +38,6 @@ class InfoActivity : BaseActivity() {
         init_title("个人资料")
 
         EventBus.getDefault().register(this@InfoActivity)
-
-        getData()
     }
 
     override fun onStart() {
