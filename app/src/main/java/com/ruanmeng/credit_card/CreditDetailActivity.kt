@@ -10,7 +10,6 @@ import com.lzy.okgo.OkGo
 import com.lzy.okgo.model.Response
 import com.ruanmeng.base.BaseActivity
 import com.ruanmeng.base.getString
-import com.ruanmeng.base.startActivity
 import com.ruanmeng.base.toast
 import com.ruanmeng.model.RefreshMessageEvent
 import com.ruanmeng.share.BaseHttp
@@ -20,6 +19,7 @@ import com.ruanmeng.utils.NumberHelper
 import kotlinx.android.synthetic.main.activity_credit_detail.*
 import kotlinx.android.synthetic.main.layout_title_left.*
 import org.greenrobot.eventbus.EventBus
+import org.greenrobot.eventbus.Subscribe
 import org.json.JSONObject
 import java.text.DecimalFormat
 
@@ -28,6 +28,8 @@ class CreditDetailActivity : BaseActivity() {
     private var creditcardId = ""
     private var creditcard = ""
     private var bank = ""
+    private var billDay = ""
+    private var repaymentDay = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,12 +37,33 @@ class CreditDetailActivity : BaseActivity() {
         setToolbarVisibility(false)
         init_title()
 
+        EventBus.getDefault().register(this@CreditDetailActivity)
+
         getData()
     }
 
     override fun init_title() {
         left_nav_title.text = "信用卡"
         left_nav_right.visibility = View.VISIBLE
+
+        credit_bill.setOnClickListener {
+            if (creditcardId.isEmpty()) return@setOnClickListener
+
+            val intent = Intent(baseContext, CreditModifyActivity::class.java)
+            intent.putExtra("title", "修改账单日")
+            intent.putExtra("creditcardId", creditcardId)
+            intent.putExtra("day", billDay)
+            startActivity(intent)
+        }
+        credit_pay.setOnClickListener {
+            if (creditcardId.isEmpty()) return@setOnClickListener
+
+            val intent = Intent(baseContext, CreditModifyActivity::class.java)
+            intent.putExtra("title", "修改还款日")
+            intent.putExtra("creditcardId", creditcardId)
+            intent.putExtra("day", repaymentDay)
+            startActivity(intent)
+        }
     }
 
     @Suppress("DEPRECATION")
@@ -148,6 +171,8 @@ class CreditDetailActivity : BaseActivity() {
                         creditcardId = obj.getString("creditcardId")
                         creditcard = obj.getString("creditcard")
                         bank = obj.getString("bank")
+                        billDay = obj.getString("billDay")
+                        repaymentDay = obj.getString("repaymentDay")
 
                         val list_bank = resources.getStringArray(R.array.bank_credit).asList()
                         if (!list_bank.contains(bank)) {
@@ -173,8 +198,8 @@ class CreditDetailActivity : BaseActivity() {
 
                         credit_bank.text = bank + "信用卡"
                         credit_tail.text = "尾号${creditcard.substring(creditcard.length - 4)}"
-                        credit_bill.setRightString(obj.getString("billDay") + "日")
-                        credit_pay.setRightString(obj.getString("repaymentDay") + "日")
+                        credit_bill.setRightString(billDay + "日")
+                        credit_pay.setRightString(repaymentDay + "日")
 
                         if (!obj.isNull("paySum")) {
                             val paySum = DecimalFormat("########0.0#####").format(obj.getString("paySum").toDouble())
@@ -188,5 +213,18 @@ class CreditDetailActivity : BaseActivity() {
                     }
 
                 })
+    }
+
+    override fun finish() {
+        EventBus.getDefault().unregister(this@CreditDetailActivity)
+        super.finish()
+    }
+
+    @Subscribe
+    fun onMessageEvent(event: RefreshMessageEvent) {
+        when (event.name) {
+            "修改账单日" -> credit_bill.setRightString(event.id + "日")
+            "修改还款日" -> credit_pay.setRightString(event.id + "日")
+        }
     }
 }

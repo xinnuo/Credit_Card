@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.lzy.extend.StringDialogCallback
 import com.lzy.okgo.OkGo
+import com.lzy.okgo.cache.CacheMode
 import com.lzy.okgo.model.Response
 import com.ruanmeng.base.*
 import com.ruanmeng.credit_card.*
@@ -69,6 +70,8 @@ class MainThirdFragment : BaseFragment() {
         OkGo.post<String>(BaseHttp.user_msg_data)
                 .tag(this@MainThirdFragment)
                 .headers("token", getString("token"))
+                .cacheMode(CacheMode.REQUEST_FAILED_READ_CACHE)
+                .cacheKey(BaseHttp.user_msg_data)
                 .execute(object : StringDialogCallback(activity, false) {
                     @SuppressLint("SetTextI18n")
                     override fun onSuccessResponse(response: Response<String>, msg: String, msgCode: String) {

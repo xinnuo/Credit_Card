@@ -36,13 +36,13 @@ import java.io.Serializable
  */
 data class CardData(
         //信用卡列表
-        var billDay: String = "",
+        var billDay: String = "0",
         var creditcard: String = "",
         var creditcardId: String = "",
         var cvn2: String = "",
         var invaridDate: String = "",
         var quota: String = "",
-        var repaymentDay: String = "",
+        var repaymentDay: String = "0",
 
         //储蓄卡列表
         var bank: String = "",

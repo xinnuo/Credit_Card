@@ -31,9 +31,9 @@
                     android:id="@+id/credit_img"
                     android:layout_width="@dimen/dimen_size_40"
                     android:layout_height="@dimen/dimen_size_40"
-                    android:src="@mipmap/default_logo"
-                    android:padding="@dimen/dimen_size_3"
                     android:background="@drawable/white_oval"
+                    android:padding="@dimen/dimen_size_3"
+                    android:src="@mipmap/default_logo"
                     app:riv_oval="true" />
 
                 <LinearLayout
@@ -71,9 +71,10 @@
                 app:sLeftTextString="账单日"
                 app:sLineShow="bottom"
                 app:sRightIconMarginRight="@dimen/dimen_size_10"
+                app:sRightIconRes="@mipmap/arrow_right"
                 app:sRightIconSize="13dp"
                 app:sRightTextColor="@color/gray"
-                app:sRightTextMarginRight="@dimen/dimen_size_10"
+                app:sRightTextMarginRight="@dimen/dimen_size_25"
                 app:sRightTextString="10日" />
 
             <com.allen.library.SuperTextView
@@ -86,9 +87,10 @@
                 app:sLeftTextString="还款日"
                 app:sLineShow="bottom"
                 app:sRightIconMarginRight="@dimen/dimen_size_10"
+                app:sRightIconRes="@mipmap/arrow_right"
                 app:sRightIconSize="13dp"
                 app:sRightTextColor="@color/gray"
-                app:sRightTextMarginRight="@dimen/dimen_size_10"
+                app:sRightTextMarginRight="@dimen/dimen_size_25"
                 app:sRightTextString="5日" />
 
             <com.allen.library.SuperTextView

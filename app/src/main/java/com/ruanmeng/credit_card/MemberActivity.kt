@@ -10,12 +10,15 @@ import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import com.allen.library.SuperTextView
+import com.allinpay.appayassistex.APPayAssistEx
 import com.jungly.gridpasswordview.GridPasswordView
 import com.jungly.gridpasswordview.PasswordType
 import com.lzy.extend.StringDialogCallback
 import com.lzy.extend.jackson.JacksonDialogCallback
 import com.lzy.okgo.OkGo
 import com.lzy.okgo.model.Response
+import com.lzy.okgo.utils.OkLogger
+import com.ruanmeng.allinpay.PaaCreator
 import com.ruanmeng.base.*
 import com.ruanmeng.model.CommonData
 import com.ruanmeng.model.CommonModel
@@ -26,7 +29,9 @@ import com.ruanmeng.utils.KeyboardHelper
 import com.ruanmeng.utils.NumberHelper
 import kotlinx.android.synthetic.main.activity_member.*
 import kotlinx.android.synthetic.main.layout_title_left.*
+import net.cachapa.expandablelayout.ExpandableLayout
 import net.idik.lib.slimadapter.SlimAdapter
+import org.json.JSONObject
 import java.text.DecimalFormat
 
 class MemberActivity : BaseActivity() {
@@ -49,6 +54,7 @@ class MemberActivity : BaseActivity() {
 
     override fun init_title() {
         left_nav_title.text = "升级会员"
+        member_sure.visibility = View.GONE
 
         member_list.load_Linear(baseContext)
 
@@ -62,6 +68,18 @@ class MemberActivity : BaseActivity() {
 
                             .visibility(R.id.item_member_divider1, if (list.indexOf(data) == 0) View.GONE else View.VISIBLE)
                             .visibility(R.id.item_member_divider2, if (data.levelName == "钻石代理") View.VISIBLE else View.GONE)
+
+                            .with<ExpandableLayout>(R.id.item_member_expand) { view ->
+                                if (data.isChecked) view.expand()
+                                else view.collapse()
+                            }
+
+                            .with<ImageView>(R.id.item_member_img) { view ->
+                                GlideApp.with(baseContext)
+                                        .load(BaseHttp.baseImg + data.levelExplain)
+                                        .dontAnimate()
+                                        .into(view)
+                            }
 
                             .clicked(R.id.item_member) {
                                 list.filter { it.isChecked }.forEach { it.isChecked = false }
@@ -81,6 +99,8 @@ class MemberActivity : BaseActivity() {
         super.doClick(v)
         when (v.id) {
             R.id.member_sure -> {
+                // startPay()
+
                 if (levelName.isEmpty()) {
                     toast("请选择升级会员类型")
                     return
@@ -189,7 +209,8 @@ class MemberActivity : BaseActivity() {
                                         override fun onSuccessResponse(response: Response<String>, msg: String, msgCode: String) {
                                             dismiss()
 
-                                            window.decorView.postDelayed({ runOnUiThread { getPay() } }, 300)
+                                            // window.decorView.postDelayed({ runOnUiThread { getPay() } }, 300)
+                                            window.decorView.postDelayed({ runOnUiThread { startPay() } }, 300)
                                         }
 
                                     })
@@ -240,9 +261,40 @@ class MemberActivity : BaseActivity() {
 
                         member_level.text = response.body().levelName
                         list.addItems(response.body().las)
+
+                        if (list.isEmpty()) {
+                            dialog("温馨提示", "更高代理级别请联系客服人员") {
+                                positiveButton("确定") { }
+                                show()
+                            }
+                        } else member_sure.visibility = View.VISIBLE
+
                         mAdapter.updateData(list).notifyDataSetChanged()
                     }
 
                 })
+    }
+
+    private fun startPay() {
+        val payData = PaaCreator.randomPaa().toString()
+        APPayAssistEx.startPay(this@MemberActivity, payData, APPayAssistEx.MODE_PRODUCT)
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        if (APPayAssistEx.REQUESTCODE == requestCode) {
+			if (null != data) {
+                val payRes: String
+                val payAmount: String
+                val payTime: String
+                val payOrderId: String
+                val resultJson = JSONObject(data.extras.getString("result"))
+					payRes = resultJson.getString(APPayAssistEx.KEY_PAY_RES)
+					payAmount = resultJson.getString("payAmount")
+					payTime = resultJson.getString("payTime")
+					payOrderId = resultJson.getString("payOrderId")
+				OkLogger.e("payResult", "payRes: $payRes  payAmount: $payAmount  payTime: $payTime  payOrderId: $payOrderId")
+			}
+		}
+        super.onActivityResult(requestCode, resultCode, data)
     }
 }

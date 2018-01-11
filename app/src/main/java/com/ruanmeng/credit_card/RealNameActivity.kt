@@ -1,5 +1,6 @@
 package com.ruanmeng.credit_card
 
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
@@ -42,9 +43,15 @@ class RealNameActivity : BaseActivity() {
         init_title("实名认证")
     }
 
+    @SuppressLint("SetTextI18n")
     override fun init_title() {
         super.init_title()
         et_name.filters = arrayOf<InputFilter>(NameLengthFilter(12))
+        val list = resources.getStringArray(R.array.bank_saving).asList()
+        real_hint.text = "注：当前支持的储蓄卡银行有，${list.toString()
+                .replace("[", "")
+                .replace("]", "")
+                .replace(", ", "、")}"
 
         bt_submit.apply {
             setBackgroundResource(R.drawable.rec_bg_d0d0d0)

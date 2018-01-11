@@ -1,5 +1,6 @@
 package com.ruanmeng.credit_card
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import com.lzy.extend.jackson.JacksonDialogCallback
@@ -50,11 +51,23 @@ class BillActivity : BaseActivity() {
                 .register<CommonData>(R.layout.item_first_list) { data, injector ->
                     injector.text(R.id.item_first_name, data.payType)
                             .text(R.id.item_first_price, "￥${NumberHelper.fmtMicrometer(data.paySum)}")
-                            .text(R.id.item_first_type, if (data.cardType == "0") "储蓄卡" else "信用卡" + "还款")
+                            .text(R.id.item_first_type,
+                                    if (data.cardType == "0") "储蓄卡" else "信用卡" + when (data.type) {
+                                        "0" -> "还款"
+                                        "1" -> "消费"
+                                        "2" -> "提现"
+                                        "3" -> "充值"
+                                        "4" -> "收款"
+                                        else -> ""
+                                    })
                             .text(R.id.item_first_num, "尾号(${data.cardNo.substring(data.cardNo.length - 4)})")
                             .text(R.id.item_first_rate, "费率 ${ if (data.rate.isEmpty()) "0.0" else (data.rate.toDouble() * 100).toString() }%")
                             .text(R.id.item_first_time, data.payTime)
-                            .text(R.id.item_first_status, if (data.status == "1") "交易成功" else "交易失败")
+                            .text(R.id.item_first_status, when (data.status) {
+                                "1" -> "交易成功"
+                                "-2" -> "交易中"
+                                else -> "交易失败"
+                            })
 
                             .visibility(R.id.item_first_divider1, if (list.indexOf(data) == list.size - 1) View.GONE else View.VISIBLE)
                             .visibility(R.id.item_first_divider2, if (list.indexOf(data) != list.size - 1) View.GONE else View.VISIBLE)
@@ -77,7 +90,11 @@ class BillActivity : BaseActivity() {
                                 }
                             }
 
-                            .clicked(R.id.item_first) { }
+                            .clicked(R.id.item_first) {
+                                val intent = Intent(baseContext, BillDetailActivity::class.java)
+                                intent.putExtra("payRecordId", data.payRecordId)
+                                startActivity(intent)
+                            }
                 }
                 .attachTo(recycle_list)
     }
@@ -92,14 +109,14 @@ class BillActivity : BaseActivity() {
                         baseContext,
                         bill_divider,
                         mPosBill,
-                        listOf("全部账单", "消费计划", "快速还款", "还款消费", "余额还款", "收款", "提现", "充值"),
+                        listOf("全部账单", "智能还款", "消费计划", "提现", "充值", "收款"),
                         object : PopupWindowUtils.PopupWindowCallBack {
 
                             override fun doWork(position: Int, name: String) {
                                 bill_hint.text = name
-                                mPayType = when (name) {
-                                    "全部账单" -> ""
-                                    else -> name
+                                mPayType = when (position) {
+                                    0 -> ""
+                                    else -> (position - 1).toString()
                                 }
                                 mPosBill = position
 
@@ -116,7 +133,6 @@ class BillActivity : BaseActivity() {
     override fun getData(pindex: Int) {
         OkGo.post<CommonModel>(BaseHttp.payrecord_data)
                 .tag(this@BillActivity)
-                .isMultipart(true)
                 .headers("token", getString("token"))
                 .params("page", pindex)
                 .params("payType", mPayType)
@@ -152,6 +168,7 @@ class BillActivity : BaseActivity() {
             list.clear()
             mAdapter.updateData(list).notifyDataSetChanged()
         }
-        getData(mPosition)
+        pageNum = 1
+        getData(pageNum)
     }
 }

@@ -29,15 +29,15 @@ public class PaaCreator {
 			paaParams.put("inputCharset", "1");
 			paaParams.put("receiveUrl", "http://www");
 			paaParams.put("version", "v1.0");
-			paaParams.put("signType", "1");
-			paaParams.put("merchantId", "");
+			paaParams.put("signType", "0");
+			paaParams.put("merchantId", "20049100001959604");
 			paaParams.put("orderNo", orderStr);
 			paaParams.put("orderAmount", amount);
 			paaParams.put("orderCurrency", "0");
 			paaParams.put("orderDatetime", timeStr);
-			paaParams.put("productName", "二维码");
-			paaParams.put("payType", "27");
-			paaParams.put("cardNo", "");
+			paaParams.put("productName", "会员升级");
+			paaParams.put("payType", "0");
+			paaParams.put("cardNo", "6216913000115973");
 		} catch (JSONException e) {
 			e.printStackTrace();
 		}
@@ -46,14 +46,14 @@ public class PaaCreator {
 				"1","inputCharset",
 				"http://www","receiveUrl",
 				"v1.0","version",
-				"1","signType",
-				"","merchantId",
+				"0","signType",
+				"20049100001959604","merchantId",
 				orderStr,"orderNo",
 				amount,"orderAmount",
 				"0","orderCurrency",
 				timeStr,"orderDatetime",
-				"二维码", "productName",
-				"27","payType",
+				"会员升级", "productName",
+				"0","payType",
 				"1234567890","key",
 		};
 
@@ -73,11 +73,16 @@ public class PaaCreator {
 		return paaParams;
 	}
 
-	public static String md5(String string) {
+	/**
+	 * MD5签名
+	 *
+	 * @param orgin
+	 * @return String
+	 */
+	private static String md5(String orgin) {
 		byte[] hash;
 		try {
-			hash = MessageDigest.getInstance("MD5").digest(
-					string.getBytes("UTF-8"));
+			hash = MessageDigest.getInstance("MD5").digest(orgin.getBytes("UTF-8"));
 		} catch (NoSuchAlgorithmException e) {
 			throw new RuntimeException("Huh, MD5 should be supported?", e);
 		} catch (UnsupportedEncodingException e) {
@@ -87,15 +92,25 @@ public class PaaCreator {
 		return hexString(hash);
 	}
 
-	public static String hexString(byte[] bytes)
-	{
+	/**
+	 * Byte数组转十六进制字符串
+	 *
+	 * @param bytes
+	 * @return String
+	 */
+	private static String hexString(byte[] bytes) {
 		StringBuilder buffer = new StringBuilder();
 		for (byte aByte : bytes) buffer.append(hexString(aByte));
 		return buffer.toString();
 	}
 
-	public static String hexString(byte byte0)
-	{
+	/**
+	 * Byte字节转十六进制字符串
+	 *
+	 * @param byte0
+	 * @return String
+	 */
+	private static String hexString(byte byte0) {
 		char ac[] = { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F' };
 		char ac1[] = new char[2];
 		ac1[0] = ac[byte0 >>> 4 & 0xf];

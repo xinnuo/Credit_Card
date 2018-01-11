@@ -22,7 +22,6 @@ import java.text.DecimalFormat
 class AgencyFragment : BaseFragment() {
 
     private val list = ArrayList<Any>()
-    private var url = ""
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -38,12 +37,7 @@ class AgencyFragment : BaseFragment() {
     }
 
     override fun init_title() {
-        url = arguments.getString("url")
-
-        empty_hint.text = when (url) {
-            BaseHttp.profit_data -> "暂无相关收益信息！"
-            else -> "暂无相关下级信息！"
-        }
+        empty_hint.text = "暂无相关收益信息！"
 
         swipe_refresh.refresh { getData(1) }
         recycle_list.load_Linear(activity, swipe_refresh) {
@@ -57,29 +51,10 @@ class AgencyFragment : BaseFragment() {
                 .register<IncomeData>(R.layout.item_agency_list_1) { data, injector ->
                     injector.text(R.id.item_agency_name, data.profitExplain)
                             .text(R.id.item_agency_time, data.createDate)
-                            .text(R.id.item_agency_buy, "￥${DecimalFormat("########0.0#####").format(data.tradeSum.toDouble())}")
-                            .text(R.id.item_agency_get, "￥${DecimalFormat("########0.0#####").format(data.profitSum.toDouble())}")
+                            .text(R.id.item_agency_buy, "￥${DecimalFormat("########0.00").format(data.tradeSum.toDouble())}")
+                            .text(R.id.item_agency_get, "￥${DecimalFormat("########0.00").format(data.profitSum.toDouble())}")
 
                             .visibility(R.id.item_agency_divider1, if (list.indexOf(data) == list.size - 1) View.GONE else View.VISIBLE)
-                            .visibility(R.id.item_agency_divider2, if (list.indexOf(data) != list.size - 1) View.GONE else View.VISIBLE)
-
-                            .with<RoundedImageView>(R.id.item_agency_img) { view ->
-                                GlideApp.with(activity)
-                                        .load(BaseHttp.baseImg + data.userHead)
-                                        .placeholder(R.mipmap.default_user) // 等待时的图片
-                                        .error(R.mipmap.default_user)       // 加载失败的图片
-                                        .centerCrop()
-                                        .dontAnimate()
-                                        .into(view)
-                            }
-                }
-                .register<CommonData>(R.layout.item_agency_list_2) { data, injector ->
-                    injector.text(R.id.item_agency_name, data.nickName)
-                            .text(R.id.item_agency_phone, "电话 ${data.mobile}")
-                            //最多保留几位小数就用几个#，最少几位就用几个0
-                            .text(R.id.item_agency_price, DecimalFormat("########0.0#####").format(data.profitSum.toDouble()))
-                            .gone(R.id.item_agency_divider1)
-
                             .visibility(R.id.item_agency_divider2, if (list.indexOf(data) != list.size - 1) View.GONE else View.VISIBLE)
 
                             .with<RoundedImageView>(R.id.item_agency_img) { view ->
@@ -96,7 +71,7 @@ class AgencyFragment : BaseFragment() {
     }
 
     override fun getData(pindex: Int) {
-        OkGo.post<CommonModel>(url)
+        OkGo.post<CommonModel>(BaseHttp.profit_data)
                 .tag(this@AgencyFragment)
                 .headers("token", getString("token"))
                 .params("page", pindex)
@@ -108,13 +83,8 @@ class AgencyFragment : BaseFragment() {
                                 clear()
                                 pageNum = pindex
                             }
-                            if (url == BaseHttp.profit_data ) {
-                                addItems(response.body().profits)
-                                if (count(response.body().profits) > 0) pageNum++
-                            } else {
-                                addItems(response.body().ls)
-                                if (count(response.body().ls) > 0) pageNum++
-                            }
+                            addItems(response.body().profits)
+                            if (count(response.body().profits) > 0) pageNum++
                         }
 
                         mAdapter.updateData(list).notifyDataSetChanged()

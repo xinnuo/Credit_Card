@@ -10,8 +10,7 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme"
-        tools:ignore="AllowBackup">
+        android:theme="@style/AppTheme">
         <activity
             android:name=".GuideActivity"
             android:screenOrientation="portrait">
@@ -135,6 +134,15 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".PlanDownActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".CreditModifyActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".NoticeActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".BillDetailActivity"
             android:screenOrientation="portrait" />
 
         <!-- 融云即时通讯 start -->

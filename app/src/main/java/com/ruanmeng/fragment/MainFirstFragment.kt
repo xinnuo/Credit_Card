@@ -16,8 +16,9 @@ import com.makeramen.roundedimageview.RoundedImageView
 import com.ruanmeng.adapter.LoopAdapter
 import com.ruanmeng.base.*
 import com.ruanmeng.credit_card.BillActivity
+import com.ruanmeng.credit_card.BillDetailActivity
+import com.ruanmeng.credit_card.NoticeActivity
 import com.ruanmeng.credit_card.R
-import com.ruanmeng.credit_card.WebActivity
 import com.ruanmeng.model.CommonData
 import com.ruanmeng.model.CommonModel
 import com.ruanmeng.model.CountMessageEvent
@@ -87,20 +88,30 @@ class MainFirstFragment : BaseFragment() {
                     mLoopAdapter = LoopAdapter(activity, banner)
                     banner.apply {
                         setAdapter(mLoopAdapter)
-                        setOnItemClickListener { position ->
-                            //轮播图点击事件
-                        }
+                        setOnItemClickListener { position -> /*轮播图点击事件*/ }
                     }
                     addHeader(view)
                 }
                 .register<CommonData>(R.layout.item_first_list) { data, injector ->
                     injector.text(R.id.item_first_name, data.payType)
                             .text(R.id.item_first_price, "￥${NumberHelper.fmtMicrometer(data.paySum)}")
-                            .text(R.id.item_first_type, if (data.cardType == "0") "储蓄卡" else "信用卡" + "还款")
+                            .text(R.id.item_first_type,
+                                    if (data.cardType == "0") "储蓄卡" else "信用卡" + when (data.type) {
+                                        "0" -> "还款"
+                                        "1" -> "消费"
+                                        "2" -> "提现"
+                                        "3" -> "充值"
+                                        "4" -> "收款"
+                                        else -> ""
+                                    })
                             .text(R.id.item_first_num, "尾号(${data.cardNo.substring(data.cardNo.length - 4)})")
-                            .text(R.id.item_first_rate, "费率 ${ if (data.rate.isEmpty()) "0.0" else (data.rate.toDouble() * 100).toString() }%")
+                            .text(R.id.item_first_rate, "费率 ${if (data.rate.isEmpty()) "0.0" else (data.rate.toDouble() * 100).toString()}%")
                             .text(R.id.item_first_time, data.payTime)
-                            .text(R.id.item_first_status, if (data.status == "1") "交易成功" else "交易失败")
+                            .text(R.id.item_first_status, when (data.status) {
+                                "1" -> "交易成功"
+                                "-2" -> "交易中"
+                                else -> "交易失败"
+                            })
 
                             .with<RoundedImageView>(R.id.item_first_img) { view ->
                                 when (BankCardUtil(data.cardNo).bankName) {
@@ -124,7 +135,11 @@ class MainFirstFragment : BaseFragment() {
                             .visibility(R.id.item_first_divider2, if (list.indexOf(data) != list.size - 1) View.GONE else View.VISIBLE)
                             .visibility(R.id.item_first_divider3, if (list.indexOf(data) != list.size - 1) View.GONE else View.VISIBLE)
 
-                            .clicked(R.id.item_first) { }
+                            .clicked(R.id.item_first) {
+                                val intent = Intent(activity, BillDetailActivity::class.java)
+                                intent.putExtra("payRecordId", data.payRecordId)
+                                startActivity(intent)
+                            }
                 }
                 .attachTo(recycle_list)
     }
@@ -160,20 +175,16 @@ class MainFirstFragment : BaseFragment() {
                         }
 
                         if (list_notice.size > 0) {
-                            mSwitchText.setData(list_notice, { position ->
-                                val intent = Intent(activity, WebActivity::class.java)
+                            mSwitchText.setData(list_notice, {
+
+                                startActivity(NoticeActivity::class.java)
+
+                                /*val intent = Intent(activity, WebActivity::class.java)
                                 intent.putExtra("title", "详情")
                                 intent.putExtra("newsnoticeId", list_notice[position].newsnoticeId)
-                                startActivity(intent)
+                                startActivity(intent)*/
                             }, mSwitchText)
                         }
-                    }
-
-                    /**
-                     * 当缓存读取成功后，回调该方法，如果只复写了onSuccess方法，是无法获取缓存的
-                     */
-                    override fun onCacheSuccess(response: Response<CommonModel>) {
-                        onSuccess(response)
                     }
 
                     override fun onFinish() {

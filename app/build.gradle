@@ -19,7 +19,7 @@ android {
         minSdkVersion versions.minSdkVersion
         targetSdkVersion versions.targetSdkVersion
         versionCode 1
-        versionName "1.0.1"
+        versionName "1.0.2"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         multiDexEnabled true
 
@@ -107,4 +107,5 @@ dependencies {
     implementation 'com.makeramen:roundedimageview:2.3.0'
     implementation 'com.weigan:loopView:0.1.2'
     implementation 'com.github.santalu:mask-edittext:1.0.1'
+    implementation 'net.cachapa.expandablelayout:expandablelayout:2.9.2'
 }

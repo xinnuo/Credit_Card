@@ -844,7 +844,29 @@ public class TimeHelper {
     public String getFirstDayOfMonth() {
         Calendar lastDate = Calendar.getInstance();
 
-        lastDate.set(Calendar.DATE, 1); //设为当前月的1 号
+        lastDate.set(Calendar.DATE, 1); //设为当前月的1号
+
+        @SuppressLint("SimpleDateFormat")
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        return sdf.format(lastDate.getTime());
+    }
+
+    //获取当月某一天
+    public String getDayOfMonth(String day) {
+        Calendar lastDate = Calendar.getInstance();
+
+        lastDate.set(Calendar.DATE, Integer.parseInt(day)); //设为当前月的某天
+
+        @SuppressLint("SimpleDateFormat")
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        return sdf.format(lastDate.getTime());
+    }
+
+    //获取当月某一天
+    public String getDayOfMonth(int day) {
+        Calendar lastDate = Calendar.getInstance();
+
+        lastDate.set(Calendar.DATE, day); //设为当前月的某天
 
         @SuppressLint("SimpleDateFormat")
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");

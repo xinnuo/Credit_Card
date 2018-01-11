@@ -77,6 +77,7 @@ data class CommonData(
         var agentLevel: String = "",
         var cost: String = "",
         var levelName: String = "",
+        var levelExplain: String = "",
 
         //全部计划
         var repaymentId: String = "",

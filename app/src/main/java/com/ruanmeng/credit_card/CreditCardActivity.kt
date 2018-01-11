@@ -246,11 +246,7 @@ class CreditCardActivity : BaseActivity() {
                         .params("tel", mTel)
                         .params("smsCode", YZM)
                         .execute(object : StringDialogCallback(baseContext) {
-                            /*{
-                                "msg": "收款成功",
-                                "msgcode": 100,
-                                "object": "https://shouyin.yeepay.com/nc-cashier-wap/wap/request/10016127996/21pDrF18M9579RwWZbqnJQ%3D%3D"
-                            }*/
+
                             override fun onSuccessResponse(response: Response<String>, msg: String, msgCode: String) {
                                 OkLogger.i(msg)
 

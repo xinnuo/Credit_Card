@@ -29,6 +29,7 @@ public class BaseHttp {
     public static String profit_data = baseIp + "/profit_data.rm";               //收益列表√
     public static String user_children_data = baseIp + "/user_children_data.rm"; //下级列表√
     public static String payrecord_data = baseIp + "/payrecord_data.rm";         //账单列表√
+    public static String payrecord_detils = baseIp + "/payrecord_detils.rm";     //账单详情√
     public static String appYee_repayment = baseIp + "/appYee_repayment.rm";     //收款√
     public static String paypawd_check = baseIp + "/paypawd_check.rm";           //检验支付密码√
     public static String add_withdraw = baseIp + "/add_withdraw.rm";             //提现√
@@ -36,6 +37,7 @@ public class BaseHttp {
     public static String get_MsgInfo = baseIp + "/get_MsgInfo.rm";               //获取消息√
     public static String msgInfo_details = baseIp + "/msgInfo_details.rm";       //消息详细√
     public static String get_msgCount = baseIp + "/get_msgCount.rm";             //未读消息数量√
+    public static String newsnotice_list = baseIp + "/newsnotice_list.rm";       //公告列表√
 
     public static String up_vip_list = baseIp + "/up_vip_list.rm";       //升级列表√
     public static String card_Info_list = baseIp + "/card_Info_list.rm"; //银行卡列表√
@@ -63,6 +65,7 @@ public class BaseHttp {
     public static String depositcard_add_sub = baseIp + "/depositcard_add_sub.rm";   //新增储蓄卡√
     public static String creditcard_add_sub = baseIp + "/creditcard_add_sub.rm";     //新增信用卡√
     public static String creditcard_details = baseIp + "/creditcard_details.rm";     //信用卡详情√
+    public static String creditcard_edit_sub = baseIp + "/creditcard_edit_sub.rm";   //更新信用卡√
     public static String creditcard_del_sub = baseIp + "/creditcard_del_sub.rm";     //删除信用卡√
     public static String repaymentplan_data = baseIp + "/repaymentplan_data.rm";     //全部计划√
     public static String repayment_list = baseIp + "/repayment_list.rm";             //子计划√
