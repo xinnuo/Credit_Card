@@ -75,7 +75,7 @@ class AgencySecondFragment : BaseFragment() {
                     injector.text(R.id.item_agency_name, data.nickName)
                             .text(R.id.item_agency_phone, "电话：${data.mobile}")
                             //最多保留几位小数就用几个#，最少几位就用几个0
-                            .text(R.id.item_agency_price, DecimalFormat("########0.0#####").format(data.profitSum.toDouble()))
+                            .text(R.id.item_agency_price, DecimalFormat("########0.00").format(data.profitSum.toDouble()))
                             .text(R.id.item_agency_time, "注册时间：" + data.createDate)
                             .gone(R.id.item_agency_divider1)
 

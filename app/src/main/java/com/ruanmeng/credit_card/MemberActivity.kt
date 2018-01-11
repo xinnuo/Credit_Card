@@ -29,6 +29,7 @@ import com.ruanmeng.utils.KeyboardHelper
 import com.ruanmeng.utils.NumberHelper
 import kotlinx.android.synthetic.main.activity_member.*
 import kotlinx.android.synthetic.main.layout_title_left.*
+import net.cachapa.expandablelayout.ExpandableLayout
 import net.idik.lib.slimadapter.SlimAdapter
 import org.json.JSONObject
 import java.text.DecimalFormat
@@ -53,6 +54,7 @@ class MemberActivity : BaseActivity() {
 
     override fun init_title() {
         left_nav_title.text = "升级会员"
+        member_sure.visibility = View.GONE
 
         member_list.load_Linear(baseContext)
 
@@ -66,6 +68,18 @@ class MemberActivity : BaseActivity() {
 
                             .visibility(R.id.item_member_divider1, if (list.indexOf(data) == 0) View.GONE else View.VISIBLE)
                             .visibility(R.id.item_member_divider2, if (data.levelName == "钻石代理") View.VISIBLE else View.GONE)
+
+                            .with<ExpandableLayout>(R.id.item_member_expand) { view ->
+                                if (data.isChecked) view.expand()
+                                else view.collapse()
+                            }
+
+                            .with<ImageView>(R.id.item_member_img) { view ->
+                                GlideApp.with(baseContext)
+                                        .load(BaseHttp.baseImg + data.levelExplain)
+                                        .dontAnimate()
+                                        .into(view)
+                            }
 
                             .clicked(R.id.item_member) {
                                 list.filter { it.isChecked }.forEach { it.isChecked = false }
@@ -85,6 +99,8 @@ class MemberActivity : BaseActivity() {
         super.doClick(v)
         when (v.id) {
             R.id.member_sure -> {
+                // startPay()
+
                 if (levelName.isEmpty()) {
                     toast("请选择升级会员类型")
                     return
@@ -245,6 +261,14 @@ class MemberActivity : BaseActivity() {
 
                         member_level.text = response.body().levelName
                         list.addItems(response.body().las)
+
+                        if (list.isEmpty()) {
+                            dialog("温馨提示", "更高代理级别请联系客服人员") {
+                                positiveButton("确定") { }
+                                show()
+                            }
+                        } else member_sure.visibility = View.VISIBLE
+
                         mAdapter.updateData(list).notifyDataSetChanged()
                     }
 

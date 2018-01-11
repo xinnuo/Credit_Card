@@ -15,6 +15,7 @@ import com.ruanmeng.model.CommonModel
 import com.ruanmeng.model.RefreshMessageEvent
 import com.ruanmeng.share.BaseHttp
 import com.ruanmeng.utils.TimeHelper
+import kotlinx.android.synthetic.main.layout_empty.*
 import kotlinx.android.synthetic.main.layout_list.*
 import net.idik.lib.slimadapter.SlimAdapter
 import org.greenrobot.eventbus.EventBus
@@ -38,6 +39,8 @@ class RepaymentActivity : BaseActivity() {
     @SuppressLint("SetTextI18n")
     override fun init_title() {
         super.init_title()
+        empty_hint.text = "暂无相关信用卡信息！"
+
         swipe_refresh.refresh { getData() }
         recycle_list.load_Linear(baseContext)
 
@@ -114,6 +117,8 @@ class RepaymentActivity : BaseActivity() {
                     override fun onFinish() {
                         super.onFinish()
                         swipe_refresh.isRefreshing = false
+
+                        empty_view.visibility = if (list.isEmpty()) View.VISIBLE else View.GONE
                     }
 
                 })

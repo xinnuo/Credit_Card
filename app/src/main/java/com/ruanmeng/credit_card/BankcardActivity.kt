@@ -21,6 +21,7 @@ import com.ruanmeng.utils.DialogHelper
 import com.ruanmeng.utils.TimeHelper
 import com.ruanmeng.utils.Tools
 import kotlinx.android.synthetic.main.activity_bankcard.*
+import kotlinx.android.synthetic.main.layout_empty.*
 import kotlinx.android.synthetic.main.layout_list.*
 import net.idik.lib.slimadapter.SlimAdapter
 import org.greenrobot.eventbus.EventBus

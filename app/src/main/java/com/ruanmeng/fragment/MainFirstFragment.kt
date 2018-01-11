@@ -1,6 +1,7 @@
 package com.ruanmeng.fragment
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -15,6 +16,7 @@ import com.makeramen.roundedimageview.RoundedImageView
 import com.ruanmeng.adapter.LoopAdapter
 import com.ruanmeng.base.*
 import com.ruanmeng.credit_card.BillActivity
+import com.ruanmeng.credit_card.BillDetailActivity
 import com.ruanmeng.credit_card.NoticeActivity
 import com.ruanmeng.credit_card.R
 import com.ruanmeng.model.CommonData
@@ -133,7 +135,11 @@ class MainFirstFragment : BaseFragment() {
                             .visibility(R.id.item_first_divider2, if (list.indexOf(data) != list.size - 1) View.GONE else View.VISIBLE)
                             .visibility(R.id.item_first_divider3, if (list.indexOf(data) != list.size - 1) View.GONE else View.VISIBLE)
 
-                            .clicked(R.id.item_first) { }
+                            .clicked(R.id.item_first) {
+                                val intent = Intent(activity, BillDetailActivity::class.java)
+                                intent.putExtra("payRecordId", data.payRecordId)
+                                startActivity(intent)
+                            }
                 }
                 .attachTo(recycle_list)
     }

@@ -51,8 +51,8 @@ class AgencyFragment : BaseFragment() {
                 .register<IncomeData>(R.layout.item_agency_list_1) { data, injector ->
                     injector.text(R.id.item_agency_name, data.profitExplain)
                             .text(R.id.item_agency_time, data.createDate)
-                            .text(R.id.item_agency_buy, "￥${DecimalFormat("########0.0#####").format(data.tradeSum.toDouble())}")
-                            .text(R.id.item_agency_get, "￥${DecimalFormat("########0.0#####").format(data.profitSum.toDouble())}")
+                            .text(R.id.item_agency_buy, "￥${DecimalFormat("########0.00").format(data.tradeSum.toDouble())}")
+                            .text(R.id.item_agency_get, "￥${DecimalFormat("########0.00").format(data.profitSum.toDouble())}")
 
                             .visibility(R.id.item_agency_divider1, if (list.indexOf(data) == list.size - 1) View.GONE else View.VISIBLE)
                             .visibility(R.id.item_agency_divider2, if (list.indexOf(data) != list.size - 1) View.GONE else View.VISIBLE)

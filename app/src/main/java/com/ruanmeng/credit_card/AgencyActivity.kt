@@ -66,8 +66,8 @@ class AgencyActivity : BaseActivity() {
                         putString("levelName", levelName)
 
                         agency_name.text = obj.getString("nickName") + " ($levelName)"
-                        agency_total.text = obj.getString("profitSum")
-                        agency_current.text = obj.getString("currentSum")
+                        agency_total.text = String.format("%.2f", obj.getString("profitSum").toDouble())
+                        agency_current.text = String.format("%.2f", obj.getString("currentSum").toDouble())
 
                         GlideApp.with(baseContext)
                                 .load(BaseHttp.baseImg + obj.getString("userHead"))

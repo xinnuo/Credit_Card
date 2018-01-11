@@ -30,7 +30,7 @@ public class PaaCreator {
 			paaParams.put("receiveUrl", "http://www");
 			paaParams.put("version", "v1.0");
 			paaParams.put("signType", "0");
-			paaParams.put("merchantId", "200491000019596");
+			paaParams.put("merchantId", "20049100001959604");
 			paaParams.put("orderNo", orderStr);
 			paaParams.put("orderAmount", amount);
 			paaParams.put("orderCurrency", "0");
@@ -47,7 +47,7 @@ public class PaaCreator {
 				"http://www","receiveUrl",
 				"v1.0","version",
 				"0","signType",
-				"200491000019596","merchantId",
+				"20049100001959604","merchantId",
 				orderStr,"orderNo",
 				amount,"orderAmount",
 				"0","orderCurrency",

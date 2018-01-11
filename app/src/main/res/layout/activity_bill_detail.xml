@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical">
+
+    <com.allen.library.SuperTextView
+        android:id="@+id/bill_id"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimen_size_46"
+        android:layout_marginTop="@dimen/dimen_size_10"
+        app:sBottomLineMargin="10dp"
+        app:sLeftTextColor="@color/black_dark"
+        app:sLeftTextMarginLeft="@dimen/dimen_size_10"
+        app:sLeftTextString="ID"
+        app:sLineShow="both"
+        app:sRightIconMarginRight="@dimen/dimen_size_10"
+        app:sRightIconSize="@dimen/dimen_size_13"
+        app:sRightTextColor="@color/gray"
+        app:sRightTextMarginRight="@dimen/dimen_size_10"
+        app:sTopLineMargin="0dp" />
+
+    <com.allen.library.SuperTextView
+        android:id="@+id/bill_type"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimen_size_45.5"
+        app:sBottomLineMargin="10dp"
+        app:sLeftTextColor="@color/black_dark"
+        app:sLeftTextMarginLeft="@dimen/dimen_size_10"
+        app:sLeftTextString="类型"
+        app:sLineShow="bottom"
+        app:sRightIconMarginRight="@dimen/dimen_size_10"
+        app:sRightIconSize="@dimen/dimen_size_13"
+        app:sRightTextColor="@color/light"
+        app:sRightTextMarginRight="@dimen/dimen_size_10" />
+
+    <com.allen.library.SuperTextView
+        android:id="@+id/bill_card"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimen_size_45.5"
+        app:sBottomLineMargin="10dp"
+        app:sLeftTextColor="@color/black_dark"
+        app:sLeftTextMarginLeft="@dimen/dimen_size_10"
+        app:sLeftTextString="卡号"
+        app:sLineShow="bottom"
+        app:sRightIconMarginRight="@dimen/dimen_size_10"
+        app:sRightIconSize="@dimen/dimen_size_13"
+        app:sRightTextColor="@color/light"
+        app:sRightTextMarginRight="@dimen/dimen_size_10" />
+
+    <com.allen.library.SuperTextView
+        android:id="@+id/bill_pay"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimen_size_45.5"
+        app:sBottomLineMargin="10dp"
+        app:sLeftTextColor="@color/black_dark"
+        app:sLeftTextMarginLeft="@dimen/dimen_size_10"
+        app:sLeftTextString="金额"
+        app:sLineShow="bottom"
+        app:sRightIconMarginRight="@dimen/dimen_size_10"
+        app:sRightIconSize="@dimen/dimen_size_13"
+        app:sRightTextColor="@color/light"
+        app:sRightTextMarginRight="@dimen/dimen_size_10" />
+
+    <com.allen.library.SuperTextView
+        android:id="@+id/bill_fee"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimen_size_45.5"
+        app:sBottomLineMargin="10dp"
+        app:sLeftTextColor="@color/black_dark"
+        app:sLeftTextMarginLeft="@dimen/dimen_size_10"
+        app:sLeftTextString="手续费"
+        app:sLineShow="bottom"
+        app:sRightIconMarginRight="@dimen/dimen_size_10"
+        app:sRightIconSize="@dimen/dimen_size_13"
+        app:sRightTextColor="@color/light"
+        app:sRightTextMarginRight="@dimen/dimen_size_10" />
+
+    <com.allen.library.SuperTextView
+        android:id="@+id/bill_back"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimen_size_45.5"
+        app:sBottomLineMargin="10dp"
+        app:sLeftTextColor="@color/black_dark"
+        app:sLeftTextMarginLeft="@dimen/dimen_size_10"
+        app:sLeftTextString="到账金额"
+        app:sLineShow="bottom"
+        app:sRightIconMarginRight="@dimen/dimen_size_10"
+        app:sRightIconSize="@dimen/dimen_size_13"
+        app:sRightTextColor="@color/light"
+        app:sRightTextMarginRight="@dimen/dimen_size_10" />
+
+    <com.allen.library.SuperTextView
+        android:id="@+id/bill_time"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimen_size_45.5"
+        app:sBottomLineMargin="10dp"
+        app:sLeftTextColor="@color/black_dark"
+        app:sLeftTextMarginLeft="@dimen/dimen_size_10"
+        app:sLeftTextString="计划执行时间"
+        app:sLineShow="bottom"
+        app:sRightIconMarginRight="@dimen/dimen_size_10"
+        app:sRightIconSize="@dimen/dimen_size_13"
+        app:sRightTextColor="@color/light"
+        app:sRightTextMarginRight="@dimen/dimen_size_10" />
+
+    <com.allen.library.SuperTextView
+        android:id="@+id/bill_status"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimen_size_45.5"
+        app:sBottomLineMargin="0dp"
+        app:sLeftTextColor="@color/black_dark"
+        app:sLeftTextMarginLeft="@dimen/dimen_size_10"
+        app:sLeftTextString="状态"
+        app:sLineShow="bottom"
+        app:sRightIconMarginRight="@dimen/dimen_size_10"
+        app:sRightIconSize="@dimen/dimen_size_13"
+        app:sRightTextColor="@color/blue"
+        app:sRightTextMarginRight="@dimen/dimen_size_10" />
+
+</LinearLayout>

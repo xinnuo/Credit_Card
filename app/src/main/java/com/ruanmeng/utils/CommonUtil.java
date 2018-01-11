@@ -132,11 +132,8 @@ public class CommonUtil {
      */
     public static String nameReplaceWithStar(String name) {
 
-        if (name == null || name.isEmpty()) {
-            return null;
-        } else {
-            return replaceAction(name, "(?<=[\\u4e00-\\u9fa5]{" + (name.length() > 3 ? "2" : "1") + "})[\\u4e00-\\u9fa5](?=[\\u4e00-\\u9fa5]{0})");
-        }
+        if (name == null || name.isEmpty()) return "";
+        else return replaceAction(name, "(?<=[\\u4e00-\\u9fa5]{" + (name.length() > 3 ? "2" : "1") + "})[\\u4e00-\\u9fa5](?=[\\u4e00-\\u9fa5]{0})");
     }
 
     /**
@@ -147,11 +144,8 @@ public class CommonUtil {
      */
     public static String phoneReplaceWithStar(String phone) {
 
-        if (phone == null || phone.isEmpty()) {
-            return null;
-        } else {
-            return replaceAction(phone, "(?<=\\d{3})\\d(?=\\d{4})");
-        }
+        if (phone == null || phone.isEmpty()) return "";
+        else return replaceAction(phone, "(?<=\\d{3})\\d(?=\\d{4})");
     }
 
     /**
@@ -162,27 +156,32 @@ public class CommonUtil {
      */
     public static String idCardReplaceWithStar(String idCard) {
 
-        if (idCard == null || idCard.isEmpty()) {
-            return null;
-        } else {
-            return replaceAction(idCard, "(?<=\\d{4})\\d(?=\\d{4})");
-        }
+        if (idCard == null || idCard.isEmpty()) return "";
+        else return replaceAction(idCard, "(?<=\\d{4})\\d(?=\\d{4})");
     }
 
     /**
      * 银行卡替换，保留后四位
-     * <p>
      * 如果银行卡号为空 或者 null ,返回null ；否则，返回替换后的字符串；
      *
      * @param bankCard 银行卡号
      */
     public static String bankCardReplaceWithStar(String bankCard) {
 
-        if (bankCard == null || bankCard.isEmpty()) {
-            return null;
-        } else {
-            return replaceAction(bankCard, "(?<=\\d{0})\\d(?=\\d{4})");
-        }
+        if (bankCard == null || bankCard.isEmpty()) return "";
+        else return replaceAction(bankCard, "(?<=\\d{0})\\d(?=\\d{4})");
+    }
+
+    /**
+     * 银行卡替换，保留后四位
+     * 如果银行卡号为空 或者 null ,返回null ；否则，返回替换后的字符串；
+     *
+     * @param bankCard 银行卡号
+     */
+    public static String bankCardReplaceHeaderWithStar(String bankCard) {
+
+        if (bankCard == null || bankCard.isEmpty()) return "";
+        return replaceAction(bankCard, "(?<=\\d{6})\\d(?=\\d{4})");
     }
 
     /**

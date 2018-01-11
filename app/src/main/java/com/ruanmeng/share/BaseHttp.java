@@ -29,6 +29,7 @@ public class BaseHttp {
     public static String profit_data = baseIp + "/profit_data.rm";               //收益列表√
     public static String user_children_data = baseIp + "/user_children_data.rm"; //下级列表√
     public static String payrecord_data = baseIp + "/payrecord_data.rm";         //账单列表√
+    public static String payrecord_detils = baseIp + "/payrecord_detils.rm";     //账单详情√
     public static String appYee_repayment = baseIp + "/appYee_repayment.rm";     //收款√
     public static String paypawd_check = baseIp + "/paypawd_check.rm";           //检验支付密码√
     public static String add_withdraw = baseIp + "/add_withdraw.rm";             //提现√

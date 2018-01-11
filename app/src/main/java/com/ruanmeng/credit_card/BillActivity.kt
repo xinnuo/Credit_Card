@@ -1,5 +1,6 @@
 package com.ruanmeng.credit_card
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import com.lzy.extend.jackson.JacksonDialogCallback
@@ -89,7 +90,11 @@ class BillActivity : BaseActivity() {
                                 }
                             }
 
-                            .clicked(R.id.item_first) { }
+                            .clicked(R.id.item_first) {
+                                val intent = Intent(baseContext, BillDetailActivity::class.java)
+                                intent.putExtra("payRecordId", data.payRecordId)
+                                startActivity(intent)
+                            }
                 }
                 .attachTo(recycle_list)
     }
