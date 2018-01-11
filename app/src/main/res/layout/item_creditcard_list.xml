@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:id="@+id/item_creditcard"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/dimen_size_10"
+        android:layout_marginRight="@dimen/dimen_size_10"
+        android:layout_marginTop="@dimen/dimen_size_10"
+        android:background="@drawable/rec_bg_blue"
+        android:orientation="vertical"
+        android:paddingTop="@dimen/dimen_size_5">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimen_size_40"
+            android:gravity="center_vertical"
+            android:paddingLeft="@dimen/dimen_size_10"
+            android:paddingRight="@dimen/dimen_size_10">
+
+            <com.makeramen.roundedimageview.RoundedImageView
+                android:id="@+id/item_creditcard_img"
+                android:layout_width="@dimen/dimen_size_30"
+                android:layout_height="@dimen/dimen_size_30"
+                android:adjustViewBounds="true"
+                android:src="@mipmap/default_logo"
+                android:padding="@dimen/dimen_size_2"
+                android:background="@drawable/white_oval"
+                app:riv_oval="true"
+                tools:ignore="ContentDescription" />
+
+            <TextView
+                android:id="@+id/item_creditcard_name"
+                style="@style/Font14_white"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/dimen_size_10"
+                android:text="银行卡" />
+
+            <TextView
+                style="@style/Font13_white"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/dimen_size_10"
+                android:layout_weight="1"
+                android:gravity="end"
+                android:text="手机尾号" />
+
+            <TextView
+                android:id="@+id/item_creditcard_tail"
+                style="@style/Font13_white"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/dimen_size_10"
+                android:text="0000" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:paddingLeft="@dimen/dimen_size_50">
+
+            <TextView
+                android:id="@+id/item_creditcard_bill"
+                style="@style/Font14_white"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="账单日：10日" />
+
+            <TextView
+                android:id="@+id/item_creditcard_pay"
+                style="@style/Font14_white"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/dimen_size_30"
+                android:text="还款日：15日" />
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/item_creditcard_day"
+            style="@style/Font14_white"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dimen_size_50"
+            android:layout_marginRight="@dimen/dimen_size_10"
+            android:layout_marginTop="@dimen/dimen_size_11"
+            android:layout_marginBottom="@dimen/dimen_size_15"
+            android:text="距离还款日还有0天" />
+
+    </LinearLayout>
+
+    <View
+        android:id="@+id/item_creditcard_divider"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimen_size_10"
+        android:visibility="gone" />
+
+    <LinearLayout
+        android:id="@+id/item_creditcard_add"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/btn_height"
+        android:layout_margin="@dimen/dimen_size_20"
+        android:background="@drawable/rec_bg_trans_stroke_blue"
+        android:gravity="center"
+        android:visibility="gone">
+
+        <ImageView
+            android:layout_width="@dimen/dimen_size_18"
+            android:layout_height="@dimen/dimen_size_18"
+            android:src="@mipmap/icon_add" />
+
+        <TextView
+            android:id="@+id/item_creditcard_hint"
+            style="@style/Font15_white"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dimen_size_5"
+            android:text="新增信用卡"
+            android:textColor="@color/colorAccent" />
+
+    </LinearLayout>
+
+</LinearLayout>

@@ -75,7 +75,10 @@ class CreditModifyActivity : BaseActivity() {
                         override fun onSuccessResponse(response: Response<String>, msg: String, msgCode: String) {
 
                             toast(msg)
+
                             EventBus.getDefault().post(RefreshMessageEvent(title, day.toString()))
+                            EventBus.getDefault().post(RefreshMessageEvent("更新信用卡"))
+
                             ActivityStack.getScreenManager().popActivities(this@CreditModifyActivity::class.java)
                         }
 
