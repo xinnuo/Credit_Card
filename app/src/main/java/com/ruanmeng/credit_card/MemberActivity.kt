@@ -2,6 +2,7 @@ package com.ruanmeng.credit_card
 
 import android.annotation.SuppressLint
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.support.design.widget.BottomSheetDialog
 import android.view.LayoutInflater
@@ -23,6 +24,7 @@ import com.ruanmeng.base.*
 import com.ruanmeng.model.CommonData
 import com.ruanmeng.model.CommonModel
 import com.ruanmeng.share.BaseHttp
+import com.ruanmeng.share.Const
 import com.ruanmeng.utils.ActivityStack
 import com.ruanmeng.utils.DialogHelper
 import com.ruanmeng.utils.KeyboardHelper
@@ -99,7 +101,7 @@ class MemberActivity : BaseActivity() {
         super.doClick(v)
         when (v.id) {
             R.id.member_sure -> {
-                // startPay()
+                startPay()
 
                 if (levelName.isEmpty()) {
                     toast("请选择升级会员类型")
@@ -160,7 +162,7 @@ class MemberActivity : BaseActivity() {
             DialogHelper.showDialog(
                     baseContext,
                     "温馨提示",
-                    "未设置支付密码，无法进行收款，是否现在去设置？",
+                    "未设置支付密码，无法进行付款，是否现在去设置？",
                     "取消",
                     "去设置") {
 
@@ -263,8 +265,12 @@ class MemberActivity : BaseActivity() {
                         list.addItems(response.body().las)
 
                         if (list.isEmpty()) {
-                            dialog("温馨提示", "更高代理级别请联系客服人员") {
-                                positiveButton("确定") { }
+                            dialog("温馨提示", "更高代理级别请联系客服人员！\n客服热线：${response.body().lxwm}") {
+                                positiveButton("联系客服") {
+                                    val intent = Intent(Intent.ACTION_DIAL, Uri.parse("tel:" + response.body().lxwm))
+                                    intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
+                                    startActivity(intent)
+                                }
                                 show()
                             }
                         } else member_sure.visibility = View.VISIBLE
@@ -277,24 +283,29 @@ class MemberActivity : BaseActivity() {
 
     private fun startPay() {
         val payData = PaaCreator.randomPaa().toString()
-        APPayAssistEx.startPay(this@MemberActivity, payData, APPayAssistEx.MODE_PRODUCT)
+        OkLogger.i(payData)
+        APPayAssistEx.startPay(
+                this@MemberActivity,
+                payData,
+                APPayAssistEx.MODE_PRODUCT,
+                Const.authority)
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         if (APPayAssistEx.REQUESTCODE == requestCode) {
-			if (null != data) {
+            if (null != data) {
                 val payRes: String
                 val payAmount: String
                 val payTime: String
                 val payOrderId: String
                 val resultJson = JSONObject(data.extras.getString("result"))
-					payRes = resultJson.getString(APPayAssistEx.KEY_PAY_RES)
-					payAmount = resultJson.getString("payAmount")
-					payTime = resultJson.getString("payTime")
-					payOrderId = resultJson.getString("payOrderId")
-				OkLogger.e("payResult", "payRes: $payRes  payAmount: $payAmount  payTime: $payTime  payOrderId: $payOrderId")
-			}
-		}
+                payRes = resultJson.getString(APPayAssistEx.KEY_PAY_RES)
+                payAmount = resultJson.getString("payAmount")
+                payTime = resultJson.getString("payTime")
+                payOrderId = resultJson.getString("payOrderId")
+                OkLogger.e("payResult", "payRes: $payRes  payAmount: $payAmount  payTime: $payTime  payOrderId: $payOrderId")
+            }
+        }
         super.onActivityResult(requestCode, resultCode, data)
     }
 }

@@ -22,6 +22,7 @@ public class BaseHttp {
     public static String pwd_forget_sub = baseIp + "/pwd_forget_sub.rm";               //忘记密码找回提交√
     public static String paypawd_add_sub = baseIp + "/paypawd_add_sub.rm";             //新增支付密码√
     public static String paypawd_change_mobile = baseIp + "/paypawd_change_mobile.rm"; //修改支付密码√
+    public static String consult_sub = baseIp + "/consult_sub.rm";                     //意见反馈
 
     public static String guide_info = baseIp + "/guide_info.rm";                 //引导页√
     public static String index_alldata = baseIp + "/index_alldata.rm";           //首页√

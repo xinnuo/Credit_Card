@@ -1,8 +1,10 @@
 package com.ruanmeng.fragment
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.support.v7.app.AlertDialog
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -59,6 +61,21 @@ class MainThirdFragment : BaseFragment() {
         }
         third_share.setOnClickListener { startActivity(ShareActivity::class.java) }
         third_setting.setOnClickListener { startActivity(SettingActivity::class.java) }
+        third_hotline.setOnClickListener {
+            if (getString("platform").isNotEmpty()) {
+                AlertDialog.Builder(activity)
+                        .setTitle("客服热线")
+                        .setMessage("拨打客服热线电话 " + getString("platform"))
+                        .setPositiveButton("呼叫") { _, _ ->
+                            val intent = Intent(Intent.ACTION_DIAL, Uri.parse("tel:" + getString("platform")))
+                            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
+                            startActivity(intent)
+                        }
+                        .setNegativeButton("取消") { _, _ -> }
+                        .create()
+                        .show()
+            }
+        }
     }
 
     override fun onStart() {
@@ -94,6 +111,7 @@ class MainThirdFragment : BaseFragment() {
                         third_phone.text = "（${getString("mobile")}）"
                         third_rank.text = getString("levelName")
                         third_money.text = "￥${NumberHelper.fmtMicrometer(getString("balanceSum"))}"
+                        third_hotline.setRightString(getString("platform"))
                         if (third_img.getTag(R.id.third_img) == null) {
                             GlideApp.with(activity)
                                     .load(BaseHttp.baseImg + getString("userhead"))
