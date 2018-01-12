@@ -22,6 +22,7 @@ data class CommonModel(
 
         var las: List<CommonData>? = ArrayList(),
         var levelName: String = "",
+        var lxwm: String = "",
 
         var msgs: List<CommonData>? = ArrayList(),
         var `object`: List<CommonData>? = ArrayList(),

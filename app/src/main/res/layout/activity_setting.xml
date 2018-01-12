@@ -23,22 +23,6 @@
         app:sTopLineMargin="0dp" />
 
     <com.allen.library.SuperTextView
-        android:id="@+id/setting_hotline"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/dimen_size_45.5"
-        app:sBottomLineMargin="10dp"
-        app:sLeftTextColor="@color/black_dark"
-        app:sLeftTextMarginLeft="@dimen/dimen_size_10"
-        app:sLeftTextString="客服热线"
-        app:sLineShow="bottom"
-        app:sRightIconMarginRight="@dimen/dimen_size_10"
-        app:sRightIconRes="@mipmap/arrow_right"
-        app:sRightIconSize="@dimen/dimen_size_13"
-        app:sRightTextColor="@color/light"
-        app:sRightTextMarginRight="@dimen/dimen_size_30"
-        app:sRightTextString="0371-88886666" />
-
-    <com.allen.library.SuperTextView
         android:id="@+id/setting_online"
         android:layout_width="match_parent"
         android:layout_height="@dimen/dimen_size_45.5"

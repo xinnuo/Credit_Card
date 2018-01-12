@@ -129,7 +129,7 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/dimen_size_46"
         android:layout_marginTop="@dimen/dimen_size_10"
-        app:sBottomLineMargin="10dp"
+        app:sBottomLineMargin="@dimen/dimen_size_10"
         app:sLeftIconRes="@mipmap/left01"
         app:sLeftIconSize="@dimen/dimen_size_18"
         app:sLeftTextColor="@color/black_dark"
@@ -138,17 +138,16 @@
         app:sLineShow="both"
         app:sRightIconMarginRight="@dimen/dimen_size_10"
         app:sRightIconRes="@mipmap/arrow_right"
-        app:sRightIconSize="13dp"
+        app:sRightIconSize="@dimen/dimen_size_13"
         app:sRightTextColor="@color/gray"
-        app:sRightTextMarginRight="25dp"
-        app:sRightTextSize="13sp"
+        app:sRightTextMarginRight="@dimen/dimen_size_30"
         app:sTopLineMargin="0dp" />
 
     <com.allen.library.SuperTextView
         android:id="@+id/third_bill"
         android:layout_width="match_parent"
         android:layout_height="@dimen/dimen_size_45.5"
-        app:sBottomLineMargin="10dp"
+        app:sBottomLineMargin="@dimen/dimen_size_10"
         app:sLeftIconRes="@mipmap/left02"
         app:sLeftIconSize="@dimen/dimen_size_18"
         app:sLeftTextColor="@color/black_dark"
@@ -157,16 +156,15 @@
         app:sLineShow="bottom"
         app:sRightIconMarginRight="@dimen/dimen_size_10"
         app:sRightIconRes="@mipmap/arrow_right"
-        app:sRightIconSize="13dp"
+        app:sRightIconSize="@dimen/dimen_size_13"
         app:sRightTextColor="@color/gray"
-        app:sRightTextMarginRight="25dp"
-        app:sRightTextSize="13sp" />
+        app:sRightTextMarginRight="@dimen/dimen_size_30" />
 
     <com.allen.library.SuperTextView
         android:id="@+id/third_real"
         android:layout_width="match_parent"
         android:layout_height="@dimen/dimen_size_45.5"
-        app:sBottomLineMargin="10dp"
+        app:sBottomLineMargin="@dimen/dimen_size_10"
         app:sLeftIconRes="@mipmap/left03"
         app:sLeftIconSize="@dimen/dimen_size_18"
         app:sLeftTextColor="@color/black_dark"
@@ -175,16 +173,15 @@
         app:sLineShow="bottom"
         app:sRightIconMarginRight="@dimen/dimen_size_10"
         app:sRightIconRes="@mipmap/arrow_right"
-        app:sRightIconSize="13dp"
+        app:sRightIconSize="@dimen/dimen_size_13"
         app:sRightTextColor="@color/gray"
-        app:sRightTextMarginRight="25dp"
-        app:sRightTextSize="13sp" />
+        app:sRightTextMarginRight="@dimen/dimen_size_30" />
 
     <com.allen.library.SuperTextView
         android:id="@+id/third_share"
         android:layout_width="match_parent"
         android:layout_height="@dimen/dimen_size_45.5"
-        app:sBottomLineMargin="0dp"
+        app:sBottomLineMargin="@dimen/dimen_size_0"
         app:sLeftIconRes="@mipmap/left04"
         app:sLeftIconSize="@dimen/dimen_size_18"
         app:sLeftTextColor="@color/black_dark"
@@ -193,17 +190,16 @@
         app:sLineShow="bottom"
         app:sRightIconMarginRight="@dimen/dimen_size_10"
         app:sRightIconRes="@mipmap/arrow_right"
-        app:sRightIconSize="13dp"
+        app:sRightIconSize="@dimen/dimen_size_13"
         app:sRightTextColor="@color/gray"
-        app:sRightTextMarginRight="25dp"
-        app:sRightTextSize="13sp" />
+        app:sRightTextMarginRight="@dimen/dimen_size_30" />
 
     <com.allen.library.SuperTextView
         android:id="@+id/third_setting"
         android:layout_width="match_parent"
         android:layout_height="@dimen/dimen_size_46"
         android:layout_marginTop="@dimen/dimen_size_10"
-        app:sBothLineMargin="0dp"
+        app:sBothLineMargin="@dimen/dimen_size_10"
         app:sLeftIconRes="@mipmap/left05"
         app:sLeftIconSize="@dimen/dimen_size_18"
         app:sLeftTextColor="@color/black_dark"
@@ -212,9 +208,25 @@
         app:sLineShow="both"
         app:sRightIconMarginRight="@dimen/dimen_size_10"
         app:sRightIconRes="@mipmap/arrow_right"
-        app:sRightIconSize="13dp"
+        app:sRightIconSize="@dimen/dimen_size_13"
         app:sRightTextColor="@color/gray"
-        app:sRightTextMarginRight="25dp"
-        app:sRightTextSize="13sp" />
+        app:sRightTextMarginRight="@dimen/dimen_size_30" />
+
+    <com.allen.library.SuperTextView
+        android:id="@+id/third_hotline"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimen_size_45.5"
+        app:sBottomLineMargin="@dimen/dimen_size_0"
+        app:sLeftIconRes="@mipmap/left06"
+        app:sLeftIconSize="@dimen/dimen_size_18"
+        app:sLeftTextColor="@color/black_dark"
+        app:sLeftTextMarginLeft="@dimen/dimen_size_10"
+        app:sLeftTextString="客服热线"
+        app:sLineShow="bottom"
+        app:sRightIconMarginRight="@dimen/dimen_size_10"
+        app:sRightIconRes="@mipmap/arrow_right"
+        app:sRightIconSize="@dimen/dimen_size_13"
+        app:sRightTextColor="@color/light"
+        app:sRightTextMarginRight="@dimen/dimen_size_30" />
 
 </LinearLayout>

@@ -37,6 +37,7 @@ public class PaaCreator {
 			paaParams.put("orderDatetime", timeStr);
 			paaParams.put("productName", "会员升级");
 			paaParams.put("payType", "0");
+			paaParams.put("ext1", "<USER>201312181020101</USER>");
 			paaParams.put("cardNo", "6216913000115973");
 		} catch (JSONException e) {
 			e.printStackTrace();
@@ -64,7 +65,7 @@ public class PaaCreator {
 		}
 		Log.d("PaaCreator", "PaaCreator " + paaStr.substring(0, paaStr.length() -1));
 		String md5Str = md5(paaStr.substring(0, paaStr.length() -1));
-		Log.d("PaaCreator", "PaaCreator md5Str " + md5Str);
+		Log.d("PaaCreator", "PaaCreator md5Str=" + md5Str);
 		try {
 			paaParams.put("signMsg", md5Str);
 		} catch (JSONException e) {
