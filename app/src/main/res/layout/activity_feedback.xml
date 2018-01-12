@@ -19,7 +19,7 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="@dimen/dimen_size_10"
         android:layout_marginRight="@dimen/dimen_size_10"
-        android:background="@drawable/rec_bg_white_stroke_lighter"
+        android:background="@drawable/rec_bg_white_stroke_divider"
         android:gravity="top"
         android:hint="您的宝贵意见，是我们进步的源泉~（150字以内）"
         android:maxLength="150"

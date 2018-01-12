@@ -37,8 +37,8 @@ public class PaaCreator {
 			paaParams.put("orderDatetime", timeStr);
 			paaParams.put("productName", "会员升级");
 			paaParams.put("ext1", "<USER>180112643565763</USER>");
-			paaParams.put("payType", "0");
-			paaParams.put("cardNo", "6216913000115973");
+			paaParams.put("payType", "33");
+			paaParams.put("cardNo", "6226981100485784");
 		} catch (JSONException e) {
 			e.printStackTrace();
 		}
@@ -55,7 +55,7 @@ public class PaaCreator {
 				timeStr,"orderDatetime",
 				"会员升级", "productName",
 				"<USER>180112643565763</USER>", "ext1",
-				"0","payType",
+				"33","payType",
 				"1234567890","key",
 		};
 

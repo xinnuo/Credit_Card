@@ -144,6 +144,9 @@
         <activity
             android:name=".BillDetailActivity"
             android:screenOrientation="portrait" />
+        <activity
+            android:name=".FeedbackActivity"
+            android:screenOrientation="portrait" />
 
         <!-- 融云即时通讯 start -->
         <!-- 会话界面 -->
@@ -240,7 +243,6 @@
                 android:resource="@xml/allinpay_path" />
         </provider>
 
-        <activity android:name=".FeedbackActivity"></activity>
     </application>
 
 </manifest>

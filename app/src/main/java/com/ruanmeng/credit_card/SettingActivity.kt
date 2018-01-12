@@ -30,6 +30,7 @@ class SettingActivity : BaseActivity() {
 
         setting_password.setOnClickListener { startActivity(SettingPasswordActivity::class.java) }
         setting_version.setOnClickListener { checkUpdate() }
+        setting_feedback.setOnClickListener { startActivity(FeedbackActivity::class.java) }
         setting_deal.setOnClickListener {
             val intent = Intent(baseContext, WebActivity::class.java)
             intent.putExtra("title", "用户协议")
