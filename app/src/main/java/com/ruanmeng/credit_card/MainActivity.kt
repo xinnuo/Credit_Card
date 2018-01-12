@@ -7,6 +7,7 @@ import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentPagerAdapter
 import android.view.KeyEvent
 import android.view.View
+import android.widget.Button
 import android.widget.CompoundButton
 import cn.jpush.android.api.JPushInterface
 import com.lzy.extend.StringDialogCallback
@@ -28,6 +29,7 @@ import com.ruanmeng.utils.OkGoUpdateHttpUtil
 import com.ruanmeng.utils.Tools
 import com.vector.update_app.UpdateAppBean
 import com.vector.update_app.UpdateAppManager
+import com.vector.update_app.service.DownloadService
 import com.vector.update_app_kotlin.check
 import com.vector.update_app_kotlin.updateApp
 import io.rong.imkit.RongIM
@@ -35,11 +37,13 @@ import io.rong.imlib.RongIMClient
 import kotlinx.android.synthetic.main.activity_main.*
 import org.greenrobot.eventbus.EventBus
 import org.json.JSONObject
+import java.io.File
 import java.util.ArrayList
 
 class MainActivity : BaseActivity() {
 
     private var isNewVersion = false
+    private var isDownloading = false
     private var isFirst = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -205,7 +209,8 @@ class MainActivity : BaseActivity() {
                                         "去认证") {
                                     startActivity(RealNameActivity::class.java)
                                 }
-                                "0" -> { }
+                                "0" -> {
+                                }
                                 "1" -> if (list.isEmpty()) {
                                     showHintDialog(
                                             "您还未绑定储蓄卡，是否现在去添加储蓄卡？",
@@ -336,9 +341,35 @@ class MainActivity : BaseActivity() {
             if (!updateApp.isConstraint) negativeButton("暂不升级") { }
             show()
             // 必须要先调show()方法，后面的getButton才有效
-            getPositiveButton().setOnClickListener {
-                if (!updateApp.isConstraint) dismiss()
-                updateAppManager.download()
+            getPositiveButton().setOnClickListener { view ->
+                if (!updateApp.isConstraint) {
+                    dismiss()
+                    updateAppManager.download()
+                } else {
+                    when (isDownloading) {
+                        true -> toast("正在下载中")
+                        false -> updateAppManager.download(object : DownloadService.DownloadCallback {
+
+                            override fun onFinish(file: File): Boolean {
+                                isDownloading = false
+                                (view as Button).text = "升级"
+                                return true
+                            }
+
+                            override fun setMax(totalSize: Long) = OkLogger.e("totalSize: " + totalSize)
+
+                            override fun onProgress(progress: Float, totalSize: Long) = OkLogger.e("progress: " + progress)
+
+                            override fun onError(msg: String) = OkLogger.e(msg)
+
+                            override fun onStart() {
+                                isDownloading = true
+                                (view as Button).text = "下载中"
+                            }
+
+                        })
+                    }
+                }
             }
         }
     }

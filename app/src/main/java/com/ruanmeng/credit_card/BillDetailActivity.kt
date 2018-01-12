@@ -33,15 +33,15 @@ class BillDetailActivity : BaseActivity() {
 
                         val cardNo = data.getString("cardNo")
                         val realSum = data.getString("realSum")
-                        val paySum = data.getString("paySum")
+                        val businessSum = data.getString("businessSum")
                         val status = data.getString("status")
 
                         bill_id.setRightString(data.getString("payRecordId"))
                         bill_type.setRightString(data.getString("payType"))
                         bill_card.setRightString(CommonUtil.bankCardReplaceHeaderWithStar(cardNo))
                         bill_pay.setRightString(String.format("%.2f", realSum.toDouble()))
-                        bill_back.setRightString(String.format("%.2f", paySum.toDouble()))
-                        bill_fee.setRightString(String.format("%.2f", realSum.toDouble() - paySum.toDouble()))
+                        bill_back.setRightString(String.format("%.2f", realSum.toDouble() - businessSum.toDouble()))
+                        bill_fee.setRightString(String.format("%.2f", businessSum.toDouble()))
                         bill_time.setRightString(data.getString("payTime"))
                         bill_status.setRightString(when (status) {
                             "1" -> "交易成功"
