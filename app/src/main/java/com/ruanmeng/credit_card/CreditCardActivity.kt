@@ -61,7 +61,6 @@ class CreditCardActivity : BaseActivity() {
         et_pay.addTextChangedListener(this@CreditCardActivity)
         et_phone.addTextChangedListener(this@CreditCardActivity)
         et_yzm.addTextChangedListener(this@CreditCardActivity)
-        et_bank.addTextChangedListener(this@CreditCardActivity)
         card_city.addTextChangedListener(this@CreditCardActivity)
 
         credit_name.text = getString("real_name")
@@ -237,7 +236,7 @@ class CreditCardActivity : BaseActivity() {
                         .params("cvn2", et_back.text.trim().toString())
                         .params("invalidDate", et_date.rawText)
                         .params("bank", card_bank.text.toString())
-                        .params("bankSubName", et_bank.text.trim().toString())
+                        .params("bankSubName", card_bank.text.toString())
                         .params("bankProvince", bankProvince)
                         .params("bankCity", bankCity)
                         .params("quota", et_limit.text.trim().toString())
@@ -314,7 +313,6 @@ class CreditCardActivity : BaseActivity() {
                 && et_pay.text.isNotBlank()
                 && et_phone.text.isNotBlank()
                 && et_yzm.text.isNotBlank()
-                && et_bank.text.isNotBlank()
                 && card_city.text.isNotBlank()) {
             card_sure.setBackgroundResource(R.drawable.rec_bg_blue)
             card_sure.isClickable = true

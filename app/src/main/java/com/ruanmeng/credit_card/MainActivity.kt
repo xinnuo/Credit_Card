@@ -317,7 +317,7 @@ class MainActivity : BaseActivity() {
                         .setNewVersion(obj.optString("versionNo"))
                         //（必须）下载地址
                         // .setApkFileUrl(obj.optString("url"))
-                        .setApkFileUrl(Const.DOWNLOAD_URL)
+                        .setApkFileUrl(Const.URL_DOWNLOAD)
                         //（必须）更新内容
                         .setUpdateLog(obj.optString("content"))
                         //是否强制更新，可以不设置

@@ -16,7 +16,7 @@ import android.util.Log;
 public class PaaCreator {
 
 	public static JSONObject randomPaa() {
-		String amount = "13900";
+		String amount = "1";
 
 		@SuppressLint("SimpleDateFormat")
 		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMddHHmmss");
@@ -30,14 +30,14 @@ public class PaaCreator {
 			paaParams.put("receiveUrl", "http://www");
 			paaParams.put("version", "v1.0");
 			paaParams.put("signType", "0");
-			paaParams.put("merchantId", "20049100001959604");
+			paaParams.put("merchantId", "008410148160091");
 			paaParams.put("orderNo", orderStr);
 			paaParams.put("orderAmount", amount);
 			paaParams.put("orderCurrency", "0");
 			paaParams.put("orderDatetime", timeStr);
 			paaParams.put("productName", "会员升级");
+			paaParams.put("ext1", "<USER>180112643565763</USER>");
 			paaParams.put("payType", "0");
-			paaParams.put("ext1", "<USER>201312181020101</USER>");
 			paaParams.put("cardNo", "6216913000115973");
 		} catch (JSONException e) {
 			e.printStackTrace();
@@ -48,12 +48,13 @@ public class PaaCreator {
 				"http://www","receiveUrl",
 				"v1.0","version",
 				"0","signType",
-				"20049100001959604","merchantId",
+				"008410148160091","merchantId",
 				orderStr,"orderNo",
 				amount,"orderAmount",
 				"0","orderCurrency",
 				timeStr,"orderDatetime",
 				"会员升级", "productName",
+				"<USER>180112643565763</USER>", "ext1",
 				"0","payType",
 				"1234567890","key",
 		};
@@ -76,9 +77,6 @@ public class PaaCreator {
 
 	/**
 	 * MD5签名
-	 *
-	 * @param orgin
-	 * @return String
 	 */
 	private static String md5(String orgin) {
 		byte[] hash;
@@ -95,9 +93,6 @@ public class PaaCreator {
 
 	/**
 	 * Byte数组转十六进制字符串
-	 *
-	 * @param bytes
-	 * @return String
 	 */
 	private static String hexString(byte[] bytes) {
 		StringBuilder buffer = new StringBuilder();
@@ -107,9 +102,6 @@ public class PaaCreator {
 
 	/**
 	 * Byte字节转十六进制字符串
-	 *
-	 * @param byte0
-	 * @return String
 	 */
 	private static String hexString(byte byte0) {
 		char ac[] = { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F' };

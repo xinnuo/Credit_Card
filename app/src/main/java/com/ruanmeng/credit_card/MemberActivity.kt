@@ -24,6 +24,7 @@ import com.ruanmeng.base.*
 import com.ruanmeng.model.CommonData
 import com.ruanmeng.model.CommonModel
 import com.ruanmeng.share.BaseHttp
+import com.ruanmeng.share.Const
 import com.ruanmeng.utils.ActivityStack
 import com.ruanmeng.utils.DialogHelper
 import com.ruanmeng.utils.KeyboardHelper
@@ -161,7 +162,7 @@ class MemberActivity : BaseActivity() {
             DialogHelper.showDialog(
                     baseContext,
                     "温馨提示",
-                    "未设置支付密码，无法进行收款，是否现在去设置？",
+                    "未设置支付密码，无法进行付款，是否现在去设置？",
                     "取消",
                     "去设置") {
 
@@ -283,7 +284,11 @@ class MemberActivity : BaseActivity() {
     private fun startPay() {
         val payData = PaaCreator.randomPaa().toString()
         OkLogger.i(payData)
-        APPayAssistEx.startPay(this@MemberActivity, payData, APPayAssistEx.MODE_PRODUCT)
+        APPayAssistEx.startPay(
+                this@MemberActivity,
+                payData,
+                APPayAssistEx.MODE_PRODUCT,
+                Const.authority)
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
