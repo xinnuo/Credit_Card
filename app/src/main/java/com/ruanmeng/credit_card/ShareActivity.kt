@@ -3,6 +3,8 @@ package com.ruanmeng.credit_card
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.graphics.Bitmap
+import android.graphics.BitmapFactory
+import android.graphics.Color
 import android.os.Bundle
 import android.support.design.widget.BottomSheetDialog
 import android.view.LayoutInflater
@@ -18,6 +20,7 @@ import com.ruanmeng.base.BaseActivity
 import com.ruanmeng.base.GlideApp
 import com.ruanmeng.base.getString
 import com.ruanmeng.share.BaseHttp
+import com.ruanmeng.utils.Tools
 import com.umeng.socialize.ShareAction
 import com.umeng.socialize.UMShareAPI
 import com.umeng.socialize.bean.SHARE_MEDIA
@@ -28,7 +31,6 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.activity_share.*
 import org.json.JSONObject
-
 
 class ShareActivity : BaseActivity() {
 
@@ -80,7 +82,7 @@ class ShareActivity : BaseActivity() {
                     ShareAction(baseContext)
                             .setPlatform(SHARE_MEDIA.WEIXIN)
                             .withText("诸葛信用管家")
-                            .withMedia(UMImage(baseContext, qrcode))
+                            .withMedia(UMImage(baseContext, Tools.getViewBitmap(share_fl)))
                             .share()
                 }
                 ll_circle.setOnClickListener {
@@ -89,7 +91,7 @@ class ShareActivity : BaseActivity() {
                     ShareAction(baseContext)
                             .setPlatform(SHARE_MEDIA.WEIXIN_CIRCLE)
                             .withText("诸葛信用管家")
-                            .withMedia(UMImage(baseContext, qrcode))
+                            .withMedia(UMImage(baseContext, Tools.getViewBitmap(share_fl)))
                             .share()
                 }
                 ll_qq.setOnClickListener {
@@ -98,7 +100,7 @@ class ShareActivity : BaseActivity() {
                     ShareAction(baseContext)
                             .setPlatform(SHARE_MEDIA.QQ)
                             .withText("诸葛信用管家")
-                            .withMedia(UMImage(baseContext, qrcode))
+                            .withMedia(UMImage(baseContext, Tools.getViewBitmap(share_fl)))
                             .share()
                 }
                 ll_zone.setOnClickListener {
@@ -107,7 +109,7 @@ class ShareActivity : BaseActivity() {
                     ShareAction(baseContext)
                             .setPlatform(SHARE_MEDIA.QZONE)
                             .withText("诸葛信用管家")
-                            .withMedia(UMImage(baseContext, qrcode))
+                            .withMedia(UMImage(baseContext, Tools.getViewBitmap(share_fl)))
                             .share()
                 }
                 tv_cancel.setOnClickListener { dialog.dismiss() }
@@ -131,11 +133,17 @@ class ShareActivity : BaseActivity() {
                         val qr_code = JSONObject(response.body()).getString("qrcode")
 
                         Observable.create(ObservableOnSubscribe<Bitmap> { e ->
-                            qrcode = QRCodeEncoder.syncEncodeQRCode(qr_code, BGAQRCodeUtil.dp2px(baseContext, 200f))
+                            qrcode = QRCodeEncoder.syncEncodeQRCode(
+                                    qr_code,
+                                    BGAQRCodeUtil.dp2px(baseContext, 200f),
+                                    Color.BLACK,
+                                    BitmapFactory.decodeResource(resources, R.mipmap.ic_launcher))
                             e.onNext(qrcode)
                         }).subscribeOn(Schedulers.newThread())
                                 .observeOn(AndroidSchedulers.mainThread())
-                                .subscribe { bitmap -> share_qrcode.setImageBitmap(bitmap) }
+                                .subscribe { bitmap ->
+                                    share_qrcode.setImageBitmap(bitmap)
+                                }
 
                     }
 

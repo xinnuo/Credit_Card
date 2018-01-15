@@ -17,6 +17,7 @@ public class PaaCreator {
 
 	public static JSONObject randomPaa() {
 		String amount = "1";
+		String url = "http://app.zgzngj.com/api/allinpay_upvip.rm?allinpayId=180112643546198&upvipId=125161611316";
 
 		@SuppressLint("SimpleDateFormat")
 		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMddHHmmss");
@@ -27,7 +28,7 @@ public class PaaCreator {
 		JSONObject paaParams = new JSONObject();
 		try {
 			paaParams.put("inputCharset", "1");
-			paaParams.put("receiveUrl", "http://www");
+			paaParams.put("receiveUrl", url);
 			paaParams.put("version", "v1.0");
 			paaParams.put("signType", "0");
 			paaParams.put("merchantId", "008410148160091");
@@ -36,7 +37,7 @@ public class PaaCreator {
 			paaParams.put("orderCurrency", "0");
 			paaParams.put("orderDatetime", timeStr);
 			paaParams.put("productName", "会员升级");
-			paaParams.put("ext1", "<USER>180112643565763</USER>");
+			paaParams.put("ext1", "<USER>180112643546198</USER>");
 			paaParams.put("payType", "33");
 			paaParams.put("cardNo", "6226981100485784");
 		} catch (JSONException e) {
@@ -45,7 +46,7 @@ public class PaaCreator {
 
 		String[] paaParamsArray = {
 				"1","inputCharset",
-				"http://www","receiveUrl",
+				url,"receiveUrl",
 				"v1.0","version",
 				"0","signType",
 				"008410148160091","merchantId",
@@ -54,7 +55,7 @@ public class PaaCreator {
 				"0","orderCurrency",
 				timeStr,"orderDatetime",
 				"会员升级", "productName",
-				"<USER>180112643565763</USER>", "ext1",
+				"<USER>180112643546198</USER>", "ext1",
 				"33","payType",
 				"1234567890","key",
 		};

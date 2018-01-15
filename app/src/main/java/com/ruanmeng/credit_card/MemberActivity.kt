@@ -25,10 +25,7 @@ import com.ruanmeng.model.CommonData
 import com.ruanmeng.model.CommonModel
 import com.ruanmeng.share.BaseHttp
 import com.ruanmeng.share.Const
-import com.ruanmeng.utils.ActivityStack
-import com.ruanmeng.utils.DialogHelper
-import com.ruanmeng.utils.KeyboardHelper
-import com.ruanmeng.utils.NumberHelper
+import com.ruanmeng.utils.*
 import kotlinx.android.synthetic.main.activity_member.*
 import kotlinx.android.synthetic.main.layout_title_left.*
 import net.cachapa.expandablelayout.ExpandableLayout
@@ -101,10 +98,13 @@ class MemberActivity : BaseActivity() {
         super.doClick(v)
         when (v.id) {
             R.id.member_sure -> {
-                startPay()
-
                 if (levelName.isEmpty()) {
                     toast("请选择升级会员类型")
+                    return
+                }
+
+                if (ACache.get(baseContext).getAsBoolean("isUpdating", false)) {
+                    toast("您的会员升级已经提交，正在处理中")
                     return
                 }
 
@@ -150,7 +150,8 @@ class MemberActivity : BaseActivity() {
         bt_next.setOnClickListener {
             dialog.dismiss()
 
-            window.decorView.postDelayed({ runOnUiThread { showPaySheetDialog() } }, 300)
+            // window.decorView.postDelayed({ runOnUiThread { showPaySheetDialog() } }, 300)
+            window.decorView.postDelayed({ runOnUiThread { getPayData() } }, 300)
         }
 
         dialog.setContentView(view)
@@ -211,7 +212,6 @@ class MemberActivity : BaseActivity() {
                                         override fun onSuccessResponse(response: Response<String>, msg: String, msgCode: String) {
                                             dismiss()
 
-                                            // window.decorView.postDelayed({ runOnUiThread { getPay() } }, 300)
                                             window.decorView.postDelayed({ runOnUiThread { startPay() } }, 300)
                                         }
 
@@ -227,27 +227,19 @@ class MemberActivity : BaseActivity() {
         }
     }
 
-    private fun getPay() {
-        OkGo.post<String>(BaseHttp.add_upvip_sub)
+    private fun getPayData() {
+        OkGo.post<String>(BaseHttp.allinpay_register)
                 .tag(this@MemberActivity)
                 .headers("token", getString("token"))
                 .params("cardId", list_cards[0].cardId)
                 .params("payVipSum", mPrice)
                 .params("agentId", agentId)
                 .params("cardType", 0)
-                .execute(object : StringDialogCallback(baseContext, false) {
-                    /*{
-                        "msg": "付款成功",
-                        "msgcode": 100,
-                        "object": "https://shouyin.yeepay.com/nc-cashier-wap/wap/request/10016127996/rZZIga6mFzmWwVHne*OWsg%3D%3D"
-                    }*/
+                .execute(object : StringDialogCallback(baseContext) {
+
                     override fun onSuccessResponse(response: Response<String>, msg: String, msgCode: String) {
 
-                        val intent = Intent(baseContext, MemberDoneActivity::class.java)
-                        intent.putExtra("levelName", levelName)
-                        startActivity(intent)
-
-                        ActivityStack.getScreenManager().popActivities(this@MemberActivity::class.java)
+                        startPay()
                     }
 
                 })
@@ -292,18 +284,26 @@ class MemberActivity : BaseActivity() {
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        /*{
+            "allinpay_pay_res": "allinpay_pay_success",
+            "payAmount": "1",
+            "payTime": "2018-01-15 10:56:03",
+            "payOrderId": ""
+        }*/
         if (APPayAssistEx.REQUESTCODE == requestCode) {
             if (null != data) {
-                val payRes: String
-                val payAmount: String
-                val payTime: String
-                val payOrderId: String
                 val resultJson = JSONObject(data.extras.getString("result"))
-                payRes = resultJson.getString(APPayAssistEx.KEY_PAY_RES)
-                payAmount = resultJson.getString("payAmount")
-                payTime = resultJson.getString("payTime")
-                payOrderId = resultJson.getString("payOrderId")
-                OkLogger.e("payResult", "payRes: $payRes  payAmount: $payAmount  payTime: $payTime  payOrderId: $payOrderId")
+                if (!resultJson.isNull(APPayAssistEx.KEY_PAY_RES)
+                        && resultJson.getString(APPayAssistEx.KEY_PAY_RES) == APPayAssistEx.RES_SUCCESS) {
+
+                    ACache.get(baseContext).put("isUpdating", true, 5 * 60)
+                    OkLogger.d(resultJson.toString())
+                    toast("支付成功，请等待后台审核！")
+                } else {
+
+                    OkLogger.e(resultJson.toString())
+                    toast("支付失败！")
+                }
             }
         }
         super.onActivityResult(requestCode, resultCode, data)

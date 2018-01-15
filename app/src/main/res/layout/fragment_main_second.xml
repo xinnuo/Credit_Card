@@ -13,22 +13,53 @@
         android:layout_height="@dimen/divider_height"
         android:background="@color/divider" />
 
-    <WebView
-        android:id="@+id/second_web"
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:overScrollMode="never" />
+        android:layout_height="match_parent">
 
-    <Button
-        android:id="@+id/second_update"
-        style="@style/Font15_white"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/dimen_size_40"
-        android:layout_margin="@dimen/dimen_size_20"
-        android:background="@drawable/rec_bg_blue"
-        android:onClick="doClick"
-        android:text="升级会员"
-        android:textSize="@dimen/sp_size_20" />
+        <android.support.v4.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:overScrollMode="never">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <WebView
+                    android:id="@+id/second_web"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:overScrollMode="never" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="65dp" />
+
+            </LinearLayout>
+
+        </android.support.v4.widget.NestedScrollView>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:background="#33000000">
+
+            <Button
+                android:id="@+id/second_update"
+                style="@style/Font15_white"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dimen_size_40"
+                android:layout_margin="@dimen/dimen_size_20"
+                android:background="@drawable/rec_bg_blue"
+                android:onClick="doClick"
+                android:text="升级会员"
+                android:textSize="@dimen/sp_size_20" />
+
+        </LinearLayout>
+
+    </FrameLayout>
 
 </LinearLayout>

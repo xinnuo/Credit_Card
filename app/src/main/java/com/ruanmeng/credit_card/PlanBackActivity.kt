@@ -9,7 +9,6 @@ import android.text.Editable
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.TextView
-import com.lzy.extend.StringDialogCallback
 import com.lzy.extend.jackson.JacksonDialogCallback
 import com.lzy.okgo.OkGo
 import com.lzy.okgo.model.Response
@@ -34,6 +33,8 @@ class PlanBackActivity : BaseActivity() {
 
     private val list = ArrayList<Any>()
     private val list_title = ArrayList<Any>()
+    private var billDay = 0
+    private var repaymentDay = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -44,6 +45,9 @@ class PlanBackActivity : BaseActivity() {
 
     override fun init_title() {
         left_nav_title.text = "新增还款计划"
+
+        billDay = intent.getStringExtra("billDay").toInt()
+        repaymentDay = intent.getStringExtra("repaymentDay").toInt()
 
         plan_submit.setBackgroundResource(R.drawable.rec_bg_d0d0d0)
         plan_submit.isClickable = false
@@ -125,6 +129,10 @@ class PlanBackActivity : BaseActivity() {
                                             view.setTextColor(resources.getColor(if (data.isChecked) R.color.colorAccent else R.color.black_dark))
                                             view.setBackgroundColor(resources.getColor(if (data.isChecked) R.color.lighter else R.color.white))
                                         }
+                                        .visibility(R.id.item_pay,
+                                                if (data.title.toInt() == repaymentDay) View.VISIBLE else View.INVISIBLE)
+                                        .visibility(R.id.item_bill,
+                                                if (data.title.toInt() == billDay) View.VISIBLE else View.INVISIBLE)
                                         .visibility(R.id.item_tab_left,
                                                 if (item_first.indexOf(data) % 7 == 0) View.VISIBLE else View.INVISIBLE)
                                         .visibility(R.id.item_tab_top,
@@ -147,6 +155,10 @@ class PlanBackActivity : BaseActivity() {
                                             view.setTextColor(resources.getColor(if (data.isChecked) R.color.colorAccent else R.color.black_dark))
                                             view.setBackgroundColor(resources.getColor(if (data.isChecked) R.color.lighter else R.color.white))
                                         }
+                                        .visibility(R.id.item_pay,
+                                                if (data.title.toInt() == repaymentDay) View.VISIBLE else View.INVISIBLE)
+                                        .visibility(R.id.item_bill,
+                                                if (data.title.toInt() == billDay) View.VISIBLE else View.INVISIBLE)
                                         .visibility(R.id.item_tab_left,
                                                 if (item_second.indexOf(data) % 7 == 0) View.VISIBLE else View.INVISIBLE)
                                         .visibility(R.id.item_tab_top,
@@ -182,20 +194,25 @@ class PlanBackActivity : BaseActivity() {
             }
             R.id.plan_plus -> {
                 val count = plan_count.text.toString().toInt()
-                if (count > 1) plan_count.text = (count - 1).toString()
+                if (count > 1) plan_count.setText((count - 1).toString())
             }
             R.id.plan_add -> {
                 val count = plan_count.text.toString().toInt()
-                plan_count.text = (count + 1).toString()
+                plan_count.setText((count + 1).toString())
             }
             R.id.plan_submit -> {
-                /*if (plan_type.text.isEmpty()) {
-                    toast("请选择还款类型")
-                    return
-                }*/
-
                 if (list.isEmpty()) {
                     toast("请选择还款日期")
+                    return
+                }
+
+                if (plan_count.text.isEmpty()) {
+                    toast("请输入还款笔数")
+                    return
+                }
+
+                if (plan_count.text.toString().toInt() < list.size) {
+                    toast("还款笔数不能小于还款天数")
                     return
                 }
 

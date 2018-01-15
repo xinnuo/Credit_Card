@@ -40,9 +40,9 @@ public class BaseHttp {
     public static String get_msgCount = baseIp + "/get_msgCount.rm";             //未读消息数量√
     public static String newsnotice_list = baseIp + "/newsnotice_list.rm";       //公告列表√
 
-    public static String up_vip_list = baseIp + "/up_vip_list.rm";       //升级列表√
-    public static String card_Info_list = baseIp + "/card_Info_list.rm"; //银行卡列表√
-    public static String add_upvip_sub = baseIp + "/add_upvip_sub.rm";   //升级会员√
+    public static String up_vip_list = baseIp + "/up_vip_list.rm";             //升级列表√
+    public static String card_Info_list = baseIp + "/card_Info_list.rm";       //银行卡列表√
+    public static String allinpay_register = baseIp + "/allinpay_register.rm"; //注册通联√
 
     public static String user_msg_data = baseIp + "/user_msg_data.rm";                     //用户个人资料√
     public static String userinfo_uploadhead_sub = baseIp + "/userinfo_uploadhead_sub.rm"; //修改头像√
