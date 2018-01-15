@@ -10,7 +10,7 @@
         android:layout_height="wrap_content"
         android:padding="@dimen/dimen_size_10"
         android:text="您有什么问题或建议想对我们说？"
-        android:textColor="@color/blue" />
+        android:textColor="@color/colorAccent" />
 
     <EditText
         android:id="@+id/feedback_content"

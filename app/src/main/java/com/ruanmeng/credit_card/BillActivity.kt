@@ -61,7 +61,11 @@ class BillActivity : BaseActivity() {
                                         else -> ""
                                     })
                             .text(R.id.item_first_num, "尾号(${data.cardNo.substring(data.cardNo.length - 4)})")
-                            .text(R.id.item_first_rate, "费率 ${ if (data.rate.isEmpty()) "0.0" else (data.rate.toDouble() * 100).toString() }%")
+                            .text(R.id.item_first_rate,
+                                    when (data.type) {
+                                        "0" -> "手续费 ￥${if (data.rate.isEmpty()) "0.00" else String.format("%.2f", data.rate.toDouble())}"
+                                        else -> "费率 ${if (data.rate.isEmpty()) "0.0" else (data.rate.toDouble() * 100).toString()}%"
+                                    })
                             .text(R.id.item_first_time, data.payTime)
                             .text(R.id.item_first_status, when (data.status) {
                                 "1" -> "交易成功"
