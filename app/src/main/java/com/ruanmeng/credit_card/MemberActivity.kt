@@ -23,16 +23,16 @@ import com.ruanmeng.allinpay.PaaCreator
 import com.ruanmeng.base.*
 import com.ruanmeng.model.CommonData
 import com.ruanmeng.model.CommonModel
+import com.ruanmeng.model.RefreshMessageEvent
 import com.ruanmeng.share.BaseHttp
 import com.ruanmeng.share.Const
-import com.ruanmeng.utils.ActivityStack
-import com.ruanmeng.utils.DialogHelper
-import com.ruanmeng.utils.KeyboardHelper
-import com.ruanmeng.utils.NumberHelper
+import com.ruanmeng.utils.*
 import kotlinx.android.synthetic.main.activity_member.*
 import kotlinx.android.synthetic.main.layout_title_left.*
 import net.cachapa.expandablelayout.ExpandableLayout
 import net.idik.lib.slimadapter.SlimAdapter
+import org.greenrobot.eventbus.EventBus
+import org.greenrobot.eventbus.Subscribe
 import org.json.JSONObject
 import java.text.DecimalFormat
 
@@ -50,6 +50,8 @@ class MemberActivity : BaseActivity() {
         setContentView(R.layout.activity_member)
         setToolbarVisibility(false)
         init_title()
+
+        EventBus.getDefault().register(this@MemberActivity)
 
         getData()
     }
@@ -101,10 +103,13 @@ class MemberActivity : BaseActivity() {
         super.doClick(v)
         when (v.id) {
             R.id.member_sure -> {
-                startPay()
-
                 if (levelName.isEmpty()) {
                     toast("请选择升级会员类型")
+                    return
+                }
+
+                if (ACache.get(baseContext).getAsBoolean("isUpdating", false)) {
+                    toast("您的会员升级已经提交，正在处理中")
                     return
                 }
 
@@ -150,7 +155,8 @@ class MemberActivity : BaseActivity() {
         bt_next.setOnClickListener {
             dialog.dismiss()
 
-            window.decorView.postDelayed({ runOnUiThread { showPaySheetDialog() } }, 300)
+            // window.decorView.postDelayed({ runOnUiThread { showPaySheetDialog() } }, 300)
+            window.decorView.postDelayed({ runOnUiThread { getPayData() } }, 300)
         }
 
         dialog.setContentView(view)
@@ -211,8 +217,7 @@ class MemberActivity : BaseActivity() {
                                         override fun onSuccessResponse(response: Response<String>, msg: String, msgCode: String) {
                                             dismiss()
 
-                                            // window.decorView.postDelayed({ runOnUiThread { getPay() } }, 300)
-                                            window.decorView.postDelayed({ runOnUiThread { startPay() } }, 300)
+                                            // window.decorView.postDelayed({ runOnUiThread { startPay() } }, 300)
                                         }
 
                                     })
@@ -227,27 +232,35 @@ class MemberActivity : BaseActivity() {
         }
     }
 
-    private fun getPay() {
-        OkGo.post<String>(BaseHttp.add_upvip_sub)
+    private fun getPayData() {
+        OkGo.post<String>(BaseHttp.allinpay_register)
                 .tag(this@MemberActivity)
                 .headers("token", getString("token"))
                 .params("cardId", list_cards[0].cardId)
                 .params("payVipSum", mPrice)
                 .params("agentId", agentId)
                 .params("cardType", 0)
-                .execute(object : StringDialogCallback(baseContext, false) {
+                .execute(object : StringDialogCallback(baseContext) {
                     /*{
-                        "msg": "付款成功",
+                        "msg": "添加成功",
                         "msgcode": 100,
-                        "object": "https://shouyin.yeepay.com/nc-cashier-wap/wap/request/10016127996/rZZIga6mFzmWwVHne*OWsg%3D%3D"
+                        "object": {
+                            "createDate": "2018-01-16 09:14:44",
+                            "sysDate": "2018-01-16 09:14:44",
+                            "allinpayId": "180115648832017",
+                            "merchantId": "008410148160091",
+                            "resultCode": "0000",
+                            "returnDatetime": "20180116091444",
+                            "userInfoId": "049A88A133964C37ADE5F02C4055CA51",
+                            "upvipId": "FD7ADBE6C69040A69B1359BDA91142DF"
+                        }
                     }*/
                     override fun onSuccessResponse(response: Response<String>, msg: String, msgCode: String) {
 
-                        val intent = Intent(baseContext, MemberDoneActivity::class.java)
-                        intent.putExtra("levelName", levelName)
-                        startActivity(intent)
-
-                        ActivityStack.getScreenManager().popActivities(this@MemberActivity::class.java)
+                        val data = JSONObject(response.body()).getJSONObject("object")
+                        startPay(data.getString("merchantId"),
+                                data.getString("allinpayId"),
+                                data.getString("upvipId"))
                     }
 
                 })
@@ -262,6 +275,7 @@ class MemberActivity : BaseActivity() {
                     override fun onSuccess(response: Response<CommonModel>) {
 
                         member_level.text = response.body().levelName
+                        list.clear()
                         list.addItems(response.body().las)
 
                         if (list.isEmpty()) {
@@ -281,8 +295,11 @@ class MemberActivity : BaseActivity() {
                 })
     }
 
-    private fun startPay() {
-        val payData = PaaCreator.randomPaa().toString()
+    private fun startPay(
+            merchantId: String,
+            userId: String,
+            upvipId: String) {
+        val payData = PaaCreator.randomPaa(merchantId, userId, upvipId, mPrice, list_cards[0].cardNo)
         OkLogger.i(payData)
         APPayAssistEx.startPay(
                 this@MemberActivity,
@@ -292,20 +309,40 @@ class MemberActivity : BaseActivity() {
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        /*{
+            "allinpay_pay_res": "allinpay_pay_success",
+            "payAmount": "1",
+            "payTime": "2018-01-15 10:56:03",
+            "payOrderId": ""
+        }*/
         if (APPayAssistEx.REQUESTCODE == requestCode) {
             if (null != data) {
-                val payRes: String
-                val payAmount: String
-                val payTime: String
-                val payOrderId: String
                 val resultJson = JSONObject(data.extras.getString("result"))
-                payRes = resultJson.getString(APPayAssistEx.KEY_PAY_RES)
-                payAmount = resultJson.getString("payAmount")
-                payTime = resultJson.getString("payTime")
-                payOrderId = resultJson.getString("payOrderId")
-                OkLogger.e("payResult", "payRes: $payRes  payAmount: $payAmount  payTime: $payTime  payOrderId: $payOrderId")
+                if (!resultJson.isNull(APPayAssistEx.KEY_PAY_RES)
+                        && resultJson.getString(APPayAssistEx.KEY_PAY_RES) == APPayAssistEx.RES_SUCCESS) {
+
+                    ACache.get(baseContext).put("isUpdating", true, 5 * 60)
+                    OkLogger.d(resultJson.toString())
+                    toast("支付成功，请等待后台审核！")
+                } else {
+
+                    OkLogger.e(resultJson.toString())
+                    toast("支付失败！")
+                }
             }
         }
         super.onActivityResult(requestCode, resultCode, data)
+    }
+
+    override fun finish() {
+        EventBus.getDefault().unregister(this@MemberActivity)
+        super.finish()
+    }
+
+    @Subscribe
+    fun onMessageEvent(event: RefreshMessageEvent) {
+        when (event.name) {
+            "升级会员" -> getData()
+        }
     }
 }

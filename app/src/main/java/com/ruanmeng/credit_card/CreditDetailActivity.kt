@@ -44,7 +44,8 @@ class CreditDetailActivity : BaseActivity() {
 
     override fun init_title() {
         left_nav_title.text = "信用卡"
-        left_nav_right.visibility = View.VISIBLE
+        val isPay = intent.getBooleanExtra("isPay", false)
+        if (!isPay) left_nav_right.visibility = View.VISIBLE
 
         credit_bill.setOnClickListener {
             if (creditcardId.isEmpty()) return@setOnClickListener
@@ -144,6 +145,8 @@ class CreditDetailActivity : BaseActivity() {
                         0 -> {
                             val intent = Intent(baseContext, PlanBackActivity::class.java)
                             intent.putExtra("creditcardId", creditcardId)
+                            intent.putExtra("billDay", billDay)
+                            intent.putExtra("repaymentDay", repaymentDay)
                             startActivity(intent)
                         }
                     }

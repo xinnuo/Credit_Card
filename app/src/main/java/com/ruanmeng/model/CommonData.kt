@@ -92,6 +92,9 @@ data class CommonData(
         var areaCode: String = "",
         var areaName: String = "",
 
+        //客服列表
+        var userhead: String = "",
+
         //信用卡列表
         var billDay: String = "",
         var creditcard: String = "",

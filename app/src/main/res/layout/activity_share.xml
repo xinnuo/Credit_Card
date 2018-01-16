@@ -20,6 +20,7 @@
         android:text="将下方软件下载二维码分享给朋友，并注册使用，即可获得相应奖励" />
 
     <LinearLayout
+        android:id="@+id/share_fl"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="@dimen/dimen_size_30"
@@ -59,7 +60,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dimen_size_3"
-                    android:text="诸葛信用管家很好用，分享给你！" />
+                    android:text="诸葛信用管家刷卡还卡都方便，分享给你用！" />
 
             </LinearLayout>
 

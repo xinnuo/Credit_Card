@@ -33,7 +33,7 @@ class BillDetailActivity : BaseActivity() {
 
                         val cardNo = data.getString("cardNo")
                         val realSum = data.getString("realSum")
-                        val businessSum = data.getString("businessSum")
+                        val businessSum = if (data.isNull("businessSum")) "0.00" else data.getString("businessSum")
                         val status = data.getString("status")
 
                         bill_id.setRightString(data.getString("payRecordId"))

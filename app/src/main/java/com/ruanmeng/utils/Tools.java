@@ -442,6 +442,29 @@ public class Tools {
     }
 
     /**
+     * 根据view来生成bitmap图片，可用于截图功能
+     */
+    public static Bitmap getViewBitmap(View v) {
+        v.clearFocus();
+        v.setPressed(false);
+        // 能画缓存就返回false
+        boolean willNotCache = v.willNotCacheDrawing();
+        v.setWillNotCacheDrawing(false);
+        int color = v.getDrawingCacheBackgroundColor();
+        v.setDrawingCacheBackgroundColor(0);
+        if (color != 0) v.destroyDrawingCache();
+        v.buildDrawingCache();
+        Bitmap cacheBitmap = v.getDrawingCache();
+        if (cacheBitmap == null) return null;
+        Bitmap bitmap = Bitmap.createBitmap(cacheBitmap);
+        // Restore the view
+        v.destroyDrawingCache();
+        v.setWillNotCacheDrawing(willNotCache);
+        v.setDrawingCacheBackgroundColor(color);
+        return bitmap;
+    }
+
+    /**
      * 将文件转为String对象
      *
      * @param path 文件路径

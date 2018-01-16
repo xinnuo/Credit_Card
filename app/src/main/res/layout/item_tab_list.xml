@@ -9,7 +9,34 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_gravity="center"
-        android:gravity="center" />
+        android:gravity="center"
+        android:text="30" />
+
+    <TextView
+        android:id="@+id/item_pay"
+        style="@style/Font12_black_dark"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center|bottom"
+        android:layout_marginBottom="@dimen/dimen_size_3"
+        android:gravity="center"
+        android:text="还款日"
+        android:textColor="@color/colorAccent"
+        android:textSize="@dimen/sp_size_8"
+        android:visibility="invisible" />
+
+    <TextView
+        android:id="@+id/item_bill"
+        style="@style/Font12_black_dark"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center|bottom"
+        android:layout_marginBottom="@dimen/dimen_size_3"
+        android:gravity="center"
+        android:text="账单日"
+        android:textColor="@color/colorAccent"
+        android:textSize="@dimen/sp_size_8"
+        android:visibility="invisible" />
 
     <View
         android:id="@+id/item_tab_top"

@@ -74,7 +74,7 @@ class MainFirstFragment : BaseFragment() {
         main_hint.visibility = if (count > 0) View.VISIBLE else View.INVISIBLE
 
         swipe_refresh.refresh { getData() }
-        recycle_list.load_Linear(activity)
+        recycle_list.load_Linear(activity, swipe_refresh)
 
         mAdapterEx = SlimAdapter.create(SlimAdapterEx::class.java)
                 .apply {
@@ -104,8 +104,15 @@ class MainFirstFragment : BaseFragment() {
                                         "4" -> "收款"
                                         else -> ""
                                     })
-                            .text(R.id.item_first_num, "尾号(${data.cardNo.substring(data.cardNo.length - 4)})")
-                            .text(R.id.item_first_rate, "费率 ${if (data.rate.isEmpty()) "0.0" else (data.rate.toDouble() * 100).toString()}%")
+                            .text(R.id.item_first_num, "尾号(${when {
+                                data.cardNo.isEmpty() -> "0000"
+                                else -> data.cardNo.substring(data.cardNo.length - 4)
+                            }})")
+                            .text(R.id.item_first_rate,
+                                    when (data.type) {
+                                        "0" -> "手续费 ￥${if (data.rate.isEmpty()) "0.00" else String.format("%.2f", data.rate.toDouble())}"
+                                        else -> "费率 ${if (data.rate.isEmpty()) "0.0" else (data.rate.toDouble() * 100).toString()}%"
+                                    })
                             .text(R.id.item_first_time, data.payTime)
                             .text(R.id.item_first_status, when (data.status) {
                                 "1" -> "交易成功"

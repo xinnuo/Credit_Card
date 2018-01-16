@@ -29,6 +29,8 @@ data class CommonModel(
 
         var areas: List<CommonData>? = ArrayList(),
 
+        var customers: List<CommonData>? = ArrayList(),
+
         var changge: String = "",
         var imgs: List<String>? = ArrayList(),
 

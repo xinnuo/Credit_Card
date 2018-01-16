@@ -19,6 +19,10 @@ import io.rong.message.TextMessage
 import io.rong.message.VoiceMessage
 import java.util.*
 
+/**
+ * rc_ext_input_edit_text.xml EditText 布局文件
+ * 修改输入框和发送按钮背景色
+ */
 class ConversationActivity : BaseActivity() {
 
     private var mTargetId = ""
@@ -46,7 +50,7 @@ class ConversationActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_conversation)
-        init_title("在线客服")
+        init_title(intent.data.getQueryParameter("title"))
 
         isPushMessage()
     }

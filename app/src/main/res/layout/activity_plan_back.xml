@@ -29,7 +29,7 @@
             android:onClick="doClick"
             android:paddingLeft="@dimen/dimen_size_10"
             android:paddingRight="@dimen/dimen_size_10"
-            android:visibility="gone" >
+            android:visibility="gone">
 
             <TextView
                 style="@style/Font14_black_dark"
@@ -159,14 +159,15 @@
                 android:src="@mipmap/ic_plus_p"
                 tools:ignore="ContentDescription" />
 
-            <TextView
+            <EditText
                 android:id="@+id/plan_count"
                 style="@style/Font15_black_dark"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/dimen_size_5"
-                android:layout_marginRight="@dimen/dimen_size_5"
+                android:layout_width="40dp"
+                android:layout_height="match_parent"
+                android:background="@android:color/white"
                 android:gravity="center"
+                android:inputType="number"
+                android:maxLength="2"
                 android:text="1"
                 android:textSize="20sp" />
 

@@ -30,7 +30,7 @@ class PlanDownActivity : BaseActivity() {
     override fun init_title() {
         super.init_title()
         swipe_refresh.refresh { getData() }
-        recycle_list.load_Linear(baseContext)
+        recycle_list.load_Linear(baseContext, swipe_refresh)
 
         mAdapter = SlimAdapter.create()
                 .register<CommonData>(R.layout.item_plan_list) { data, injector ->

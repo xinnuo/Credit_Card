@@ -8,7 +8,10 @@ import android.util.Log;
 
 import com.ruanmeng.credit_card.LoginActivity;
 import com.ruanmeng.credit_card.MessageActivity;
+import com.ruanmeng.model.RefreshMessageEvent;
+import com.ruanmeng.utils.ACache;
 
+import org.greenrobot.eventbus.EventBus;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -55,6 +58,14 @@ public class JPushReceiver extends BroadcastReceiver {
                     switch (push_type) {
                         case "MSG":
                         case "SYS":
+                            intent = new Intent(context, MessageActivity.class);
+                            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                            context.startActivity(intent);
+                            break;
+                        case "VIP":
+                            ACache.get(context).put("isUpdating", false);
+                            EventBus.getDefault().post(new RefreshMessageEvent("升级会员", "", ""));
+
                             intent = new Intent(context, MessageActivity.class);
                             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                             context.startActivity(intent);
