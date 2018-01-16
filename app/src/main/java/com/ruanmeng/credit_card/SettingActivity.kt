@@ -1,10 +1,16 @@
 package com.ruanmeng.credit_card
 
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.os.Environment
 import android.support.v7.app.AlertDialog
+import com.lzy.extend.jackson.JacksonDialogCallback
+import com.lzy.okgo.OkGo
+import com.lzy.okgo.model.Response
 import com.ruanmeng.base.*
+import com.ruanmeng.model.CommonData
+import com.ruanmeng.model.CommonModel
 import com.ruanmeng.share.BaseHttp
 import com.ruanmeng.share.Const
 import com.ruanmeng.utils.OkGoUpdateHttpUtil
@@ -13,10 +19,14 @@ import com.vector.update_app.UpdateAppBean
 import com.vector.update_app.UpdateAppManager
 import com.vector.update_app_kotlin.check
 import com.vector.update_app_kotlin.updateApp
+import io.rong.imkit.RongIM
+import io.rong.imlib.model.UserInfo
 import kotlinx.android.synthetic.main.activity_setting.*
 import org.json.JSONObject
 
 class SettingActivity : BaseActivity() {
+
+    private val list = ArrayList<CommonData>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,6 +39,7 @@ class SettingActivity : BaseActivity() {
         setting_version.setRightString("v" + Tools.getVersion(baseContext))
 
         setting_password.setOnClickListener { startActivity(SettingPasswordActivity::class.java) }
+        setting_online.setOnClickListener { getData() }
         setting_version.setOnClickListener { checkUpdate() }
         setting_feedback.setOnClickListener { startActivity(FeedbackActivity::class.java) }
         setting_deal.setOnClickListener {
@@ -54,6 +65,31 @@ class SettingActivity : BaseActivity() {
                     .create()
                     .show()
         }
+    }
+
+    override fun getData() {
+        OkGo.post<CommonModel>(BaseHttp.customer_list)
+                .tag(this@SettingActivity)
+                .execute(object : JacksonDialogCallback<CommonModel>(baseContext, CommonModel::class.java, true) {
+
+                    override fun onSuccess(response: Response<CommonModel>) {
+                        list.addItems(response.body().customers)
+
+                        if (list.isNotEmpty()) {
+                            //融云刷新用户信息
+                            RongIM.getInstance().refreshUserInfoCache(UserInfo(
+                                    list[0].userInfoId,
+                                    list[0].nickName,
+                                    Uri.parse(BaseHttp.baseImg + list[0].userhead)))
+                            //融云单聊
+                            RongIM.getInstance().startPrivateChat(
+                                    baseContext,
+                                    list[0].userInfoId,
+                                    list[0].nickName)
+                        }
+                    }
+
+                })
     }
 
     /**

@@ -15,9 +15,17 @@ import android.util.Log;
 
 public class PaaCreator {
 
-	public static JSONObject randomPaa() {
-		String amount = "1";
-		String url = "http://app.zgzngj.com/api/allinpay_upvip.rm?allinpayId=180112643546198&upvipId=125161611316";
+	public static String randomPaa(
+			String merchantId,
+			String userId,
+			String upvipId,
+			String price,
+			String cardNo) {
+
+		Double mPrice = Double.parseDouble(price) * 100;
+		// String amount = String.valueOf(mPrice.intValue());
+		String amount = "100";
+		String url = "http://app.zgzngj.com/api/allinpay_upvip.rm?allinpayId=" + userId + "&upvipId=" + upvipId;
 
 		@SuppressLint("SimpleDateFormat")
 		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMddHHmmss");
@@ -31,15 +39,15 @@ public class PaaCreator {
 			paaParams.put("receiveUrl", url);
 			paaParams.put("version", "v1.0");
 			paaParams.put("signType", "0");
-			paaParams.put("merchantId", "008410148160091");
+			paaParams.put("merchantId", merchantId);
 			paaParams.put("orderNo", orderStr);
 			paaParams.put("orderAmount", amount);
 			paaParams.put("orderCurrency", "0");
 			paaParams.put("orderDatetime", timeStr);
 			paaParams.put("productName", "会员升级");
-			paaParams.put("ext1", "<USER>180112643546198</USER>");
+			paaParams.put("ext1", "<USER>" + userId + "</USER>");
 			paaParams.put("payType", "33");
-			paaParams.put("cardNo", "6226981100485784");
+			paaParams.put("cardNo", cardNo);
 		} catch (JSONException e) {
 			e.printStackTrace();
 		}
@@ -49,13 +57,13 @@ public class PaaCreator {
 				url,"receiveUrl",
 				"v1.0","version",
 				"0","signType",
-				"008410148160091","merchantId",
+				merchantId,"merchantId",
 				orderStr,"orderNo",
 				amount,"orderAmount",
 				"0","orderCurrency",
 				timeStr,"orderDatetime",
 				"会员升级", "productName",
-				"<USER>180112643546198</USER>", "ext1",
+				"<USER>" + userId + "</USER>", "ext1",
 				"33","payType",
 				"1234567890","key",
 		};
@@ -73,7 +81,7 @@ public class PaaCreator {
 		} catch (JSONException e) {
 			e.printStackTrace();
 		}
-		return paaParams;
+		return paaParams.toString();
 	}
 
 	/**

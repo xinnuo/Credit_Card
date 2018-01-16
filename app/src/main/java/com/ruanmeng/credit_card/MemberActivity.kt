@@ -23,6 +23,7 @@ import com.ruanmeng.allinpay.PaaCreator
 import com.ruanmeng.base.*
 import com.ruanmeng.model.CommonData
 import com.ruanmeng.model.CommonModel
+import com.ruanmeng.model.RefreshMessageEvent
 import com.ruanmeng.share.BaseHttp
 import com.ruanmeng.share.Const
 import com.ruanmeng.utils.*
@@ -30,6 +31,8 @@ import kotlinx.android.synthetic.main.activity_member.*
 import kotlinx.android.synthetic.main.layout_title_left.*
 import net.cachapa.expandablelayout.ExpandableLayout
 import net.idik.lib.slimadapter.SlimAdapter
+import org.greenrobot.eventbus.EventBus
+import org.greenrobot.eventbus.Subscribe
 import org.json.JSONObject
 import java.text.DecimalFormat
 
@@ -47,6 +50,8 @@ class MemberActivity : BaseActivity() {
         setContentView(R.layout.activity_member)
         setToolbarVisibility(false)
         init_title()
+
+        EventBus.getDefault().register(this@MemberActivity)
 
         getData()
     }
@@ -212,7 +217,7 @@ class MemberActivity : BaseActivity() {
                                         override fun onSuccessResponse(response: Response<String>, msg: String, msgCode: String) {
                                             dismiss()
 
-                                            window.decorView.postDelayed({ runOnUiThread { startPay() } }, 300)
+                                            // window.decorView.postDelayed({ runOnUiThread { startPay() } }, 300)
                                         }
 
                                     })
@@ -236,10 +241,26 @@ class MemberActivity : BaseActivity() {
                 .params("agentId", agentId)
                 .params("cardType", 0)
                 .execute(object : StringDialogCallback(baseContext) {
-
+                    /*{
+                        "msg": "添加成功",
+                        "msgcode": 100,
+                        "object": {
+                            "createDate": "2018-01-16 09:14:44",
+                            "sysDate": "2018-01-16 09:14:44",
+                            "allinpayId": "180115648832017",
+                            "merchantId": "008410148160091",
+                            "resultCode": "0000",
+                            "returnDatetime": "20180116091444",
+                            "userInfoId": "049A88A133964C37ADE5F02C4055CA51",
+                            "upvipId": "FD7ADBE6C69040A69B1359BDA91142DF"
+                        }
+                    }*/
                     override fun onSuccessResponse(response: Response<String>, msg: String, msgCode: String) {
 
-                        startPay()
+                        val data = JSONObject(response.body()).getJSONObject("object")
+                        startPay(data.getString("merchantId"),
+                                data.getString("allinpayId"),
+                                data.getString("upvipId"))
                     }
 
                 })
@@ -254,6 +275,7 @@ class MemberActivity : BaseActivity() {
                     override fun onSuccess(response: Response<CommonModel>) {
 
                         member_level.text = response.body().levelName
+                        list.clear()
                         list.addItems(response.body().las)
 
                         if (list.isEmpty()) {
@@ -273,8 +295,11 @@ class MemberActivity : BaseActivity() {
                 })
     }
 
-    private fun startPay() {
-        val payData = PaaCreator.randomPaa().toString()
+    private fun startPay(
+            merchantId: String,
+            userId: String,
+            upvipId: String) {
+        val payData = PaaCreator.randomPaa(merchantId, userId, upvipId, mPrice, list_cards[0].cardNo)
         OkLogger.i(payData)
         APPayAssistEx.startPay(
                 this@MemberActivity,
@@ -307,5 +332,17 @@ class MemberActivity : BaseActivity() {
             }
         }
         super.onActivityResult(requestCode, resultCode, data)
+    }
+
+    override fun finish() {
+        EventBus.getDefault().unregister(this@MemberActivity)
+        super.finish()
+    }
+
+    @Subscribe
+    fun onMessageEvent(event: RefreshMessageEvent) {
+        when (event.name) {
+            "升级会员" -> getData()
+        }
     }
 }

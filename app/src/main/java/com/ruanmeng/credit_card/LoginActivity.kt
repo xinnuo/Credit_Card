@@ -13,6 +13,7 @@ import com.ruanmeng.RongCloudContext
 import com.ruanmeng.base.*
 import com.ruanmeng.share.BaseHttp
 import com.ruanmeng.share.Const
+import com.ruanmeng.utils.ACache
 import com.ruanmeng.utils.ActivityStack
 import com.ruanmeng.utils.CommonUtil
 import io.rong.imkit.RongIM
@@ -121,6 +122,8 @@ class LoginActivity : BaseActivity() {
         putString("nickName", "")
         putString("sex", "")
         putString("userhead", "")
+
+        ACache.get(baseContext).put("isUpdating", false)
 
         JPushInterface.stopPush(applicationContext)
 

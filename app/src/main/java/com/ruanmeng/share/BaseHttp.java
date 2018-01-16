@@ -61,6 +61,7 @@ public class BaseHttp {
     public static String city2_data = baseIp + "/city2_data.rm";                           //获取某省份所有市√
     public static String appChanpay_backOpenCard = baseIp + "/appChanpay_backOpenCard.rm"; //绑卡√
     public static String get_versioninfo = baseIp + "/get_versioninfo.rm";                 //获取版本信息√
+    public static String customer_list = baseIp + "/customer_list.rm";                     //客服列表√
 
     public static String identify_othercode = baseIp + "/identify_othercode.rm";     //获取其他验证码√
     public static String depositcard_add_sub = baseIp + "/depositcard_add_sub.rm";   //新增储蓄卡√
