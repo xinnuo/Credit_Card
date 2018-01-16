@@ -42,7 +42,7 @@ class RepaymentActivity : BaseActivity() {
         empty_hint.text = "暂无相关信用卡信息！"
 
         swipe_refresh.refresh { getData() }
-        recycle_list.load_Linear(baseContext)
+        recycle_list.load_Linear(baseContext, swipe_refresh)
 
         mAdapter = SlimAdapter.create()
                 .register<CardData>(R.layout.item_creditcard_list) { data, injector ->

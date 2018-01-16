@@ -66,7 +66,7 @@ class BankcardActivity : BaseActivity() {
         }
 
         swipe_refresh.refresh { getData(mPosition) }
-        recycle_list.load_Linear(baseContext)
+        recycle_list.load_Linear(baseContext, swipe_refresh)
 
         mAdapter = SlimAdapter.create()
                 .register<CommonData>(R.layout.item_bankcard_list) { data, injector ->

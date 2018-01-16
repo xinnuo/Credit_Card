@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@android:color/white"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/white"
+        android:gravity="center_vertical"
+        android:padding="@dimen/dimen_size_10">
+
+        <com.makeramen.roundedimageview.RoundedImageView
+            android:id="@+id/item_online_img"
+            android:layout_width="@dimen/dimen_size_50"
+            android:layout_height="@dimen/dimen_size_50"
+            android:scaleType="centerCrop"
+            android:src="@mipmap/default_user"
+            app:riv_oval="true" />
+
+        <TextView
+            android:id="@+id/item_online_name"
+            style="@style/Font15_black_dark"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dimen_size_10"
+            android:layout_weight="1"
+            android:text="名称" />
+
+        <TextView
+            android:id="@+id/item_online_contact"
+            style="@style/Font14_white"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/rec_bg_blue"
+            android:paddingRight="@dimen/dimen_size_10"
+            android:paddingLeft="@dimen/dimen_size_10"
+            android:paddingTop="@dimen/dimen_size_5"
+            android:paddingBottom="@dimen/dimen_size_5"
+            android:text="在线联系" />
+
+    </LinearLayout>
+
+    <View
+        android:id="@+id/item_online_divider1"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/divider_height"
+        android:layout_marginLeft="@dimen/dimen_size_10"
+        android:layout_marginRight="@dimen/dimen_size_10"
+        android:background="@color/divider" />
+
+    <View
+        android:id="@+id/item_online_divider2"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/divider_height"
+        android:background="@color/divider"
+        android:visibility="gone" />
+
+</LinearLayout>

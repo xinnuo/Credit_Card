@@ -1,7 +1,6 @@
 package com.ruanmeng.credit_card
 
 import android.content.Intent
-import android.net.Uri
 import android.os.Bundle
 import android.os.Environment
 import android.support.v7.app.AlertDialog
@@ -19,8 +18,6 @@ import com.vector.update_app.UpdateAppBean
 import com.vector.update_app.UpdateAppManager
 import com.vector.update_app_kotlin.check
 import com.vector.update_app_kotlin.updateApp
-import io.rong.imkit.RongIM
-import io.rong.imlib.model.UserInfo
 import kotlinx.android.synthetic.main.activity_setting.*
 import org.json.JSONObject
 
@@ -73,19 +70,19 @@ class SettingActivity : BaseActivity() {
                 .execute(object : JacksonDialogCallback<CommonModel>(baseContext, CommonModel::class.java, true) {
 
                     override fun onSuccess(response: Response<CommonModel>) {
+                        list.clear()
                         list.addItems(response.body().customers)
 
                         if (list.isNotEmpty()) {
-                            //融云刷新用户信息
-                            RongIM.getInstance().refreshUserInfoCache(UserInfo(
-                                    list[0].userInfoId,
-                                    list[0].nickName,
-                                    Uri.parse(BaseHttp.baseImg + list[0].userhead)))
-                            //融云单聊
-                            RongIM.getInstance().startPrivateChat(
-                                    baseContext,
-                                    list[0].userInfoId,
-                                    list[0].nickName)
+                            val items = ArrayList<CommonData>()
+                            items.addAll(list.filter { it.userInfoId == getString("token") })
+
+                            if (items.isNotEmpty()) startActivity(ConversationListActivity::class.java)
+                            else {
+                                val intent = Intent(baseContext, OnlineActivity::class.java)
+                                intent.putExtra("list", list)
+                                startActivity(intent)
+                            }
                         }
                     }
 
@@ -136,7 +133,7 @@ class SettingActivity : BaseActivity() {
     private fun showDownloadDialog(updateApp: UpdateAppBean, updateAppManager: UpdateAppManager) {
         dialog("版本更新", "是否升级到${updateApp.newVersion}版本？\n\n${updateApp.updateLog}") {
             positiveButton("升级") { updateAppManager.download() }
-            negativeButton("暂不升级") {  }
+            negativeButton("暂不升级") { }
             show()
         }
     }

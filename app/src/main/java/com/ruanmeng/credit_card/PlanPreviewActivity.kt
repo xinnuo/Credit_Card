@@ -36,7 +36,7 @@ class PlanPreviewActivity : BaseActivity() {
                 mAdapter.updateData(list).notifyDataSetChanged()
             } }, 500)
         }
-        recycle_list.load_Linear(baseContext)
+        recycle_list.load_Linear(baseContext, swipe_refresh)
 
         mAdapter = SlimAdapter.create()
                 .register<CommonData>(R.layout.item_plan_list) { data, injector ->

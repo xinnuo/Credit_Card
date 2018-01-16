@@ -60,7 +60,10 @@ class BillActivity : BaseActivity() {
                                         "4" -> "收款"
                                         else -> ""
                                     })
-                            .text(R.id.item_first_num, "尾号(${data.cardNo.substring(data.cardNo.length - 4)})")
+                            .text(R.id.item_first_num, "尾号(${when {
+                                data.cardNo.isEmpty() -> "0000"
+                                else -> data.cardNo.substring(data.cardNo.length - 4)
+                            }})")
                             .text(R.id.item_first_rate,
                                     when (data.type) {
                                         "0" -> "手续费 ￥${if (data.rate.isEmpty()) "0.00" else String.format("%.2f", data.rate.toDouble())}"
