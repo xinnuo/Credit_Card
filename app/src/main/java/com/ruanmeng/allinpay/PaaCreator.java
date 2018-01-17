@@ -23,8 +23,7 @@ public class PaaCreator {
 			String cardNo) {
 
 		Double mPrice = Double.parseDouble(price) * 100;
-		// String amount = String.valueOf(mPrice.intValue());
-		String amount = "100";
+		String amount = String.valueOf(mPrice.intValue());
 		String url = "http://app.zgzngj.com/api/allinpay_upvip.rm?allinpayId=" + userId + "&upvipId=" + upvipId;
 
 		@SuppressLint("SimpleDateFormat")
