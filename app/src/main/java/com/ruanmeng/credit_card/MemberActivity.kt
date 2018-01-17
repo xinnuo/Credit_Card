@@ -323,7 +323,7 @@ class MemberActivity : BaseActivity() {
 
                     ACache.get(baseContext).put("isUpdating", true, 5 * 60)
                     OkLogger.d(resultJson.toString())
-                    toast("支付成功，请等待后台审核！")
+                    toast("支付成功！")
                 } else {
 
                     OkLogger.e(resultJson.toString())
