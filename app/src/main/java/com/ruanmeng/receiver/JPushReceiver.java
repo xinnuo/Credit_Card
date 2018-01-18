@@ -6,7 +6,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 
-import com.ruanmeng.credit_card.LoginActivity;
 import com.ruanmeng.credit_card.MessageActivity;
 import com.ruanmeng.model.RefreshMessageEvent;
 import com.ruanmeng.utils.ACache;
@@ -47,25 +46,30 @@ public class JPushReceiver extends BroadcastReceiver {
             int notifactionId = bundle != null ? bundle.getInt(JPushInterface.EXTRA_NOTIFICATION_ID) : -1;
             Log.d(TAG, "[JPushReceiver] 接收到推送下来的通知的ID: " + notifactionId);
 
+            try {
+                JSONObject json = new JSONObject(bundle != null ? bundle.getString(JPushInterface.EXTRA_EXTRA) : "{}");
+                if (!json.isNull("type")) {
+                    String push_type = json.getString("type");
+                    if ("VIP".equals(push_type)) {
+                        ACache.get(context).put("isUpdating", false);
+                        EventBus.getDefault().post(new RefreshMessageEvent("升级会员", "", ""));
+                    }
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
         } else if (JPushInterface.ACTION_NOTIFICATION_OPENED.equals(intent.getAction())) {
             Log.d(TAG, "[JPushReceiver] 用户点击打开了通知");
-            //打开自定义的Activity
 
+            //打开自定义的Activity
             try {
-                JSONObject json = new JSONObject(bundle.getString(JPushInterface.EXTRA_EXTRA));
+                JSONObject json = new JSONObject(bundle != null ? bundle.getString(JPushInterface.EXTRA_EXTRA) : "{}");
                 if (!json.isNull("type")) {
                     String push_type = json.getString("type");
                     switch (push_type) {
                         case "MSG":
                         case "SYS":
-                            intent = new Intent(context, MessageActivity.class);
-                            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                            context.startActivity(intent);
-                            break;
                         case "VIP":
-                            ACache.get(context).put("isUpdating", false);
-                            EventBus.getDefault().post(new RefreshMessageEvent("升级会员", "", ""));
-
                             intent = new Intent(context, MessageActivity.class);
                             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                             context.startActivity(intent);

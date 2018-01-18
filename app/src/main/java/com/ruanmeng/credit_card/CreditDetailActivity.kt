@@ -181,6 +181,7 @@ class CreditDetailActivity : BaseActivity() {
                         if (!list_bank.contains(bank)) {
                             credit_add.visibility = View.GONE
                             credit_look.visibility = View.GONE
+                            toast("该信用卡暂不支持还款功能")
                         }
 
                         when (bank) {
