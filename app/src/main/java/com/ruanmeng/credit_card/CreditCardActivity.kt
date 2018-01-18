@@ -14,7 +14,6 @@ import com.ruanmeng.model.CommonData
 import com.ruanmeng.model.CommonModel
 import com.ruanmeng.model.RefreshMessageEvent
 import com.ruanmeng.share.BaseHttp
-import com.ruanmeng.utils.BankCardUtil
 import com.ruanmeng.utils.BankcardHelper
 import com.ruanmeng.utils.CommonUtil
 import com.ruanmeng.utils.DialogHelper
@@ -23,7 +22,7 @@ import kotlinx.android.synthetic.main.activity_credit_card.*
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
 import org.json.JSONObject
-import java.util.ArrayList
+import java.util.*
 
 class CreditCardActivity : BaseActivity() {
 
@@ -194,10 +193,10 @@ class CreditCardActivity : BaseActivity() {
                     return
                 }
 
-                if (BankCardUtil(et_card.rawText).bankName != card_bank.text.toString()) {
+                /*if (BankCardUtil(et_card.rawText).bankName != card_bank.text.toString()) {
                     toast("卡号与所属银行不符，请选择正确的所属银行")
                     return
-                }
+                }*/
 
                 val day_bill = et_bill.text.trim().toString().toInt()
                 if (day_bill < 0 || day_bill > 31) {
