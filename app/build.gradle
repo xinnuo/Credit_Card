@@ -19,7 +19,7 @@ android {
         minSdkVersion versions.minSdkVersion
         targetSdkVersion versions.targetSdkVersion
         versionCode 1
-        versionName "1.0.4"
+        versionName "1.0.5"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         multiDexEnabled true
 
@@ -45,11 +45,15 @@ android {
         }
     }
     signingConfigs {
+        release {
+            v2SigningEnabled false
+        }
         debug {
             storeFile file('../Credit_Card.jks')
             storePassword "123456"
             keyAlias "Credit_Card"
             keyPassword "123456"
+            v2SigningEnabled false
         }
     }
 

@@ -109,6 +109,8 @@ class PlanActivity : BaseActivity() {
                             .clicked(R.id.item_plan) {
                                 val intent = Intent(baseContext, PlanDownActivity::class.java)
                                 intent.putExtra("repaymentplanId", data.repaymentplanId)
+                                intent.putExtra("maxSum", data.maxSum)
+                                intent.putExtra("sumRateSum", data.sumRateSum)
                                 startActivity(intent)
                             }
                 }

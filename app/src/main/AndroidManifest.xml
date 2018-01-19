@@ -204,7 +204,7 @@
             android:grantUriPermissions="true">
             <meta-data
                 android:name="android.support.FILE_PROVIDER_PATHS"
-                android:resource="@xml/allinpay_path" />
+                android:resource="@xml/rc_file_path" />
         </provider>
         <!-- 融云即时通讯 end -->
 
@@ -251,7 +251,7 @@
         <!-- 微信分享 end -->
 
 
-        <!-- 通联支付共享文件 -->
+        <!-- 通联支付 共享文件 -->
         <provider
             android:name="com.allinpay.appayassistex.APFileProvider"
             android:authorities="${applicationId}.fileProvider"
@@ -260,6 +260,17 @@
             <meta-data
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/allinpay_path" />
+        </provider>
+
+        <!-- AppUpdate 共享文件 -->
+        <provider
+            android:name="com.vector.update_app.UpdateFileProvider"
+            android:authorities="${applicationId}.fileProvider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/new_app_file_paths" />
         </provider>
 
     </application>

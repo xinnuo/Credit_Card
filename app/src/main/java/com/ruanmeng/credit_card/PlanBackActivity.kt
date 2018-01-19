@@ -216,6 +216,11 @@ class PlanBackActivity : BaseActivity() {
                     return
                 }
 
+                if (plan_count.text.toString().toDouble() / list.size > 2) {
+                    toast("每天最多还款不超过两笔")
+                    return
+                }
+
                 val repaymentDay = list.toString()
                         .replace("[", "")
                         .replace("]", "")
@@ -239,6 +244,8 @@ class PlanBackActivity : BaseActivity() {
                                     list.addItems(response.body().`object`)
                                     val intent = Intent(baseContext, PlanPreviewActivity::class.java)
                                     intent.putExtra("data", list)
+                                    intent.putExtra("maxSum", response.body().maxSum)
+                                    intent.putExtra("sumRateSum", response.body().sumRateSum)
                                     startActivity(intent)
 
                                     ActivityStack.getScreenManager().popActivities(this@PlanBackActivity::class.java)
