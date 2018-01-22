@@ -11,6 +11,7 @@ import com.ruanmeng.model.CommonData
 import com.ruanmeng.model.CommonModel
 import com.ruanmeng.share.BaseHttp
 import com.ruanmeng.utils.NumberHelper
+import kotlinx.android.synthetic.main.activity_plan_preview.*
 import kotlinx.android.synthetic.main.layout_list.*
 import net.idik.lib.slimadapter.SlimAdapter
 
@@ -30,6 +31,11 @@ class PlanPreviewActivity : BaseActivity() {
 
     override fun init_title() {
         super.init_title()
+        val maxSum = intent.getStringExtra("maxSum").toDouble()
+        val sumRateSum = intent.getStringExtra("sumRateSum").toDouble()
+        preview_bao.text = String.format("%.2f", maxSum + sumRateSum)
+        preview_fee.text = String.format("%.2f", sumRateSum)
+
         swipe_refresh.refresh {
             window.decorView.postDelayed({ runOnUiThread {
                 swipe_refresh.isRefreshing = false

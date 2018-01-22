@@ -94,6 +94,23 @@
                 app:sRightTextString="5日" />
 
             <com.allen.library.SuperTextView
+                android:id="@+id/credit_quota"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dimen_size_45.5"
+                app:sBottomLineMargin="10dp"
+                app:sLeftTextColor="@color/gray"
+                app:sLeftTextMarginLeft="@dimen/dimen_size_10"
+                app:sLeftTextString="信用卡额度"
+                app:sLineShow="bottom"
+                app:sRightIconMarginRight="@dimen/dimen_size_10"
+                app:sRightIconRes="@mipmap/arrow_right"
+                app:sRightIconSize="13dp"
+                app:sRightTextColor="@color/gray"
+                app:sRightTextMarginRight="@dimen/dimen_size_25"
+                app:sRightTextString="0元" />
+
+
+            <com.allen.library.SuperTextView
                 android:id="@+id/credit_yi"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/dimen_size_45.5"
@@ -106,7 +123,7 @@
                 app:sRightIconSize="13dp"
                 app:sRightTextColor="@color/black_dark"
                 app:sRightTextMarginRight="@dimen/dimen_size_10"
-                app:sRightTextString="0.0" />
+                app:sRightTextString="0.00元" />
 
             <com.allen.library.SuperTextView
                 android:id="@+id/credit_wei"
@@ -121,7 +138,7 @@
                 app:sRightIconSize="13dp"
                 app:sRightTextColor="@color/black_dark"
                 app:sRightTextMarginRight="@dimen/dimen_size_10"
-                app:sRightTextString="0.0" />
+                app:sRightTextString="0.00元" />
 
             <LinearLayout
                 android:id="@+id/credit_add"

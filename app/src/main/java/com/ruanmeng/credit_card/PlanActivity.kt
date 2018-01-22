@@ -73,6 +73,9 @@ class PlanActivity : BaseActivity() {
                                     "兴业银行" -> view.setImageResource(R.mipmap.bank11)
                                     "民生银行" -> view.setImageResource(R.mipmap.bank12)
                                     "华夏银行" -> view.setImageResource(R.mipmap.bank13)
+                                    "浦发银行" -> view.setImageResource(R.mipmap.bank14)
+                                    "广发银行" -> view.setImageResource(R.mipmap.bank15)
+                                    "邮政储蓄" -> view.setImageResource(R.mipmap.bank16)
                                 }
                             }
 
@@ -109,6 +112,8 @@ class PlanActivity : BaseActivity() {
                             .clicked(R.id.item_plan) {
                                 val intent = Intent(baseContext, PlanDownActivity::class.java)
                                 intent.putExtra("repaymentplanId", data.repaymentplanId)
+                                intent.putExtra("maxSum", data.maxSum)
+                                intent.putExtra("sumRateSum", data.sumRateSum)
                                 startActivity(intent)
                             }
                 }

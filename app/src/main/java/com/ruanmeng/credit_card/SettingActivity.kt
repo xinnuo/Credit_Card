@@ -74,10 +74,8 @@ class SettingActivity : BaseActivity() {
                         list.addItems(response.body().customers)
 
                         if (list.isNotEmpty()) {
-                            val items = ArrayList<CommonData>()
-                            items.addAll(list.filter { it.userInfoId == getString("token") })
-
-                            if (items.isNotEmpty()) startActivity(ConversationListActivity::class.java)
+                            if (list.any { it.userInfoId == getString("token") })
+                                startActivity(ConversationListActivity::class.java)
                             else {
                                 val intent = Intent(baseContext, OnlineActivity::class.java)
                                 intent.putExtra("list", list)

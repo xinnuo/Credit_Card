@@ -11,6 +11,7 @@ import com.ruanmeng.model.CommonData
 import com.ruanmeng.model.CommonModel
 import com.ruanmeng.share.BaseHttp
 import com.ruanmeng.utils.NumberHelper
+import kotlinx.android.synthetic.main.activity_plan_down.*
 import kotlinx.android.synthetic.main.layout_list.*
 import net.idik.lib.slimadapter.SlimAdapter
 
@@ -29,6 +30,11 @@ class PlanDownActivity : BaseActivity() {
 
     override fun init_title() {
         super.init_title()
+        val maxSum = intent.getStringExtra("maxSum").toDouble()
+        val sumRateSum = intent.getStringExtra("sumRateSum").toDouble()
+        down_bao.text = String.format("%.2f", maxSum + sumRateSum)
+        down_fee.text = String.format("%.2f", sumRateSum)
+
         swipe_refresh.refresh { getData() }
         recycle_list.load_Linear(baseContext, swipe_refresh)
 

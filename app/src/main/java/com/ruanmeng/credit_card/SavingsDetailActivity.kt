@@ -43,6 +43,9 @@ class SavingsDetailActivity : BaseActivity() {
             "兴业银行" -> bankcard_img.setImageResource(R.mipmap.bank11)
             "民生银行" -> bankcard_img.setImageResource(R.mipmap.bank12)
             "华夏银行" -> bankcard_img.setImageResource(R.mipmap.bank13)
+            "浦发银行" -> bankcard_img.setImageResource(R.mipmap.bank14)
+            "广发银行" -> bankcard_img.setImageResource(R.mipmap.bank15)
+            "邮政储蓄" -> bankcard_img.setImageResource(R.mipmap.bank16)
         }
 
         bankcard_name.text = data.bank + "储蓄卡"

@@ -7,7 +7,7 @@
         <item>工商银行</item>
         <item>农业银行</item>
         <item>建设银行</item>
-        <!--<item>交通银行</item>-->
+        <!-- <item>交通银行</item> -->
         <item>中信银行</item>
         <item>光大银行</item>
         <item>北京银行</item>
@@ -16,6 +16,9 @@
         <item>兴业银行</item>
         <item>民生银行</item>
         <item>华夏银行</item>
+        <item>浦发银行</item>
+        <item>广发银行</item>
+        <item>邮政储蓄</item>
 
     </string-array>
 
@@ -25,7 +28,7 @@
         <item>农业银行</item>
         <item>中国银行</item>
         <item>建设银行</item>
-        <!--<item>交通银行</item>-->
+        <!-- <item>交通银行</item> -->
         <item>光大银行</item>
         <item>兴业银行</item>
         <item>中信银行</item>
@@ -43,6 +46,9 @@
         <item>民生银行</item>
         <item>平安银行</item>
         <item>北京银行</item>
+        <item>浦发银行</item>
+        <item>广发银行</item>
+        <item>邮政储蓄</item>
 
     </string-array>
 

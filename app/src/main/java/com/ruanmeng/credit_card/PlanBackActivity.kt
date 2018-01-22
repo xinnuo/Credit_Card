@@ -6,9 +6,11 @@ import android.os.Bundle
 import android.support.design.widget.BottomSheetDialog
 import android.support.v7.widget.RecyclerView
 import android.text.Editable
+import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.TextView
+import com.lzy.extend.StringDialogCallback
 import com.lzy.extend.jackson.JacksonDialogCallback
 import com.lzy.okgo.OkGo
 import com.lzy.okgo.model.Response
@@ -26,6 +28,7 @@ import com.ruanmeng.view.FullyGridLayoutManager
 import kotlinx.android.synthetic.main.activity_plan_back.*
 import kotlinx.android.synthetic.main.layout_title_left.*
 import net.idik.lib.slimadapter.SlimAdapter
+import org.json.JSONObject
 import java.util.*
 import kotlin.collections.ArrayList
 
@@ -35,12 +38,15 @@ class PlanBackActivity : BaseActivity() {
     private val list_title = ArrayList<Any>()
     private var billDay = 0
     private var repaymentDay = 0
+    private var mRate = 0.0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_plan_back)
         setToolbarVisibility(false)
         init_title()
+
+        getData()
     }
 
     override fun init_title() {
@@ -53,6 +59,17 @@ class PlanBackActivity : BaseActivity() {
         plan_submit.isClickable = false
 
         plan_total.addTextChangedListener(this@PlanBackActivity)
+        plan_count.addTextChangedListener(object : TextWatcher{
+            override fun afterTextChanged(s: Editable) { }
+            override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) { }
+
+            override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
+                if (s.isNotEmpty()) {
+                    if (s.toString().toInt() > 0)
+                        calculatedValue(plan_total.text.toString().toDouble())
+                }
+            }
+        })
     }
 
     @Suppress("DEPRECATION")
@@ -194,11 +211,19 @@ class PlanBackActivity : BaseActivity() {
             }
             R.id.plan_plus -> {
                 val count = plan_count.text.toString().toInt()
-                if (count > 1) plan_count.setText((count - 1).toString())
+                if (count > 1) {
+                    plan_count.setText((count - 1).toString())
+                    plan_count.setSelection(plan_count.text.length)
+                    if (plan_total.text.isNotEmpty())
+                        calculatedValue(plan_total.text.toString().toDouble())
+                }
             }
             R.id.plan_add -> {
                 val count = plan_count.text.toString().toInt()
                 plan_count.setText((count + 1).toString())
+                plan_count.setSelection(plan_count.text.length)
+                if (plan_total.text.isNotEmpty())
+                    calculatedValue(plan_total.text.toString().toDouble())
             }
             R.id.plan_submit -> {
                 if (list.isEmpty()) {
@@ -213,6 +238,11 @@ class PlanBackActivity : BaseActivity() {
 
                 if (plan_count.text.toString().toInt() < list.size) {
                     toast("还款笔数不能小于还款天数")
+                    return
+                }
+
+                if (plan_count.text.toString().toDouble() / list.size > 2) {
+                    toast("每天最多还款不超过两笔")
                     return
                 }
 
@@ -239,6 +269,8 @@ class PlanBackActivity : BaseActivity() {
                                     list.addItems(response.body().`object`)
                                     val intent = Intent(baseContext, PlanPreviewActivity::class.java)
                                     intent.putExtra("data", list)
+                                    intent.putExtra("maxSum", response.body().maxSum)
+                                    intent.putExtra("sumRateSum", response.body().sumRateSum)
                                     startActivity(intent)
 
                                     ActivityStack.getScreenManager().popActivities(this@PlanBackActivity::class.java)
@@ -273,6 +305,37 @@ class PlanBackActivity : BaseActivity() {
         }
     }
 
+    override fun getData() {
+        OkGo.post<String>(BaseHttp.base_rate_data)
+                .tag(this@PlanBackActivity)
+                .execute(object : StringDialogCallback(baseContext) {
+
+                    override fun onSuccessResponse(response: Response<String>, msg: String, msgCode: String) {
+
+                        mRate = JSONObject(response.body())
+                                .getJSONObject("pingTai")
+                                .getString("consumeRate")
+                                .toDouble()
+                    }
+
+                })
+    }
+
+    @SuppressLint("SetTextI18n")
+    private fun calculatedValue(value: Double) {
+        val value_count = plan_count.text.toString().toInt()
+        val value_max = when {
+            value < 1000 -> value / value_count + value * 0.1
+            else -> value / value_count + 100
+        }
+        val value_fee = (value + value_count * 2) * mRate
+        val value_bond = value_max + value_fee
+
+        plan_save.text = "￥${String.format("%.2f", value_bond)}"
+        plan_fee.text = "￥${String.format("%.2f", value_fee)}"
+    }
+
+    @SuppressLint("SetTextI18n")
     override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
         if (plan_total.text.isNotBlank()) {
             plan_submit.setBackgroundResource(R.drawable.rec_bg_blue)
@@ -286,7 +349,13 @@ class PlanBackActivity : BaseActivity() {
             if ("." == s.toString()) {
                 plan_total.setText("0.")
                 plan_total.setSelection(plan_total.text.length) //设置光标的位置
+            } else {
+                val input = s.toString().toDouble()
+                calculatedValue(input)
             }
+        } else {
+            plan_save.text = "￥0.00"
+            plan_fee.text = "￥0.00"
         }
     }
 

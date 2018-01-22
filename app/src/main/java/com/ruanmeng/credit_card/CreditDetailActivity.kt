@@ -30,6 +30,7 @@ class CreditDetailActivity : BaseActivity() {
     private var bank = ""
     private var billDay = ""
     private var repaymentDay = ""
+    private var quota = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -47,6 +48,9 @@ class CreditDetailActivity : BaseActivity() {
         val isPay = intent.getBooleanExtra("isPay", false)
         if (!isPay) left_nav_right.visibility = View.VISIBLE
 
+        quota = intent.getStringExtra("quota")
+        credit_quota.setRightString(quota.toDouble().toInt().toString() + "元")
+
         credit_bill.setOnClickListener {
             if (creditcardId.isEmpty()) return@setOnClickListener
 
@@ -63,6 +67,13 @@ class CreditDetailActivity : BaseActivity() {
             intent.putExtra("title", "修改还款日")
             intent.putExtra("creditcardId", creditcardId)
             intent.putExtra("day", repaymentDay)
+            startActivity(intent)
+        }
+        credit_quota.setOnClickListener {
+            val intent = Intent(baseContext, CreditModifyActivity::class.java)
+            intent.putExtra("title", "修改额度")
+            intent.putExtra("creditcardId", creditcardId)
+            intent.putExtra("day", quota.toDouble().toInt().toString())
             startActivity(intent)
         }
     }
@@ -198,6 +209,9 @@ class CreditDetailActivity : BaseActivity() {
                             "兴业银行" -> credit_img.setImageResource(R.mipmap.bank11)
                             "民生银行" -> credit_img.setImageResource(R.mipmap.bank12)
                             "华夏银行" -> credit_img.setImageResource(R.mipmap.bank13)
+                            "浦发银行" -> credit_img.setImageResource(R.mipmap.bank14)
+                            "广发银行" -> credit_img.setImageResource(R.mipmap.bank15)
+                            "邮政储蓄" -> credit_img.setImageResource(R.mipmap.bank16)
                         }
 
                         credit_bank.text = bank + "信用卡"
@@ -206,13 +220,13 @@ class CreditDetailActivity : BaseActivity() {
                         credit_pay.setRightString(repaymentDay + "日")
 
                         if (!obj.isNull("paySum")) {
-                            val paySum = DecimalFormat("########0.0#####").format(obj.getString("paySum").toDouble())
-                            credit_yi.setRightString(NumberHelper.fmtMicrometer(paySum))
+                            val paySum = DecimalFormat("########0.00####").format(obj.getString("paySum").toDouble())
+                            credit_yi.setRightString(NumberHelper.fmtMicrometer(paySum) + "元")
                         }
 
                         if (!obj.isNull("nopaySum")) {
-                            val nopaySum = DecimalFormat("########0.0#####").format(obj.getString("nopaySum").toDouble())
-                            credit_wei.setRightString(NumberHelper.fmtMicrometer(nopaySum))
+                            val nopaySum = DecimalFormat("########0.00####").format(obj.getString("nopaySum").toDouble())
+                            credit_wei.setRightString(NumberHelper.fmtMicrometer(nopaySum) + "元")
                         }
                     }
 
@@ -227,8 +241,18 @@ class CreditDetailActivity : BaseActivity() {
     @Subscribe
     fun onMessageEvent(event: RefreshMessageEvent) {
         when (event.name) {
-            "修改账单日" -> credit_bill.setRightString(event.id + "日")
-            "修改还款日" -> credit_pay.setRightString(event.id + "日")
+            "修改账单日" -> {
+                billDay = event.id
+                credit_bill.setRightString(billDay + "日")
+            }
+            "修改还款日" -> {
+                repaymentDay = event.id
+                credit_pay.setRightString(repaymentDay + "日")
+            }
+            "修改额度" -> {
+                quota = event.id
+                credit_quota.setRightString(quota + "元")
+            }
         }
     }
 }

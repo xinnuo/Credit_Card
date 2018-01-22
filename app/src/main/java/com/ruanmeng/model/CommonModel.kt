@@ -34,6 +34,8 @@ data class CommonModel(
         var changge: String = "",
         var imgs: List<String>? = ArrayList(),
 
+        var maxSum: String = "",
+        var sumRateSum: String = "",
         var msg: String = "",
         var msgcode: String = "",
         var success: String = ""

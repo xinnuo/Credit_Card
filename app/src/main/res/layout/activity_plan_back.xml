@@ -66,8 +66,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="@dimen/line_height"
-            android:paddingLeft="@dimen/dimen_size_10"
-            android:paddingRight="@dimen/dimen_size_10">
+            android:paddingLeft="@dimen/dimen_size_10">
 
             <TextView
                 style="@style/Font14_black_dark"
@@ -85,7 +84,8 @@
                 android:hint="请输入还款总金额"
                 android:inputType="numberDecimal"
                 android:maxLength="9"
-                android:paddingLeft="@dimen/dimen_size_10" />
+                android:paddingLeft="@dimen/dimen_size_10"
+                android:paddingRight="@dimen/dimen_size_10"/>
 
         </LinearLayout>
 
@@ -179,6 +179,74 @@
                 android:padding="@dimen/dimen_size_13"
                 android:src="@mipmap/ic_add_p"
                 tools:ignore="ContentDescription" />
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/divider_height"
+            android:layout_marginLeft="@dimen/dimen_size_10"
+            android:layout_marginRight="@dimen/dimen_size_10"
+            android:background="@color/divider" />
+
+        <LinearLayout
+            android:id="@+id/plan_save_11"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/line_height"
+            android:gravity="center_vertical"
+            android:onClick="doClick"
+            android:paddingLeft="@dimen/dimen_size_10"
+            android:paddingRight="@dimen/dimen_size_10">
+
+            <TextView
+                style="@style/Font14_black_dark"
+                android:layout_width="70dp"
+                android:layout_height="wrap_content"
+                android:text="还款保证金" />
+
+            <TextView
+                android:id="@+id/plan_save"
+                style="@style/Font14_black_dark"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="end"
+                android:text="￥0.00"
+                android:paddingLeft="@dimen/dimen_size_10" />
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/divider_height"
+            android:layout_marginLeft="@dimen/dimen_size_10"
+            android:layout_marginRight="@dimen/dimen_size_10"
+            android:background="@color/divider" />
+
+        <LinearLayout
+            android:id="@+id/plan_fee_11"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/line_height"
+            android:gravity="center_vertical"
+            android:onClick="doClick"
+            android:paddingLeft="@dimen/dimen_size_10"
+            android:paddingRight="@dimen/dimen_size_10">
+
+            <TextView
+                style="@style/Font14_black_dark"
+                android:layout_width="70dp"
+                android:layout_height="wrap_content"
+                android:text="还款手续费" />
+
+            <TextView
+                android:id="@+id/plan_fee"
+                style="@style/Font14_black_dark"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="end"
+                android:text="￥0.00"
+                android:paddingLeft="@dimen/dimen_size_10" />
 
         </LinearLayout>
 

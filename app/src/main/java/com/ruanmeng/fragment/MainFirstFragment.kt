@@ -135,6 +135,9 @@ class MainFirstFragment : BaseFragment() {
                                     "兴业银行" -> view.setImageResource(R.mipmap.bank11)
                                     "民生银行" -> view.setImageResource(R.mipmap.bank12)
                                     "华夏银行" -> view.setImageResource(R.mipmap.bank13)
+                                    "浦发银行" -> view.setImageResource(R.mipmap.bank14)
+                                    "广发银行" -> view.setImageResource(R.mipmap.bank15)
+                                    "邮政储蓄" -> view.setImageResource(R.mipmap.bank16)
                                 }
                             }
 
