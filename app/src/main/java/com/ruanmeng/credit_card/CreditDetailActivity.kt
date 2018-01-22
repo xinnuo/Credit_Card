@@ -22,7 +22,6 @@ import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
 import org.json.JSONObject
 import java.text.DecimalFormat
-import kotlin.math.roundToInt
 
 class CreditDetailActivity : BaseActivity() {
 
