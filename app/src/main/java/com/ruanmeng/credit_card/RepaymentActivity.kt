@@ -96,6 +96,7 @@ class RepaymentActivity : BaseActivity() {
                             .clicked(R.id.item_creditcard) {
                                 val intent = Intent(baseContext, CreditDetailActivity::class.java)
                                 intent.putExtra("creditcardId", data.creditcardId)
+                                intent.putExtra("quota", data.quota)
                                 intent.putExtra("isPay", true)
                                 startActivity(intent)
                             }
