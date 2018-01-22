@@ -198,6 +198,9 @@ class CreditDetailActivity : BaseActivity() {
                             "兴业银行" -> credit_img.setImageResource(R.mipmap.bank11)
                             "民生银行" -> credit_img.setImageResource(R.mipmap.bank12)
                             "华夏银行" -> credit_img.setImageResource(R.mipmap.bank13)
+                            "浦发银行" -> credit_img.setImageResource(R.mipmap.bank14)
+                            "广发银行" -> credit_img.setImageResource(R.mipmap.bank15)
+                            "邮政储蓄" -> credit_img.setImageResource(R.mipmap.bank16)
                         }
 
                         credit_bank.text = bank + "信用卡"
@@ -206,12 +209,12 @@ class CreditDetailActivity : BaseActivity() {
                         credit_pay.setRightString(repaymentDay + "日")
 
                         if (!obj.isNull("paySum")) {
-                            val paySum = DecimalFormat("########0.0#####").format(obj.getString("paySum").toDouble())
+                            val paySum = DecimalFormat("########0.00####").format(obj.getString("paySum").toDouble())
                             credit_yi.setRightString(NumberHelper.fmtMicrometer(paySum))
                         }
 
                         if (!obj.isNull("nopaySum")) {
-                            val nopaySum = DecimalFormat("########0.0#####").format(obj.getString("nopaySum").toDouble())
+                            val nopaySum = DecimalFormat("########0.00####").format(obj.getString("nopaySum").toDouble())
                             credit_wei.setRightString(NumberHelper.fmtMicrometer(nopaySum))
                         }
                     }

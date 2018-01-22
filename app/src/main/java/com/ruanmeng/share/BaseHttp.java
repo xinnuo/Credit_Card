@@ -75,4 +75,5 @@ public class BaseHttp {
     public static String add_consumeplan = baseIp + "/add_consumeplan.rm";           //新增消费计划√
     public static String add_repaymentplan = baseIp + "/add_repaymentplan.rm";       //新增还款计划√
     public static String before_repaymentplan = baseIp + "/before_repaymentplan.rm"; //预览还款计划√
+    public static String base_rate_data = baseIp + "/base_rate_data.rm";             //基本费率√
 }
