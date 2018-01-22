@@ -12,6 +12,8 @@ import com.ruanmeng.share.BaseHttp
 import com.ruanmeng.utils.ActivityStack
 import kotlinx.android.synthetic.main.activity_credit_modify.*
 import org.greenrobot.eventbus.EventBus
+import android.text.InputFilter
+
 
 class CreditModifyActivity : BaseActivity() {
 
@@ -35,6 +37,11 @@ class CreditModifyActivity : BaseActivity() {
                 modify_hint.text = "还款日"
                 modify_day.hint = "请输入还款日(两位日期数字)"
             }
+            "修改额度" -> {
+                modify_hint.text = "额度"
+                modify_day.hint = "请输入信用卡额度(元)"
+                modify_day.filters = arrayOf<InputFilter>(InputFilter.LengthFilter(7))
+            }
         }
         modify_sure.setBackgroundResource(R.drawable.rec_bg_d0d0d0)
         modify_sure.isClickable = false
@@ -52,9 +59,15 @@ class CreditModifyActivity : BaseActivity() {
                 return@setOnClickListener
             }
 
-            if (day < 0 || day > 31) {
-                toast("请输入正确的${modify_hint.text}（两位数字）")
-                return@setOnClickListener
+            when (title) {
+                "修改账单日", "修改还款日" -> if (day < 0 || day > 31) {
+                    toast("请输入正确的${modify_hint.text}（两位数字）")
+                    return@setOnClickListener
+                }
+                "修改额度" -> if (day < 0) {
+                    toast("请输入正确的信用卡额度")
+                    return@setOnClickListener
+                }
             }
 
             OkGo.post<String>(BaseHttp.creditcard_edit_sub)
@@ -65,6 +78,7 @@ class CreditModifyActivity : BaseActivity() {
                         when (title) {
                             "修改账单日" -> params("billDay", day)
                             "修改还款日" -> params("repaymentDay", day)
+                            "修改额度" -> params("quota", day)
                         }
                     }
                     .execute(object : StringDialogCallback(baseContext) {
