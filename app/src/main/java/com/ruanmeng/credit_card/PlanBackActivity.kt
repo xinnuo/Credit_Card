@@ -59,13 +59,13 @@ class PlanBackActivity : BaseActivity() {
         plan_submit.isClickable = false
 
         plan_total.addTextChangedListener(this@PlanBackActivity)
-        plan_count.addTextChangedListener(object : TextWatcher{
-            override fun afterTextChanged(s: Editable) { }
-            override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) { }
+        plan_count.addTextChangedListener(object : TextWatcher {
+            override fun afterTextChanged(s: Editable) {}
+            override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {}
 
             override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
                 if (s.isNotEmpty()) {
-                    if (s.toString().toInt() > 0)
+                    if (s.toString().toInt() > 0 && plan_total.text.isNotEmpty())
                         calculatedValue(plan_total.text.toString().toDouble())
                 }
             }
@@ -204,6 +204,10 @@ class PlanBackActivity : BaseActivity() {
                         list.add(it.content)
                     }
                     plan_date.text = list_title.toString()
+                    if (list.isNotEmpty()) {
+                        plan_count.setText((list.size).toString())
+                        plan_count.setSelection(plan_count.text.length)
+                    }
                 }
 
                 dialog.setContentView(view)
@@ -324,6 +328,9 @@ class PlanBackActivity : BaseActivity() {
     @SuppressLint("SetTextI18n")
     private fun calculatedValue(value: Double) {
         val value_count = plan_count.text.toString().toInt()
+
+        if (value_count < 1) return
+
         val value_max = when {
             value < 1000 -> value / value_count + value * 0.1
             else -> value / value_count + 100
