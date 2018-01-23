@@ -126,6 +126,7 @@ class LoginActivity : BaseActivity() {
         ACache.get(baseContext).put("isUpdating", false)
 
         JPushInterface.stopPush(applicationContext)
+        JPushInterface.clearAllNotifications(applicationContext)
 
         //清除通知栏消息
         RongCloudContext.getInstance().clearNotificationMessage()

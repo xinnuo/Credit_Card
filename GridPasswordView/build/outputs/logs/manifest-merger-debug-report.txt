@@ -1,31 +1,31 @@
 -- Merging decision tree log ---
 manifest
-ADDED from F:\workspace\Credit_Card\GridPasswordView\src\main\AndroidManifest.xml:2:1-6:12
-INJECTED from F:\workspace\Credit_Card\GridPasswordView\src\main\AndroidManifest.xml:2:1-6:12
-INJECTED from F:\workspace\Credit_Card\GridPasswordView\src\main\AndroidManifest.xml:2:1-6:12
-INJECTED from F:\workspace\Credit_Card\GridPasswordView\src\main\AndroidManifest.xml:2:1-6:12
-INJECTED from F:\workspace\Credit_Card\GridPasswordView\src\main\AndroidManifest.xml:2:1-6:12
+ADDED from D:\workspace_studio\Credit_Card\GridPasswordView\src\main\AndroidManifest.xml:2:1-6:12
+INJECTED from D:\workspace_studio\Credit_Card\GridPasswordView\src\main\AndroidManifest.xml:2:1-6:12
+INJECTED from D:\workspace_studio\Credit_Card\GridPasswordView\src\main\AndroidManifest.xml:2:1-6:12
+INJECTED from D:\workspace_studio\Credit_Card\GridPasswordView\src\main\AndroidManifest.xml:2:1-6:12
+INJECTED from D:\workspace_studio\Credit_Card\GridPasswordView\src\main\AndroidManifest.xml:2:1-6:12
 	package
-		ADDED from F:\workspace\Credit_Card\GridPasswordView\src\main\AndroidManifest.xml:2:11-48
-		INJECTED from F:\workspace\Credit_Card\GridPasswordView\src\main\AndroidManifest.xml
-		INJECTED from F:\workspace\Credit_Card\GridPasswordView\src\main\AndroidManifest.xml
+		ADDED from D:\workspace_studio\Credit_Card\GridPasswordView\src\main\AndroidManifest.xml:2:11-48
+		INJECTED from D:\workspace_studio\Credit_Card\GridPasswordView\src\main\AndroidManifest.xml
+		INJECTED from D:\workspace_studio\Credit_Card\GridPasswordView\src\main\AndroidManifest.xml
 	android:versionName
-		INJECTED from F:\workspace\Credit_Card\GridPasswordView\src\main\AndroidManifest.xml
-		ADDED from F:\workspace\Credit_Card\GridPasswordView\src\main\AndroidManifest.xml:2:1-6:12
-		INJECTED from F:\workspace\Credit_Card\GridPasswordView\src\main\AndroidManifest.xml
+		INJECTED from D:\workspace_studio\Credit_Card\GridPasswordView\src\main\AndroidManifest.xml
+		ADDED from D:\workspace_studio\Credit_Card\GridPasswordView\src\main\AndroidManifest.xml:2:1-6:12
+		INJECTED from D:\workspace_studio\Credit_Card\GridPasswordView\src\main\AndroidManifest.xml
 application
-ADDED from F:\workspace\Credit_Card\GridPasswordView\src\main\AndroidManifest.xml:4:5-20
+ADDED from D:\workspace_studio\Credit_Card\GridPasswordView\src\main\AndroidManifest.xml:4:5-20
 uses-sdk
-INJECTED from F:\workspace\Credit_Card\GridPasswordView\src\main\AndroidManifest.xml reason: use-sdk injection requested
-INJECTED from F:\workspace\Credit_Card\GridPasswordView\src\main\AndroidManifest.xml
-INJECTED from F:\workspace\Credit_Card\GridPasswordView\src\main\AndroidManifest.xml
-INJECTED from F:\workspace\Credit_Card\GridPasswordView\src\main\AndroidManifest.xml
-INJECTED from F:\workspace\Credit_Card\GridPasswordView\src\main\AndroidManifest.xml
+INJECTED from D:\workspace_studio\Credit_Card\GridPasswordView\src\main\AndroidManifest.xml reason: use-sdk injection requested
+INJECTED from D:\workspace_studio\Credit_Card\GridPasswordView\src\main\AndroidManifest.xml
+INJECTED from D:\workspace_studio\Credit_Card\GridPasswordView\src\main\AndroidManifest.xml
+INJECTED from D:\workspace_studio\Credit_Card\GridPasswordView\src\main\AndroidManifest.xml
+INJECTED from D:\workspace_studio\Credit_Card\GridPasswordView\src\main\AndroidManifest.xml
 	android:targetSdkVersion
-		INJECTED from F:\workspace\Credit_Card\GridPasswordView\src\main\AndroidManifest.xml
-		ADDED from F:\workspace\Credit_Card\GridPasswordView\src\main\AndroidManifest.xml
-		INJECTED from F:\workspace\Credit_Card\GridPasswordView\src\main\AndroidManifest.xml
+		INJECTED from D:\workspace_studio\Credit_Card\GridPasswordView\src\main\AndroidManifest.xml
+		ADDED from D:\workspace_studio\Credit_Card\GridPasswordView\src\main\AndroidManifest.xml
+		INJECTED from D:\workspace_studio\Credit_Card\GridPasswordView\src\main\AndroidManifest.xml
 	android:minSdkVersion
-		INJECTED from F:\workspace\Credit_Card\GridPasswordView\src\main\AndroidManifest.xml
-		ADDED from F:\workspace\Credit_Card\GridPasswordView\src\main\AndroidManifest.xml
-		INJECTED from F:\workspace\Credit_Card\GridPasswordView\src\main\AndroidManifest.xml
+		INJECTED from D:\workspace_studio\Credit_Card\GridPasswordView\src\main\AndroidManifest.xml
+		ADDED from D:\workspace_studio\Credit_Card\GridPasswordView\src\main\AndroidManifest.xml
+		INJECTED from D:\workspace_studio\Credit_Card\GridPasswordView\src\main\AndroidManifest.xml
