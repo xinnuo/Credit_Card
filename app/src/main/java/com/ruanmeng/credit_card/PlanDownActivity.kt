@@ -50,11 +50,19 @@ class PlanDownActivity : BaseActivity() {
                                     })
                             .text(R.id.item_plan_num, "尾号(${data.cardNo.substring(data.cardNo.length - 4)})")
                             .text(R.id.item_plan_time, if (data.status == "1") data.repaymentTime else (data.repaymentDay + ":00"))
-                            .text(R.id.item_plan_status, when (data.status) {
-                                "-1" -> "未还款"
-                                "0" -> "还款失败"
-                                "1" -> "已还款"
-                                else -> ""
+                            .text(R.id.item_plan_status, when (data.type) {
+                                "1" -> when (data.status) {
+                                    "-1" -> "未消费"
+                                    "0" -> "消费失败"
+                                    "1" -> "已消费"
+                                    else -> ""
+                                }
+                                else -> when (data.status) {
+                                    "-1" -> "未还款"
+                                    "0" -> "还款失败"
+                                    "1" -> "已还款"
+                                    else -> ""
+                                }
                             })
 
                             .with<RoundedImageView>(R.id.item_plan_img) { view ->
