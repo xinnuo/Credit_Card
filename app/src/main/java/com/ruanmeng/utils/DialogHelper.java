@@ -74,7 +74,6 @@ public class DialogHelper {
                 .btnText(btnText)
                 .btnNum(1)
                 .btnTextColor(context.getResources().getColor(R.color.colorAccent))
-                .showAnim(new BounceTopEnter())
                 .show();
         materialDialog.setOnBtnClickL(
                 new OnBtnClickL() { //left btn click listener
