@@ -22,6 +22,7 @@ public class JPushMessageReceiver extends cn.jpush.android.service.JPushMessageR
     @Override
     public void onAliasOperatorResult(Context context, JPushMessage jPushMessage) {
         OkLogger.i("JPush_Message", jPushMessage.toString());
+        super.onAliasOperatorResult(context, jPushMessage);
     }
 
     /**
@@ -33,6 +34,7 @@ public class JPushMessageReceiver extends cn.jpush.android.service.JPushMessageR
     @Override
     public void onTagOperatorResult(Context context, JPushMessage jPushMessage) {
         OkLogger.i("JPush_Message", jPushMessage.toString());
+        super.onTagOperatorResult(context, jPushMessage);
     }
 
     /**
@@ -44,5 +46,18 @@ public class JPushMessageReceiver extends cn.jpush.android.service.JPushMessageR
     @Override
     public void onCheckTagOperatorResult(Context context, JPushMessage jPushMessage) {
         OkLogger.i("JPush_Message", jPushMessage.toString());
+        super.onCheckTagOperatorResult(context, jPushMessage);
+    }
+
+    /**
+     * 设置手机号码会在此方法中回调结果
+     *
+     * @param context      上下文
+     * @param jPushMessage 设置手机号码返回的消息结果体
+     */
+    @Override
+    public void onMobileNumberOperatorResult(Context context, JPushMessage jPushMessage) {
+        OkLogger.i("JPush_Message", jPushMessage.toString());
+        super.onMobileNumberOperatorResult(context, jPushMessage);
     }
 }

@@ -14,7 +14,7 @@ android {
     defaultConfig {
         minSdkVersion versions.minSdkVersion
         targetSdkVersion versions.targetSdkVersion
-        versionName "3.0.8"
+        versionName "3.1.1"
     }
     buildTypes {
         release {
