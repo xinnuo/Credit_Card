@@ -23,6 +23,22 @@ android {
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         multiDexEnabled true
 
+        applicationVariants.all { variant ->
+            if (variant.buildType.name == "release") {
+                variant.outputs.all { output ->
+                    def file = output.outputFile
+                    if (file != null && file.name.endsWith('.apk')) {
+                        // def version = "v${versionName}(${versionCode})"
+                        // def formatDate = new Date().format("yyyyMMddHHmm", TimeZone.getTimeZone("UTC"))
+                        // def fileName = file.name.replace(".apk", "-${version}-${formatDate}.apk")
+                        // def fileName = "${applicationId}-v${versionName}.apk"
+                        def fileName = file.name.replace(".apk", "-v${versionName}.apk")
+                        outputFileName = fileName
+                    }
+                }
+            }
+        }
+
         //支持 armeabi-v7a 和 x86 架构 CPU
         //处理.so文件时的重要法则:要么全部支持，要么都不支持
         ndk { abiFilters "armeabi-v7a", "x86" }
