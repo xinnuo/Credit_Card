@@ -16,7 +16,6 @@
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -159,9 +158,7 @@
             android:windowSoftInputMode="stateHidden|adjustResize">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
-
                 <category android:name="android.intent.category.DEFAULT" />
-
                 <data
                     android:host="${applicationId}"
                     android:pathPrefix="/conversationlist"
@@ -175,9 +172,7 @@
             android:windowSoftInputMode="stateHidden|adjustResize">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
-
                 <category android:name="android.intent.category.DEFAULT" />
-
                 <data
                     android:host="${applicationId}"
                     android:pathPrefix="/conversation/"
@@ -269,12 +264,6 @@
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/new_app_file_paths" />
         </provider>
-
-        <!--<service
-            android:name="com.ruanmeng.receiver.JobSchedulerService"
-            android:enabled="true"
-            android:exported="true"
-            android:permission="android.permission.BIND_JOB_SERVICE" />-->
 
     </application>
 
