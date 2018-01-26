@@ -270,6 +270,12 @@
                 android:resource="@xml/new_app_file_paths" />
         </provider>
 
+        <!--<service
+            android:name="com.ruanmeng.receiver.JobSchedulerService"
+            android:enabled="true"
+            android:exported="true"
+            android:permission="android.permission.BIND_JOB_SERVICE" />-->
+
     </application>
 
 </manifest>
