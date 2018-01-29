@@ -97,7 +97,7 @@ class PlanBackActivity : BaseActivity() {
 
                 val date_now = TimeHelper.getInstance().stringDateShort                     //今天
                 val date_tom = TimeHelper.getInstance().getNextDay(date_now, 1)        //明天
-                val date_end = TimeHelper.getInstance().defaultDay                          //本月最后一天
+                val date_end = TimeHelper.getInstance().dayOfMonthEnd                       //本月最后一天
                 val date_month = TimeHelper.getInstance().nextMonthFirst                    //下月第一天
                 val date_next = TimeHelper.getInstance().getAfterMonth(date_now, 1) //下月的今天
 
