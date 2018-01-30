@@ -15,6 +15,7 @@ import com.lzy.okgo.model.Response
 import com.ruanmeng.base.*
 import com.ruanmeng.model.CommonData
 import com.ruanmeng.model.CommonModel
+import com.ruanmeng.model.RefreshMessageEvent
 import com.ruanmeng.share.BaseHttp
 import com.ruanmeng.utils.ActivityStack
 import com.ruanmeng.utils.DialogHelper
@@ -22,7 +23,8 @@ import com.ruanmeng.utils.KeyboardHelper
 import com.ruanmeng.utils.NumberHelper
 import kotlinx.android.synthetic.main.activity_cashout.*
 import kotlinx.android.synthetic.main.layout_title_left.*
-import java.text.DecimalFormat
+import org.greenrobot.eventbus.EventBus
+import java.math.BigDecimal
 
 class CashoutActivity : BaseActivity() {
 
@@ -44,8 +46,13 @@ class CashoutActivity : BaseActivity() {
     override fun init_title() {
         left_nav_title.text = "提现"
 
-        withdrawSum = getString("withdrawSum").toDouble()
-        cashout_total.text = DecimalFormat("########0.00####").format(withdrawSum) + "元"
+        if (getString("withdrawSum").isNotEmpty()) {
+            val withdrawString = getString("withdrawSum")
+            withdrawSum = BigDecimal(withdrawString.toDouble())
+                    .setScale(2, BigDecimal.ROUND_HALF_UP)
+                    .toDouble()
+        }
+        cashout_total.text = String.format("%.2f", withdrawSum) + "元"
 
         cashout_ok.setBackgroundResource(R.drawable.rec_bg_d0d0d0)
         cashout_ok.isClickable = false
@@ -65,12 +72,12 @@ class CashoutActivity : BaseActivity() {
                     return
                 }
 
-                showPaySheetDialog()
+                showPaySheetDialog(cashout_count.text.toString())
             }
         }
     }
 
-    private fun showPaySheetDialog() {
+    private fun showPaySheetDialog(value: String) {
         if (getString("isPayPwd") != "1") {
             DialogHelper.showDialog(
                     baseContext,
@@ -99,7 +106,7 @@ class CashoutActivity : BaseActivity() {
                     gpv_pwd = view.findViewById(R.id.withdraw_pwd)
 
                     tv_title.text = "确认提现"
-                    tv_hint.text = "提现金额${NumberHelper.fmtMicrometer(cashout_count.text.toString())}元"
+                    tv_hint.text = "提现金额${NumberHelper.fmtMicrometer(value)}元"
                     tv_hint.textSize = 22f
                     gpv_pwd.setPasswordType(PasswordType.NUMBER)
 
@@ -126,6 +133,10 @@ class CashoutActivity : BaseActivity() {
                                             window.decorView.postDelayed({ runOnUiThread { getWithdraw() } }, 300)
                                         }
 
+                                        override fun onSuccessResponseErrorCode(
+                                                response: Response<String>,
+                                                msg: String,
+                                                msgCode: String) = dismiss()
                                     })
                         }
 
@@ -154,6 +165,7 @@ class CashoutActivity : BaseActivity() {
                     override fun onSuccessResponse(response: Response<String>, msg: String, msgCode: String) {
 
                         toast(msg)
+                        EventBus.getDefault().post(RefreshMessageEvent("提现", "", ""))
                         ActivityStack.getScreenManager().popActivities(this@CashoutActivity::class.java)
                     }
 

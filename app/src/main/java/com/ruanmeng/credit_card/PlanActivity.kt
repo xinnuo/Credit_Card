@@ -81,6 +81,11 @@ class PlanActivity : BaseActivity() {
 
                             .visibility(R.id.item_plan_divider1, if (list.indexOf(data) == list.size - 1) View.GONE else View.VISIBLE)
                             .visibility(R.id.item_plan_divider2, if (list.indexOf(data) != list.size - 1) View.GONE else View.VISIBLE)
+                            .visibility(R.id.item_plan_delete, when {
+                                data.sfdelete.isEmpty() -> View.VISIBLE
+                                data.sfdelete.toInt() > 0 -> View.GONE
+                                else -> View.VISIBLE
+                            })
 
                             .clicked(R.id.item_plan_delete) {
                                 DialogHelper.showDialog(

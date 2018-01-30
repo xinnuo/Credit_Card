@@ -118,11 +118,7 @@ class MainActivity : BaseActivity() {
                     "1" -> startActivity(GatherActivity::class.java)
                 }
             }
-            R.id.first_card -> {
-                val intent = Intent(baseContext, WebActivity::class.java)
-                intent.putExtra("title", "在线办卡")
-                startActivity(intent)
-            }
+            R.id.first_card -> startActivity(OnlineCardActivity::class.java)
             R.id.first_express -> {
                 val intent = Intent(baseContext, WebActivity::class.java)
                 intent.putExtra("title", "快递查询")

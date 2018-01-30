@@ -14,6 +14,7 @@ import kotlinx.android.synthetic.main.activity_web.*
 import kotlinx.android.synthetic.main.layout_title_left.*
 import org.greenrobot.eventbus.EventBus
 import org.json.JSONObject
+import android.webkit.WebSettings
 
 class WebActivity : BaseActivity() {
 
@@ -211,9 +212,15 @@ class WebActivity : BaseActivity() {
             }
             "收款支付" -> wv_web.loadUrl(intent.getStringExtra("url"))
             "支付验证" -> wv_web.loadUrl(intent.getStringExtra("url"))
-            "在线办卡" -> wv_web.loadUrl("http://partner.51credit.com/xzf/")
+            "在线办卡" -> {
+                wv_web.settings.useWideViewPort = true
+                wv_web.loadUrl(intent.getStringExtra("url"))
+            }
             "快递查询" -> wv_web.loadUrl("http://www.kuaidi100.com/?from=openv")
-            "违章查询" -> wv_web.loadUrl("http://www.4008000000.com/weizhangchaxun.html?WT.mc_id=C03-BDJG-PEFIND-bd0027&WT.srch=1")
+            "违章查询" -> {
+                wv_web.settings.useWideViewPort = true
+                wv_web.loadUrl("http://www.4008000000.com/weizhangchaxun.html?WT.mc_id=C03-BDJG-PEFIND-bd0027&WT.srch=1")
+            }
             "安全保障" -> wv_web.loadUrl("https://m.ecpic.com.cn/mobilemsb/product/initPrd?mId=1678313&vCode=334216")
         }
     }

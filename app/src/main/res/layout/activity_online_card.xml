@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical">
+
+    <com.allen.library.SuperTextView
+        android:id="@+id/online_51"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimen_size_46"
+        android:layout_marginTop="@dimen/dimen_size_10"
+        app:sBottomLineMargin="@dimen/dimen_size_10"
+        app:sLeftIconRes="@mipmap/online_card_1"
+        app:sLeftIconSize="@dimen/dimen_size_18"
+        app:sLeftTextColor="@color/black_dark"
+        app:sLeftTextMarginLeft="@dimen/dimen_size_10"
+        app:sLeftTextString="51信用卡"
+        app:sLineShow="both"
+        app:sRightIconMarginRight="@dimen/dimen_size_10"
+        app:sRightIconRes="@mipmap/arrow_right"
+        app:sRightIconSize="@dimen/dimen_size_13"
+        app:sRightTextColor="@color/gray"
+        app:sRightTextMarginRight="@dimen/dimen_size_30"
+        app:sTopLineMargin="0dp" />
+
+    <com.allen.library.SuperTextView
+        android:id="@+id/online_hui"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimen_size_45.5"
+        app:sBottomLineMargin="@dimen/dimen_size_0"
+        app:sLeftIconRes="@mipmap/online_card_2"
+        app:sLeftIconSize="@dimen/dimen_size_18"
+        app:sLeftTextColor="@color/black_dark"
+        app:sLeftTextMarginLeft="@dimen/dimen_size_10"
+        app:sLeftTextString="泰金聚融"
+        app:sLineShow="bottom"
+        app:sRightIconMarginRight="@dimen/dimen_size_10"
+        app:sRightIconRes="@mipmap/arrow_right"
+        app:sRightIconSize="@dimen/dimen_size_13"
+        app:sRightTextColor="@color/gray"
+        app:sRightTextMarginRight="@dimen/dimen_size_30" />
+
+</LinearLayout>

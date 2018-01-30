@@ -144,6 +144,11 @@ class GatherActivity : BaseActivity() {
                                                     getPay(mCount)
                                                 }
 
+                                                override fun onSuccessResponseErrorCode(
+                                                        response: Response<String>,
+                                                        msg: String,
+                                                        msgCode: String) = dismiss()
+
                                             })
                                 }
 

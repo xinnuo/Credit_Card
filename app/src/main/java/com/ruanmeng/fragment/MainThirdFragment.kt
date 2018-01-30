@@ -96,7 +96,6 @@ class MainThirdFragment : BaseFragment() {
                         val obj = JSONObject(response.body())
                         putString("balanceSum", obj.getString("balanceSum"))
                         putString("profitSum", obj.getString("profitSum"))
-                        putString("withdrawSum", obj.getString("withdrawSum"))
                         putString("levelName", obj.getString("levelName") ?: "")
                         putString("platform", obj.getString("lxwm") ?: "")
 

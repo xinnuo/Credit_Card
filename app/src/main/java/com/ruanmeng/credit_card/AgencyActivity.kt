@@ -10,9 +10,12 @@ import com.ruanmeng.adapter.TabFragmentAdapter
 import com.ruanmeng.base.*
 import com.ruanmeng.fragment.AgencyFragment
 import com.ruanmeng.fragment.AgencySecondFragment
+import com.ruanmeng.model.RefreshMessageEvent
 import com.ruanmeng.share.BaseHttp
 import com.ruanmeng.utils.Tools
 import kotlinx.android.synthetic.main.activity_agency.*
+import org.greenrobot.eventbus.EventBus
+import org.greenrobot.eventbus.Subscribe
 import org.json.JSONObject
 
 class AgencyActivity : BaseActivity() {
@@ -24,6 +27,8 @@ class AgencyActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_agency)
         init_title("代理商")
+
+        EventBus.getDefault().register(this@AgencyActivity)
 
         getData()
     }
@@ -61,7 +66,7 @@ class AgencyActivity : BaseActivity() {
                         val obj = data.getJSONObject("agentInfo")
 
                         levelName = data.getString("levelName")
-                        withdrawSum = obj.getString("withdrawSum")
+                        withdrawSum = obj.getString("currentSum")
                         putString("withdrawSum", withdrawSum)
                         putString("levelName", levelName)
 
@@ -78,5 +83,17 @@ class AgencyActivity : BaseActivity() {
                     }
 
                 })
+    }
+
+    override fun finish() {
+        EventBus.getDefault().unregister(this@AgencyActivity)
+        super.finish()
+    }
+
+    @Subscribe
+    fun onMessageEvent(event: RefreshMessageEvent) {
+        when (event.name) {
+            "提现" -> getData()
+        }
     }
 }
