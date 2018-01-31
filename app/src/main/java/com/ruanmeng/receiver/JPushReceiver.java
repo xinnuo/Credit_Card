@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.util.Log;
 
 import com.ruanmeng.credit_card.MessageActivity;
+import com.ruanmeng.model.CountMessageEvent;
 import com.ruanmeng.model.RefreshMessageEvent;
 import com.ruanmeng.utils.ACache;
 
@@ -53,6 +54,9 @@ public class JPushReceiver extends BroadcastReceiver {
                     if ("VIP".equals(push_type)) {
                         ACache.get(context).put("isUpdating", false);
                         EventBus.getDefault().post(new RefreshMessageEvent("升级会员", "", ""));
+                    }
+                    if ("TX".equals(push_type)) {
+                        EventBus.getDefault().post(new CountMessageEvent("提现", ""));
                     }
                 }
             } catch (JSONException e) {
