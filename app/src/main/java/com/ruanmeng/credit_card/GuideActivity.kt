@@ -54,7 +54,6 @@ class GuideActivity : BaseActivity() {
         AndPermission.with(this@GuideActivity)
                 .permission(
                         Manifest.permission.CAMERA,
-                        Manifest.permission.ACCESS_FINE_LOCATION,
                         Manifest.permission.WRITE_EXTERNAL_STORAGE)
                 .callback(object : PermissionListener {
                     override fun onSucceed(requestCode: Int, grantPermissions: MutableList<String>) {
