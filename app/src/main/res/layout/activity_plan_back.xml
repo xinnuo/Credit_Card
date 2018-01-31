@@ -99,7 +99,7 @@
         <LinearLayout
             android:id="@+id/plan_date_11"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/line_height"
+            android:layout_height="wrap_content"
             android:gravity="center_vertical"
             android:onClick="doClick"
             android:paddingLeft="@dimen/dimen_size_10"
@@ -108,7 +108,8 @@
             <TextView
                 style="@style/Font14_black_dark"
                 android:layout_width="70dp"
-                android:layout_height="wrap_content"
+                android:layout_height="@dimen/line_height"
+                android:gravity="center_vertical"
                 android:text="还款日期" />
 
             <TextView
@@ -119,11 +120,13 @@
                 android:layout_marginRight="@dimen/dimen_size_5"
                 android:layout_weight="1"
                 android:gravity="end"
+                android:paddingTop="@dimen/dimen_size_10"
+                android:paddingBottom="@dimen/dimen_size_10"
                 android:paddingLeft="@dimen/dimen_size_10" />
 
             <ImageView
                 android:layout_width="13dp"
-                android:layout_height="13dp"
+                android:layout_height="@dimen/line_height"
                 android:src="@mipmap/arrow_right"
                 tools:ignore="ContentDescription" />
 

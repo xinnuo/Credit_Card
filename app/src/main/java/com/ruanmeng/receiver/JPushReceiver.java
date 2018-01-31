@@ -74,6 +74,7 @@ public class JPushReceiver extends BroadcastReceiver {
                         case "MSG":
                         case "SYS":
                         case "VIP":
+                        case "TX":
                             intent = new Intent(context, MessageActivity.class);
                             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                             context.startActivity(intent);
