@@ -101,30 +101,35 @@ public class JPushReceiver extends BroadcastReceiver {
     private static String printBundle(Bundle bundle) {
         StringBuilder sb = new StringBuilder();
         for (String key : bundle.keySet()) {
-            if (key.equals(JPushInterface.EXTRA_NOTIFICATION_ID)) {
-                sb.append("\nkey:").append(key).append(", value:").append(bundle.getInt(key));
-            }else if(key.equals(JPushInterface.EXTRA_CONNECTION_CHANGE)){
-                sb.append("\nkey:").append(key).append(", value:").append(bundle.getBoolean(key));
-            } else if (key.equals(JPushInterface.EXTRA_EXTRA)) {
-                if (bundle.getString(JPushInterface.EXTRA_EXTRA).isEmpty()) {
-                    Log.i(TAG, "This message has no Extra data");
-                    continue;
-                }
-
-                try {
-                    JSONObject json = new JSONObject(bundle.getString(JPushInterface.EXTRA_EXTRA));
-                    Iterator<String> it =  json.keys();
-
-                    while (it.hasNext()) {
-                        String myKey = it.next();
-                        sb.append("\nkey:").append(key).append(", value: [").append(myKey).append(" - ").append(json.optString(myKey)).append("]");
+            switch (key) {
+                case JPushInterface.EXTRA_NOTIFICATION_ID:
+                    sb.append("\nkey:").append(key).append(", value:").append(bundle.getInt(key));
+                    break;
+                case JPushInterface.EXTRA_CONNECTION_CHANGE:
+                    sb.append("\nkey:").append(key).append(", value:").append(bundle.getBoolean(key));
+                    break;
+                case JPushInterface.EXTRA_EXTRA:
+                    if (bundle.getString(JPushInterface.EXTRA_EXTRA).isEmpty()) {
+                        Log.i(TAG, "This message has no Extra data");
+                        continue;
                     }
-                } catch (JSONException e) {
-                    Log.e(TAG, "Get message extra JSON error!");
-                }
 
-            } else {
-                sb.append("\nkey:").append(key).append(", value:").append(bundle.getString(key));
+                    try {
+                        JSONObject json = new JSONObject(bundle.getString(JPushInterface.EXTRA_EXTRA));
+                        Iterator<String> it = json.keys();
+
+                        while (it.hasNext()) {
+                            String myKey = it.next();
+                            sb.append("\nkey:").append(key).append(", value: [").append(myKey).append(" - ").append(json.optString(myKey)).append("]");
+                        }
+                    } catch (JSONException e) {
+                        Log.e(TAG, "Get message extra JSON error!");
+                    }
+
+                    break;
+                default:
+                    sb.append("\nkey:").append(key).append(", value:").append(bundle.getString(key));
+                    break;
             }
         }
         return sb.toString();
