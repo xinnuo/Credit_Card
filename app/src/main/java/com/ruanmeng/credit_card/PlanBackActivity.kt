@@ -248,7 +248,7 @@ class PlanBackActivity : BaseActivity() {
                                         if (data.position > 6) View.INVISIBLE else View.VISIBLE)
                                 .clicked(R.id.item_tab) {
                                     data.isChecked = !data.isChecked
-                                    (adapter as SlimAdapter).notifyItemChanged(items.indexOf(data))
+                                    (adapter as SlimAdapter).notifyItemChanged(items.indexOf(data), 0)
                                 }
                     }
                     .attachTo(this)
