@@ -715,7 +715,7 @@ public class TimeHelper {
     }
 
     /**
-     * 获得指定日期的月数
+     * 获得指定日期的月份
      */
     public int getMonthOfDate(String time) {
         try {
@@ -734,7 +734,7 @@ public class TimeHelper {
     }
 
     /**
-     * 获得指定日期的月数
+     * 获得指定日期的月份
      */
     public int getMonthOfDate(String time, String pattern) {
         try {
