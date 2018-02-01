@@ -72,6 +72,11 @@ class CashoutActivity : BaseActivity() {
                     return
                 }
 
+                if (mCount < 100) {
+                    toast("最低提现金额不少于100.0元")
+                    return
+                }
+
                 showPaySheetDialog(cashout_count.text.toString())
             }
         }
