@@ -15,7 +15,6 @@ import com.lzy.extend.StringDialogCallback
 import com.lzy.extend.jackson.JacksonDialogCallback
 import com.lzy.okgo.OkGo
 import com.lzy.okgo.model.Response
-import com.lzy.okgo.utils.OkLogger
 import com.ruanmeng.base.BaseActivity
 import com.ruanmeng.base.addItems
 import com.ruanmeng.base.getString
@@ -39,7 +38,7 @@ class PlanBackActivity : BaseActivity() {
 
     private val list = ArrayList<Any>()
     private val list_title = ArrayList<Any>()
-    private var list_item: ArrayList<Any>? = null
+    private var list_item = ArrayList<Any>()
     private var billDay = 0
     private var repaymentDay = 0
     private var mRate = 0.0
@@ -75,10 +74,7 @@ class PlanBackActivity : BaseActivity() {
             }
         })
 
-        thread {
-            list_item = getDateList()
-            OkLogger.i(list_item.toString())
-        }
+        thread { list_item.addAll(getDateList()) }
     }
 
     @Suppress("DEPRECATION")
@@ -216,8 +212,6 @@ class PlanBackActivity : BaseActivity() {
         val recycle_list = view.findViewById(R.id.dialog_select_list) as RecyclerView
         val dialog = BottomSheetDialog(baseContext)
 
-        val items = getDateList()
-
         recycle_list.apply {
             layoutManager = GridLayoutManager(baseContext, 7)
 
@@ -248,12 +242,12 @@ class PlanBackActivity : BaseActivity() {
                                         if (data.position > 6) View.INVISIBLE else View.VISIBLE)
                                 .clicked(R.id.item_tab) {
                                     data.isChecked = !data.isChecked
-                                    (adapter as SlimAdapter).notifyItemChanged(items.indexOf(data), 0)
+                                    (adapter as SlimAdapter).notifyItemChanged(list_item.indexOf(data), 0)
                                 }
                     }
                     .attachTo(this)
         }
-        (recycle_list.adapter as SlimAdapter).updateData(items)
+        (recycle_list.adapter as SlimAdapter).updateData(list_item)
 
         tv_cancel.setOnClickListener { dialog.dismiss() }
         tv_ok.setOnClickListener {
@@ -261,7 +255,7 @@ class PlanBackActivity : BaseActivity() {
 
             list_title.clear()
             list.clear()
-            items.filter { it is CommonData && it.isChecked }.forEach {
+            list_item.filter { it is CommonData && it.isChecked }.forEach {
                 it as CommonData
                 list_title.add(it.title)
                 list.add(it.content)
