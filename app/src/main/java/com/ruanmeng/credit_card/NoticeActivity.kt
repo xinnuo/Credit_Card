@@ -73,7 +73,7 @@ class NoticeActivity : BaseActivity() {
                             if (count(response.body().news) > 0) pageNum++
                         }
 
-                        mAdapter.updateData(list).notifyDataSetChanged()
+                        mAdapter.updateData(list)
                     }
 
                     override fun onFinish() {

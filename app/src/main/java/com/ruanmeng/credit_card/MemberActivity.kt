@@ -93,7 +93,7 @@ class MemberActivity : BaseActivity() {
                                 mPrice = DecimalFormat("########0.0#####").format(data.cost.toDouble())
                                 levelName = data.levelName
 
-                                mAdapter.updateData(list).notifyDataSetChanged()
+                                mAdapter.notifyDataSetChanged()
                             }
                 }
                 .attachTo(member_list)
@@ -289,7 +289,7 @@ class MemberActivity : BaseActivity() {
                             }
                         } else member_sure.visibility = View.VISIBLE
 
-                        mAdapter.updateData(list).notifyDataSetChanged()
+                        mAdapter.updateData(list)
                     }
 
                 })

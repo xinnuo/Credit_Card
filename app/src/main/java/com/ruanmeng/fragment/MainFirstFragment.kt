@@ -110,7 +110,7 @@ class MainFirstFragment : BaseFragment() {
                             }})")
                             .text(R.id.item_first_rate,
                                     when (data.type) {
-                                        "0" -> "手续费 ￥${if (data.rate.isEmpty()) "0.00" else String.format("%.2f", data.rate.toDouble())}"
+                                        "0", "2" -> "手续费 ￥${if (data.rate.isEmpty()) "0.00" else String.format("%.2f", data.rate.toDouble())}"
                                         else -> "费率 ${if (data.rate.isEmpty()) "0.0" else (data.rate.toDouble() * 100).toString()}%"
                                     })
                             .text(R.id.item_first_time, data.payTime)
@@ -171,7 +171,7 @@ class MainFirstFragment : BaseFragment() {
                         list_notice.addItems(response.body().news)
                         list.addItems(response.body().payrecords)
 
-                        mAdapterEx.updateData(list).notifyDataSetChanged()
+                        mAdapterEx.updateData(list)
 
                         val imgs = ArrayList<String>()
                         list_slider.mapTo(imgs) { it.sliderImg }

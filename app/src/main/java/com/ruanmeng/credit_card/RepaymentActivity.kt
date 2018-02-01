@@ -116,7 +116,7 @@ class RepaymentActivity : BaseActivity() {
                             addItems(response.body().creditcards)
                         }
 
-                        mAdapter.updateData(list).notifyDataSetChanged()
+                        mAdapter.updateData(list)
                     }
 
                     override fun onFinish() {

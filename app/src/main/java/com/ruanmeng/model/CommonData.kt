@@ -115,5 +115,6 @@ data class CommonData(
         var name: String = "",
         var tel: String = "",
 
+        var position: Int = -1,
         var isChecked: Boolean = false
 ) : Serializable

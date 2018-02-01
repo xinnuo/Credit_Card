@@ -143,7 +143,7 @@ class PlanActivity : BaseActivity() {
                             if (count(response.body().repayments) > 0) pageNum++
                         }
 
-                        mAdapter.updateData(list).notifyDataSetChanged()
+                        mAdapter.updateData(list)
                     }
 
                     override fun onFinish() {

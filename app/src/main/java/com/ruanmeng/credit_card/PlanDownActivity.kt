@@ -98,7 +98,7 @@ class PlanDownActivity : BaseActivity() {
                             addItems(response.body().repayments)
                         }
 
-                        mAdapter.updateData(list).notifyDataSetChanged()
+                        mAdapter.updateData(list)
                     }
 
                     override fun onFinish() {

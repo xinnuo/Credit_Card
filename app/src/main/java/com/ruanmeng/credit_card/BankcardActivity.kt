@@ -21,7 +21,6 @@ import com.ruanmeng.utils.DialogHelper
 import com.ruanmeng.utils.TimeHelper
 import com.ruanmeng.utils.Tools
 import kotlinx.android.synthetic.main.activity_bankcard.*
-import kotlinx.android.synthetic.main.layout_empty.*
 import kotlinx.android.synthetic.main.layout_list.*
 import net.idik.lib.slimadapter.SlimAdapter
 import org.greenrobot.eventbus.EventBus
@@ -252,7 +251,7 @@ class BankcardActivity : BaseActivity() {
 
                                 list_depositcard.addItems(response.body().depositcards)
 
-                                mAdapter.updateData(list).notifyDataSetChanged()
+                                mAdapter.updateData(list)
                             }
 
                             override fun onFinish() {
@@ -276,7 +275,7 @@ class BankcardActivity : BaseActivity() {
                                     add(CardData().apply { isChecked = true })
                                 }
 
-                                mAdapter.updateData(list).notifyDataSetChanged()
+                                mAdapter.updateData(list)
                             }
 
                             override fun onFinish() {
@@ -293,7 +292,7 @@ class BankcardActivity : BaseActivity() {
         swipe_refresh.isRefreshing = true
         if (list.size > 0) {
             list.clear()
-            mAdapter.updateData(list).notifyDataSetChanged()
+            mAdapter.notifyDataSetChanged()
         }
         getData(mPosition)
     }

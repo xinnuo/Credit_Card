@@ -66,7 +66,7 @@ class BillActivity : BaseActivity() {
                             }})")
                             .text(R.id.item_first_rate,
                                     when (data.type) {
-                                        "0" -> "手续费 ￥${if (data.rate.isEmpty()) "0.00" else String.format("%.2f", data.rate.toDouble())}"
+                                        "0", "2" -> "手续费 ￥${if (data.rate.isEmpty()) "0.00" else String.format("%.2f", data.rate.toDouble())}"
                                         else -> "费率 ${if (data.rate.isEmpty()) "0.0" else (data.rate.toDouble() * 100).toString()}%"
                                     })
                             .text(R.id.item_first_time, data.payTime)
@@ -158,7 +158,7 @@ class BillActivity : BaseActivity() {
                             if (count(response.body().payrecords) > 0) pageNum++
                         }
 
-                        mAdapter.updateData(list).notifyDataSetChanged()
+                        mAdapter.updateData(list)
                     }
 
                     override fun onFinish() {
@@ -176,7 +176,7 @@ class BillActivity : BaseActivity() {
         swipe_refresh.isRefreshing = true
         if (list.size > 0) {
             list.clear()
-            mAdapter.updateData(list).notifyDataSetChanged()
+            mAdapter.notifyDataSetChanged()
         }
         pageNum = 1
         getData(pageNum)

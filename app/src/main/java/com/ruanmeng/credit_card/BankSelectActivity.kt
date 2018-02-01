@@ -25,7 +25,7 @@ class BankSelectActivity : BaseActivity() {
             "信用卡" -> list.addAll(resources.getStringArray(R.array.bank_credit).asList())
             else -> list.addAll(resources.getStringArray(R.array.bank_list).asList())
         }
-        mAdapter.updateData(list).notifyDataSetChanged()
+        mAdapter.updateData(list)
     }
 
     override fun init_title() {

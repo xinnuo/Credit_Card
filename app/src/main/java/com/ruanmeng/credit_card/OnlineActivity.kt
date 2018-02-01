@@ -79,7 +79,7 @@ class OnlineActivity : BaseActivity() {
                         list.clear()
                         list.addItems(response.body().customers)
 
-                        mAdapter.updateData(list).notifyDataSetChanged()
+                        mAdapter.updateData(list)
                     }
 
                     override fun onFinish() {

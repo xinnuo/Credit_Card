@@ -26,7 +26,7 @@ class PlanPreviewActivity : BaseActivity() {
 
         @Suppress("UNCHECKED_CAST")
         list = intent.getSerializableExtra("data") as ArrayList<CommonData>
-        mAdapter.updateData(list).notifyDataSetChanged()
+        mAdapter.updateData(list)
     }
 
     override fun init_title() {
@@ -39,7 +39,7 @@ class PlanPreviewActivity : BaseActivity() {
         swipe_refresh.refresh {
             window.decorView.postDelayed({ runOnUiThread {
                 swipe_refresh.isRefreshing = false
-                mAdapter.updateData(list).notifyDataSetChanged()
+                mAdapter.notifyDataSetChanged()
             } }, 500)
         }
         recycle_list.load_Linear(baseContext, swipe_refresh)
@@ -99,7 +99,7 @@ class PlanPreviewActivity : BaseActivity() {
 
                         if (response.body().msgcode != "100") toast(response.body().msg)
 
-                        mAdapter.updateData(list).notifyDataSetChanged()
+                        mAdapter.updateData(list)
                     }
 
                     override fun onFinish() {

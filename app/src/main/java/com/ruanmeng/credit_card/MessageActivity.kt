@@ -88,7 +88,7 @@ class MessageActivity : BaseActivity() {
                             if (count(response.body().msgs) > 0) pageNum++
                         }
 
-                        mAdapter.updateData(list).notifyDataSetChanged()
+                        mAdapter.updateData(list)
                     }
 
                     override fun onFinish() {
