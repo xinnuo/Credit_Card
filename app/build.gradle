@@ -7,9 +7,7 @@ apply from: '../dependency.gradle'
 
 repositories {
     mavenCentral()
-    flatDir {
-        dir 'libs'
-    }
+    flatDir { dir 'libs' }
 }
 
 android {
@@ -61,9 +59,7 @@ android {
         }
     }
     signingConfigs {
-        release {
-            v2SigningEnabled false
-        }
+        release { v2SigningEnabled false }
         debug {
             storeFile file('../Credit_Card.jks')
             storePassword "123456"
@@ -82,9 +78,7 @@ android {
 
     sourceSets {
         main.java.srcDirs += 'src/main/kotlin'
-        main {
-            jniLibs.srcDirs = ['libs']
-        }
+        main { jniLibs.srcDirs = ['libs'] }
     }
 }
 
