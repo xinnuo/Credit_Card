@@ -212,6 +212,11 @@ class PlanBackActivity : BaseActivity() {
         val recycle_list = view.findViewById(R.id.dialog_select_list) as RecyclerView
         val dialog = BottomSheetDialog(baseContext)
 
+        list_item.filter { it is CommonData && it.isChecked }.forEach {
+            it as CommonData
+            it.isChecked = list.contains(it.content)
+        }
+
         recycle_list.apply {
             layoutManager = GridLayoutManager(baseContext, 7)
 
@@ -430,7 +435,7 @@ class PlanBackActivity : BaseActivity() {
                     title = (start_now + it).toString()
                     content = TimeHelper.getInstance().getNextDay(date_tom, it.toInt())
                     position = it.toInt()
-                    isChecked = list.contains((content))
+                    isChecked = list.contains(content)
                 }
             }
         }
