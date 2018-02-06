@@ -113,7 +113,9 @@ dependencies {
 
     implementation 'com.github.LuckSiege.PictureSelector:picture_library:v2.1.7'
 
-    implementation 'com.qianwen:update-app-kotlin:1.1.0'
+    implementation ('com.qianwen:update-app-kotlin:1.1.0') {
+        exclude group: 'org.jetbrains.kotlin', module:'kotlin-stdlib-jre7'
+    }
 
     implementation 'net.idik:slimadapter:2.1.2'
     implementation 'com.yanzhenjie:permission:1.1.2'
