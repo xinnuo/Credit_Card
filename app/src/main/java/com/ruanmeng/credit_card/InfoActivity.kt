@@ -74,7 +74,7 @@ class InfoActivity : BaseActivity() {
             }
         }
 
-        info_name.setOnClickListener { startActivity(NicknameActivity::class.java) }
+        info_name.setOnClickListener { /*startActivity(NicknameActivity::class.java)*/ }
         info_rec.setOnClickListener {
             if (mobile.isEmpty()) startActivity(RecommendActivity::class.java)
         }

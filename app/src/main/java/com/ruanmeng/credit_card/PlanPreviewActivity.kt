@@ -58,7 +58,6 @@ class PlanPreviewActivity : BaseActivity() {
                             .text(R.id.item_plan_time, data.repaymentTime + ":00")
                             .text(R.id.item_plan_status, if (data.type == "1") "未消费" else "未还款")
                             .text(R.id.item_plan_fee, "手续费：￥" + data.rateSum)
-                            .visible(R.id.item_plan_fee)
 
                             .with<RoundedImageView>(R.id.item_plan_img) { view ->
                                 when (data.repaymentType) {
