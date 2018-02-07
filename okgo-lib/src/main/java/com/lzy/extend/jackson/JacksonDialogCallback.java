@@ -42,6 +42,7 @@ public abstract class JacksonDialogCallback<T> extends JacksonCallback<T> {
         this.activity = activity;
 
         mMProgressDialog = new MProgressDialog.Builder(activity)
+                .setCancelable(true)
                 .isCanceledOnTouchOutside(false)
                 .setDimAmount(0.5f)
                 .build();
