@@ -36,6 +36,7 @@ class GatherActivity : BaseActivity() {
 
     private val list = ArrayList<CardData>()
     private var cardNo = ""
+    private var cardMemo = ""
     private var source = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -100,6 +101,9 @@ class GatherActivity : BaseActivity() {
                         startActivity(PasswordPayActivity::class.java)
                     }
                 } else {
+                    val mMemo = gather_memo.text.toString()
+                    if (mMemo.isNotEmpty() && mMemo != cardMemo) updateMemo()
+
                     val mCount = gather_count.text.toString()
                     val dialog = object : BottomDialog(baseContext) {
 
@@ -221,7 +225,49 @@ class GatherActivity : BaseActivity() {
                             gather_card.text = list[0].bank
                             gather_tail.text = "（${list[0].creditcard.substring(list[0].creditcard.length - 4)}）"
                             list[0].isChecked = true
+
+                            checkMemo(list[0].creditcardId)
                         }
+                    }
+
+                })
+    }
+
+    private fun checkMemo(cardId: String) {
+        gather_memo.setText("")
+
+        OkGo.post<String>(BaseHttp.find_usercard)
+                .tag(this@GatherActivity)
+                .headers("token", getString("token"))
+                .params("cardId", cardId)
+                .execute(object : StringDialogCallback(baseContext, false) {
+
+                    override fun onSuccessResponse(response: Response<String>, msg: String, msgCode: String) {
+
+                        val data = JSONObject(response.body())
+                        if (!data.isNull("object")) {
+                            val obj = data.getJSONObject("object")
+                            if (!obj.isNull("conet")) {
+                                cardMemo = obj.getString("conet")
+                                gather_memo.setText(cardMemo)
+                            }
+                        }
+                    }
+
+                })
+    }
+
+    private fun updateMemo() {
+        OkGo.post<String>(BaseHttp.update_usercard)
+                .tag(this@GatherActivity)
+                .headers("token", getString("token"))
+                .params("cardId", list.filter { it.isChecked }[0].creditcardId)
+                .params("conet", gather_memo.text.toString())
+                .execute(object : StringDialogCallback(baseContext, false) {
+
+                    override fun onSuccessResponse(response: Response<String>, msg: String, msgCode: String) {
+
+                        cardMemo = gather_memo.text.toString()
                     }
 
                 })
@@ -278,6 +324,8 @@ class GatherActivity : BaseActivity() {
                                     cardNo = data.creditcard
                                     gather_card.text = data.bank
                                     gather_tail.text = "（${data.creditcard.substring(data.creditcard.length - 4)}）"
+
+                                    checkMemo(data.creditcardId)
                                 })
                     })
                     .attachTo(recyclerView)

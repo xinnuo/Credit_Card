@@ -9,7 +9,7 @@ import java.util.regex.Pattern;
  */
 
 public class BankCardUtil {
-    //邮储银行
+    //邮政储蓄
     private String s1 = "^(621096|621098|622150|622151|622181|622188|622199|955100|621095|620062|621285|621798|621799|621797|620529|621622|621599|621674|623218|623219)\\d{13}$";
     private String s2 = "^(62215049|62215050|62215051|62218850|62218851|62218849)\\d{11}$";
     private String s3 = "^(622812|622810|622811|628310|625919)\\d{10}$";
@@ -462,7 +462,7 @@ public class BankCardUtil {
 
     public String getBankName() {
         if (Pattern.matches(s1, totalBankcode) || Pattern.matches(s2, totalBankcode) || Pattern.matches(s3, totalBankcode)) {
-            return "邮储银行";
+            return "邮政储蓄";
         } else if (Pattern.matches(s4, totalBankcode) || Pattern.matches(s5, totalBankcode) || Pattern.matches(s6, totalBankcode) || Pattern.matches(s7, totalBankcode) || Pattern.matches(s8, totalBankcode) || Pattern.matches(s9, totalBankcode) || Pattern.matches(s10, totalBankcode) || Pattern.matches(s11, totalBankcode) || Pattern.matches(s12, totalBankcode) || Pattern.matches(s13, totalBankcode)) {
             return "工商银行";
         } else if (Pattern.matches(s14, totalBankcode) || Pattern.matches(s15, totalBankcode) || Pattern.matches(s16, totalBankcode) || Pattern.matches(s17, totalBankcode) || Pattern.matches(s18, totalBankcode)) {

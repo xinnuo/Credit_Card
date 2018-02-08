@@ -39,6 +39,8 @@ public class BaseHttp {
     public static String msgInfo_details = baseIp + "/msgInfo_details.rm";       //消息详细√
     public static String get_msgCount = baseIp + "/get_msgCount.rm";             //未读消息数量√
     public static String newsnotice_list = baseIp + "/newsnotice_list.rm";       //公告列表√
+    public static String find_usercard = baseIp + "/find_usercard.rm";           //查询备注√
+    public static String update_usercard = baseIp + "/update_usercard.rm";       //增加备注√
 
     public static String up_vip_list = baseIp + "/up_vip_list.rm";             //升级列表√
     public static String card_Info_list = baseIp + "/card_Info_list.rm";       //银行卡列表√
