@@ -9,11 +9,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.lzy.extend.StringDialogCallback
+import com.lzy.extend.jackson.JacksonDialogCallback
 import com.lzy.okgo.OkGo
 import com.lzy.okgo.cache.CacheMode
 import com.lzy.okgo.model.Response
 import com.ruanmeng.base.*
 import com.ruanmeng.credit_card.*
+import com.ruanmeng.model.CommonData
+import com.ruanmeng.model.CommonModel
 import com.ruanmeng.share.BaseHttp
 import com.ruanmeng.utils.NumberHelper
 import io.rong.imkit.RongIM
@@ -23,6 +26,8 @@ import kotlinx.android.synthetic.main.layout_title_main.*
 import org.json.JSONObject
 
 class MainThirdFragment : BaseFragment() {
+
+    private val list = ArrayList<CommonData>()
 
     //调用这个方法切换时不会释放掉Fragment
     override fun setMenuVisibility(menuVisible: Boolean) {
@@ -60,6 +65,7 @@ class MainThirdFragment : BaseFragment() {
             }
         }
         third_share.setOnClickListener { startActivity(ShareActivity::class.java) }
+        third_online.setOnClickListener { getOnlineData() }
         third_setting.setOnClickListener { startActivity(SettingActivity::class.java) }
         third_hotline.setOnClickListener {
             if (getString("platform").isNotEmpty()) {
@@ -141,4 +147,27 @@ class MainThirdFragment : BaseFragment() {
 
                 })
     }
-}
+
+    private fun getOnlineData() {
+        OkGo.post<CommonModel>(BaseHttp.customer_list)
+                .tag(this@MainThirdFragment)
+                .execute(object : JacksonDialogCallback<CommonModel>(activity, CommonModel::class.java, true) {
+
+                    override fun onSuccess(response: Response<CommonModel>) {
+                        list.clear()
+                        list.addItems(response.body().customers)
+
+                        if (list.isNotEmpty()) {
+                            if (list.any { it.userInfoId == getString("token") })
+                                startActivity(ConversationListActivity::class.java)
+                            else {
+                                val intent = Intent(activity, OnlineActivity::class.java)
+                                intent.putExtra("list", list)
+                                startActivity(intent)
+                            }
+                        }
+                    }
+
+                })
+    }
+ }

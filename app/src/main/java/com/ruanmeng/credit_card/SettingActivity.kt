@@ -4,12 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.os.Environment
 import android.support.v7.app.AlertDialog
-import com.lzy.extend.jackson.JacksonDialogCallback
-import com.lzy.okgo.OkGo
-import com.lzy.okgo.model.Response
 import com.ruanmeng.base.*
-import com.ruanmeng.model.CommonData
-import com.ruanmeng.model.CommonModel
 import com.ruanmeng.share.BaseHttp
 import com.ruanmeng.share.Const
 import com.ruanmeng.utils.OkGoUpdateHttpUtil
@@ -23,8 +18,6 @@ import org.json.JSONObject
 
 class SettingActivity : BaseActivity() {
 
-    private val list = ArrayList<CommonData>()
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_setting)
@@ -36,7 +29,6 @@ class SettingActivity : BaseActivity() {
         setting_version.setRightString("v" + Tools.getVersion(baseContext))
 
         setting_password.setOnClickListener { startActivity(SettingPasswordActivity::class.java) }
-        setting_online.setOnClickListener { getData() }
         setting_version.setOnClickListener { checkUpdate() }
         setting_feedback.setOnClickListener { startActivity(FeedbackActivity::class.java) }
         setting_deal.setOnClickListener {
@@ -62,29 +54,6 @@ class SettingActivity : BaseActivity() {
                     .create()
                     .show()
         }
-    }
-
-    override fun getData() {
-        OkGo.post<CommonModel>(BaseHttp.customer_list)
-                .tag(this@SettingActivity)
-                .execute(object : JacksonDialogCallback<CommonModel>(baseContext, CommonModel::class.java, true) {
-
-                    override fun onSuccess(response: Response<CommonModel>) {
-                        list.clear()
-                        list.addItems(response.body().customers)
-
-                        if (list.isNotEmpty()) {
-                            if (list.any { it.userInfoId == getString("token") })
-                                startActivity(ConversationListActivity::class.java)
-                            else {
-                                val intent = Intent(baseContext, OnlineActivity::class.java)
-                                intent.putExtra("list", list)
-                                startActivity(intent)
-                            }
-                        }
-                    }
-
-                })
     }
 
     /**

@@ -195,16 +195,16 @@
         app:sRightTextMarginRight="@dimen/dimen_size_30" />
 
     <com.allen.library.SuperTextView
-        android:id="@+id/third_setting"
+        android:id="@+id/third_online"
         android:layout_width="match_parent"
         android:layout_height="@dimen/dimen_size_46"
         android:layout_marginTop="@dimen/dimen_size_10"
         app:sBothLineMargin="@dimen/dimen_size_10"
-        app:sLeftIconRes="@mipmap/left05"
+        app:sLeftIconRes="@mipmap/left07"
         app:sLeftIconSize="@dimen/dimen_size_18"
         app:sLeftTextColor="@color/black_dark"
         app:sLeftTextMarginLeft="@dimen/dimen_size_10"
-        app:sLeftTextString="设置"
+        app:sLeftTextString="在线客服"
         app:sLineShow="both"
         app:sRightIconMarginRight="@dimen/dimen_size_10"
         app:sRightIconRes="@mipmap/arrow_right"
@@ -216,7 +216,7 @@
         android:id="@+id/third_hotline"
         android:layout_width="match_parent"
         android:layout_height="@dimen/dimen_size_45.5"
-        app:sBottomLineMargin="@dimen/dimen_size_0"
+        app:sBottomLineMargin="@dimen/dimen_size_10"
         app:sLeftIconRes="@mipmap/left06"
         app:sLeftIconSize="@dimen/dimen_size_18"
         app:sLeftTextColor="@color/black_dark"
@@ -227,6 +227,23 @@
         app:sRightIconRes="@mipmap/arrow_right"
         app:sRightIconSize="@dimen/dimen_size_13"
         app:sRightTextColor="@color/light"
+        app:sRightTextMarginRight="@dimen/dimen_size_30" />
+
+    <com.allen.library.SuperTextView
+        android:id="@+id/third_setting"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimen_size_46"
+        app:sBottomLineMargin="@dimen/dimen_size_0"
+        app:sLeftIconRes="@mipmap/left05"
+        app:sLeftIconSize="@dimen/dimen_size_18"
+        app:sLeftTextColor="@color/black_dark"
+        app:sLeftTextMarginLeft="@dimen/dimen_size_10"
+        app:sLeftTextString="设置"
+        app:sLineShow="bottom"
+        app:sRightIconMarginRight="@dimen/dimen_size_10"
+        app:sRightIconRes="@mipmap/arrow_right"
+        app:sRightIconSize="@dimen/dimen_size_13"
+        app:sRightTextColor="@color/gray"
         app:sRightTextMarginRight="@dimen/dimen_size_30" />
 
 </LinearLayout>
