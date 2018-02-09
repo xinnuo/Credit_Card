@@ -14,6 +14,7 @@ import com.luck.picture.lib.entity.LocalMedia
 import com.lzy.extend.StringDialogCallback
 import com.lzy.okgo.OkGo
 import com.lzy.okgo.model.Response
+import com.maning.imagebrowserlibrary.MNImageBrowser
 import com.ruanmeng.base.*
 import com.ruanmeng.share.BaseHttp
 import com.ruanmeng.share.Const
@@ -90,6 +91,7 @@ class RealNameActivity : BaseActivity() {
                 image_type = 4
                 selectPicture(false)
             }
+            R.id.real_demo -> MNImageBrowser.showImageBrowser(baseContext, real_demo, 0, arrayListOf(R.mipmap.real_logo))
             R.id.bt_submit -> {
                 if (image_first.isEmpty() || image_second.isEmpty()) {
                     toast("请上传身份证正反面照")

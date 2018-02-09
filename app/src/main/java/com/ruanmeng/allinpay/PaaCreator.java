@@ -24,7 +24,7 @@ public class PaaCreator {
 
 		Double mPrice = Double.parseDouble(price) * 100;
 		String amount = String.valueOf(mPrice.intValue());
-		String url = "http://app.zgzngj.com/api/allinpay_upvip.rm?allinpayId=" + userId + "&upvipId=" + upvipId;
+		String url = "http://app.zgzngj.com/api/allinpay_upvip.rm";
 
 		@SuppressLint("SimpleDateFormat")
 		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMddHHmmss");
@@ -45,6 +45,7 @@ public class PaaCreator {
 			paaParams.put("orderDatetime", timeStr);
 			paaParams.put("productName", "会员升级");
 			paaParams.put("ext1", "<USER>" + userId + "</USER>");
+			paaParams.put("ext2", userId + "," + upvipId);
 			paaParams.put("payType", "33");
 			paaParams.put("cardNo", cardNo);
 		} catch (JSONException e) {
@@ -63,6 +64,7 @@ public class PaaCreator {
 				timeStr,"orderDatetime",
 				"会员升级", "productName",
 				"<USER>" + userId + "</USER>", "ext1",
+				userId + "," + upvipId, "ext2",
 				"33","payType",
 				"1234567890","key",
 		};

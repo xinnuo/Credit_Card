@@ -97,6 +97,7 @@ class BillActivity : BaseActivity() {
                                     "浦发银行" -> view.setImageResource(R.mipmap.bank14)
                                     "广发银行" -> view.setImageResource(R.mipmap.bank15)
                                     "邮政储蓄" -> view.setImageResource(R.mipmap.bank16)
+                                    "未知" -> view.setImageResource(R.mipmap.default_logo)
                                 }
                             }
 

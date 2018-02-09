@@ -311,7 +311,7 @@
                     android:layout_marginTop="@dimen/dimen_size_10"
                     android:gravity="center_vertical"
                     android:text="注："
-                    android:textColor="@color/red"/>
+                    android:textColor="@color/red" />
 
             </LinearLayout>
 
@@ -381,6 +381,34 @@
                         android:layout_height="wrap_content"
                         android:gravity="center_vertical"
                         android:text="本人+身份证+储蓄卡" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="@dimen/dimen_size_15"
+                    android:gravity="center_horizontal"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:id="@+id/real_demo"
+                        android:layout_width="wrap_content"
+                        android:layout_height="88dp"
+                        android:layout_gravity="center_vertical"
+                        android:adjustViewBounds="true"
+                        android:onClick="doClick"
+                        android:paddingBottom="@dimen/dimen_size_8"
+                        android:paddingTop="@dimen/dimen_size_8"
+                        android:src="@mipmap/real_logo" />
+
+                    <TextView
+                        style="@style/Font12_black_dark"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical"
+                        android:text="（示例图片）" />
 
                 </LinearLayout>
 
