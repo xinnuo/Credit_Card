@@ -16,8 +16,8 @@ android {
         applicationId "com.ruanmeng.credit_card"
         minSdkVersion versions.minSdkVersion
         targetSdkVersion versions.targetSdkVersion
-        versionCode 109
-        versionName "1.0.9"
+        versionCode 110
+        versionName "1.1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         multiDexEnabled true
 
@@ -114,8 +114,8 @@ dependencies {
 
     implementation 'com.github.LuckSiege.PictureSelector:picture_library:v2.1.7'
 
-    implementation ('com.qianwen:update-app-kotlin:1.1.0') {
-        exclude group: 'org.jetbrains.kotlin', module:'kotlin-stdlib-jre7'
+    implementation('com.qianwen:update-app-kotlin:1.1.0') {
+        exclude group: 'org.jetbrains.kotlin', module: 'kotlin-stdlib-jre7'
     }
 
     implementation 'net.idik:slimadapter:2.1.2'

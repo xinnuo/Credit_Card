@@ -76,6 +76,12 @@ class CreditDetailActivity : BaseActivity() {
             intent.putExtra("day", quota.toDouble().toInt().toString())
             startActivity(intent)
         }
+        credit_email.setOnClickListener {
+            val intent = Intent(baseContext, EmailActivity::class.java)
+            intent.putExtra("title", "绑定邮箱")
+            intent.putExtra("creditcardId", creditcardId)
+            startActivity(intent)
+        }
     }
 
     @Suppress("DEPRECATION")
@@ -253,6 +259,7 @@ class CreditDetailActivity : BaseActivity() {
                 quota = event.id
                 credit_quota.setRightString(quota + "元")
             }
+            "绑定邮箱" -> { }
         }
     }
 }

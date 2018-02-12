@@ -109,6 +109,21 @@
                 app:sRightTextMarginRight="@dimen/dimen_size_25"
                 app:sRightTextString="0元" />
 
+            <com.allen.library.SuperTextView
+                android:id="@+id/credit_email"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dimen_size_45.5"
+                app:sBottomLineMargin="10dp"
+                app:sLeftTextColor="@color/gray"
+                app:sLeftTextMarginLeft="@dimen/dimen_size_10"
+                app:sLeftTextString="绑定邮箱"
+                app:sLineShow="bottom"
+                app:sRightIconMarginRight="@dimen/dimen_size_10"
+                app:sRightIconRes="@mipmap/arrow_right"
+                app:sRightIconSize="13dp"
+                app:sRightTextColor="@color/gray"
+                app:sRightTextMarginRight="@dimen/dimen_size_25"
+                app:sRightTextString="未绑定" />
 
             <com.allen.library.SuperTextView
                 android:id="@+id/credit_yi"

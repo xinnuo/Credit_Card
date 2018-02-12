@@ -154,7 +154,9 @@
         <activity
             android:name=".OnlineCardActivity"
             android:screenOrientation="portrait" />
-
+        <activity
+            android:name=".EmailActivity"
+            android:screenOrientation="portrait" />
 
         <!-- 融云即时通讯 start -->
         <!-- 会话列表 -->
