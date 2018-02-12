@@ -31,6 +31,7 @@ class CreditDetailActivity : BaseActivity() {
     private var billDay = ""
     private var repaymentDay = ""
     private var quota = ""
+    private var mailId = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -70,6 +71,8 @@ class CreditDetailActivity : BaseActivity() {
             startActivity(intent)
         }
         credit_quota.setOnClickListener {
+            if (creditcardId.isEmpty()) return@setOnClickListener
+
             val intent = Intent(baseContext, CreditModifyActivity::class.java)
             intent.putExtra("title", "修改额度")
             intent.putExtra("creditcardId", creditcardId)
@@ -77,9 +80,12 @@ class CreditDetailActivity : BaseActivity() {
             startActivity(intent)
         }
         credit_email.setOnClickListener {
+            if (creditcardId.isEmpty()) return@setOnClickListener
+
             val intent = Intent(baseContext, EmailActivity::class.java)
-            intent.putExtra("title", "绑定邮箱")
+            intent.putExtra("title", if (mailId.isEmpty()) "绑定邮箱" else "更换邮箱")
             intent.putExtra("creditcardId", creditcardId)
+            intent.putExtra("mailId", mailId)
             startActivity(intent)
         }
     }
@@ -193,6 +199,7 @@ class CreditDetailActivity : BaseActivity() {
                         bank = obj.getString("bank")
                         billDay = obj.getString("billDay")
                         repaymentDay = obj.getString("repaymentDay")
+                        mailId = if(!obj.isNull("mailId")) obj.getString("mailId") else ""
 
                         val list_bank = resources.getStringArray(R.array.bank_credit).asList()
                         if (!list_bank.contains(bank)) {
@@ -224,6 +231,9 @@ class CreditDetailActivity : BaseActivity() {
                         credit_tail.text = "尾号${creditcard.substring(creditcard.length - 4)}"
                         credit_bill.setRightString(billDay + "日")
                         credit_pay.setRightString(repaymentDay + "日")
+
+                        val mailUser = if(!obj.isNull("mailUser")) obj.getString("mailUser") else ""
+                        credit_email.setRightString(if(mailUser.isNotEmpty()) mailUser else "未绑定")
 
                         if (!obj.isNull("paySum")) {
                             val paySum = DecimalFormat("########0.00####").format(obj.getString("paySum").toDouble())
@@ -259,7 +269,8 @@ class CreditDetailActivity : BaseActivity() {
                 quota = event.id
                 credit_quota.setRightString(quota + "元")
             }
-            "绑定邮箱" -> { }
+            "绑定邮箱" -> getData()
+            "更换邮箱" -> credit_email.setRightString(event.id)
         }
     }
 }

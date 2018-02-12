@@ -76,6 +76,19 @@
 
     </LinearLayout>
 
+    <TextView
+        android:id="@+id/card_hint"
+        style="@style/Font12_black"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/dimen_size_10"
+        android:layout_marginRight="@dimen/dimen_size_10"
+        android:layout_marginTop="@dimen/dimen_size_5"
+        android:lineSpacingExtra="@dimen/dimen_size_3"
+        android:text="@string/hint_email"
+        android:textColor="@color/red" />
+
+
     <Button
         android:id="@+id/email_sure"
         style="@style/Font15_white"
