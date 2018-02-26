@@ -93,6 +93,16 @@
 
         <!-- 此部分代码需要移植到您的 app 下的 manifest，并且 authorities 指定您的包名。例如：com.android.FileProvider -->
         <!-- 否则使用拍照功能时，会崩溃 -->
+        <!-- Android 7.0 应用间共享文件 -->
+        <provider
+            android:name="io.rong.imkit.RongCloudFileProvider"
+            android:authorities="${applicationId}.FileProvider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/rc_file_path" />
+        </provider>
         <!--<provider-->
         <!--android:name="android.support.v4.content.FileProvider"-->
         <!--android:authorities="包名.FileProvider"-->
