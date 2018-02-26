@@ -68,8 +68,6 @@ class GuideActivity : BaseActivity() {
                 })
                 .start()
 
-        guide_in.setOnClickListener { quitGuide() }
-
         timer = object : CountDownTimer(4000, 1000) {
 
             @SuppressLint("SetTextI18n")
@@ -78,6 +76,11 @@ class GuideActivity : BaseActivity() {
             }
 
             override fun onFinish() = quitGuide()
+        }
+
+        guide_in.setOnClickListener {
+            timer.cancel()
+            quitGuide()
         }
     }
 
