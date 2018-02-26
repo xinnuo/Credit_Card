@@ -218,7 +218,7 @@ class MainFirstFragment : BaseFragment() {
                 val count = event.count.toInt()
                 main_hint.visibility = if (count > 0) View.VISIBLE else View.INVISIBLE
             }
-            "提现" -> {
+            "提现", "手动计划" -> {
                 swipe_refresh.isRefreshing = true
                 getData()
             }

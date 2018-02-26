@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical">
 
     <com.allen.library.SuperTextView
@@ -118,5 +118,16 @@
         app:sRightIconSize="@dimen/dimen_size_13"
         app:sRightTextColor="@color/blue"
         app:sRightTextMarginRight="@dimen/dimen_size_10" />
+
+    <Button
+        android:id="@+id/bill_retry"
+        style="@style/Font15_white"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/btn_height"
+        android:layout_margin="@dimen/dimen_size_20"
+        android:background="@drawable/rec_bg_blue"
+        android:onClick="doClick"
+        android:text="重新执行计划"
+        android:visibility="gone" />
 
 </LinearLayout>

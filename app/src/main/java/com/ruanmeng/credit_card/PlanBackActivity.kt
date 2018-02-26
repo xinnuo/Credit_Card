@@ -493,7 +493,7 @@ class PlanBackActivity : BaseActivity() {
             value < 1000 -> value / value_count + value * 0.1
             else -> value / value_count + 100
         }
-        val value_fee = (value + value_count * 2) * mRate
+        val value_fee = (value + value_count * 2) * mRate + value_count
         val value_bond = value_max + value_fee
 
         plan_save.text = "￥${String.format("%.2f", value_bond)}"

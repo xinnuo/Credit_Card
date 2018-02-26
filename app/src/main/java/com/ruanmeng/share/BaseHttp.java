@@ -80,4 +80,5 @@ public class BaseHttp {
     public static String base_rate_data = baseIp + "/base_rate_data.rm";             //基本费率√
     public static String mail_add_sub = baseIp + "/mail_add_sub.rm";                 //绑定邮箱√
     public static String mail_update_sub = baseIp + "/mail_update_sub.rm";           //更新邮箱√
+    public static String hand_exec_plan = baseIp + "/hand_exec_plan.rm";             //手动执行计划√
 }
