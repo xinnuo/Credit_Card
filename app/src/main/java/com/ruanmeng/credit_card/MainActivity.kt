@@ -131,7 +131,7 @@ class MainActivity : BaseActivity() {
             }
             R.id.first_new -> {
                 val intent = Intent(baseContext, WebActivity::class.java)
-                intent.putExtra("title", "信用卡攻略")
+                intent.putExtra("title", "新手攻略")
                 startActivity(intent)
             }
             R.id.first_safe -> {

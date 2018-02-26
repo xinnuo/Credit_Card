@@ -25,10 +25,10 @@ class WebActivity : BaseActivity() {
         init_title()
 
         when (intent.getStringExtra("title")) {
-            "信用卡攻略" -> {
+            "新手攻略" -> {
                 OkGo.post<String>(BaseHttp.help_center)
                         .tag(this@WebActivity)
-                        .params("htmlKey", "xykgl")
+                        .params("htmlKey", "xsgl")
                         .execute(object : StringDialogCallback(baseContext) {
 
                             override fun onSuccessResponse(response: Response<String>, msg: String, msgCode: String) {
@@ -44,8 +44,7 @@ class WebActivity : BaseActivity() {
                                         "</style>\n" +
                                         "<body style=\"padding:0; margin:0; \">" +
                                         "<div class=\"con\">" +
-                                        // JSONObject(response.body()).getString("help") +
-                                        "该功能正在开发中" +
+                                        JSONObject(response.body()).getString("help") +
                                         "</div>" +
                                         "</body>" +
                                         "</html>"
@@ -273,5 +272,20 @@ class WebActivity : BaseActivity() {
             }
         }
         super.onBackPressed()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        wv_web.onResume()
+    }
+
+    override fun onPause() {
+        super.onPause()
+        wv_web.onPause()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        wv_web.destroy()
     }
 }

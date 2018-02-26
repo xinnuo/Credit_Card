@@ -60,8 +60,8 @@ class AgencyFragment : BaseFragment() {
                             .with<RoundedImageView>(R.id.item_agency_img) { view ->
                                 GlideApp.with(activity)
                                         .load(BaseHttp.baseImg + data.userHead)
-                                        .placeholder(R.mipmap.default_user) // 等待时的图片
-                                        .error(R.mipmap.default_user)       // 加载失败的图片
+                                        .placeholder(R.mipmap.ic_launcher_round) // 等待时的图片
+                                        .error(R.mipmap.ic_launcher_round)       // 加载失败的图片
                                         .centerCrop()
                                         .dontAnimate()
                                         .into(view)

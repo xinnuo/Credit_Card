@@ -76,8 +76,8 @@ class AgencyActivity : BaseActivity() {
 
                         GlideApp.with(baseContext)
                                 .load(BaseHttp.baseImg + obj.getString("userHead"))
-                                .placeholder(R.mipmap.default_user)
-                                .error(R.mipmap.default_user)
+                                .placeholder(R.mipmap.ic_launcher_round)
+                                .error(R.mipmap.ic_launcher_round)
                                 .dontAnimate()
                                 .into(agency_img)
                     }

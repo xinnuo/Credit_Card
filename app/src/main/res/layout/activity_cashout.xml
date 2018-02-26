@@ -141,6 +141,18 @@
         android:layout_height="@dimen/divider_height"
         android:background="@color/divider" />
 
+    <TextView
+        android:id="@+id/gather_hint"
+        style="@style/Font12_black"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/dimen_size_10"
+        android:layout_marginRight="@dimen/dimen_size_10"
+        android:layout_marginTop="@dimen/dimen_size_5"
+        android:lineSpacingExtra="@dimen/dimen_size_3"
+        android:text="注：每笔提现金额需扣除6%的税和1元的手续费。"
+        android:textColor="@color/red" />
+
     <Button
         android:id="@+id/cashout_ok"
         style="@style/Font15_white"

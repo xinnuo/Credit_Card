@@ -17,7 +17,7 @@
         android:layout_marginTop="@dimen/dimen_size_30"
         android:gravity="center"
         android:lineSpacingExtra="@dimen/dimen_size_3"
-        android:text="将下方软件下载二维码分享给朋友，并注册使用，即可获得相应奖励" />
+        android:text="@string/hint_share" />
 
     <LinearLayout
         android:id="@+id/share_fl"
@@ -78,5 +78,13 @@
             tools:ignore="ContentDescription" />
 
     </LinearLayout>
+
+    <TextView
+        style="@style/Font12_black"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dimen_size_10"
+        android:text="@string/hint_save"
+        android:textColor="@color/red" />
 
 </LinearLayout>

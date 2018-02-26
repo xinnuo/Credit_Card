@@ -59,10 +59,16 @@ class ShareActivity : BaseActivity() {
         share_hint.text = "我是${getString("nickName")}"
         GlideApp.with(baseContext)
                 .load(BaseHttp.baseImg + getString("userhead"))
-                .placeholder(R.mipmap.default_user)
-                .error(R.mipmap.default_user)
+                .placeholder(R.mipmap.ic_launcher_round)
+                .error(R.mipmap.ic_launcher_round)
                 .dontAnimate()
                 .into(share_img)
+
+        share_qrcode.setOnLongClickListener {
+            if (mSaveFile == null) saveFile(Tools.getViewBitmap(share_fl))
+            else showText("分享信息已保存到相册")
+            return@setOnLongClickListener true
+        }
     }
 
     @SuppressLint("InflateParams")
@@ -122,7 +128,7 @@ class ShareActivity : BaseActivity() {
                 tv_cancel.setOnClickListener { dialog.dismiss() }
 
                 if (mSaveFile == null) saveFile(Tools.getViewBitmap(share_fl))
-                else showText("图片保存至：${mSaveFile!!.absoluteFile}")
+                else showText("分享信息已保存到相册")
             }
         }
     }
@@ -153,7 +159,8 @@ class ShareActivity : BaseActivity() {
             out.flush()
             out.close()
 
-            showText("图片保存至：${mSaveFile!!.absoluteFile}")
+            // showText("图片保存至：${mSaveFile!!.absoluteFile}")
+            showText("分享信息已保存到相册")
 
             // 保存图片到相册显示的方法（没有则只有重启后才有）
             val intent = Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE)

@@ -120,8 +120,8 @@ class MainThirdFragment : BaseFragment() {
                         if (third_img.getTag(R.id.third_img) == null) {
                             GlideApp.with(activity)
                                     .load(BaseHttp.baseImg + getString("userhead"))
-                                    .placeholder(R.mipmap.default_user)
-                                    .error(R.mipmap.default_user)
+                                    .placeholder(R.mipmap.ic_launcher_round)
+                                    .error(R.mipmap.ic_launcher_round)
                                     .dontAnimate()
                                     .into(third_img)
 
@@ -130,8 +130,8 @@ class MainThirdFragment : BaseFragment() {
                             if (third_img.getTag(R.id.third_img) != getString("userhead")) {
                                 GlideApp.with(activity)
                                         .load(BaseHttp.baseImg + getString("userhead"))
-                                        .placeholder(R.mipmap.default_user)
-                                        .error(R.mipmap.default_user)
+                                        .placeholder(R.mipmap.ic_launcher_round)
+                                        .error(R.mipmap.ic_launcher_round)
                                         .dontAnimate()
                                         .into(third_img)
 
