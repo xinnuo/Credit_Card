@@ -1,1 +1,1 @@
-include ':app', ':okgo-lib', ':MNProgressHUD', ':RongCloudIMkit', ':JPush', ':UmengSocial'
+include ':app', ':okgo-lib', ':MNProgressHUD', ':RongCloudIMkit', ':JPush'
