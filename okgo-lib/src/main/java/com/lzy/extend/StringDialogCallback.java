@@ -78,13 +78,14 @@ public abstract class StringDialogCallback extends StringCallback {
                 onSuccessResponse(response, msg, msgCode);
             }
         } catch (JSONException e) {
-                e.printStackTrace();
+            e.printStackTrace();
         }
     }
 
     public abstract void onSuccessResponse(Response<String> response, String msg, String msgCode);
 
-    public void onSuccessResponseErrorCode(Response<String> response, String msg, String msgCode) { }
+    public void onSuccessResponseErrorCode(Response<String> response, String msg, String msgCode) {
+    }
 
     /**
      * 当缓存读取成功后，回调该方法
