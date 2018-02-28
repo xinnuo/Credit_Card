@@ -231,14 +231,19 @@
         <!-- JPush end -->
 
 
-        <!-- 微信分享 start -->
+        <!-- 友盟分享 start -->
+        <!-- 微信分享 -->
         <activity
             android:name=".wxapi.WXEntryActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:exported="true"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Translucent.NoTitleBar" />
-        <!-- 微信分享 end -->
+        <!-- 友盟 appkey -->
+        <meta-data
+            android:name="UMENG_APPKEY"
+            android:value="5a406400f43e48303000015e" />
+        <!-- 友盟分享 end -->
 
 
         <!-- 通联支付 共享文件 -->
