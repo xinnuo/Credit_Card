@@ -16,6 +16,7 @@
 
 package com.ruanmeng.utils;
 
+import android.annotation.SuppressLint;
 import android.os.Handler;
 import android.os.Message;
 import android.os.SystemClock;
@@ -115,6 +116,7 @@ public abstract class CountDownTimer {
 
 
     // handles counting down
+    @SuppressLint("HandlerLeak")
     private Handler mHandler = new Handler() {
 
         @Override

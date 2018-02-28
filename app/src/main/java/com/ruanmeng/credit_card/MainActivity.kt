@@ -306,6 +306,9 @@ class MainActivity : BaseActivity() {
                 val version_new = obj.optString("versionNo").replace(".", "").toInt()
                 val version_old = Tools.getVersion(baseContext).replace(".", "").toInt()
 
+                if (version_new < 111)
+                    EventBus.getDefault().post(CountMessageEvent("在线办卡", ""))
+
                 UpdateAppBean()
                         //（必须）是否更新Yes,No
                         .setUpdate(if (version_new > version_old) "Yes" else "No")

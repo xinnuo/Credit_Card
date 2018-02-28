@@ -26,6 +26,7 @@ import com.ruanmeng.share.BaseHttp
 import com.ruanmeng.utils.BankCardUtil
 import com.ruanmeng.utils.NumberHelper
 import com.ruanmeng.view.SwitcherTextView
+import kotlinx.android.synthetic.main.header_first.*
 import kotlinx.android.synthetic.main.layout_list.*
 import kotlinx.android.synthetic.main.layout_title_main.*
 import net.idik.lib.slimadapter.SlimAdapter
@@ -221,6 +222,10 @@ class MainFirstFragment : BaseFragment() {
             "提现", "手动计划" -> {
                 swipe_refresh.isRefreshing = true
                 getData()
+            }
+            "在线办卡" -> {
+                first_card_txt.text = "在线咨询"
+                first_card.isClickable = false
             }
         }
     }

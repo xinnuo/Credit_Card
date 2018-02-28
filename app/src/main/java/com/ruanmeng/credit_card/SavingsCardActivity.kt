@@ -26,6 +26,9 @@ import java.util.*
 
 class SavingsCardActivity : BaseActivity() {
 
+    private var time_space: Int = 60
+    private lateinit var thread_sure: Runnable
+
     private var time_count: Int = 180
     private lateinit var thread: Runnable
     private var YZM: String = ""
@@ -44,6 +47,7 @@ class SavingsCardActivity : BaseActivity() {
         EventBus.getDefault().register(this@SavingsCardActivity)
     }
 
+    @SuppressLint("SetTextI18n")
     override fun init_title() {
         super.init_title()
         card_sure.setBackgroundResource(R.drawable.rec_bg_d0d0d0)
@@ -59,6 +63,18 @@ class SavingsCardActivity : BaseActivity() {
 
         saving_name.text = getString("real_name")
         saving_num.text = CommonUtil.idCardReplaceWithStar(getString("real_IDCard"))
+
+        thread_sure = Runnable {
+            if (time_space > 0) {
+                card_sure.text = "${time_space}秒后重新添加"
+                card_sure.postDelayed(thread_sure, 1000)
+                time_space--
+            } else {
+                card_sure.text = "重新添加"
+                card_sure.isClickable = true
+                time_space = 60
+            }
+        }
     }
 
     @SuppressLint("SetTextI18n")
@@ -187,6 +203,10 @@ class SavingsCardActivity : BaseActivity() {
                     toast("验证码错误，请重新输入")
                     return
                 }*/
+
+                card_sure.isClickable = false
+                time_space = 60
+                card_sure.post(thread_sure)
 
                 OkGo.post<String>(BaseHttp.depositcard_add_sub)
                         .tag(this@SavingsCardActivity)
