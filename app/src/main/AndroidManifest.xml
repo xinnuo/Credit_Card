@@ -202,6 +202,7 @@
         <!-- 融云即时通讯 end -->
 
 
+        <!-- JPush start -->
         <!-- JPush 用户自定义的广播接收器 -->
         <receiver
             android:name="com.ruanmeng.receiver.JPushReceiver"
@@ -228,6 +229,10 @@
                 <category android:name="${applicationId}" />
             </intent-filter>
         </receiver>
+        <!-- 来自开发者平台取得的AppKey -->
+        <meta-data
+            android:name="JPUSH_APPKEY"
+            android:value="7abcaa5f799f1f92333406d8" />
         <!-- JPush end -->
 
 

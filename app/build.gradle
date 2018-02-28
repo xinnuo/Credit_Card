@@ -96,27 +96,32 @@ dependencies {
 
     implementation project(':okgo-lib')
     implementation project(':RongCloudIMkit')
-    implementation project(':JPush')
 
     implementation(name: 'HMS-SDK-2.4.0.300', ext: 'aar')
     implementation(name: 'FlycoDialog-1.3.2', ext: 'aar')
     implementation(name: 'GridPasswordView-0.3', ext: 'aar')
+    implementation(name: 'JPush-3.1.1', ext: 'aar')
     implementation(name: 'RollViewPager', ext: 'aar')
     implementation(name: 'SuperText-1.1.1', ext: 'aar')
     implementation(name: 'UmengSocial-6.4.6', ext: 'aar')
 
+    //图片浏览
     implementation(name: 'MNImageBrowser-1.0.3', ext: 'aar')
     implementation 'com.github.chrisbanes:PhotoView:2.0.0'
 
+    //图片加载
     implementation 'com.github.bumptech.glide:glide:' + versions.glideVersion
     kapt 'com.github.bumptech.glide:compiler:' + versions.glideVersion
 
+    //二维码扫描和生成
     implementation 'com.google.zxing:core:3.3.1'
     implementation 'cn.bingoogolapple:bga-qrcodecore:1.1.9@aar'
     implementation 'cn.bingoogolapple:bga-zxing:1.1.9@aar'
 
+    //图片选择
     implementation 'com.github.LuckSiege.PictureSelector:picture_library:v2.1.7'
 
+    //版本更新
     implementation('com.qianwen:update-app-kotlin:1.1.0') {
         exclude group: 'org.jetbrains.kotlin', module: 'kotlin-stdlib-jre7'
     }

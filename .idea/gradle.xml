@@ -8,7 +8,6 @@
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$" />
-            <option value="$PROJECT_DIR$/JPush" />
             <option value="$PROJECT_DIR$/MNProgressHUD" />
             <option value="$PROJECT_DIR$/RongCloudIMkit" />
             <option value="$PROJECT_DIR$/app" />
