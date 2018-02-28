@@ -23,21 +23,6 @@
         app:sTopLineMargin="0dp" />
 
     <com.allen.library.SuperTextView
-        android:id="@+id/setting_version"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/dimen_size_45.5"
-        app:sBottomLineMargin="10dp"
-        app:sLeftTextColor="@color/black_dark"
-        app:sLeftTextMarginLeft="@dimen/dimen_size_10"
-        app:sLeftTextString="版本信息"
-        app:sLineShow="bottom"
-        app:sRightIconMarginRight="@dimen/dimen_size_10"
-        app:sRightIconSize="@dimen/dimen_size_13"
-        app:sRightTextColor="@color/light"
-        app:sRightTextMarginRight="@dimen/dimen_size_20"
-        app:sRightTextString="v1.0.0" />
-
-    <com.allen.library.SuperTextView
         android:id="@+id/setting_feedback"
         android:layout_width="match_parent"
         android:layout_height="@dimen/dimen_size_45.5"
@@ -51,6 +36,21 @@
         app:sRightIconSize="@dimen/dimen_size_13"
         app:sRightTextColor="@color/light"
         app:sRightTextMarginRight="@dimen/dimen_size_30" />
+
+    <com.allen.library.SuperTextView
+        android:id="@+id/setting_version"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimen_size_45.5"
+        app:sBottomLineMargin="10dp"
+        app:sLeftTextColor="@color/black_dark"
+        app:sLeftTextMarginLeft="@dimen/dimen_size_10"
+        app:sLeftTextString="版本信息"
+        app:sLineShow="bottom"
+        app:sRightIconMarginRight="@dimen/dimen_size_10"
+        app:sRightIconSize="@dimen/dimen_size_13"
+        app:sRightTextColor="@color/light"
+        app:sRightTextMarginRight="@dimen/dimen_size_20"
+        app:sRightTextString="v1.0.0" />
 
     <com.allen.library.SuperTextView
         android:id="@+id/setting_deal"
