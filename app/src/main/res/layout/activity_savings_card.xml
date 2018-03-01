@@ -21,7 +21,7 @@
 
             <TextView
                 style="@style/Font14_gray"
-                android:layout_width="70dp"
+                android:layout_width="75dp"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/dimen_size_10"
                 android:text="姓名" />
@@ -49,7 +49,7 @@
 
             <TextView
                 style="@style/Font14_gray"
-                android:layout_width="70dp"
+                android:layout_width="75dp"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/dimen_size_10"
                 android:text="身份证" />
@@ -78,7 +78,7 @@
 
             <TextView
                 style="@style/Font14_gray"
-                android:layout_width="70dp"
+                android:layout_width="75dp"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/dimen_size_10"
                 android:text="储蓄卡号" />
@@ -125,7 +125,7 @@
 
             <TextView
                 style="@style/Font14_gray"
-                android:layout_width="70dp"
+                android:layout_width="75dp"
                 android:layout_height="wrap_content"
                 android:text="所属银行" />
 
@@ -159,7 +159,7 @@
 
             <TextView
                 style="@style/Font14_gray"
-                android:layout_width="70dp"
+                android:layout_width="75dp"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/dimen_size_10"
                 android:text="开户行" />
@@ -194,7 +194,7 @@
 
             <TextView
                 style="@style/Font14_gray"
-                android:layout_width="70dp"
+                android:layout_width="75dp"
                 android:layout_height="wrap_content"
                 android:text="归属地" />
 
@@ -228,7 +228,7 @@
 
             <TextView
                 style="@style/Font14_gray"
-                android:layout_width="70dp"
+                android:layout_width="75dp"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/dimen_size_10"
                 android:text="手机号" />
@@ -262,7 +262,7 @@
 
             <TextView
                 style="@style/Font14_gray"
-                android:layout_width="70dp"
+                android:layout_width="75dp"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/dimen_size_10"
                 android:text="验证码" />

@@ -70,7 +70,7 @@
 
             <TextView
                 style="@style/Font14_black_dark"
-                android:layout_width="70dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="还款总金额" />
 
@@ -107,7 +107,7 @@
 
             <TextView
                 style="@style/Font14_black_dark"
-                android:layout_width="70dp"
+                android:layout_width="wrap_content"
                 android:layout_height="@dimen/line_height"
                 android:gravity="center_vertical"
                 android:text="还款日期" />
@@ -148,7 +148,7 @@
 
             <TextView
                 style="@style/Font14_black_dark"
-                android:layout_width="70dp"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="还款笔数" />
@@ -203,7 +203,7 @@
 
             <TextView
                 style="@style/Font14_black_dark"
-                android:layout_width="70dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="还款保证金" />
 
@@ -237,7 +237,7 @@
 
             <TextView
                 style="@style/Font14_black_dark"
-                android:layout_width="70dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="还款手续费" />
 
