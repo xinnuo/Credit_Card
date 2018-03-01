@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -85,7 +86,7 @@
                 android:inputType="numberDecimal"
                 android:maxLength="9"
                 android:paddingLeft="@dimen/dimen_size_10"
-                android:paddingRight="@dimen/dimen_size_10"/>
+                android:paddingRight="@dimen/dimen_size_10" />
 
         </LinearLayout>
 
@@ -95,6 +96,117 @@
             android:layout_marginLeft="@dimen/dimen_size_10"
             android:layout_marginRight="@dimen/dimen_size_10"
             android:background="@color/divider" />
+
+        <net.cachapa.expandablelayout.ExpandableLayout
+            android:id="@+id/plan_num_11"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:el_duration="300"
+            app:el_expanded="true">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:onClick="doClick"
+                    android:paddingLeft="@dimen/dimen_size_10"
+                    android:paddingRight="@dimen/dimen_size_10">
+
+                    <TextView
+                        style="@style/Font14_black_dark"
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/line_height"
+                        android:layout_marginRight="@dimen/dimen_size_15"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical"
+                        android:text="还款期数" />
+
+                    <RadioGroup
+                        android:id="@+id/plan_group"
+                        android:layout_width="wrap_content"
+                        android:layout_height="@dimen/dimen_size_30"
+                        android:layout_marginRight="@dimen/dimen_size_10"
+                        android:padding="@dimen/divider_height"
+                        android:background="@drawable/rec_bg_trans_stroke_lighter_radius_0"
+                        android:orientation="horizontal">
+
+                        <RadioButton
+                            android:id="@+id/plan_check1"
+                            android:layout_width="@dimen/dimen_size_50"
+                            android:layout_height="match_parent"
+                            android:background="@drawable/rb_plan_selector"
+                            android:button="@null"
+                            android:gravity="center"
+                            android:text="6"
+                            android:textColor="@color/rb_plan_selector_color" />
+
+                        <View
+                            android:id="@+id/plan_divider1"
+                            android:layout_width="@dimen/divider_height"
+                            android:layout_height="match_parent"
+                            android:background="@color/lighter" />
+
+                        <RadioButton
+                            android:id="@+id/plan_check2"
+                            android:layout_width="@dimen/dimen_size_50"
+                            android:layout_height="match_parent"
+                            android:background="@drawable/rb_plan_selector"
+                            android:button="@null"
+                            android:gravity="center"
+                            android:text="12"
+                            android:textColor="@color/rb_plan_selector_color" />
+
+                        <View
+                            android:id="@+id/plan_divider2"
+                            android:layout_width="@dimen/divider_height"
+                            android:layout_height="match_parent"
+                            android:background="@color/lighter" />
+
+                        <RadioButton
+                            android:id="@+id/plan_check3"
+                            android:layout_width="@dimen/dimen_size_50"
+                            android:layout_height="match_parent"
+                            android:background="@drawable/rb_plan_selector"
+                            android:button="@null"
+                            android:gravity="center"
+                            android:text="18"
+                            android:textColor="@color/rb_plan_selector_color" />
+
+                        <View
+                            android:id="@+id/plan_divider3"
+                            android:layout_width="@dimen/divider_height"
+                            android:layout_height="match_parent"
+                            android:background="@color/lighter" />
+
+                        <RadioButton
+                            android:id="@+id/plan_check4"
+                            android:layout_width="@dimen/dimen_size_50"
+                            android:layout_height="match_parent"
+                            android:background="@drawable/rb_plan_selector"
+                            android:button="@null"
+                            android:gravity="center"
+                            android:text="24"
+                            android:textColor="@color/rb_plan_selector_color" />
+
+                    </RadioGroup>
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/divider_height"
+                    android:layout_marginLeft="@dimen/dimen_size_10"
+                    android:layout_marginRight="@dimen/dimen_size_10"
+                    android:background="@color/divider" />
+
+            </LinearLayout>
+
+        </net.cachapa.expandablelayout.ExpandableLayout>
 
         <LinearLayout
             android:id="@+id/plan_date_11"
@@ -120,9 +232,9 @@
                 android:layout_marginRight="@dimen/dimen_size_5"
                 android:layout_weight="1"
                 android:gravity="end"
-                android:paddingTop="@dimen/dimen_size_10"
                 android:paddingBottom="@dimen/dimen_size_10"
-                android:paddingLeft="@dimen/dimen_size_10" />
+                android:paddingLeft="@dimen/dimen_size_10"
+                android:paddingTop="@dimen/dimen_size_10" />
 
             <ImageView
                 android:layout_width="13dp"
@@ -214,8 +326,8 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="end"
-                android:text="￥0.00"
-                android:paddingLeft="@dimen/dimen_size_10" />
+                android:paddingLeft="@dimen/dimen_size_10"
+                android:text="￥0.00" />
 
         </LinearLayout>
 
@@ -248,8 +360,8 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="end"
-                android:text="￥0.00"
-                android:paddingLeft="@dimen/dimen_size_10" />
+                android:paddingLeft="@dimen/dimen_size_10"
+                android:text="￥0.00" />
 
         </LinearLayout>
 
@@ -290,10 +402,10 @@
         style="@style/Font12_black"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/hint_repayment"
         android:gravity="bottom"
-        android:padding="@dimen/dimen_size_15"
         android:lineSpacingExtra="@dimen/dimen_size_3"
+        android:padding="@dimen/dimen_size_15"
+        android:text="@string/hint_repayment"
         android:textColor="@color/red" />
 
 </LinearLayout>

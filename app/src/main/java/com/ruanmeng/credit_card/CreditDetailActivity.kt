@@ -11,6 +11,7 @@ import com.lzy.okgo.model.Response
 import com.ruanmeng.base.BaseActivity
 import com.ruanmeng.base.getString
 import com.ruanmeng.base.toast
+import com.ruanmeng.model.CommonData
 import com.ruanmeng.model.RefreshMessageEvent
 import com.ruanmeng.share.BaseHttp
 import com.ruanmeng.utils.ActivityStack
@@ -32,6 +33,7 @@ class CreditDetailActivity : BaseActivity() {
     private var repaymentDay = ""
     private var quota = ""
     private var mailId = ""
+    private var list_date = ArrayList<String>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -170,6 +172,7 @@ class CreditDetailActivity : BaseActivity() {
                             intent.putExtra("creditcardId", creditcardId)
                             intent.putExtra("billDay", billDay)
                             intent.putExtra("repaymentDay", repaymentDay)
+                            intent.putExtra("days", list_date)
                             startActivity(intent)
                         }
                     }
@@ -244,6 +247,12 @@ class CreditDetailActivity : BaseActivity() {
                             val nopaySum = DecimalFormat("########0.00####").format(obj.getString("nopaySum").toDouble())
                             credit_wei.setRightString(NumberHelper.fmtMicrometer(nopaySum) + "元")
                         }
+
+                        list_date.clear()
+                        if (obj.optString("days").isNotEmpty()) {
+                            val days = obj.getJSONArray("days")
+                            (0 until days.length() - 1).mapTo(list_date) { days.getString(it) }
+                        }
                     }
 
                 })
@@ -257,19 +266,11 @@ class CreditDetailActivity : BaseActivity() {
     @Subscribe
     fun onMessageEvent(event: RefreshMessageEvent) {
         when (event.name) {
-            "修改账单日" -> {
-                billDay = event.id
-                credit_bill.setRightString(billDay + "日")
-            }
-            "修改还款日" -> {
-                repaymentDay = event.id
-                credit_pay.setRightString(repaymentDay + "日")
-            }
             "修改额度" -> {
                 quota = event.id
                 credit_quota.setRightString(quota + "元")
             }
-            "绑定邮箱" -> getData()
+            "绑定邮箱", "修改账单日", "修改还款日" -> getData()
             "更换邮箱" -> credit_email.setRightString(event.id)
         }
     }

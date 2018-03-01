@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.support.design.widget.BottomSheetDialog
+import android.support.v7.app.AlertDialog
 import android.support.v7.widget.GridLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.text.Editable
@@ -39,6 +40,7 @@ class PlanBackActivity : BaseActivity() {
     private val list = ArrayList<Any>()
     private val list_title = ArrayList<Any>()
     private var list_item = ArrayList<Any>()
+    private var list_days = ArrayList<String>()
     private var billDay = 0
     private var repaymentDay = 0
     private var mRate = 0.0
@@ -57,6 +59,8 @@ class PlanBackActivity : BaseActivity() {
 
         billDay = intent.getStringExtra("billDay").toInt()
         repaymentDay = intent.getStringExtra("repaymentDay").toInt()
+        @Suppress("UNCHECKED_CAST")
+        list_days = intent.getSerializableExtra("days") as ArrayList<String>
 
         plan_submit.setBackgroundResource(R.drawable.rec_bg_d0d0d0)
         plan_submit.isClickable = false
@@ -75,6 +79,46 @@ class PlanBackActivity : BaseActivity() {
         })
 
         thread { list_item.addAll(getDateList()) }
+
+        if (list_days.size < 24) {
+            plan_check4.visibility = View.GONE
+            plan_divider3.visibility = View.GONE
+        }
+        if (list_days.size < 18) {
+            plan_check3.visibility = View.GONE
+            plan_divider2.visibility = View.GONE
+        }
+        if (list_days.size < 12) {
+            plan_check2.visibility = View.GONE
+            plan_divider1.visibility = View.GONE
+        }
+        if (list_days.size < 6) plan_num_11.collapse()
+
+        plan_group.setOnCheckedChangeListener { _, checkedId ->
+            if (!plan_check1.isChecked
+                    && !plan_check2.isChecked
+                    && !plan_check3.isChecked
+                    && !plan_check4.isChecked) return@setOnCheckedChangeListener
+
+            val count = when (checkedId) {
+                R.id.plan_check1 -> 6
+                R.id.plan_check2 -> 12
+                R.id.plan_check3 -> 18
+                R.id.plan_check4 -> 24
+                else -> -1
+            }
+
+            list_title.clear()
+            list.clear()
+
+            (0 until count).mapTo(list) { list_days[it] }
+            (0 until count).mapTo(list_title) { TimeHelper.getInstance().getDayOfDate(list_days[it]) }
+            plan_date.text = list_title.toString()
+            if (list.isNotEmpty()) {
+                plan_count.setText((list.size).toString())
+                plan_count.setSelection(plan_count.text.length)
+            }
+        }
     }
 
     @Suppress("DEPRECATION")
@@ -128,38 +172,46 @@ class PlanBackActivity : BaseActivity() {
                     return
                 }
 
-                val repaymentDay = list.toString()
-                        .replace("[", "")
-                        .replace("]", "")
-                        .replace(" ", "")
+                AlertDialog.Builder(baseContext)
+                        .setTitle("温馨提示")
+                        .setMessage("信用卡余额应不低于${plan_save.text}元(保证金)，确定要提交吗？")
+                        .setPositiveButton("确定") { _, _ ->
+                            val repaymentDay = list.toString()
+                                    .replace("[", "")
+                                    .replace("]", "")
+                                    .replace(" ", "")
 
-                OkGo.post<CommonModel>(BaseHttp.add_repaymentplan)
-                        .tag(this@PlanBackActivity)
-                        .isMultipart(true)
-                        .headers("token", getString("token"))
-                        .params("creditcardId", intent.getStringExtra("creditcardId"))
-                        .params("repaymentSum", plan_total.text.toString())
-                        .params("repaymentDay", repaymentDay)
-                        .params("repaymentNum", plan_count.text.toString())
-                        .params("cardType", "1")
-                        .execute(object : JacksonDialogCallback<CommonModel>(baseContext, CommonModel::class.java) {
-                            override fun onSuccess(response: Response<CommonModel>) {
+                            OkGo.post<CommonModel>(BaseHttp.add_repaymentplan)
+                                    .tag(this@PlanBackActivity)
+                                    .isMultipart(true)
+                                    .headers("token", getString("token"))
+                                    .params("creditcardId", intent.getStringExtra("creditcardId"))
+                                    .params("repaymentSum", plan_total.text.toString())
+                                    .params("repaymentDay", repaymentDay)
+                                    .params("repaymentNum", plan_count.text.toString())
+                                    .params("cardType", "1")
+                                    .execute(object : JacksonDialogCallback<CommonModel>(baseContext, CommonModel::class.java) {
+                                        override fun onSuccess(response: Response<CommonModel>) {
 
-                                toast(response.body().msg)
-                                if (response.body().msgcode == "100") {
-                                    val list = ArrayList<CommonData>()
-                                    list.addItems(response.body().`object`)
-                                    val intent = Intent(baseContext, PlanPreviewActivity::class.java)
-                                    intent.putExtra("data", list)
-                                    intent.putExtra("maxSum", response.body().maxSum)
-                                    intent.putExtra("sumRateSum", response.body().sumRateSum)
-                                    startActivity(intent)
+                                            toast(response.body().msg)
+                                            if (response.body().msgcode == "100") {
+                                                val list = ArrayList<CommonData>()
+                                                list.addItems(response.body().`object`)
+                                                val intent = Intent(baseContext, PlanPreviewActivity::class.java)
+                                                intent.putExtra("data", list)
+                                                intent.putExtra("maxSum", response.body().maxSum)
+                                                intent.putExtra("sumRateSum", response.body().sumRateSum)
+                                                startActivity(intent)
 
-                                    ActivityStack.getScreenManager().popActivities(this@PlanBackActivity::class.java)
-                                }
-                            }
+                                                ActivityStack.getScreenManager().popActivities(this@PlanBackActivity::class.java)
+                                            }
+                                        }
 
-                        })
+                                    })
+                        }
+                        .setNegativeButton("取消") { _, _ -> }
+                        .create()
+                        .show()
             }
             R.id.plan_preview -> {
                 if (plan_type.text.isEmpty()) {
@@ -212,7 +264,7 @@ class PlanBackActivity : BaseActivity() {
         val recycle_list = view.findViewById(R.id.dialog_select_list) as RecyclerView
         val dialog = BottomSheetDialog(baseContext)
 
-        list_item.filter { it is CommonData && it.isChecked }.forEach {
+        list_item.filter { it is CommonData /*&& it.isChecked*/ }.forEach {
             it as CommonData
             it.isChecked = list.contains(it.content)
         }
@@ -260,6 +312,7 @@ class PlanBackActivity : BaseActivity() {
 
             list_title.clear()
             list.clear()
+            plan_group.check(-1)
             list_item.filter { it is CommonData && it.isChecked }.forEach {
                 it as CommonData
                 list_title.add(it.title)
