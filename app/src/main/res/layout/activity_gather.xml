@@ -147,7 +147,7 @@
 
         <EditText
             android:id="@+id/gather_memo"
-            style="@style/Font14_black"
+            style="@style/Font15_black"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@null"
@@ -157,6 +157,7 @@
             android:paddingRight="@dimen/dimen_size_10"
             android:lineSpacingExtra="@dimen/dimen_size_3"
             android:hint="添加备注(50字以内)"
+            android:textSize="@dimen/sp_size_18"
             android:maxLength="50" />
 
     </LinearLayout>

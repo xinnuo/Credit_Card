@@ -191,6 +191,19 @@
                 android:onClick="doClick"
                 android:text="查看全部计划" />
 
+            <TextView
+                android:id="@+id/credit_check"
+                style="@style/Font15_gray"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/btn_height"
+                android:layout_marginBottom="@dimen/dimen_size_20"
+                android:layout_marginLeft="@dimen/dimen_size_20"
+                android:layout_marginRight="@dimen/dimen_size_20"
+                android:background="@drawable/rec_bg_trans_stroke_light"
+                android:gravity="center"
+                android:onClick="doClick"
+                android:text="查询电子邮箱账单" />
+
         </LinearLayout>
 
     </android.support.v4.widget.NestedScrollView>

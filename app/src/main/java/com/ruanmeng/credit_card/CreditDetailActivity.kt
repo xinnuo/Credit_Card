@@ -11,7 +11,6 @@ import com.lzy.okgo.model.Response
 import com.ruanmeng.base.BaseActivity
 import com.ruanmeng.base.getString
 import com.ruanmeng.base.toast
-import com.ruanmeng.model.CommonData
 import com.ruanmeng.model.RefreshMessageEvent
 import com.ruanmeng.share.BaseHttp
 import com.ruanmeng.utils.ActivityStack
@@ -89,6 +88,9 @@ class CreditDetailActivity : BaseActivity() {
             intent.putExtra("creditcardId", creditcardId)
             intent.putExtra("mailId", mailId)
             startActivity(intent)
+        }
+        credit_check.setOnClickListener {
+
         }
     }
 
@@ -237,6 +239,7 @@ class CreditDetailActivity : BaseActivity() {
 
                         val mailUser = if(!obj.isNull("mailUser")) obj.getString("mailUser") else ""
                         credit_email.setRightString(if(mailUser.isNotEmpty()) mailUser else "未绑定")
+                        credit_check.visibility = if(mailUser.isNotEmpty()) View.VISIBLE else View.GONE
 
                         if (!obj.isNull("paySum")) {
                             val paySum = DecimalFormat("########0.00####").format(obj.getString("paySum").toDouble())
