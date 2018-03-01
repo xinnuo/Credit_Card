@@ -212,10 +212,11 @@ public class TimeHelper {
      * 判断是否润年
      */
     public boolean isLeapYear(String ddate) {
-
         /**
-         * 详细设计： 1.被400整除是闰年，否则： 2.不能被4整除则不是闰年 3.能被4整除同时不能被100整除则是闰年
-         * 3.能被4整除同时能被100整除则不是闰年
+         * 详细设计：
+         *     1.被400整除是闰年
+         *     2.不能被4整除则不是闰年
+         *     3.能被4整除同时不能被100整除则是闰年
          */
         Date d = strToDate(ddate);
         GregorianCalendar gc = (GregorianCalendar) Calendar.getInstance();
@@ -291,11 +292,11 @@ public class TimeHelper {
     }
 
     /**
-     * 获取现在时间
+     * 根据用户传入的时间表示格式，返回当前时间的格式 如果是yyyyMMdd，注意字母y不能大写。
      */
-    public String getNowTime(String dateformat) {
+    public String getNowTime(String pattern) {
         @SuppressLint("SimpleDateFormat")
-        SimpleDateFormat dateFormat = new SimpleDateFormat(dateformat);
+        SimpleDateFormat dateFormat = new SimpleDateFormat(pattern);
         return dateFormat.format(getNow());
     }
 
@@ -327,15 +328,6 @@ public class TimeHelper {
     }
 
     /**
-     * 根据用户传入的时间表示格式，返回当前时间的格式 如果是yyyyMMdd，注意字母y不能大写。
-     */
-    public String getUserDate(String sformat) {
-        @SuppressLint("SimpleDateFormat")
-        SimpleDateFormat formatter = new SimpleDateFormat(sformat);
-        return formatter.format(getNow());
-    }
-
-    /**
      * 将长时间格式字符串转换为时间 yyyy-MM-dd HH:mm:ss
      */
     public Date strToDateLong(String strDate) {
@@ -355,15 +347,6 @@ public class TimeHelper {
     }
 
     /**
-     * 将短时间格式时间转换为字符串 yyyy-MM-dd
-     */
-    public String dateToStr(Date dateDate) {
-        @SuppressLint("SimpleDateFormat")
-        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-        return formatter.format(dateDate);
-    }
-
-    /**
      * 将短时间格式字符串转换为时间 yyyy-MM-dd
      */
     public Date strToDate(String strDate) {
@@ -371,6 +354,15 @@ public class TimeHelper {
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
         ParsePosition pos = new ParsePosition(0);
         return formatter.parse(strDate, pos);
+    }
+
+    /**
+     * 将短时间格式时间转换为字符串 yyyy-MM-dd
+     */
+    public String dateToStr(Date dateDate) {
+        @SuppressLint("SimpleDateFormat")
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+        return formatter.format(dateDate);
     }
 
     /**
@@ -394,7 +386,7 @@ public class TimeHelper {
     }
 
     /**
-     * 时间前推或后推分钟,其中JJ表示分钟.
+     * 返回指定时间前（后）推几分钟的时间,其中JJ表示分钟.
      */
     public String getPreTime(String sj1, String jj) {
         @SuppressLint("SimpleDateFormat")
@@ -453,7 +445,7 @@ public class TimeHelper {
     }
 
     /**
-     * 得到一个时间延后或前移几天的时间,nowdate为时间 yyyy-MM-dd,delay为前移或后延的日期
+     * 得到一个时间前（后）移几天的时间,nowdate为时间 yyyy-MM-dd,delay为前（后）移的日期
      */
     public String getNextDay(String nowdate, String delay) {
         try {
@@ -471,7 +463,7 @@ public class TimeHelper {
     }
 
     /**
-     * 得到一个时间延后或前移几天的时间,nowdate为时间 yyyy-MM-dd,delay为前移或后延的日期
+     * 得到一个时间前（后）移几天的时间,nowdate为时间 yyyy-MM-dd,delay为前（后）移的日期
      */
     public String getNextDay(String nowdate, int day) {
         try {
@@ -509,32 +501,21 @@ public class TimeHelper {
     /**
      * 得到二个日期间的间隔天数
      */
-    public String getTwoDay(String sj1, String sj2) {
+    public String getTwoDay(String start, String end) {
+        if (start == null || TextUtils.isEmpty(start)) return "";
+        if (end == null || TextUtils.isEmpty(end)) return "";
+
         @SuppressLint("SimpleDateFormat")
         SimpleDateFormat myFormatter = new SimpleDateFormat("yyyy-MM-dd");
         long day;
         try {
-            Date date = myFormatter.parse(sj1);
-            Date mydate = myFormatter.parse(sj2);
+            Date date = myFormatter.parse(start);
+            Date mydate = myFormatter.parse(end);
             day = (date.getTime() - mydate.getTime()) / (24 * 60 * 60 * 1000);
         } catch (Exception e) {
             return "";
         }
         return day + "";
-    }
-
-    /**
-     * 根据一个日期，返回是星期几的字符串
-     */
-    @SuppressLint("SimpleDateFormat")
-    public String getWeek(String sdate) {
-        Date date = strToDate(sdate);
-        Calendar c = Calendar.getInstance();
-        c.setTime(date);
-        // int hour=c.get(Calendar.DAY_OF_WEEK);
-        // hour 中存的就是星期几了，其范围 1~7
-        // 1=星期日 7=星期六，其他类推
-        return new SimpleDateFormat("EEEE").format(c.getTime());
     }
 
     /**
@@ -559,31 +540,34 @@ public class TimeHelper {
         return (date_e.getTime() - date_s.getTime()) / (24 * 60 * 60 * 1000);
     }
 
-    // 获得本周星期日的日期
-    public String getCurrentWeekday() {
-        weeks = 0;
-        int mondayPlus = this.getMondayPlus();
-        GregorianCalendar currentDate = new GregorianCalendar();
-        currentDate.add(GregorianCalendar.DATE, mondayPlus + 6);
-        Date monday = currentDate.getTime();
-        DateFormat df = DateFormat.getDateInstance();
-        return df.format(monday);
+    /**
+     * 根据一个日期，返回是星期几的字符串
+     */
+    @SuppressLint("SimpleDateFormat")
+    public String getWeek(String sdate) {
+        Date date = strToDate(sdate);
+        Calendar c = Calendar.getInstance();
+        c.setTime(date);
+        // int hour=c.get(Calendar.DAY_OF_WEEK);
+        // hour 中存的就是星期几了，其范围 1~7
+        // 1=星期日 7=星期六，其他类推
+        return new SimpleDateFormat("EEEE").format(c.getTime());
     }
 
+    /**
+     * 返回当天和本周星期一相差的天数
+     */
     private int getMondayPlus() {
         Calendar cd = Calendar.getInstance();
         // 获得今天是一周的第几天，星期日是第一天，星期二是第二天......
         int dayOfWeek = cd.get(Calendar.DAY_OF_WEEK) - 1; //因为按中国礼拜一作为第一天所以这里减1
-        if (dayOfWeek == 1) {
-            return 0;
-        } else {
-            return 1 - dayOfWeek;
-        }
+        return dayOfWeek == 1 ? 0 : 1 - dayOfWeek;
     }
 
-    //获得本周一的日期
+    /**
+     * 返回本周一的日期
+     */
     public String getMondayOFWeek() {
-        weeks = 0;
         int mondayPlus = this.getMondayPlus();
         GregorianCalendar currentDate = new GregorianCalendar();
         currentDate.add(GregorianCalendar.DATE, mondayPlus);
@@ -592,31 +576,82 @@ public class TimeHelper {
         return df.format(monday);
     }
 
-    //获得相应周的周六的日期
-    public String getSaturday() {
+    /**
+     * 返回本周二的日期
+     */
+    public String getTuesdayOFWeek() {
         int mondayPlus = this.getMondayPlus();
         GregorianCalendar currentDate = new GregorianCalendar();
-        currentDate.add(GregorianCalendar.DATE, mondayPlus + 7 * weeks + 6);
+        currentDate.add(GregorianCalendar.DATE, mondayPlus + 1);
         Date monday = currentDate.getTime();
         DateFormat df = DateFormat.getDateInstance();
         return df.format(monday);
     }
 
-    // 获得上周星期日的日期
-    public String getPreviousWeekSunday() {
-        weeks = 0;
-        weeks--;
+    /**
+     * 返回本周三的日期
+     */
+    public String getWednesdayOFWeek() {
         int mondayPlus = this.getMondayPlus();
         GregorianCalendar currentDate = new GregorianCalendar();
-        currentDate.add(GregorianCalendar.DATE, mondayPlus + weeks);
+        currentDate.add(GregorianCalendar.DATE, mondayPlus + 2);
         Date monday = currentDate.getTime();
         DateFormat df = DateFormat.getDateInstance();
         return df.format(monday);
     }
 
-    // 获得上周星期一的日期
-    public String getPreviousWeekday() {
-        weeks--;
+    /**
+     * 返回本周四的日期
+     */
+    public String getThursdayOFWeek() {
+        int mondayPlus = this.getMondayPlus();
+        GregorianCalendar currentDate = new GregorianCalendar();
+        currentDate.add(GregorianCalendar.DATE, mondayPlus + 3);
+        Date monday = currentDate.getTime();
+        DateFormat df = DateFormat.getDateInstance();
+        return df.format(monday);
+    }
+
+    /**
+     * 返回本周五的日期
+     */
+    public String getFridayOFWeek() {
+        int mondayPlus = this.getMondayPlus();
+        GregorianCalendar currentDate = new GregorianCalendar();
+        currentDate.add(GregorianCalendar.DATE, mondayPlus + 4);
+        Date monday = currentDate.getTime();
+        DateFormat df = DateFormat.getDateInstance();
+        return df.format(monday);
+    }
+
+    /**
+     * 返回本周六的日期
+     */
+    public String getSaturdayOFWeek() {
+        int mondayPlus = this.getMondayPlus();
+        GregorianCalendar currentDate = new GregorianCalendar();
+        currentDate.add(GregorianCalendar.DATE, mondayPlus + 5);
+        Date monday = currentDate.getTime();
+        DateFormat df = DateFormat.getDateInstance();
+        return df.format(monday);
+    }
+
+    /**
+     * 返回本周日的日期
+     */
+    public String getSundayOFWeek() {
+        int mondayPlus = this.getMondayPlus();
+        GregorianCalendar currentDate = new GregorianCalendar();
+        currentDate.add(GregorianCalendar.DATE, mondayPlus + 6);
+        Date monday = currentDate.getTime();
+        DateFormat df = DateFormat.getDateInstance();
+        return df.format(monday);
+    }
+
+    /**
+     * 返回几周前（后）星期一的日期
+     */
+    public String getAnyWeekMonday(int weeks) {
         int mondayPlus = this.getMondayPlus();
         GregorianCalendar currentDate = new GregorianCalendar();
         currentDate.add(GregorianCalendar.DATE, mondayPlus + 7 * weeks);
@@ -625,18 +660,58 @@ public class TimeHelper {
         return df.format(monday);
     }
 
-    // 获得几周前（后）星期一的日期
-    public String getMonday(int weeks) {
+    /**
+     * 返回几周前（后）星期二的日期
+     */
+    public String getAnyWeekTuesday(int weeks) {
         int mondayPlus = this.getMondayPlus();
         GregorianCalendar currentDate = new GregorianCalendar();
-        currentDate.add(GregorianCalendar.DATE, mondayPlus + 7 * weeks);
+        currentDate.add(GregorianCalendar.DATE, mondayPlus + 7 * weeks + 1);
         Date monday = currentDate.getTime();
         DateFormat df = DateFormat.getDateInstance();
         return df.format(monday);
     }
 
-    // 获得几周前（后）星期五的日期
-    public String getFriday(int weeks) {
+    /**
+     * 返回几周前（后）星期三的日期
+     */
+    public String getAnyWeekWednesday(int weeks) {
+        int mondayPlus = this.getMondayPlus();
+        GregorianCalendar currentDate = new GregorianCalendar();
+        currentDate.add(GregorianCalendar.DATE, mondayPlus + 7 * weeks + 2);
+        Date monday = currentDate.getTime();
+        DateFormat df = DateFormat.getDateInstance();
+        return df.format(monday);
+    }
+
+    /**
+     * 返回几周前（后）星期四的日期
+     */
+    public String getAnyWeekThursday(int weeks) {
+        int mondayPlus = this.getMondayPlus();
+        GregorianCalendar currentDate = new GregorianCalendar();
+        currentDate.add(GregorianCalendar.DATE, mondayPlus + 7 * weeks + 3);
+        Date monday = currentDate.getTime();
+        DateFormat df = DateFormat.getDateInstance();
+        return df.format(monday);
+    }
+
+    /**
+     * 返回几周前（后）星期五的日期
+     */
+    public String getAnyWeekFriday(int weeks) {
+        int mondayPlus = this.getMondayPlus();
+        GregorianCalendar currentDate = new GregorianCalendar();
+        currentDate.add(GregorianCalendar.DATE, mondayPlus + 7 * weeks + 4);
+        Date monday = currentDate.getTime();
+        DateFormat df = DateFormat.getDateInstance();
+        return df.format(monday);
+    }
+
+    /**
+     * 返回几周前（后）星期六的日期
+     */
+    public String getAnyWeekSaturday(int weeks) {
         int mondayPlus = this.getMondayPlus();
         GregorianCalendar currentDate = new GregorianCalendar();
         currentDate.add(GregorianCalendar.DATE, mondayPlus + 7 * weeks + 5);
@@ -645,8 +720,22 @@ public class TimeHelper {
         return df.format(monday);
     }
 
-    // 获得几周前（后）星期五的日期
-    public String getDay(int weeks, int day) {
+    /**
+     * 返回几周前（后）星期日的日期
+     */
+    public String getAnyWeekSunday(int weeks) {
+        int mondayPlus = this.getMondayPlus();
+        GregorianCalendar currentDate = new GregorianCalendar();
+        currentDate.add(GregorianCalendar.DATE, mondayPlus + 7 * weeks + 6);
+        Date monday = currentDate.getTime();
+        DateFormat df = DateFormat.getDateInstance();
+        return df.format(monday);
+    }
+
+    /**
+     * 返回几周前（后）星期几的日期（0一~6日）
+     */
+    public String getAnyWeekDay(int weeks, int day) {
         int mondayPlus = this.getMondayPlus();
         GregorianCalendar currentDate = new GregorianCalendar();
         currentDate.add(GregorianCalendar.DATE, mondayPlus + 7 * weeks + day);
@@ -655,9 +744,34 @@ public class TimeHelper {
         return df.format(monday);
     }
 
-    // 获得下周星期一的日期
+    /**
+     * 返回上周日的日期
+     */
+    public String getPreviousWeekSunday() {
+        int mondayPlus = this.getMondayPlus();
+        GregorianCalendar currentDate = new GregorianCalendar();
+        currentDate.add(GregorianCalendar.DATE, mondayPlus - 1);
+        Date monday = currentDate.getTime();
+        DateFormat df = DateFormat.getDateInstance();
+        return df.format(monday);
+    }
+
+    /**
+     * 返回上周一的日期
+     */
+    public String getPreviousWeekday() {
+        int mondayPlus = this.getMondayPlus();
+        GregorianCalendar currentDate = new GregorianCalendar();
+        currentDate.add(GregorianCalendar.DATE, mondayPlus - 7);
+        Date monday = currentDate.getTime();
+        DateFormat df = DateFormat.getDateInstance();
+        return df.format(monday);
+    }
+
+    /**
+     * 返回下周一的日期
+     */
     public String getNextMonday() {
-        weeks++;
         int mondayPlus = this.getMondayPlus();
         GregorianCalendar currentDate = new GregorianCalendar();
         currentDate.add(GregorianCalendar.DATE, mondayPlus + 7);
@@ -666,7 +780,9 @@ public class TimeHelper {
         return df.format(monday);
     }
 
-    // 获得下周星期日的日期
+    /**
+     * 返回下周日的日期
+     */
     public String getNextSunday() {
         int mondayPlus = this.getMondayPlus();
         GregorianCalendar currentDate = new GregorianCalendar();
