@@ -90,7 +90,28 @@ class CreditDetailActivity : BaseActivity() {
             startActivity(intent)
         }
         credit_check.setOnClickListener {
+            if (creditcardId.isEmpty()) return@setOnClickListener
 
+            OkGo.post<String>(BaseHttp.get_bill_credit)
+                    .tag(this@CreditDetailActivity)
+                    .headers("token", getString("token"))
+                    .params("cardId", creditcardId)
+                    .execute(object : StringDialogCallback(baseContext) {
+
+                        override fun onSuccessResponse(response: Response<String>, msg: String, msgCode: String) {
+
+                            val obj = JSONObject(response.body()).optJSONObject("object")
+
+                            if (obj.optString("type") == "1") {
+                                val intent = Intent(baseContext, CreditCodeActivity::class.java)
+                                intent.putExtra("cardId", creditcardId)
+                                intent.putExtra("token", obj.getString("token"))
+                                intent.putExtra("qrcode", obj.getString("josn"))
+                                startActivity(intent)
+                            }
+                        }
+
+                    })
         }
     }
 
