@@ -92,6 +92,8 @@ dependencies {
     implementation 'com.android.support:support-v4:' + versions.supportLibraryVersion
     implementation 'org.jetbrains.kotlin:kotlin-stdlib-jdk7:' + versions.kotlin_version
     implementation 'com.android.support.constraint:constraint-layout:1.0.2'
+    //使用分包 multiDexEnabled 必须加入该依赖，Application使其继承MultiDexApplication
+    implementation 'com.android.support:multidex:1.0.2'
     testImplementation 'junit:junit:4.12'
 
     implementation project(':okgo-lib')

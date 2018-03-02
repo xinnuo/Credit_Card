@@ -174,7 +174,7 @@ class PlanBackActivity : BaseActivity() {
 
                 AlertDialog.Builder(baseContext)
                         .setTitle("温馨提示")
-                        .setMessage("信用卡余额应不低于${plan_save.text}元(保证金)，确定要提交吗？")
+                        .setMessage("您的实际信用卡可用额度是否大于(${plan_save.text})元？")
                         .setPositiveButton("确定") { _, _ ->
                             val repaymentDay = list.toString()
                                     .replace("[", "")

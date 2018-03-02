@@ -81,4 +81,6 @@ public class BaseHttp {
     public static String mail_add_sub = baseIp + "/mail_add_sub.rm";                 //绑定邮箱√
     public static String mail_update_sub = baseIp + "/mail_update_sub.rm";           //更新邮箱√
     public static String hand_exec_plan = baseIp + "/hand_exec_plan.rm";             //手动执行计划√
+    public static String get_bill_credit = baseIp + "/get_bill_credit.rm";           //信用卡账单√
+    public static String get_bill_qqcredit = baseIp + "/get_bill_qqcredit.rm";       //qq邮箱用卡账单√
 }

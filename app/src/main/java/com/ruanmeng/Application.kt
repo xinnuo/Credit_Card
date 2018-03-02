@@ -29,6 +29,7 @@ package com.ruanmeng
 
 import android.app.ActivityManager
 import android.content.Context
+import android.support.multidex.MultiDexApplication
 import cn.jpush.android.api.JPushInterface
 import com.lzy.okgo.OkGo
 import com.lzy.okgo.cache.CacheEntity
@@ -53,7 +54,7 @@ import java.util.logging.Level
  * 创建人：小卷毛
  * 创建时间：2017-12-05 16:35
  */
-class Application : android.app.Application() {
+class Application : MultiDexApplication() {
 
     override fun onCreate() {
         super.onCreate()
