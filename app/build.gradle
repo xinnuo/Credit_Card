@@ -93,7 +93,7 @@ dependencies {
     implementation 'org.jetbrains.kotlin:kotlin-stdlib-jdk7:' + versions.kotlin_version
     implementation 'com.android.support.constraint:constraint-layout:1.0.2'
     //使用分包 multiDexEnabled 必须加入该依赖，Application使其继承MultiDexApplication
-    implementation 'com.android.support:multidex:1.0.2'
+    implementation 'com.android.support:multidex:1.0.3'
     testImplementation 'junit:junit:4.12'
 
     implementation project(':okgo-lib')
@@ -106,6 +106,7 @@ dependencies {
     implementation(name: 'RollViewPager', ext: 'aar')
     implementation(name: 'SuperText-1.1.1', ext: 'aar')
     implementation(name: 'UmengSocial-6.4.6', ext: 'aar')
+    implementation(name: 'BouncingJelly-1.0.0', ext: 'aar')
 
     //图片浏览
     implementation(name: 'MNImageBrowser-1.0.3', ext: 'aar')
