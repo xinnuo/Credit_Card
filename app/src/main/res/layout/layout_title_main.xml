@@ -14,6 +14,7 @@
         android:drawablePadding="@dimen/dimen_size_3"
         android:drawableRight="@mipmap/home_dw"
         android:gravity="center_vertical"
+        android:maxLength="5"
         android:onClick="doClick"
         android:padding="@dimen/dimen_size_10"
         android:text="城市"
