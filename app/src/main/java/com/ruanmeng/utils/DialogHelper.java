@@ -508,6 +508,93 @@ public class DialogHelper {
         dialog.show();
     }
 
+    public static void showAddressDialog(
+            final Context context,
+            final List<CommonData> list_province,
+            final List<CommonData> list_city,
+            final List<CommonData> list_district,
+            final AreaCallBack callBack) {
+
+        BottomBaseDialog dialog = new BottomBaseDialog(context) {
+
+            private LoopView province, city, district;
+
+            @Override
+            public View onCreateView() {
+                View view = View.inflate(context, R.layout.dialog_select_address, null);
+
+                TextView tv_cancel = view.findViewById(R.id.tv_dialog_select_cancle);
+                TextView tv_ok = view.findViewById(R.id.tv_dialog_select_ok);
+                province = view.findViewById(R.id.lv_dialog_select_province);
+                city = view.findViewById(R.id.lv_dialog_select_city);
+                district = view.findViewById(R.id.lv_dialog_select_district);
+                district.setVisibility(View.VISIBLE);
+
+                province.setTextSize(14f);
+                province.setDividerColor(context.getResources().getColor(R.color.divider));
+                province.setNotLoop();
+                city.setTextSize(14f);
+                city.setDividerColor(context.getResources().getColor(R.color.divider));
+                city.setNotLoop();
+                district.setTextSize(14f);
+                district.setDividerColor(context.getResources().getColor(R.color.divider));
+                district.setNotLoop();
+
+                tv_cancel.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        dismiss();
+                    }
+                });
+
+                tv_ok.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        dismiss();
+
+                        callBack.doWork(
+                                province.getSelectedItem(),
+                                city.getSelectedItem(),
+                                district.getSelectedItem());
+                    }
+                });
+
+                return view;
+            }
+
+            @Override
+            public void setUiBeforShow() {
+                List<String> provinces = new ArrayList<>();
+                List<String> cities = new ArrayList<>();
+                final List<String> districts = new ArrayList<>();
+
+                for (CommonData item : list_province) provinces.add(item.getAreaName());
+                for (CommonData item : list_city) cities.add(item.getAreaName());
+                for (CommonData item : list_district) districts.add(item.getAreaName());
+
+                if (provinces.size() > 0) province.setItems(provinces);
+                if (cities.size() > 0) city.setItems(cities);
+                if (districts.size() > 0) district.setItems(districts);
+
+                province.setListener(new OnItemSelectedListener() {
+                    @Override
+                    public void onItemSelected(int index) {
+                        callBack.getCities(city, district, province.getSelectedItem());
+                    }
+                });
+                city.setListener(new OnItemSelectedListener() {
+                    @Override
+                    public void onItemSelected(int index) {
+                        callBack.getDistricts(district, city.getSelectedItem());
+                    }
+                });
+            }
+
+        };
+
+        dialog.show();
+    }
+
     public interface HintCallBack {
         void doWork();
     }
@@ -522,7 +609,12 @@ public class DialogHelper {
 
     public interface AddressCallBack {
         void doWork(int pos_province, int pos_city);
-
         void getCities(LoopView loopView, int pos);
+    }
+
+    public interface AreaCallBack {
+        void doWork(int pos_province, int pos_city, int pos_district);
+        void getCities(LoopView loopView, LoopView loopView2, int pos);
+        void getDistricts(LoopView loopView, int pos);
     }
 }

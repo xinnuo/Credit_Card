@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.allen.library.SuperTextView
 import com.jude.rollviewpager.RollPagerView
+import com.lzy.extend.StringDialogCallback
 import com.lzy.extend.jackson.JacksonDialogCallback
 import com.lzy.okgo.OkGo
 import com.lzy.okgo.cache.CacheMode
@@ -15,10 +16,7 @@ import com.lzy.okgo.model.Response
 import com.makeramen.roundedimageview.RoundedImageView
 import com.ruanmeng.adapter.LoopAdapter
 import com.ruanmeng.base.*
-import com.ruanmeng.credit_card.BillActivity
-import com.ruanmeng.credit_card.BillDetailActivity
-import com.ruanmeng.credit_card.NoticeActivity
-import com.ruanmeng.credit_card.R
+import com.ruanmeng.credit_card.*
 import com.ruanmeng.model.CommonData
 import com.ruanmeng.model.CommonModel
 import com.ruanmeng.model.CountMessageEvent
@@ -33,6 +31,7 @@ import net.idik.lib.slimadapter.SlimAdapter
 import net.idik.lib.slimadapter.SlimAdapterEx
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
+import org.json.JSONObject
 import java.util.ArrayList
 
 class MainFirstFragment : BaseFragment() {
@@ -65,11 +64,13 @@ class MainFirstFragment : BaseFragment() {
 
         swipe_refresh.isRefreshing = true
         getData()
+        userCity()
     }
 
     @SuppressLint("InflateParams")
     override fun init_title() {
         main_title.text = "诸葛信用管家"
+        main_city.visibility = View.VISIBLE
         main_right.visibility = View.VISIBLE
         val count = getString("msgCount", "0").toInt()
         main_hint.visibility = if (count > 0) View.VISIBLE else View.INVISIBLE
@@ -154,6 +155,8 @@ class MainFirstFragment : BaseFragment() {
                             }
                 }
                 .attachTo(recycle_list)
+
+        main_city.setOnClickListener { startActivity(CityActivity::class.java) }
     }
 
     override fun getData() {
@@ -207,6 +210,25 @@ class MainFirstFragment : BaseFragment() {
                 })
     }
 
+    private fun userCity() {
+        OkGo.post<String>(BaseHttp.user_agentCity)
+                .tag(this@MainFirstFragment)
+                .headers("token", getString("token"))
+                .cacheMode(CacheMode.REQUEST_FAILED_READ_CACHE)
+                .cacheKey(BaseHttp.user_agentCity)
+                .execute(object : StringDialogCallback(activity, false) {
+
+                    override fun onSuccessResponse(response: Response<String>, msg: String, msgCode: String) {
+                        val obj = JSONObject(response.body()).optJSONObject("city")
+                        val userCity = obj?.optString("userCity") ?: ""
+
+                        if (userCity.isEmpty()) startActivity(CityActivity::class.java)
+                        else main_city.text = userCity
+                    }
+
+                })
+    }
+
     override fun onDestroy() {
         EventBus.getDefault().unregister(this@MainFirstFragment)
         super.onDestroy()
@@ -227,6 +249,7 @@ class MainFirstFragment : BaseFragment() {
                 first_card_txt.text = "在线咨询"
                 first_card.isClickable = false
             }
+            "选择城市" -> main_city.text = event.count
         }
     }
 }

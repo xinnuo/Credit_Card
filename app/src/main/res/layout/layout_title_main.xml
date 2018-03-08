@@ -7,6 +7,19 @@
     android:background="?attr/colorPrimary">
 
     <TextView
+        android:id="@+id/main_city"
+        style="@style/Font15_black_dark"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:drawablePadding="@dimen/dimen_size_3"
+        android:drawableRight="@mipmap/home_dw"
+        android:gravity="center_vertical"
+        android:onClick="doClick"
+        android:padding="@dimen/dimen_size_10"
+        android:text="城市"
+        android:visibility="gone" />
+
+    <TextView
         android:id="@+id/main_title"
         android:layout_width="200dp"
         android:layout_height="wrap_content"

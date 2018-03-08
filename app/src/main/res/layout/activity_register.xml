@@ -2,6 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical">
 
     <LinearLayout
@@ -107,6 +108,45 @@
                 android:inputType="textWebPassword"
                 android:maxLength="20"
                 android:paddingLeft="@dimen/dimen_size_10" />
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/divider_height"
+            android:layout_marginLeft="@dimen/dimen_size_10"
+            android:layout_marginRight="@dimen/dimen_size_10"
+            android:background="@color/divider" />
+
+        <LinearLayout
+            android:id="@+id/register_city_ll"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/line_height"
+            android:gravity="center_vertical"
+            android:onClick="doClick"
+            android:paddingLeft="@dimen/dimen_size_10"
+            android:paddingRight="@dimen/dimen_size_10">
+
+            <TextView
+                style="@style/Font14_black_dark"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="所在地" />
+
+            <TextView
+                android:id="@+id/register_city"
+                style="@style/Font14_black_dark"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:hint="请选择当前所在地"
+                android:paddingLeft="@dimen/dimen_size_10" />
+
+            <ImageView
+                android:layout_width="13dp"
+                android:layout_height="13dp"
+                android:src="@mipmap/arrow_right"
+                tools:ignore="ContentDescription" />
 
         </LinearLayout>
 

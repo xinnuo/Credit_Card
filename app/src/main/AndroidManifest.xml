@@ -18,6 +18,7 @@
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -160,6 +161,9 @@
         <activity
             android:name=".CreditCodeActivity"
             android:screenOrientation="portrait" />
+        <activity android:name=".CityActivity"
+            android:screenOrientation="portrait"/>
+
 
         <!-- 融云即时通讯 start -->
         <!-- 会话列表 -->

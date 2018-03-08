@@ -16,8 +16,8 @@ android {
         applicationId "com.ruanmeng.credit_card"
         minSdkVersion versions.minSdkVersion
         targetSdkVersion versions.targetSdkVersion
-        versionCode 110
-        versionName "1.1.0"
+        versionCode 111
+        versionName "1.1.1"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         multiDexEnabled true
 

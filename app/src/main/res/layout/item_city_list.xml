@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:id="@+id/item_city"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/line_height"
+        android:gravity="center_vertical"
+        android:paddingLeft="@dimen/dimen_size_15"
+        android:paddingRight="@dimen/dimen_size_5">
+
+        <TextView
+            android:id="@+id/item_city_name"
+            style="@style/Font14_black_dark"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/line_height"
+            android:layout_weight="1"
+            android:gravity="center_vertical"
+            android:text="名称" />
+
+        <ImageView
+            android:id="@+id/item_city_check"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:adjustViewBounds="true"
+            android:padding="@dimen/dimen_size_5"
+            android:src="@mipmap/icon_city"
+            android:visibility="invisible"
+            tools:ignore="ContentDescription" />
+
+    </LinearLayout>
+
+    <View
+        android:id="@+id/item_city_divider1"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/divider_height"
+        android:layout_marginLeft="@dimen/dimen_size_15"
+        android:layout_marginRight="@dimen/dimen_size_15"
+        android:background="@color/divider" />
+
+    <View
+        android:id="@+id/item_city_divider2"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/divider_height"
+        android:background="@color/divider"
+        android:visibility="gone" />
+
+</LinearLayout>

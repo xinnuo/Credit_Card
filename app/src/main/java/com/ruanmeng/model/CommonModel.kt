@@ -28,6 +28,7 @@ data class CommonModel(
         var `object`: List<CommonData>? = ArrayList(),
 
         var areas: List<CommonData>? = ArrayList(),
+        var rows: List<CommonData>? = ArrayList(),
 
         var customers: List<CommonData>? = ArrayList(),
 
