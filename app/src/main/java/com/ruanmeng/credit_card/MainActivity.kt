@@ -240,6 +240,12 @@ class MainActivity : BaseActivity() {
         return super.onKeyDown(keyCode, event)
     }
 
+    override fun onBackPressed() {
+        RongCloudContext.getInstance().clearNotificationMessage()
+        RongIM.getInstance().disconnect()
+        super.onBackPressed()
+    }
+
     private fun connect(token: String) {
         /**
          * IMKit SDK调用第二步,建立与服务器的连接
