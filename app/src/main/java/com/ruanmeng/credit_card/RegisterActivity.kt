@@ -212,6 +212,7 @@ class RegisterActivity : BaseActivity() {
 
                 OkGo.post<String>(BaseHttp.register_sub)
                         .tag(this@RegisterActivity)
+                        .isMultipart(true)
                         .params("mobile", et_name.text.toString())
                         .params("smscode", et_yzm.text.toString())
                         .params("password", et_pwd.text.toString())

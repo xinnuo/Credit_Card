@@ -65,6 +65,7 @@ class CityActivity : BaseActivity(), OnFragmentItemSelectListener {
     override fun getData() {
         OkGo.post<String>(BaseHttp.update_user_agentCity)
                 .tag(this@CityActivity)
+                .isMultipart(true)
                 .headers("token", getString("token"))
                 .params("userProvince", province)
                 .params("userCity", city)
@@ -73,7 +74,6 @@ class CityActivity : BaseActivity(), OnFragmentItemSelectListener {
 
                     override fun onSuccessResponse(response: Response<String>, msg: String, msgCode: String) {
 
-                        toast(msg)
                         EventBus.getDefault().post(CountMessageEvent("选择城市", city))
                         ActivityStack.getScreenManager().popActivities(this@CityActivity::class.java)
                     }
