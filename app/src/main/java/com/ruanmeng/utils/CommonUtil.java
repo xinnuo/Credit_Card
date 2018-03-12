@@ -71,8 +71,7 @@ public class CommonUtil {
      */
     public static boolean isMobileNumber(String mobile) {
         if (mobile.length() != 11) return false;
-        // Pattern p = Pattern.compile("^((1[3|5|8][0-9])|(14[5|7])|(17[0|1|3|6|7|8]))\\d{8}$");
-        Pattern p = Pattern.compile("^((1[3|5|8][0-9])|(14[5|7])|(17[0-9]))\\d{8}$");
+        Pattern p = Pattern.compile("^((1[3|5|8][0-9])|(14[5|7])|(16[6])|(17[0|1|3|6|7|8])|(19[8|9]))\\d{8}$");
         Matcher m = p.matcher(mobile);
         return m.matches();
     }
