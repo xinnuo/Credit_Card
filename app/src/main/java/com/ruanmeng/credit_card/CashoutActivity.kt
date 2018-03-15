@@ -72,8 +72,8 @@ class CashoutActivity : BaseActivity() {
                     return
                 }
 
-                if (mCount < 100) {
-                    toast("最低提现金额不少于100.0元")
+                if (mCount < 2) {
+                    toast("最低提现金额不少于2.0元")
                     return
                 }
 

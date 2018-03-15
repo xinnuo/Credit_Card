@@ -81,30 +81,36 @@ class PlanBackActivity : BaseActivity() {
         thread { list_item.addAll(getDateList()) }
 
         if (list_days.size < 24) {
+            plan_check5.visibility = View.GONE
+            plan_divider4.visibility = View.GONE
+        }
+        if (list_days.size < 18) {
             plan_check4.visibility = View.GONE
             plan_divider3.visibility = View.GONE
         }
-        if (list_days.size < 18) {
+        if (list_days.size < 12) {
             plan_check3.visibility = View.GONE
             plan_divider2.visibility = View.GONE
         }
-        if (list_days.size < 12) {
+        if (list_days.size < 6) {
             plan_check2.visibility = View.GONE
             plan_divider1.visibility = View.GONE
         }
-        if (list_days.size < 6) plan_num_11.collapse()
+        if (list_days.size < 3) plan_num_11.collapse()
 
         plan_group.setOnCheckedChangeListener { _, checkedId ->
             if (!plan_check1.isChecked
                     && !plan_check2.isChecked
                     && !plan_check3.isChecked
-                    && !plan_check4.isChecked) return@setOnCheckedChangeListener
+                    && !plan_check4.isChecked
+                    && !plan_check5.isChecked) return@setOnCheckedChangeListener
 
             val count = when (checkedId) {
-                R.id.plan_check1 -> 6
-                R.id.plan_check2 -> 12
-                R.id.plan_check3 -> 18
-                R.id.plan_check4 -> 24
+                R.id.plan_check1 -> 3
+                R.id.plan_check2 -> 6
+                R.id.plan_check3 -> 12
+                R.id.plan_check4 -> 18
+                R.id.plan_check5 -> 24
                 else -> -1
             }
 

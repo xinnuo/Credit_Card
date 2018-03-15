@@ -130,7 +130,6 @@
                         android:id="@+id/plan_group"
                         android:layout_width="wrap_content"
                         android:layout_height="@dimen/dimen_size_30"
-                        android:layout_marginRight="@dimen/dimen_size_10"
                         android:padding="@dimen/divider_height"
                         android:background="@drawable/rec_bg_trans_stroke_lighter_radius_0"
                         android:orientation="horizontal">
@@ -142,7 +141,7 @@
                             android:background="@drawable/rb_plan_selector"
                             android:button="@null"
                             android:gravity="center"
-                            android:text="6"
+                            android:text="3"
                             android:textColor="@color/rb_plan_selector_color" />
 
                         <View
@@ -158,7 +157,7 @@
                             android:background="@drawable/rb_plan_selector"
                             android:button="@null"
                             android:gravity="center"
-                            android:text="12"
+                            android:text="6"
                             android:textColor="@color/rb_plan_selector_color" />
 
                         <View
@@ -174,7 +173,7 @@
                             android:background="@drawable/rb_plan_selector"
                             android:button="@null"
                             android:gravity="center"
-                            android:text="18"
+                            android:text="12"
                             android:textColor="@color/rb_plan_selector_color" />
 
                         <View
@@ -185,6 +184,22 @@
 
                         <RadioButton
                             android:id="@+id/plan_check4"
+                            android:layout_width="@dimen/dimen_size_50"
+                            android:layout_height="match_parent"
+                            android:background="@drawable/rb_plan_selector"
+                            android:button="@null"
+                            android:gravity="center"
+                            android:text="18"
+                            android:textColor="@color/rb_plan_selector_color" />
+
+                        <View
+                            android:id="@+id/plan_divider4"
+                            android:layout_width="@dimen/divider_height"
+                            android:layout_height="match_parent"
+                            android:background="@color/lighter" />
+
+                        <RadioButton
+                            android:id="@+id/plan_check5"
                             android:layout_width="@dimen/dimen_size_50"
                             android:layout_height="match_parent"
                             android:background="@drawable/rb_plan_selector"
