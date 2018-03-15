@@ -8,6 +8,7 @@ import android.graphics.Color
 import android.net.Uri
 import android.os.Bundle
 import android.os.Environment
+import android.provider.MediaStore
 import android.support.design.widget.BottomSheetDialog
 import android.view.Gravity
 import android.view.LayoutInflater
@@ -162,7 +163,13 @@ class ShareActivity : BaseActivity() {
             // showText("图片保存至：${mSaveFile!!.absoluteFile}")
             showText("分享信息已保存到相册")
 
-            // 保存图片到相册显示的方法（没有则只有重启后才有）
+            //保存图片到相册显示的方法（没有则只有重启后才有）
+            MediaStore.Images.Media.insertImage(
+                    contentResolver,
+                    mSaveFile!!.absolutePath,
+                    "qrcode_share.jpg",
+                    null)
+
             val intent = Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE)
             val uri = Uri.fromFile(mSaveFile)
             intent.data = uri
@@ -170,7 +177,6 @@ class ShareActivity : BaseActivity() {
         } catch (e: IOException) {
             e.printStackTrace()
         }
-
     }
 
     override fun getData() {
