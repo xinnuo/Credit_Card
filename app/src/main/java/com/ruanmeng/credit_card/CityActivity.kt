@@ -8,7 +8,6 @@ import com.lzy.okgo.model.Response
 import com.ruanmeng.base.BaseActivity
 import com.ruanmeng.base.addItems
 import com.ruanmeng.base.getString
-import com.ruanmeng.base.toast
 import com.ruanmeng.fragment.CityFirstFragment
 import com.ruanmeng.fragment.CitySecondFragment
 import com.ruanmeng.fragment.CityThirdFragment
@@ -130,7 +129,7 @@ class CityActivity : BaseActivity(), OnFragmentItemSelectListener {
                                             R.anim.push_left_out,
                                             R.anim.push_right_in,
                                             R.anim.push_right_out)
-                                    .add(R.id.city_container, second)
+                                    .replace(R.id.city_container, second)
                                     .addToBackStack(null)
                                     .commit()
                         }
@@ -162,7 +161,7 @@ class CityActivity : BaseActivity(), OnFragmentItemSelectListener {
                                             R.anim.push_left_out,
                                             R.anim.push_right_in,
                                             R.anim.push_right_out)
-                                    .add(R.id.city_container, third)
+                                    .replace(R.id.city_container, third)
                                     .addToBackStack(null)
                                     .commit()
                         } else getData()
