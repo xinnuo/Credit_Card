@@ -9,7 +9,6 @@
     android:orientation="horizontal"
     android:padding="10dp">
 
-
     <io.rong.imkit.widget.AsyncImageView
         android:id="@+id/portrait"
         android:layout_width="45dp"
@@ -40,4 +39,5 @@
             android:layout_marginTop="3dp" />
 
     </LinearLayout>
+
 </LinearLayout>

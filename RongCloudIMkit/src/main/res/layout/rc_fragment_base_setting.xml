@@ -1,9 +1,7 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-             xmlns:tools="http://schemas.android.com/tools"
-             android:layout_width="match_parent"
-             android:layout_height="match_parent"
-             android:background="@android:color/white"
-    >
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white">
 
     <RelativeLayout
         android:id="@+id/rc_setting_item"
@@ -21,7 +19,7 @@
             android:layout_marginLeft="5dp"
             android:text="名称"
             android:textColor="#252525"
-            android:textSize="15dp"/>
+            android:textSize="15dp" />
 
         <CheckBox
             android:id="@id/rc_checkbox"
@@ -31,13 +29,14 @@
             android:layout_centerVertical="true"
             android:layout_gravity="center_vertical"
             android:button="@drawable/rc_switch_btn"
-            android:gravity="center_vertical"/>
+            android:gravity="center_vertical" />
 
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:layout_alignParentBottom="true"
-            android:background="#e4e4e4"/>
+            android:background="#E4E4E4" />
+
     </RelativeLayout>
 
 </FrameLayout>

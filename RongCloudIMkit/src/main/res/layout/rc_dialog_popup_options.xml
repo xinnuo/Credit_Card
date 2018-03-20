@@ -4,12 +4,13 @@
     android:layout_height="wrap_content"
     android:gravity="center_horizontal"
     android:orientation="vertical">
+
     <ListView
         android:id="@+id/rc_list_dialog_popup_options"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/rc_corner_popup_dialog_style"
         android:divider="@color/rc_popup_dialog_list_divider_color"
-        android:dividerHeight="0.5dp">
-    </ListView>
+        android:dividerHeight="0.5dp" />
+
 </RelativeLayout>

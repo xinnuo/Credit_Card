@@ -55,6 +55,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="12dp"
             android:src="@drawable/rc_ic_star_selector" />
+
     </LinearLayout>
 
     <View
@@ -74,7 +75,7 @@
             android:layout_height="match_parent"
             android:gravity="center"
             android:text="@string/rc_cs_submit"
-            android:textColor="#0099ff"
+            android:textColor="#0099FF"
             android:textSize="17sp" />
 
         <View style="@style/vertical_light_thin_divider" />
@@ -85,7 +86,9 @@
             android:layout_height="match_parent"
             android:gravity="center"
             android:text="@string/rc_cs_cancel"
-            android:textColor="#0099ff"
+            android:textColor="#0099FF"
             android:textSize="17sp" />
+
     </LinearLayout>
+
 </LinearLayout>

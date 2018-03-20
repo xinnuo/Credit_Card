@@ -38,6 +38,7 @@
             android:background="@drawable/rc_message_checkbox"
             android:button="@null"
             android:visibility="gone" />
+
     </LinearLayout>
 
     <io.rong.imkit.widget.AsyncImageView
@@ -172,6 +173,5 @@
         </LinearLayout>
 
     </FrameLayout>
-
 
 </RelativeLayout>

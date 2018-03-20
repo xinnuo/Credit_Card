@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <view xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
-    android:layout_marginLeft="16dp"
     android:layout_width="wrap_content"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:layout_marginLeft="16dp"
+    android:orientation="vertical">
 
     <TextView
         android:id="@+id/type_text"
@@ -12,7 +12,7 @@
         android:gravity="center_vertical"
         android:text="@string/rc_picsel_pictype"
         android:textColor="@android:color/white"
-        android:textSize="16sp"/>
+        android:textSize="16sp" />
 
     <ImageView
         android:id="@+id/type_image"
@@ -20,5 +20,6 @@
         android:layout_height="match_parent"
         android:paddingLeft="4dp"
         android:paddingTop="8dp"
-        android:src="@drawable/rc_picsel_pictype_normal"/>
+        android:src="@drawable/rc_picsel_pictype_normal" />
+
 </view>

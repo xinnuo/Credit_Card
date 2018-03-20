@@ -36,8 +36,9 @@
             android:layout_gravity="center_horizontal"
             android:layout_marginBottom="17dp"
             android:layout_marginTop="17dp"
-            android:textColor="#a8a8a8"
+            android:textColor="#A8A8A8"
             android:textSize="12sp" />
+
     </LinearLayout>
 
     <Button
@@ -47,7 +48,7 @@
         android:layout_gravity="center_horizontal"
         android:background="@drawable/rc_ac_btn_file_download_open_button"
         android:text="@string/rc_ac_file_download_btn"
-        android:textColor="#ffffff"
+        android:textColor="#FFFFFF"
         android:textSize="16sp" />
 
     <LinearLayout
@@ -80,6 +81,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginRight="16dp"
                 android:src="@drawable/rc_btn_download_cancel" />
+
         </LinearLayout>
 
         <TextView
@@ -90,5 +92,7 @@
             android:layout_marginTop="22dp"
             android:textColor="#343434"
             android:textSize="16sp" />
+
     </LinearLayout>
+
 </LinearLayout>

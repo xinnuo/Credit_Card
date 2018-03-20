@@ -7,10 +7,10 @@
 
     <ProgressBar
         android:id="@+id/refresh_loading_indicator"
-        android:paddingTop="5dp"
         android:layout_width="20dp"
         android:layout_height="20dp"
         android:indeterminateDrawable="@drawable/rc_progress_sending_style"
-        android:visibility="gone"/>
+        android:paddingTop="5dp"
+        android:visibility="gone" />
 
 </LinearLayout>

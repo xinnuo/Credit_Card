@@ -47,6 +47,7 @@
                 android:layout_marginLeft="6dp"
                 android:layout_marginRight="6dp"
                 android:src="@drawable/rc_voice_toggle_selector"/>
+
         </LinearLayout>
 
         <!-- 文本，表情输入容器，通过控制“语音”，容器中填充不同的内容 -->
@@ -73,6 +74,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/rc_plugin_toggle_selector"/>
+
         </LinearLayout>
 
     </LinearLayout>
@@ -83,4 +85,5 @@
         android:layout_height="2px"
         android:layout_alignParentTop="true"
         android:background="@color/rc_divider_color"/>
+
 </RelativeLayout>

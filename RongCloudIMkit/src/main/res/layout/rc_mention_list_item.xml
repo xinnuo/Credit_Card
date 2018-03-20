@@ -11,28 +11,28 @@
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:layout_weight="1.0"
+        android:background="#f0f0f6"
         android:paddingBottom="5dip"
         android:paddingLeft="12dip"
         android:paddingTop="5dip"
-        android:background="#f0f0f6"
         android:text="A"
         android:textColor="#999999" />
 
     <LinearLayout
         android:id="@+id/memberItem"
         android:layout_width="fill_parent"
-        android:paddingRight="12dp"
         android:layout_height="52dp"
         android:background="@drawable/rc_bg_mentionlist_item"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:paddingRight="12dp">
 
         <io.rong.imkit.widget.AsyncImageView
-            android:layout_gravity="center_vertical"
             android:id="@+id/rc_user_portrait"
             android:layout_width="36dp"
             android:layout_height="36dp"
-            android:scaleType="centerCrop"
+            android:layout_gravity="center_vertical"
             android:layout_marginLeft="12dp"
+            android:scaleType="centerCrop"
             app:RCCornerRadius="3dip"
             app:RCDefDrawable="@drawable/rc_default_portrait" />
 
@@ -41,10 +41,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
-            android:lines="1"
-            android:ellipsize="end"
-            android:maxLength="32"
             android:layout_marginLeft="12dp"
+            android:ellipsize="end"
+            android:lines="1"
+            android:maxLength="32"
             android:textColor="#353535"
             android:textSize="16sp" />
 

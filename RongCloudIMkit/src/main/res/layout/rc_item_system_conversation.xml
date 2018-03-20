@@ -11,15 +11,15 @@
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
-        android:layout_marginTop="10dp"
         android:layout_marginLeft="6dp"
         android:layout_marginRight="70dp"
-        android:ellipsize = "end"
-        android:singleLine="true"
-        android:gravity="top"
+        android:layout_marginTop="10dp"
         android:background="@android:color/transparent"
+        android:ellipsize="end"
+        android:gravity="top"
+        android:singleLine="true"
         android:textColor="@color/rc_text_color_primary"
-        android:textSize="@dimen/rc_conversation_item_name_size"/>
+        android:textSize="@dimen/rc_conversation_item_name_size" />
 
     <TextView
         android:id="@id/rc_conversation_time"
@@ -27,37 +27,37 @@
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
         android:layout_alignParentTop="true"
-        android:layout_marginTop="10dp"
         android:layout_marginRight="8dp"
+        android:layout_marginTop="10dp"
         android:background="@android:color/transparent"
         android:textColor="#d7d7d7"
-        android:textSize="@dimen/rc_conversation_item_data_size"/>
+        android:textSize="@dimen/rc_conversation_item_data_size" />
 
     <TextView
         android:id="@id/rc_conversation_content"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_below="@id/rc_conversation_title"
-        android:background="@android:color/transparent"
-        android:ellipsize = "end"
-        android:singleLine="true"
-        android:layout_marginLeft="6dp"
         android:layout_marginBottom="10dp"
+        android:layout_marginLeft="6dp"
         android:layout_marginRight="70dp"
+        android:background="@android:color/transparent"
+        android:ellipsize="end"
         android:gravity="bottom"
+        android:singleLine="true"
         android:textColor="@color/rc_text_color_secondary"
-        android:textSize="@dimen/rc_conversation_item_data_size"/>
+        android:textSize="@dimen/rc_conversation_item_data_size" />
 
     <ImageView
         android:id="@+id/rc_conversation_msg_block"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:layout_below="@+id/rc_conversation_time"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
-        android:layout_marginRight="8dp"
+        android:layout_below="@+id/rc_conversation_time"
         android:layout_marginBottom="10dp"
+        android:layout_marginRight="8dp"
         android:src="@drawable/rc_ic_message_block"
-        android:visibility="gone"/>
+        android:visibility="gone" />
 
 </RelativeLayout>

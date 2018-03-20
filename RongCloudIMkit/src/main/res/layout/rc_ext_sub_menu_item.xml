@@ -10,16 +10,17 @@
         android:id="@+id/rc_sub_menu_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:singleLine="true"
+        android:layout_gravity="center"
         android:padding="10dp"
-        android:textSize="14sp"
+        android:singleLine="true"
         android:textColor="#828282"
-        android:layout_gravity="center" />
+        android:textSize="14sp" />
 
     <View
         android:id="@+id/rc_sub_menu_divider_line"
         android:layout_width="match_parent"
         android:layout_height="0.5px"
-        android:visibility="gone"
-        android:background="@android:color/darker_gray" />
+        android:background="@android:color/darker_gray"
+        android:visibility="gone" />
+
 </LinearLayout>

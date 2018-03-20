@@ -2,10 +2,10 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="64dp"
-    android:gravity="center_vertical"
     android:layout_marginLeft="5dp"
     android:layout_marginRight="14dp"
-    android:background="@android:color/transparent">
+    android:background="@android:color/transparent"
+    android:gravity="center_vertical">
 
     <LinearLayout
         android:id="@+id/rc_layout"
@@ -36,9 +36,10 @@
             android:layout_alignParentTop="true"
             android:layout_weight="1"
             android:background="@android:color/transparent"
-            android:gravity="right|top"
+            android:gravity="end|top"
             android:textColor="@color/rc_text_color_secondary"
             android:textSize="@dimen/rc_conversation_item_time_size" />
+
     </LinearLayout>
 
     <RelativeLayout

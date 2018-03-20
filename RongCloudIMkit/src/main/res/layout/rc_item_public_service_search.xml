@@ -5,45 +5,44 @@
     android:layout_height="wrap_content"
     android:padding="10dp">
 
-
     <io.rong.imkit.widget.AsyncImageView
         android:id="@id/rc_portrait"
         android:layout_width="45dp"
         android:layout_height="45dp"
-        app:RCCornerRadius="3dp"
         android:layout_centerVertical="true"
         android:layout_gravity="center_vertical"
+        app:RCCornerRadius="3dp"
         app:RCDefDrawable="@drawable/rc_ic_def_msg_portrait" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_toRightOf="@+id/rc_portrait"
-        android:layout_toEndOf="@+id/rc_portrait"
-        android:orientation="vertical"
-        android:gravity="center_vertical"
         android:layout_marginLeft="15dp"
-        android:layout_marginStart="15dp">
+        android:layout_marginStart="15dp"
+        android:layout_toEndOf="@+id/rc_portrait"
+        android:layout_toRightOf="@+id/rc_portrait"
+        android:gravity="center_vertical"
+        android:orientation="vertical">
 
         <TextView
             android:id="@id/rc_title"
-            android:textColor="@color/rc_text_color_primary"
-            android:textSize="15sp"
-            android:maxLines="1"
-            android:layout_gravity="center_vertical"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:maxLines="1"
+            android:textColor="@color/rc_text_color_primary"
+            android:textSize="15sp" />
 
         <TextView
             android:id="@+id/rc_description"
-            android:textColor="@color/rc_text_color_secondary"
-            android:layout_gravity="center_vertical"
-            android:textSize="14sp"
-            android:maxLines="1"
-            android:layout_marginTop="5dp"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-    </LinearLayout>
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginTop="5dp"
+            android:maxLines="1"
+            android:textColor="@color/rc_text_color_secondary"
+            android:textSize="14sp" />
 
+    </LinearLayout>
 
 </RelativeLayout>

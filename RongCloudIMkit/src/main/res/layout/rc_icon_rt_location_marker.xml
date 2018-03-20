@@ -8,7 +8,7 @@
         android:id="@android:id/icon"
         android:layout_width="40dp"
         android:layout_height="40dp"
-        android:src="@drawable/rc_ext_realtime_default_avatar"/>
+        android:src="@drawable/rc_ext_realtime_default_avatar" />
 
     <ImageView
         android:id="@android:id/icon1"

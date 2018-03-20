@@ -32,6 +32,7 @@
             android:layout_marginRight="5dp"
             android:visibility="gone"
             android:background="@android:color/transparent" />
+
     </FrameLayout>
 
     <View

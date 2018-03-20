@@ -12,4 +12,5 @@
         android:layout_height="46dp"
         android:layout_gravity="center"
         android:scaleType="center"/>
+
 </FrameLayout>

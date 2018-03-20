@@ -8,9 +8,9 @@
         android:id="@id/rc_img"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:RCMinShortSideSize="120dp"
+        android:scaleType="centerCrop"
         app:RCMask="true"
-        android:scaleType="centerCrop"/>
+        app:RCMinShortSideSize="120dp" />
 
     <TextView
         android:id="@id/rc_msg"
@@ -21,4 +21,5 @@
         android:gravity="center"
         android:textColor="@android:color/white"
         android:textSize="11sp" />
+
 </io.rong.imkit.widget.RCMessageFrameLayout>

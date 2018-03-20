@@ -36,4 +36,5 @@
         android:layout_height="2px"
         android:layout_alignParentTop="true"
         android:background="@color/rc_divider_color"/>
+
 </RelativeLayout>

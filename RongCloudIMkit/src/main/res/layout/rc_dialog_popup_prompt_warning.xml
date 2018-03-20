@@ -12,7 +12,6 @@
         android:layout_height="wrap_content"
         android:paddingTop="48dp">
 
-
         <TextView
             android:id="@+id/popup_dialog_message"
             android:layout_width="match_parent"
@@ -21,13 +20,14 @@
             android:paddingLeft="19dp"
             android:includeFontPadding="false"
             android:textSize="17sp" />
+
     </RelativeLayout>
 
     <LinearLayout
         android:id="@+id/popup_dialog_prompt_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="right"
+        android:gravity="end"
         android:paddingTop="49dp"
         android:paddingBottom="24dp"
         android:paddingRight="19dp"
@@ -53,6 +53,5 @@
             android:textColor="@color/rc_popup_dialog_prompt_clear_color" />
 
     </LinearLayout>
-
 
 </LinearLayout>

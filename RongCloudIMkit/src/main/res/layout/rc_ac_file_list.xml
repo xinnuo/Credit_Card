@@ -8,4 +8,5 @@
         android:id="@+id/rc_ac_fl_storage_folder_list_fragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
+
 </LinearLayout>

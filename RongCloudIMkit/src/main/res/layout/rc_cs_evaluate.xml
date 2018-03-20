@@ -60,7 +60,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:text="@string/rc_cs_very_satisfactory"
-                android:textColor="#f4aa3a"
+                android:textColor="#F4AA3A"
                 android:textSize="16sp" />
 
             <TextView
@@ -104,8 +104,11 @@
                     android:layout_marginLeft="10dp"
                     android:clickable="true"
                     android:src="@drawable/rc_cs_unresolved" />
+
             </LinearLayout>
+
         </LinearLayout>
+
     </ScrollView>
 
     <EditText

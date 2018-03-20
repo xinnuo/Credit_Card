@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<io.rong.imkit.widget.SquareLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<io.rong.imkit.widget.SquareLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="127dip">
 
@@ -9,7 +8,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:adjustViewBounds="true"
-        android:scaleType="centerCrop"/>
+        android:scaleType="centerCrop" />
 
     <RelativeLayout
         android:id="@+id/mask"
@@ -24,7 +23,7 @@
             android:layout_height="32dp"
             android:layout_alignParentRight="true"
             android:focusable="false"
-            android:scaleType="centerInside"/>
+            android:scaleType="centerInside" />
 
     </RelativeLayout>
 

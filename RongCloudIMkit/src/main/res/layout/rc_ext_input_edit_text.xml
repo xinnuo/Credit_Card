@@ -24,6 +24,7 @@
             android:paddingTop="3dp"
             android:maxLines="4"
             android:textSize="16sp"/>
+
     </RelativeLayout>
 
     <ImageView
@@ -49,7 +50,9 @@
             android:layout_gravity="center"
             android:gravity="center"
             android:text="@string/rc_ext_send"
-            android:textColor="#ffffff"
+            android:textColor="#FFFFFF"
             android:textSize="14sp"/>
+
     </FrameLayout>
+
 </LinearLayout>

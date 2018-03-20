@@ -12,15 +12,13 @@
         android:horizontalSpacing="2dp"
         android:numColumns="3"
         android:scrollbars="none"
-        android:verticalSpacing="2dp"></GridView>
-
+        android:verticalSpacing="2dp"/>
 
     <FrameLayout
-
         android:layout_width="match_parent"
         android:layout_height="48dp"
         android:layout_gravity="bottom"
-        android:background="#c000">
+        android:background="#C000">
 
         <Button
             android:id="@android:id/button1"
@@ -33,7 +31,7 @@
             android:gravity="center"
             android:onClick="ok"
             android:text="发送"
-            android:textColor="#fff"
+            android:textColor="#FFF"
             android:textSize="14sp" />
 
         <Button
@@ -47,9 +45,9 @@
             android:background="@null"
             android:gravity="center"
             android:text="预览"
-            android:textColor="#fff"
+            android:textColor="#FFF"
             android:textSize="14sp" />
-    </FrameLayout>
 
+    </FrameLayout>
 
 </FrameLayout>
