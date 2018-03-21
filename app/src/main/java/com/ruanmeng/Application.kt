@@ -45,6 +45,7 @@ import com.umeng.socialize.Config
 import com.umeng.socialize.PlatformConfig
 import com.umeng.socialize.UMShareAPI
 import io.rong.imkit.RongIM
+import io.rong.push.RongPushClient
 import okhttp3.OkHttpClient
 import java.util.concurrent.TimeUnit
 import java.util.logging.Level
@@ -74,12 +75,11 @@ class Application : MultiDexApplication() {
         if (applicationInfo.packageName == getCurrentProcessName(applicationContext)
                 || "io.rong.push" == getCurrentProcessName(applicationContext)) {
 
-            // RongPushClient.registerHWPush(this@Application)         //华为推送
             // RongPushClient.registerMiPush(this@Application, "", "") //小米推送
             // RongPushClient.registerGCM(this@Application)            //谷歌推送
 
+            RongPushClient.registerHWPush(this@Application) //华为推送
             RongIM.init(this@Application)
-
 
             /* 融云SDK事件监听处理 */
             if (applicationInfo.packageName == getCurrentProcessName(applicationContext)) {
