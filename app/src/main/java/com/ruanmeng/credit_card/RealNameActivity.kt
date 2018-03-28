@@ -238,7 +238,7 @@ class RealNameActivity : BaseActivity() {
                 .map { list ->
                     return@map Luban.with(baseContext)
                             .setTargetDir(cacheDir.absolutePath)
-                            .ignoreBy(500)
+                            .ignoreBy(400)
                             .loadLocalMedia(list)
                             .get()
                 }
