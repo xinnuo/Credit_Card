@@ -107,6 +107,7 @@ dependencies {
     implementation(name: 'SuperText-1.1.1', ext: 'aar')
     implementation(name: 'UmengSocial-6.4.6', ext: 'aar')
     implementation(name: 'BouncingJelly-1.0.0', ext: 'aar')
+    implementation(name: 'RoundedImageView-2.3.0', ext: 'aar')
 
     //图片浏览
     implementation(name: 'MNImageBrowser-1.0.3', ext: 'aar')
@@ -132,7 +133,6 @@ dependencies {
     implementation 'net.idik:slimadapter:2.1.2'
     implementation 'com.yanzhenjie:permission:1.1.2'
     implementation 'org.greenrobot:eventbus:3.0.0'
-    implementation 'com.makeramen:roundedimageview:2.3.0'
     implementation 'com.weigan:loopView:0.1.2'
     implementation 'com.github.santalu:mask-edittext:1.0.1'
     implementation 'net.cachapa.expandablelayout:expandablelayout:2.9.2'
