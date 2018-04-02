@@ -326,7 +326,8 @@ class MainActivity : BaseActivity() {
                         //（必须）更新内容
                         .setUpdateLog(obj.optString("content"))
                         //是否强制更新，可以不设置
-                        .setConstraint(obj.optString("forces") == "1")
+                        // .setConstraint(obj.optString("forces") == "1")
+                        .setConstraint(false)
             }
             hasNewApp { updateApp, updateAppManager ->
                 isNewVersion = true
