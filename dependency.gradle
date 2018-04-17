@@ -1,5 +1,5 @@
 ext.versions = [
-        gradlePluginVersion: '3.1.0',
+        gradlePluginVersion: '3.1.1',
         compileSdkVersion: 27,
         minSdkVersion: 16,
         targetSdkVersion: 27,
