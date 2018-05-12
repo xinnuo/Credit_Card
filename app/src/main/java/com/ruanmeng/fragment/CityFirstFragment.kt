@@ -16,22 +16,22 @@ class CityFirstFragment : BaseFragment() {
 
     private lateinit var list: ArrayList<CommonData>
 
-    override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?,
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
-        return inflater!!.inflate(R.layout.fragment_city_first, container, false)
+        return inflater.inflate(R.layout.fragment_city_first, container, false)
     }
 
-    override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         init_title()
 
         @Suppress("UNCHECKED_CAST")
-        list = arguments.getSerializable("list") as ArrayList<CommonData>
+        list = arguments?.getSerializable("list") as ArrayList<CommonData>
         mAdapter.updateData(list)
     }
 
     override fun init_title() {
-        recycle_list.load_Linear(activity)
+        activity?.let { recycle_list.load_Linear(it) }
 
         mAdapter = SlimAdapter.create()
                 .register<CommonData>(R.layout.item_city_list) { data, injector ->
