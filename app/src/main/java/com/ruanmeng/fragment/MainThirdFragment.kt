@@ -41,7 +41,7 @@ class MainThirdFragment : BaseFragment() {
         return inflater.inflate(R.layout.fragment_main_third, container, false)
     }
 
-    override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         init_title()
     }
@@ -69,7 +69,7 @@ class MainThirdFragment : BaseFragment() {
         third_setting.setOnClickListener { startActivity(SettingActivity::class.java) }
         third_hotline.setOnClickListener {
             if (getString("platform").isNotEmpty()) {
-                AlertDialog.Builder(activity)
+                AlertDialog.Builder(activity!!)
                         .setTitle("客服热线")
                         .setMessage("拨打客服热线电话 " + getString("platform"))
                         .setPositiveButton("呼叫") { _, _ ->

@@ -356,15 +356,17 @@ class MainActivity : BaseActivity() {
                         true -> toast("正在下载中")
                         false -> updateAppManager.download(object : DownloadService.DownloadCallback {
 
+                            override fun onInstallAppAndAppOnForeground(file: File?): Boolean = false
+
                             override fun onFinish(file: File): Boolean {
                                 isDownloading = false
                                 (view as Button).text = "升级"
                                 return true
                             }
 
-                            override fun setMax(totalSize: Long) = OkLogger.e("totalSize: " + totalSize)
+                            override fun setMax(totalSize: Long) = OkLogger.e("totalSize: $totalSize")
 
-                            override fun onProgress(progress: Float, totalSize: Long) = OkLogger.e("progress: " + progress)
+                            override fun onProgress(progress: Float, totalSize: Long) = OkLogger.e("progress: $progress")
 
                             override fun onError(msg: String) = OkLogger.e(msg)
 

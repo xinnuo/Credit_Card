@@ -56,7 +56,7 @@ class MainFirstFragment : BaseFragment() {
         return inflater.inflate(R.layout.fragment_main_first, container, false)
     }
 
-    override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         init_title()
 
@@ -76,7 +76,7 @@ class MainFirstFragment : BaseFragment() {
         main_hint.visibility = if (count > 0) View.VISIBLE else View.INVISIBLE
 
         swipe_refresh.refresh { getData() }
-        recycle_list.load_Linear(activity, swipe_refresh)
+        recycle_list.load_Linear(activity!!, swipe_refresh)
 
         mAdapterEx = SlimAdapter.create(SlimAdapterEx::class.java)
                 .apply {
