@@ -35,7 +35,7 @@ class MainSecondFragment : BaseFragment() {
         return inflater.inflate(R.layout.fragment_main_second, container, false)
     }
 
-    override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         init_title()
 

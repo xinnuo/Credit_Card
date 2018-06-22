@@ -28,7 +28,7 @@ class AgencyFragment : BaseFragment() {
         return inflater.inflate(R.layout.fragment_agency, container, false)
     }
 
-    override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         init_title()
 
@@ -40,7 +40,7 @@ class AgencyFragment : BaseFragment() {
         empty_hint.text = "暂无相关收益信息！"
 
         swipe_refresh.refresh { getData(1) }
-        recycle_list.load_Linear(activity, swipe_refresh) {
+        recycle_list.load_Linear(activity!!, swipe_refresh) {
             if (!isLoadingMore) {
                 isLoadingMore = true
                 getData(pageNum)

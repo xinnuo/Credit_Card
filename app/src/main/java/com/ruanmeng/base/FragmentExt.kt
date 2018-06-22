@@ -43,7 +43,7 @@ import com.ruanmeng.utils.PreferencesUtils
  */
 inline fun Fragment.startActivity(activity: Class<*>) = startActivity(Intent(this.activity, activity))
 
-inline fun Fragment.toast(text: CharSequence) = MToast.makeTextShort(this.activity, text).show()
+inline fun Fragment.toast(text: CharSequence) = MToast.makeTextShort(this.activity!!, text).show()
 
 inline fun Fragment.showToast(text: CharSequence, duration: Int = Toast.LENGTH_SHORT) = Toast.makeText(this.activity, text, duration).show()
 

@@ -32,7 +32,7 @@ class AgencySecondFragment : BaseFragment() {
         return inflater.inflate(R.layout.fragment_agency_second, container, false)
     }
 
-    override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         init_title()
     }
@@ -50,7 +50,7 @@ class AgencySecondFragment : BaseFragment() {
                     mPosition = tab.position + 1
                     OkGo.getInstance().cancelTag(this@AgencySecondFragment)
 
-                    activity.window.decorView.postDelayed({ runOnUiThread { updateList() } }, 300)
+                    activity!!.window.decorView.postDelayed({ runOnUiThread { updateList() } }, 300)
                 }
 
             })
@@ -63,7 +63,7 @@ class AgencySecondFragment : BaseFragment() {
         }
 
         swipe_refresh.refresh { getData(1) }
-        recycle_list.load_Linear(activity, swipe_refresh) {
+        recycle_list.load_Linear(activity!!, swipe_refresh) {
             if (!isLoadingMore) {
                 isLoadingMore = true
                 getData(pageNum)
